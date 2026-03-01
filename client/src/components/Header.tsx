@@ -84,11 +84,11 @@ export default function Header() {
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-3">
             <a
-              href="tel:+18005551234"
+              href="tel:+19087675309"
               className="flex items-center gap-2 text-sm text-white/50 hover:text-neon transition-colors"
             >
               <Phone className="w-4 h-4" />
-              <span className="font-mono">(800) 555-1234</span>
+              <span className="font-mono">(908) 767-5309</span>
             </a>
             <Link
               href="/buy-tradelines"

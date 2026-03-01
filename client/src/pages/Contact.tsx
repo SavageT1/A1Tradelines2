@@ -14,8 +14,8 @@ const CONTACT_INFO = [
   {
     icon: Phone,
     label: "Phone",
-    value: "(800) 555-1234",
-    href: "tel:+18005551234",
+    value: "(908) 767-5309",
+    href: "tel:+19087675309",
     description: "Mon-Fri, 9am-6pm EST",
   },
   {

@@ -88,8 +88,8 @@ export default function Footer() {
             <h3 className="text-sm font-bold text-white/80 uppercase tracking-widest">Contact</h3>
             <ul className="space-y-3">
               <li>
-                <a href="tel:+18005551234" className="text-white/40 hover:text-neon text-sm transition-colors flex items-center gap-2">
-                  <span className="font-mono">(800) 555-1234</span>
+                <a href="tel:+19087675309" className="text-white/40 hover:text-neon text-sm transition-colors flex items-center gap-2">
+                  <span className="font-mono">(908) 767-5309</span>
                 </a>
               </li>
               <li>
