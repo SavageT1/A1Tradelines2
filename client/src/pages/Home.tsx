@@ -29,7 +29,7 @@ const STATS = [
   { value: "2,500+", label: "Clients Served" },
   { value: "150+", label: "Point Avg. Increase" },
   { value: "98%", label: "Satisfaction Rate" },
-  { value: "10+", label: "Years Experience" },
+  { value: "16+", label: "Years Experience" },
 ];
 
 const HOW_IT_WORKS = [

@@ -39,7 +39,7 @@ const DIFFERENTIATORS = [
   "Bank-diverse tradeline inventory for maximum impact",
   "Ongoing support throughout the reporting cycle",
   "Money-back guarantee if tradeline doesn't post",
-  "10+ years of industry expertise and relationships",
+  "16+ years of industry expertise and relationships",
 ];
 
 export default function About() {
@@ -99,7 +99,7 @@ export default function About() {
                       <p className="text-xs text-white/30 mt-1">Satisfaction Rate</p>
                     </div>
                     <div className="text-center p-4 bg-white/[0.02] rounded-xl">
-                      <span className="text-2xl font-display font-extrabold text-neon font-mono">10+</span>
+                      <span className="text-2xl font-display font-extrabold text-neon font-mono">16+</span>
                       <p className="text-xs text-white/30 mt-1">Years Experience</p>
                     </div>
                   </div>
