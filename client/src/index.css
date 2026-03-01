@@ -40,8 +40,8 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --color-neon: oklch(0.85 0.25 155);
-  --color-neon-dark: oklch(0.65 0.2 155);
+  --color-neon: #5DF136;
+  --color-neon-dark: #4AC42A;
   --color-void: oklch(0.1 0 0);
   --color-void-light: oklch(0.14 0 0);
   --font-display: "Bebas Neue", "Impact", ui-sans-serif, system-ui, sans-serif;
@@ -57,32 +57,32 @@
   --card-foreground: oklch(0.93 0 0);
   --popover: oklch(0.12 0 0);
   --popover-foreground: oklch(0.93 0 0);
-  --primary: oklch(0.85 0.25 155);
+  --primary: #5DF136;
   --primary-foreground: oklch(0.1 0 0);
   --secondary: oklch(0.15 0 0);
   --secondary-foreground: oklch(0.8 0 0);
   --muted: oklch(0.18 0 0);
   --muted-foreground: oklch(0.6 0 0);
   --accent: oklch(0.15 0.02 155);
-  --accent-foreground: oklch(0.85 0.25 155);
+  --accent-foreground: #5DF136;
   --destructive: oklch(0.6 0.25 25);
   --destructive-foreground: oklch(0.98 0 0);
   --border: oklch(1 0 0 / 8%);
   --input: oklch(1 0 0 / 10%);
-  --ring: oklch(0.85 0.25 155);
-  --chart-1: oklch(0.85 0.25 155);
-  --chart-2: oklch(0.7 0.2 155);
-  --chart-3: oklch(0.55 0.15 155);
-  --chart-4: oklch(0.4 0.1 155);
-  --chart-5: oklch(0.3 0.05 155);
+  --ring: #5DF136;
+  --chart-1: #5DF136;
+  --chart-2: #4AC42A;
+  --chart-3: #3BA81E;
+  --chart-4: #2C8C12;
+  --chart-5: #1D7006;
   --sidebar: oklch(0.1 0 0);
   --sidebar-foreground: oklch(0.85 0 0);
-  --sidebar-primary: oklch(0.85 0.25 155);
+  --sidebar-primary: #5DF136;
   --sidebar-primary-foreground: oklch(0.1 0 0);
   --sidebar-accent: oklch(0.15 0.02 155);
-  --sidebar-accent-foreground: oklch(0.85 0.25 155);
+  --sidebar-accent-foreground: #5DF136;
   --sidebar-border: oklch(1 0 0 / 8%);
-  --sidebar-ring: oklch(0.85 0.25 155);
+  --sidebar-ring: #5DF136;
 }
 
 @layer base {
@@ -160,23 +160,23 @@
 
   .glass-panel-hover:hover {
     background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(0, 255, 127, 0.3);
+    border-color: rgba(93, 241, 54, 0.3);
   }
 
   .neon-glow {
-    box-shadow: 0 0 20px rgba(0, 255, 127, 0.15), 0 0 60px rgba(0, 255, 127, 0.05);
+    box-shadow: 0 0 20px rgba(93, 241, 54, 0.15), 0 0 60px rgba(93, 241, 54, 0.05);
   }
 
   .neon-glow-strong {
-    box-shadow: 0 0 30px rgba(0, 255, 127, 0.3), 0 0 80px rgba(0, 255, 127, 0.1);
+    box-shadow: 0 0 30px rgba(93, 241, 54, 0.3), 0 0 80px rgba(93, 241, 54, 0.1);
   }
 
   .neon-text-glow {
-    text-shadow: 0 0 20px rgba(0, 255, 127, 0.5), 0 0 40px rgba(0, 255, 127, 0.2);
+    text-shadow: 0 0 20px rgba(93, 241, 54, 0.5), 0 0 40px rgba(93, 241, 54, 0.2);
   }
 
   .neon-border-glow {
-    box-shadow: inset 0 0 20px rgba(0, 255, 127, 0.05), 0 0 20px rgba(0, 255, 127, 0.1);
+    box-shadow: inset 0 0 20px rgba(93, 241, 54, 0.05), 0 0 20px rgba(93, 241, 54, 0.1);
   }
 
   .card-shine {
@@ -220,11 +220,11 @@
   }
 
   .btn-neon:hover {
-    box-shadow: 0 0 25px rgba(0, 255, 127, 0.5), 0 0 60px rgba(0, 255, 127, 0.2), 0 8px 25px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 25px rgba(93, 241, 54, 0.5), 0 0 60px rgba(93, 241, 54, 0.2), 0 8px 25px rgba(0, 0, 0, 0.3);
   }
 
   .btn-neon:active {
-    box-shadow: 0 0 15px rgba(0, 255, 127, 0.4), 0 2px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 15px rgba(93, 241, 54, 0.4), 0 2px 10px rgba(0, 0, 0, 0.3);
   }
 
   /* Animated Ghost Button */
@@ -240,7 +240,7 @@
     inset: 0;
     border-radius: inherit;
     padding: 1px;
-    background: linear-gradient(135deg, transparent 40%, rgba(0,255,127,0.4) 50%, transparent 60%);
+    background: linear-gradient(135deg, transparent 40%, rgba(93,241,54,0.4) 50%, transparent 60%);
     background-size: 300% 300%;
     background-position: 0% 0%;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -256,9 +256,9 @@
 
   .btn-ghost:hover {
     background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(0, 255, 127, 0.4);
-    box-shadow: 0 0 20px rgba(0, 255, 127, 0.1), 0 4px 15px rgba(0, 0, 0, 0.2);
-    color: rgba(0, 255, 127, 1);
+    border-color: rgba(93, 241, 54, 0.4);
+    box-shadow: 0 0 20px rgba(93, 241, 54, 0.1), 0 4px 15px rgba(0, 0, 0, 0.2);
+    color: rgba(93, 241, 54, 1);
   }
 
   .btn-ghost:active {
@@ -278,7 +278,7 @@
   border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 255, 127, 0.3);
+  background: rgba(93, 241, 54, 0.3);
 }
 
 /* Animations */

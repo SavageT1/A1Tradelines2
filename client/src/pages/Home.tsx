@@ -229,9 +229,18 @@ Take Back Control of
               transition={{ duration: 1, delay: 0.3 }}
               className="hidden lg:block"
             >
-              <div className="relative">
-                <div className="absolute -inset-4 bg-neon/5 rounded-3xl blur-2xl" />
-                <div className="relative glass-panel rounded-2xl p-8 space-y-6 neon-border-glow">
+              <div className="space-y-6">
+                <div className="relative">
+                  <div className="absolute -inset-4 bg-neon/5 rounded-3xl blur-2xl" />
+                  <div className="relative glass-panel rounded-2xl overflow-hidden neon-border-glow">
+                    <video autoPlay muted playsInline className="w-full h-auto rounded-2xl" style={{ aspectRatio: "16/9" }}>
+                      <source src="https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663300423717/dDgVYfJtZJVkrJar.mp4" type="video/mp4" />
+                    </video>
+                  </div>
+                </div>
+                <div className="relative">
+                  <div className="absolute -inset-4 bg-neon/5 rounded-3xl blur-2xl" />
+                  <div className="relative glass-panel rounded-2xl p-8 space-y-6 neon-border-glow">
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-12 bg-neon/10 rounded-xl flex items-center justify-center">
                       <TrendingUp className="w-6 h-6 text-neon" />
@@ -262,6 +271,7 @@ Take Back Control of
                     />
                   </div>
                   <p className="text-[11px] text-white/25">* Simulation based on adding a $50K, 15-year tradeline</p>
+                  </div>
                 </div>
               </div>
             </motion.div>
