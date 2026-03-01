@@ -131,9 +131,9 @@ export default function Home() {
                   Strategy-First Tradeline Matching
                 </div>
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-extrabold tracking-tight leading-[1.05]">
-                  Build the Credit
-                  <br />
-                  <span className="text-neon neon-text-glow">You Deserve</span>
+Take Back Control of
+                   <br />
+                   <span className="text-neon neon-text-glow">Your Credit Score</span>
                 </h1>
                 <p className="text-lg sm:text-xl text-white/50 max-w-lg leading-relaxed">
                   Premium authorized user tradelines matched to your specific goals. See your potential score increase before you buy.
