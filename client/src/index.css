@@ -94,7 +94,17 @@
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
   .font-display {
-    letter-spacing: 0.04em;
+    letter-spacing: 0.05em;
+  }
+
+  /* Center headings on mobile */
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-center md:text-left;
+  }
+
+  /* Apply consistent letter-spacing to all display headings */
+  h1, h2, h3 {
+    @apply tracking-[0.05em];
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),

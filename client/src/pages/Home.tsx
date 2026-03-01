@@ -166,7 +166,7 @@ export default function Home() {
                   <Sparkles className="w-3.5 h-3.5" />
                   Strategy-First Tradeline Matching
                 </div>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-extrabold tracking-[0.05em] leading-[1.05]">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-extrabold leading-[1.05]">
 Take Back Control of
                    <br />
                    <span className="text-neon neon-text-glow">Your Credit Score</span>
