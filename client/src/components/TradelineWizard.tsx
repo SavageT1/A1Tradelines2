@@ -33,6 +33,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { Link } from "wouter";
+import { submitToHubSpot } from "@/lib/hubspot";
 
 // --- Types ---
 interface Tradeline {
@@ -370,9 +371,24 @@ export default function TradelineWizard() {
     }
   };
 
-  const handleLeadSubmit = (e: React.FormEvent) => {
+  const handleLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLeadSubmitted(true);
+
+    try {
+      const nameParts = leadForm.name.trim().split(" ");
+      const firstname = nameParts[0] || "";
+      const lastname = nameParts.slice(1).join(" ") || "";
+      await submitToHubSpot({
+        firstname,
+        lastname,
+        email: leadForm.email,
+        phone: leadForm.phone,
+      });
+    } catch (error) {
+      console.error("HubSpot submission error:", error);
+    }
+
     setLeadCaptured(true);
     setTimeout(() => {
       setStep(3);

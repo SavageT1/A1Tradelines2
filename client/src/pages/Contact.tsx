@@ -4,9 +4,10 @@
  */
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, CheckCircle2, Clock, ArrowRight } from "lucide-react";
+import { Mail, Phone, MapPin, Send, CheckCircle2, Clock, ArrowRight, AlertCircle } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
+import { submitToHubSpot } from "@/lib/hubspot";
 
 const CONTACT_HERO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663300423717/YgBCM3Vvv9dzqmN7qfKYzh/contact-hero-GATXTizuF7kKCUe38nynTh.webp";
 
@@ -43,6 +44,8 @@ const CONTACT_INFO = [
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -51,9 +54,37 @@ export default function Contact() {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError(null);
+
+    try {
+      // Split name into first and last name
+      const nameParts = form.name.trim().split(" ");
+      const firstname = nameParts[0] || "";
+      const lastname = nameParts.slice(1).join(" ") || "";
+
+      // Submit to HubSpot
+      const result = await submitToHubSpot({
+        firstname,
+        lastname,
+        email: form.email,
+        phone: form.phone,
+        message: form.message,
+      });
+
+      if (result.success) {
+        setSubmitted(true);
+      } else {
+        setError(result.message);
+      }
+    } catch (err) {
+      setError("Failed to submit form. Please try again.");
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -153,6 +184,7 @@ export default function Contact() {
                         onClick={() => {
                           setSubmitted(false);
                           setForm({ name: "", email: "", phone: "", subject: "", message: "" });
+                          setError(null);
                         }}
                         className="mt-4 text-neon text-sm font-bold hover:underline"
                       >
@@ -165,6 +197,16 @@ export default function Contact() {
                         <h3 className="text-xl font-display font-extrabold mb-2">Send Us a Message</h3>
                         <p className="text-sm text-white/40">Fill out the form below and we'll get back to you promptly.</p>
                       </div>
+                      {error && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="mb-5 p-4 bg-red-500/10 border border-red-500/30 rounded-lg flex items-start gap-3"
+                        >
+                          <AlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
+                          <p className="text-sm text-red-300">{error}</p>
+                        </motion.div>
+                      )}
                       <form onSubmit={handleSubmit} className="space-y-5">
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           <div className="space-y-1.5">
@@ -228,9 +270,10 @@ export default function Contact() {
                           whileHover={{ scale: 1.01 }}
                           whileTap={{ scale: 0.99 }}
                           type="submit"
-                          className="btn-neon w-full bg-neon text-black font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-neon/20 transition-all text-sm"
+                          disabled={loading}
+                          className="btn-neon w-full bg-neon text-black font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-neon/20 transition-all text-sm disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                          Send Message <Send className="w-4 h-4" />
+                          {loading ? "Sending..." : "Send Message"} {!loading && <Send className="w-4 h-4" />}
                         </motion.button>
                       </form>
                     </>
