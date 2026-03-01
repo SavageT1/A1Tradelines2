@@ -1,8 +1,9 @@
 /*
- * TradelineWizard.tsx — Integrated credit score simulator.
- * Adapted from the standalone Credit Score Simulator app.
+ * TradelineWizard.tsx — Integrated Credit Score Simulator.
+ * Dual-path flow:
+ *   Path A: Upload credit report → auto-extract contact info → show results + tradeline recs (no lead gate)
+ *   Path B: Manual entry → select tradeline → lead capture gate → show results + tradeline recs
  * Neon Pulse Design: neon green accent, glassmorphism panels, dark void bg.
- * Includes lead capture gate before showing results.
  */
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -26,7 +27,12 @@ import {
   HelpCircle,
   UploadCloud,
   Loader2,
+  FileText,
+  MapPin,
+  Star,
+  ArrowRight,
 } from "lucide-react";
+import { Link } from "wouter";
 
 // --- Types ---
 interface Tradeline {
@@ -55,6 +61,12 @@ interface SimulationResult {
   originalAverageAge: number;
   newAverageAge: number;
   insights: string[];
+}
+
+interface ExtractedContact {
+  name: string;
+  address: string;
+  reportDate: string;
 }
 
 // --- Constants ---
@@ -102,6 +114,23 @@ const getScoreLabel = (score: number) => {
   if (score >= 580) return "Fair";
   return "Poor";
 };
+
+// Tradeline recommendation options with score boost estimates
+const TRADELINE_OPTIONS = [
+  { name: "Premium Plus", limit: 50000, age: 180, price: "$1,200", bank: "Chase", tier: "Premium" },
+  { name: "Platinum Elite", limit: 25000, age: 120, price: "$850", bank: "Amex", tier: "Premium" },
+  { name: "Gold Preferred", limit: 15000, age: 84, price: "$550", bank: "Citi", tier: "Standard" },
+  { name: "Silver Standard", limit: 5000, age: 48, price: "$350", bank: "Capital One", tier: "Economy" },
+];
+
+// Additional boost tradelines shown in results
+const BOOST_TRADELINES = [
+  { name: "Diamond Reserve", limit: 75000, age: 240, price: "$1,800", bank: "Chase", boost: "+45-80 pts", tier: "Ultra Premium" },
+  { name: "Centurion Select", limit: 50000, age: 180, price: "$1,200", bank: "Amex", boost: "+35-65 pts", tier: "Premium" },
+  { name: "Prestige Gold", limit: 30000, age: 144, price: "$950", bank: "Citi", boost: "+25-50 pts", tier: "Premium" },
+  { name: "Advantage Plus", limit: 20000, age: 96, price: "$700", bank: "BofA", boost: "+20-40 pts", tier: "Standard" },
+  { name: "Builder Select", limit: 10000, age: 60, price: "$450", bank: "Discover", boost: "+15-30 pts", tier: "Economy" },
+];
 
 // --- Sub-components ---
 const ScoreGauge = ({ score, label }: { score: number; label: string }) => {
@@ -177,7 +206,9 @@ const Tooltip = ({ content }: { content: string }) => (
 
 // --- Main Component ---
 export default function TradelineWizard() {
+  // Steps: 1 = profile input, 2 = select tradeline, 2.5 = lead gate (manual only), 3 = results
   const [step, setStep] = useState(1);
+  const [inputMethod, setInputMethod] = useState<"none" | "upload" | "manual">("none");
   const [profile, setProfile] = useState<CreditProfile>({
     totalBalance: 2500,
     totalLimit: 5000,
@@ -193,6 +224,7 @@ export default function TradelineWizard() {
   const [leadCaptured, setLeadCaptured] = useState(false);
   const [leadForm, setLeadForm] = useState({ name: "", email: "", phone: "" });
   const [leadSubmitted, setLeadSubmitted] = useState(false);
+  const [extractedContact, setExtractedContact] = useState<ExtractedContact | null>(null);
 
   const validateField = (name: string, value: number) => {
     let error = "";
@@ -204,6 +236,7 @@ export default function TradelineWizard() {
   };
 
   const handleProfileChange = (name: keyof CreditProfile, value: string) => {
+    setInputMethod("manual");
     if (name === "missedPaymentsRange") {
       const percentage = MISSED_PAYMENTS_MAP[value] || 100;
       setProfile({ ...profile, missedPaymentsRange: value, onTimePaymentPercentage: percentage });
@@ -217,17 +250,36 @@ export default function TradelineWizard() {
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement> | React.DragEvent) => {
     e.preventDefault();
     setIsUploading(true);
+    setInputMethod("upload");
+
+    // Simulate report parsing — extracting contact info + credit data
     setTimeout(() => {
       setIsUploading(false);
       setUploadSuccess(true);
+
+      // Simulated extracted data from credit report
+      setExtractedContact({
+        name: "Report Owner",
+        address: "Extracted from report",
+        reportDate: new Date().toLocaleDateString(),
+      });
+
       setProfile({
         totalBalance: 12450,
         totalLimit: 45000,
         averageAgeInMonths: 72,
         onTimePaymentPercentage: 98,
         missedPaymentsRange: "1-2",
-        tradelines: [{ id: "1", name: "Existing Card", limit: 45000, balance: 12450, ageInMonths: 72 }],
+        tradelines: [
+          { id: "1", name: "Chase Freedom", limit: 15000, balance: 3200, ageInMonths: 96 },
+          { id: "2", name: "Amex Gold", limit: 20000, balance: 5750, ageInMonths: 60 },
+          { id: "3", name: "Citi Double Cash", limit: 10000, balance: 3500, ageInMonths: 48 },
+        ],
       });
+
+      // Auto-capture lead from report — skip lead gate
+      setLeadCaptured(true);
+
       setTimeout(() => {
         setStep(2);
         setUploadSuccess(false);
@@ -260,7 +312,7 @@ export default function TradelineWizard() {
       tradelines: newTradelines,
     };
     const newScore = calculateScore(newProfile);
-    const insights = [];
+    const insights: string[] = [];
     if (newScore > currentScore) insights.push(`Adding this tradeline could increase your score by ${newScore - currentScore} points.`);
     const oldUtil = (profile.totalBalance / profile.totalLimit) * 100;
     const newUtil = (newTotalBalance / newTotalLimit) * 100;
@@ -270,8 +322,33 @@ export default function TradelineWizard() {
     } else {
       insights.push(`Note: Adding a new account slightly lowers your average age, but the utilization benefit often outweighs this.`);
     }
-    return { originalScore: currentScore, newScore, originalUtilization: oldUtil, newUtilization: newUtil, originalAverageAge: profile.averageAgeInMonths, newAverageAge, insights };
+    return {
+      originalScore: currentScore,
+      newScore,
+      originalUtilization: oldUtil,
+      newUtilization: newUtil,
+      originalAverageAge: profile.averageAgeInMonths,
+      newAverageAge,
+      insights,
+    };
   }, [profile, simulatedTradeline, currentScore]);
+
+  // Calculate boost estimates for each recommendation based on current profile
+  const getBoostEstimate = (limit: number, age: number) => {
+    const newTradelines = [...profile.tradelines, { id: "sim", name: "Sim", limit, balance: 0, ageInMonths: age }];
+    const newTotalBalance = newTradelines.reduce((sum, t) => sum + t.balance, 0);
+    const newTotalLimit = newTradelines.reduce((sum, t) => sum + t.limit, 0);
+    const newAverageAge = newTradelines.reduce((sum, t) => sum + t.ageInMonths, 0) / newTradelines.length;
+    const newProfile: CreditProfile = {
+      ...profile,
+      totalBalance: newTotalBalance,
+      totalLimit: newTotalLimit,
+      averageAgeInMonths: newAverageAge,
+      tradelines: newTradelines,
+    };
+    const boostedScore = calculateScore(newProfile);
+    return boostedScore - currentScore;
+  };
 
   const handleAddTradeline = (t: Partial<Tradeline>) => {
     const newTradeline: Tradeline = {
@@ -283,10 +360,13 @@ export default function TradelineWizard() {
       isSimulated: true,
     };
     setSimulatedTradeline(newTradeline);
+
+    // Path A (upload): lead already captured, go straight to results
+    // Path B (manual): need lead gate first
     if (leadCaptured) {
       setStep(3);
     } else {
-      setStep(2.5 as any); // lead gate
+      setStep(2.5 as any);
     }
   };
 
@@ -298,13 +378,6 @@ export default function TradelineWizard() {
       setStep(3);
     }, 1000);
   };
-
-  const TRADELINE_OPTIONS = [
-    { name: "Premium Plus", limit: 50000, age: 180, price: "$1,200", bank: "Chase" },
-    { name: "Platinum Elite", limit: 25000, age: 120, price: "$850", bank: "Amex" },
-    { name: "Gold Preferred", limit: 15000, age: 84, price: "$550", bank: "Citi" },
-    { name: "Silver Standard", limit: 5000, age: 48, price: "$350", bank: "Capital One" },
-  ];
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10">
@@ -359,6 +432,8 @@ export default function TradelineWizard() {
                       tradelines: [{ id: "1", name: "Primary Card", limit: 5000, balance: 2500, ageInMonths: 36 }],
                     });
                     setErrors({});
+                    setInputMethod("none");
+                    setExtractedContact(null);
                   }}
                   className="text-xs font-bold text-white/30 hover:text-white transition-colors uppercase tracking-widest"
                 >
@@ -366,7 +441,7 @@ export default function TradelineWizard() {
                 </button>
               </div>
 
-              {/* Upload */}
+              {/* Upload Credit Report */}
               <div
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={handleFileUpload}
@@ -380,17 +455,23 @@ export default function TradelineWizard() {
                     <div className="flex flex-col items-center gap-2">
                       <Loader2 className="w-8 h-8 text-neon animate-spin" />
                       <p className="text-neon font-bold text-sm animate-pulse">Analyzing Report...</p>
+                      <p className="text-white/30 text-[11px]">Extracting credit data & contact info</p>
                     </div>
                   ) : uploadSuccess ? (
                     <div className="flex flex-col items-center gap-2">
                       <CheckCircle2 className="w-8 h-8 text-emerald-400" />
                       <p className="text-emerald-400 font-bold text-sm">Report Analyzed!</p>
+                      <p className="text-white/30 text-[11px]">Contact info extracted — no form needed</p>
                     </div>
                   ) : (
                     <>
                       <UploadCloud className="w-8 h-8 text-neon/60 mx-auto" />
                       <p className="font-medium text-white/70 text-sm">Upload Credit Report</p>
-                      <p className="text-[11px] text-white/30">PDF, PNG, JPG — for more accurate results</p>
+                      <p className="text-[11px] text-white/30">PDF, PNG, JPG — we'll extract your data & contact info automatically</p>
+                      <div className="flex items-center justify-center gap-2 mt-1">
+                        <FileText className="w-3 h-3 text-neon/40" />
+                        <span className="text-[10px] text-neon/40 font-medium">Skip the form — upload for instant results</span>
+                      </div>
                     </>
                   )}
                 </div>
@@ -475,10 +556,15 @@ export default function TradelineWizard() {
               <motion.button
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.99 }}
-                onClick={() => isStep1Valid && setStep(2)}
+                onClick={() => {
+                  if (isStep1Valid) {
+                    if (inputMethod !== "upload") setInputMethod("manual");
+                    setStep(2);
+                  }
+                }}
                 disabled={!isStep1Valid}
-                className={`w-full ${
-                  isStep1Valid ? "bg-neon hover:bg-neon/90 text-black shadow-lg shadow-neon/20" : "bg-white/5 text-white/20 cursor-not-allowed"
+                className={`btn-neon w-full ${
+                  isStep1Valid ? "bg-neon text-black shadow-lg shadow-neon/20" : "bg-white/5 text-white/20 cursor-not-allowed"
                 } font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all text-sm`}
               >
                 Next: Choose Tradeline <ChevronRight className="w-4 h-4" />
@@ -505,35 +591,70 @@ export default function TradelineWizard() {
                 </button>
               </div>
 
+              {/* Show extracted info badge if uploaded */}
+              {inputMethod === "upload" && extractedContact && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex items-center gap-3 p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-xl"
+                >
+                  <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+                  <div>
+                    <p className="text-emerald-400 text-xs font-bold">Contact info extracted from your report</p>
+                    <p className="text-white/40 text-[11px]">No additional form required — select a tradeline to see your results instantly</p>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Show manual entry notice */}
+              {inputMethod === "manual" && !leadCaptured && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex items-center gap-3 p-3 bg-neon/5 border border-neon/10 rounded-xl"
+                >
+                  <Info className="w-5 h-5 text-neon shrink-0" />
+                  <div>
+                    <p className="text-neon/80 text-xs font-bold">Quick contact info needed to unlock results</p>
+                    <p className="text-white/30 text-[11px]">After selecting a tradeline, we'll ask for your info to show personalized results</p>
+                  </div>
+                </motion.div>
+              )}
+
               <div className="grid gap-3">
-                {TRADELINE_OPTIONS.map((t, i) => (
-                  <motion.div
-                    key={t.name}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.08 }}
-                    whileHover={{ scale: 1.01, x: 5 }}
-                    whileTap={{ scale: 0.99 }}
-                    onClick={() => handleAddTradeline({ name: t.name, limit: t.limit, ageInMonths: t.age, balance: 0 })}
-                    className="group glass-panel p-4 sm:p-5 rounded-xl flex items-center justify-between hover:border-neon/30 cursor-pointer transition-all card-shine"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-neon/10 rounded-lg flex items-center justify-center group-hover:bg-neon/20 transition-colors">
-                        <CreditCard className="w-5 h-5 text-neon" />
+                {TRADELINE_OPTIONS.map((t, i) => {
+                  const boost = getBoostEstimate(t.limit, t.age);
+                  return (
+                    <motion.div
+                      key={t.name}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.08 }}
+                      whileHover={{ scale: 1.01, x: 5 }}
+                      whileTap={{ scale: 0.99 }}
+                      onClick={() => handleAddTradeline({ name: t.name, limit: t.limit, ageInMonths: t.age, balance: 0 })}
+                      className="group glass-panel p-4 sm:p-5 rounded-xl flex items-center justify-between hover:border-neon/30 cursor-pointer transition-all card-shine"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-neon/10 rounded-lg flex items-center justify-center group-hover:bg-neon/20 transition-colors">
+                          <CreditCard className="w-5 h-5 text-neon" />
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-sm">{t.name}</h4>
+                          <p className="text-white/40 text-xs">
+                            <span className="font-mono">${t.limit.toLocaleString()}</span> Limit &middot; {Math.round(t.age / 12)} Years &middot; {t.bank}
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <h4 className="font-bold text-sm">{t.name}</h4>
-                        <p className="text-white/40 text-xs">
-                          <span className="font-mono">${t.limit.toLocaleString()}</span> Limit &middot; {Math.round(t.age / 12)} Years &middot; {t.bank}
-                        </p>
+                      <div className="text-right">
+                        <span className="block font-bold text-neon font-mono">{t.price}</span>
+                        {boost > 0 && (
+                          <span className="text-[9px] text-emerald-400 font-bold">+{boost} pts</span>
+                        )}
                       </div>
-                    </div>
-                    <div className="text-right">
-                      <span className="block font-bold text-neon font-mono">{t.price}</span>
-                      <span className="text-[9px] text-white/30 uppercase font-bold tracking-widest">Select</span>
-                    </div>
-                  </motion.div>
-                ))}
+                    </motion.div>
+                  );
+                })}
               </div>
 
               <div className="p-4 bg-neon/5 border border-neon/10 rounded-xl flex gap-3">
@@ -545,7 +666,7 @@ export default function TradelineWizard() {
             </motion.div>
           )}
 
-          {/* LEAD CAPTURE GATE */}
+          {/* LEAD CAPTURE GATE — Only for manual entry path */}
           {(step as number) === 2.5 && (
             <motion.div
               key="leadgate"
@@ -568,9 +689,12 @@ export default function TradelineWizard() {
                     <div className="w-12 h-12 bg-neon/10 rounded-full flex items-center justify-center mx-auto mb-3">
                       <Sparkles className="w-6 h-6 text-neon" />
                     </div>
-                    <h3 className="text-xl font-bold">See Your Results</h3>
+                    <h3 className="text-xl font-bold">Unlock Your Score</h3>
                     <p className="text-white/40 text-sm max-w-sm mx-auto">
-                      Enter your contact info to unlock your personalized credit score simulation and tradeline recommendations.
+                      Enter your contact info to see your personalized credit score simulation and tradeline recommendations.
+                    </p>
+                    <p className="text-neon/40 text-[11px]">
+                      Tip: Upload your credit report instead to skip this step!
                     </p>
                   </div>
                   <form onSubmit={handleLeadSubmit} className="space-y-3">
@@ -611,7 +735,7 @@ export default function TradelineWizard() {
                       whileHover={{ scale: 1.01 }}
                       whileTap={{ scale: 0.99 }}
                       type="submit"
-                      className="w-full bg-neon text-black font-bold py-3 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-neon/20 text-sm"
+                      className="btn-neon w-full bg-neon text-black font-bold py-3 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-neon/20 text-sm"
                     >
                       Unlock My Results <ChevronRight className="w-4 h-4" />
                     </motion.button>
@@ -622,7 +746,7 @@ export default function TradelineWizard() {
             </motion.div>
           )}
 
-          {/* STEP 3: Results */}
+          {/* STEP 3: Results + Boost Recommendations */}
           {step === 3 && simulationResult && (
             <motion.div
               key="step3"
@@ -643,10 +767,11 @@ export default function TradelineWizard() {
                   }}
                   className="text-white/30 hover:text-white flex items-center gap-1 text-sm"
                 >
-                  <ChevronLeft className="w-4 h-4" /> Reset
+                  <ChevronLeft className="w-4 h-4" /> Try Another
                 </button>
               </div>
 
+              {/* Score Result Card */}
               <div className="glass-panel rounded-2xl p-5 sm:p-7 space-y-5 neon-border-glow card-shine">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-5 border-b border-white/5 gap-3">
                   <div>
@@ -690,14 +815,101 @@ export default function TradelineWizard() {
                     </motion.div>
                   ))}
                 </div>
-
-                <a
-                  href="/buy-tradelines"
-                  className="block w-full bg-neon text-black font-bold py-3 rounded-xl text-center text-sm shadow-lg shadow-neon/20 hover:bg-neon/90 transition-all"
-                >
-                  Browse Available Tradelines <ChevronRight className="w-4 h-4 inline ml-1" />
-                </a>
               </div>
+
+              {/* ===== BOOST YOUR SCORE FURTHER ===== */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8 }}
+                className="space-y-4"
+              >
+                <div className="flex items-center gap-2">
+                  <Zap className="w-5 h-5 text-neon animate-pulse" />
+                  <h3 className="text-lg font-bold">Boost Your Score Even Further</h3>
+                </div>
+                <p className="text-white/40 text-sm">
+                  Based on your profile, these tradelines could push your score even higher. Stack multiple for maximum impact.
+                </p>
+
+                <div className="grid gap-3">
+                  {BOOST_TRADELINES.map((t, i) => {
+                    const boost = getBoostEstimate(t.limit, t.age);
+                    const potentialScore = currentScore + boost;
+                    return (
+                      <motion.div
+                        key={t.name}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 1 + i * 0.1 }}
+                        className="group glass-panel p-4 rounded-xl hover:border-neon/30 transition-all card-shine"
+                      >
+                        <div className="flex items-center justify-between gap-3">
+                          <div className="flex items-center gap-3 flex-1 min-w-0">
+                            <div className="w-10 h-10 bg-neon/10 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-neon/20 transition-colors">
+                              <CreditCard className="w-5 h-5 text-neon" />
+                            </div>
+                            <div className="min-w-0">
+                              <div className="flex items-center gap-2">
+                                <h4 className="font-bold text-sm truncate">{t.name}</h4>
+                                <span className={`text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full ${
+                                  t.tier === "Ultra Premium" ? "bg-amber-500/20 text-amber-400" :
+                                  t.tier === "Premium" ? "bg-neon/10 text-neon" :
+                                  "bg-white/5 text-white/40"
+                                }`}>
+                                  {t.tier}
+                                </span>
+                              </div>
+                              <p className="text-white/40 text-xs">
+                                <span className="font-mono">${t.limit.toLocaleString()}</span> Limit &middot; {Math.round(t.age / 12)}yr &middot; {t.bank}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="text-right shrink-0">
+                            <span className="block font-bold text-neon font-mono text-sm">{t.price}</span>
+                            {boost > 0 && (
+                              <span className="text-[10px] text-emerald-400 font-bold flex items-center justify-end gap-0.5">
+                                <ArrowUpRight className="w-3 h-3" />+{boost} pts → {potentialScore}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+
+                {/* CTA Buttons */}
+                <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="flex-1">
+                    <Link
+                      href="/buy-tradelines"
+                      className="btn-neon block w-full bg-neon text-black font-bold py-3.5 rounded-xl text-center text-sm shadow-lg shadow-neon/20 transition-all"
+                    >
+                      Browse Full Inventory <ArrowRight className="w-4 h-4 inline ml-1" />
+                    </Link>
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="flex-1">
+                    <Link
+                      href="/contact"
+                      className="btn-ghost block w-full bg-white/5 border border-white/10 text-white font-bold py-3.5 rounded-xl text-center text-sm transition-all"
+                    >
+                      <Phone className="w-4 h-4 inline mr-1" /> Talk to a Strategist
+                    </Link>
+                  </motion.div>
+                </div>
+
+                {/* Strategy note */}
+                <div className="p-4 bg-neon/5 border border-neon/10 rounded-xl flex gap-3">
+                  <Star className="w-5 h-5 text-neon shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-neon/80 text-xs font-bold mb-1">Pro Strategy Tip</p>
+                    <p className="text-xs text-neon/50 leading-relaxed">
+                      Combining 2-3 tradelines from different banks often produces better results than a single tradeline. Our strategists can build a custom plan to maximize your score increase for your specific funding goals.
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -721,13 +933,44 @@ export default function TradelineWizard() {
             <MetricCard icon={ShieldCheck} label="Payment History" value={`${profile.onTimePaymentPercentage}%`} />
             <MetricCard icon={TrendingUp} label="Accounts" value={`${profile.tradelines.length + (simulatedTradeline ? 1 : 0)}`} />
           </div>
+
+          {/* Extracted contact info badge (upload path) */}
+          {inputMethod === "upload" && extractedContact && step >= 2 && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="glass-panel rounded-xl p-4 space-y-2"
+            >
+              <div className="flex items-center gap-2 text-emerald-400">
+                <FileText className="w-4 h-4" />
+                <h4 className="font-bold text-xs uppercase tracking-widest">Report Data</h4>
+              </div>
+              <div className="space-y-1.5 text-xs">
+                <div className="flex items-center gap-2 text-white/50">
+                  <User className="w-3 h-3 text-white/30" />
+                  <span>{extractedContact.name}</span>
+                </div>
+                <div className="flex items-center gap-2 text-white/50">
+                  <MapPin className="w-3 h-3 text-white/30" />
+                  <span>{extractedContact.address}</span>
+                </div>
+                <div className="flex items-center gap-2 text-white/50">
+                  <History className="w-3 h-3 text-white/30" />
+                  <span>Report date: {extractedContact.reportDate}</span>
+                </div>
+              </div>
+            </motion.div>
+          )}
+
           <div className="bg-neon/5 border border-neon/10 rounded-xl p-4 space-y-2">
             <div className="flex items-center gap-2 text-neon">
               <Zap className="w-4 h-4 animate-pulse" />
               <h4 className="font-bold text-sm">Simulator Tip</h4>
             </div>
             <p className="text-xs text-neon/50 leading-relaxed">
-              Keeping your utilization below 30% is good, but below 10% is where you see the most significant score jumps. Adding a high-limit tradeline is the fastest way to achieve this.
+              {step === 3
+                ? "Want an even bigger boost? Stack multiple tradelines from different banks for maximum impact on your score."
+                : "Keeping your utilization below 30% is good, but below 10% is where you see the most significant score jumps. Adding a high-limit tradeline is the fastest way to achieve this."}
             </p>
           </div>
         </div>
