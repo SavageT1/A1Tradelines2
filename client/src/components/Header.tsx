@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone } from "lucide-react";
 
 const LOGO_URL =
-  "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663300423717/zSXPyWmPjshtTLyO.png?Expires=1803896566&Signature=CmRmMqyC9Tj7YdEv3AWFtyWqB6C9~63I5q3BkNi3yhQSYy7alj5WAdzUPw6TSeS5BOC19w7szCaSvsrT24v7wfq1dPmC9J4YziRrm2eKIkM8bBmTYnj5MVAkzWwopX9qmi1Rw91JV9-aFWk3QTYJBCxtr2~~KN5CHsf556IFYg6aT4JpewmmXMd9gdzceq1xpCAAgY8z5oysdR0jdlkwwvEowKB5AlufRlqfURPdT7HEE-Jn~oP3aFbXQFYkQ5Ho4jtO6Nnmz07hUiff3HvjIscwhg~aT45LB7IqfWdCGl59w2qo4DHRUMybG-IcUE0Fdjcupg70IV7-EyqDOhUY0Q__&Key-Pair-Id=K2HSFNDJXOU9YS";
+  "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663300423717/bPnWfefKrdDXDqCx.png?Expires=1803933625&Signature=vPTh-wshoDRgZOD4MikRHmiMEy8-wRe4zw6W5~s2wWuX0S-nPJ52rAZyp8ThLklcP4ggOZjLsYhHfO3n1dQ9VXU0HKwpM5FFfxi1IsNuGVmnVWHehGqNu5S5LWz4CPsfpRikcbs3T~hsYD1~ZEjwmSzNybEjENMISIqxTm8kX7792tE70f3HUviTFf0O86k1qUrbmA4Oq9h5MUp1VMzj1GLCCU0QZElYTcWcdpP2u0abmTHzaoEIsRRXjBWzwcpajUKHIxAtuEHHWaxb5XQORSlE80nnZ8ZKh-Hdes7DQNfVTcvZkYybkBZSSGFOn45M2lFHLKBQwwBe0mPXa2Ye6w__&Key-Pair-Id=K2HSFNDJXOU9YS";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
