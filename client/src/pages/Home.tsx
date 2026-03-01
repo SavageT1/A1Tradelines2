@@ -1,7 +1,7 @@
 /*
  * Home.tsx — A1 Tradelines Homepage
  * Neon Pulse Design: dark void, neon green accents, glassmorphism, animated reveals.
- * Sections: Hero, Tradeline Wizard, How It Works, Testimonials, Final CTA
+ * Sections: Hero, Credit Score Simulator, How It Works, Testimonials, Final CTA
  */
 import { motion } from "framer-motion";
 import { Link } from "wouter";
@@ -75,7 +75,7 @@ const TESTIMONIALS = [
   {
     name: "David R.",
     role: "Entrepreneur",
-    text: "The Tradeline Wizard tool alone was worth it — it showed me exactly what I needed. The actual results exceeded the simulation. Highly recommend A1 Tradelines to anyone serious about their credit.",
+    text: "The Credit Score Simulator alone was worth it — it showed me exactly what I needed. The actual results exceeded the simulation. Highly recommend A1 Tradelines to anyone serious about their credit.",
     rating: 5,
   },
   {
@@ -146,18 +146,22 @@ export default function Home() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="flex flex-col sm:flex-row gap-4"
               >
-                <Link
-                  href="/buy-tradelines"
-                  className="inline-flex items-center justify-center gap-2 bg-neon text-black px-8 py-4 rounded-xl text-base font-bold shadow-lg shadow-neon/25 hover:shadow-neon/40 hover:bg-neon/90 transition-all"
+                <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
+                  <Link
+                    href="/buy-tradelines"
+                    className="btn-neon inline-flex items-center justify-center gap-2 bg-neon text-black px-8 py-4 rounded-xl text-base font-bold shadow-lg shadow-neon/25 transition-all"
+                  >
+                    Browse Tradelines <ArrowRight className="w-5 h-5" />
+                  </Link>
+                </motion.div>
+                <motion.a
+                  href="#simulator"
+                  whileHover={{ scale: 1.04, borderColor: "rgba(0,255,127,0.4)" }}
+                  whileTap={{ scale: 0.97 }}
+                  className="btn-ghost inline-flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white px-8 py-4 rounded-xl text-base font-medium transition-all"
                 >
-                  Browse Tradelines <ArrowRight className="w-5 h-5" />
-                </Link>
-                <a
-                  href="#wizard"
-                  className="inline-flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white px-8 py-4 rounded-xl text-base font-medium hover:bg-white/10 hover:border-white/20 transition-all"
-                >
-                  Try the Wizard
-                </a>
+                  Credit Score Simulator
+                </motion.a>
               </motion.div>
 
               {/* Stats */}
@@ -229,8 +233,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== TRADELINE WIZARD SECTION ===== */}
-      <section id="wizard" className="py-20 sm:py-28 relative">
+      {/* ===== CREDIT SCORE SIMULATOR SECTION ===== */}
+      <section id="simulator" className="py-20 sm:py-28 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionReveal>
             <div className="text-center mb-12">
@@ -373,18 +377,22 @@ export default function Home() {
                   Join thousands of clients who have used A1 Tradelines to unlock better rates, higher limits, and new financial opportunities.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                  <Link
-                    href="/buy-tradelines"
-                    className="inline-flex items-center justify-center gap-2 bg-neon text-black px-8 py-4 rounded-xl text-base font-bold shadow-lg shadow-neon/25 hover:shadow-neon/40 hover:bg-neon/90 transition-all"
-                  >
-                    Get Started Now <ArrowRight className="w-5 h-5" />
-                  </Link>
-                  <Link
-                    href="/contact"
-                    className="inline-flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white px-8 py-4 rounded-xl text-base font-medium hover:bg-white/10 transition-all"
-                  >
-                    Schedule Consultation
-                  </Link>
+                  <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
+                    <Link
+                      href="/buy-tradelines"
+                      className="btn-neon inline-flex items-center justify-center gap-2 bg-neon text-black px-8 py-4 rounded-xl text-base font-bold shadow-lg shadow-neon/25 transition-all"
+                    >
+                      Get Started Now <ArrowRight className="w-5 h-5" />
+                    </Link>
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.04, borderColor: "rgba(0,255,127,0.4)" }} whileTap={{ scale: 0.97 }}>
+                    <Link
+                      href="/contact"
+                      className="btn-ghost inline-flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white px-8 py-4 rounded-xl text-base font-medium transition-all"
+                    >
+                      Schedule Consultation
+                    </Link>
+                  </motion.div>
                 </div>
               </div>
             </div>

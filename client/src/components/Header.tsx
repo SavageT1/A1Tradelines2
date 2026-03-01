@@ -92,7 +92,7 @@ export default function Header() {
             </a>
             <Link
               href="/buy-tradelines"
-              className="bg-neon text-black px-5 py-2.5 rounded-lg text-sm font-bold hover:bg-neon/90 transition-all shadow-lg shadow-neon/20 hover:shadow-neon/40"
+              className="btn-neon bg-neon text-black px-5 py-2.5 rounded-lg text-sm font-bold transition-all shadow-lg shadow-neon/20"
             >
               Get Started
             </Link>
@@ -150,7 +150,7 @@ export default function Header() {
               >
                 <Link
                   href="/buy-tradelines"
-                  className="block w-full text-center bg-neon text-black px-5 py-3 rounded-xl text-base font-bold shadow-lg shadow-neon/20"
+                  className="btn-neon block w-full text-center bg-neon text-black px-5 py-3 rounded-xl text-base font-bold shadow-lg shadow-neon/20"
                 >
                   Get Started
                 </Link>

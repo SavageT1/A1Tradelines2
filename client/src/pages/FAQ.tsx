@@ -17,7 +17,7 @@ const FAQ_ITEMS = [
   },
   {
     question: "How much can a tradeline increase my credit score?",
-    answer: "The impact varies depending on your current credit profile. Clients typically see increases of 30 to 150+ points. The biggest factors are your current utilization ratio, average account age, and overall credit history. Our Tradeline Wizard simulator can give you a personalized estimate before you purchase.",
+    answer: "The impact varies depending on your current credit profile. Clients typically see increases of 30 to 150+ points. The biggest factors are your current utilization ratio, average account age, and overall credit history. Our Credit Score Simulator can give you a personalized estimate before you purchase.",
   },
   {
     question: "How long does it take for a tradeline to appear on my credit report?",
@@ -45,7 +45,7 @@ const FAQ_ITEMS = [
   },
   {
     question: "How is A1 Tradelines different from other tradeline companies?",
-    answer: "We take a strategy-first approach. Before recommending any tradeline, we analyze your complete credit profile and understand your funding goals. We also offer our proprietary Tradeline Wizard simulator, ongoing support, and a money-back guarantee. We're not just selling tradelines — we're building credit strategies.",
+    answer: "We take a strategy-first approach. Before recommending any tradeline, we analyze your complete credit profile and understand your funding goals. We also offer our proprietary Credit Score Simulator, ongoing support, and a money-back guarantee. We're not just selling tradelines — we're building credit strategies.",
   },
   {
     question: "Do you offer payment plans?",
@@ -57,7 +57,7 @@ const FAQ_ITEMS = [
   },
   {
     question: "How do I get started?",
-    answer: "Getting started is easy. You can browse our tradeline inventory, use our Tradeline Wizard to simulate your score increase, or schedule a free consultation with one of our credit strategists. We'll help you find the right tradeline strategy for your goals.",
+    answer: "Getting started is easy. You can browse our tradeline inventory, use our Credit Score Simulator to simulate your score increase, or schedule a free consultation with one of our credit strategists. We'll help you find the right tradeline strategy for your goals.",
   },
 ];
 

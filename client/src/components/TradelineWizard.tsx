@@ -1,6 +1,6 @@
 /*
  * TradelineWizard.tsx — Integrated credit score simulator.
- * Adapted from the standalone Tradeline Wizard app.
+ * Adapted from the standalone Credit Score Simulator app.
  * Neon Pulse Design: neon green accent, glassmorphism panels, dark void bg.
  * Includes lead capture gate before showing results.
  */
@@ -312,7 +312,7 @@ export default function TradelineWizard() {
       <div className="order-2 lg:order-1 lg:col-span-7 space-y-6">
         <div className="space-y-2">
           <h2 className="text-2xl sm:text-3xl font-display font-extrabold tracking-tight">
-            TRADELINE <span className="text-neon neon-text-glow">WIZARD</span>
+            CREDIT SCORE <span className="text-neon neon-text-glow">SIMULATOR</span>
           </h2>
           <p className="text-white/40 text-sm">The Credit Score Simulator by A1 Tradelines</p>
         </div>
@@ -724,7 +724,7 @@ export default function TradelineWizard() {
           <div className="bg-neon/5 border border-neon/10 rounded-xl p-4 space-y-2">
             <div className="flex items-center gap-2 text-neon">
               <Zap className="w-4 h-4 animate-pulse" />
-              <h4 className="font-bold text-sm">Wizard's Tip</h4>
+              <h4 className="font-bold text-sm">Simulator Tip</h4>
             </div>
             <p className="text-xs text-neon/50 leading-relaxed">
               Keeping your utilization below 30% is good, but below 10% is where you see the most significant score jumps. Adding a high-limit tradeline is the fastest way to achieve this.

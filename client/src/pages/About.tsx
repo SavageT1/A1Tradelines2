@@ -29,7 +29,7 @@ const VALUES = [
   {
     icon: Zap,
     title: "Innovation",
-    description: "From our Tradeline Wizard simulator to our matching algorithms, we leverage technology to deliver better results faster.",
+    description: "From our Credit Score Simulator to our matching algorithms, we leverage technology to deliver better results faster.",
   },
 ];
 
@@ -71,7 +71,7 @@ export default function About() {
                     We took a different approach. Before recommending a single tradeline, we analyze your complete credit profile, understand your funding goals, and build a strategy designed to maximize your results. Whether you're trying to qualify for a mortgage, secure business funding, or simply build a stronger financial foundation, we match you with the right tradelines at the right time.
                   </p>
                   <p>
-                    Today, A1 Tradelines has helped over 2,500 clients achieve their credit goals. Our proprietary Tradeline Wizard technology lets you simulate your score increase before you buy, and our team of credit strategists provides hands-on guidance every step of the way.
+                    Today, A1 Tradelines has helped over 2,500 clients achieve their credit goals. Our proprietary Credit Score Simulator lets you simulate your score increase before you buy, and our team of credit strategists provides hands-on guidance every step of the way.
                   </p>
                 </div>
               </div>
@@ -169,7 +169,7 @@ export default function About() {
               <div className="text-center mt-10">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 bg-neon text-black px-8 py-3.5 rounded-xl text-sm font-bold shadow-lg shadow-neon/20 hover:bg-neon/90 transition-all"
+                  className="btn-neon inline-flex items-center gap-2 bg-neon text-black px-8 py-3.5 rounded-xl text-sm font-bold shadow-lg shadow-neon/20 transition-all"
                 >
                   Schedule a Free Consultation <ArrowRight className="w-4 h-4" />
                 </Link>

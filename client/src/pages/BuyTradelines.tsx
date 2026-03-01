@@ -183,7 +183,7 @@ export default function BuyTradelines() {
                   {/* CTA */}
                   <button
                     onClick={() => toast.success(`Inquiry submitted for ${t.bank} tradeline. Our team will contact you shortly.`)}
-                    className="w-full bg-neon/10 border border-neon/20 text-neon py-2.5 rounded-xl text-sm font-bold hover:bg-neon/20 hover:border-neon/40 transition-all flex items-center justify-center gap-2"
+                    className="btn-ghost w-full bg-neon/10 border border-neon/20 text-neon py-2.5 rounded-xl text-sm font-bold transition-all flex items-center justify-center gap-2"
                   >
                     Inquire Now <ArrowRight className="w-4 h-4" />
                   </button>
@@ -212,7 +212,7 @@ export default function BuyTradelines() {
               </p>
               <a
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-neon text-black px-8 py-3.5 rounded-xl text-sm font-bold shadow-lg shadow-neon/20 hover:bg-neon/90 transition-all"
+                className="btn-neon inline-flex items-center gap-2 bg-neon text-black px-8 py-3.5 rounded-xl text-sm font-bold shadow-lg shadow-neon/20 transition-all"
               >
                 <Phone className="w-4 h-4" /> Schedule Free Consultation
               </a>

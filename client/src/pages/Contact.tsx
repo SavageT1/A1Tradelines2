@@ -26,6 +26,13 @@ const CONTACT_INFO = [
     description: "We respond within 24 hours",
   },
   {
+    icon: MapPin,
+    label: "Office",
+    value: "522 N Central Ave #831",
+    href: "https://maps.google.com/?q=522+N+Central+Ave+%23831+Phoenix+AZ+85004",
+    description: "Phoenix, Arizona 85004",
+  },
+  {
     icon: Clock,
     label: "Business Hours",
     value: "Mon - Fri, 9am - 6pm",
@@ -221,7 +228,7 @@ export default function Contact() {
                           whileHover={{ scale: 1.01 }}
                           whileTap={{ scale: 0.99 }}
                           type="submit"
-                          className="w-full bg-neon text-black font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-neon/20 hover:bg-neon/90 transition-all text-sm"
+                          className="btn-neon w-full bg-neon text-black font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-neon/20 transition-all text-sm"
                         >
                           Send Message <Send className="w-4 h-4" />
                         </motion.button>

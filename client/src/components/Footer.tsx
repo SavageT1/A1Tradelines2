@@ -97,6 +97,16 @@ export default function Footer() {
                   info@a1tradelines.com
                 </a>
               </li>
+              <li>
+                <a
+                  href="https://maps.google.com/?q=522+N+Central+Ave+%23831+Phoenix+AZ+85004"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/40 hover:text-neon text-sm transition-colors leading-relaxed"
+                >
+                  522 N Central Ave #831<br />Phoenix, Arizona 85004
+                </a>
+              </li>
             </ul>
           </div>
         </div>
