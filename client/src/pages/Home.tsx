@@ -192,11 +192,12 @@ Take Back Control of
                 </motion.div>
                 <motion.a
                   href="#simulator"
-                  whileHover={{ scale: 1.04, borderColor: "rgba(0,255,127,0.4)" }}
+                  whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.97 }}
-                  className="btn-ghost inline-flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white px-8 py-4 rounded-xl text-base font-medium transition-all"
+                  className="group btn-ghost inline-flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white px-8 py-4 rounded-xl text-base font-medium transition-all hover:bg-neon hover:text-black hover:border-neon"
                 >
-                  Credit Score Simulator
+                  <span className="group-hover:hidden">Credit Score Simulator</span>
+                  <span className="hidden group-hover:inline font-bold">TRADELINE WIZARD</span>
                 </motion.a>
               </motion.div>
 
