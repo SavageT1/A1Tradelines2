@@ -166,10 +166,12 @@ export default function Home() {
                   <Sparkles className="w-3.5 h-3.5" />
                   Strategy-First Tradeline Matching
                 </div>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-extrabold leading-[1.05]">
-Take Back Control of
+                <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-display font-extrabold leading-[1.05]">
+Take Back Control
                    <br />
-                   <span className="text-neon neon-text-glow">Your Credit Score</span>
+                   <span className="text-neon neon-text-glow">Of Your Credit</span>
+                   <br />
+Score
                 </h1>
                 <p className="text-lg sm:text-xl text-white/50 max-w-lg leading-relaxed mx-auto lg:mx-0">
                   Premium authorized user tradelines matched to your specific goals. See your potential score increase before you buy.

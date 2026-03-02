@@ -29,7 +29,7 @@ export default function PageHero({ title, subtitle, backgroundImage }: PageHeroP
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.25, 0.4, 0.25, 1] }}
-          className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight"
+          className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-display font-extrabold tracking-tight"
         >
           {title}
         </motion.h1>

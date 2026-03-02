@@ -44,13 +44,13 @@ export default function Header() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-20">
+        <div className="flex items-center justify-between h-24 sm:h-28">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
             <img
               src={LOGO_URL}
               alt="A1 Tradelines"
-              className="h-10 sm:h-12 w-auto object-contain drop-shadow-lg group-hover:drop-shadow-[0_0_12px_rgba(0,255,127,0.4)] transition-all duration-300"
+              className="h-20 sm:h-24 w-auto object-contain drop-shadow-lg group-hover:drop-shadow-[0_0_12px_rgba(93,241,54,0.4)] transition-all duration-300"
             />
           </Link>
 
