@@ -153,14 +153,14 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left: Text */}
-            <div className="space-y-8 text-center lg:text-left">
+          <div className="flex flex-col items-center justify-center gap-12 lg:gap-16">
+            {/* Center: Text */}
+            <div className="space-y-8 text-center max-w-3xl">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                className="space-y-6 flex flex-col items-center lg:items-start"
+                className="space-y-6 flex flex-col items-center"
               >
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neon/10 border border-neon/20 text-neon text-xs font-bold uppercase tracking-widest">
                   <Sparkles className="w-3.5 h-3.5" />
@@ -173,7 +173,7 @@ Of Your
                    <br />
                    <span className="text-neon neon-text-glow">Credit Score</span>
                 </h1>
-                <p className="text-lg sm:text-xl text-white/50 max-w-lg leading-relaxed mx-auto lg:mx-0">
+                <p className="text-lg sm:text-xl text-white/50 max-w-2xl leading-relaxed mx-auto">
                   Premium authorized user tradelines matched to your specific goals. See your potential score increase before you buy.
                 </p>
               </motion.div>
@@ -182,7 +182,7 @@ Of Your
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-start"
+                className="flex flex-col sm:flex-row gap-4 items-center justify-center"
               >
                 <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
                   <Link
@@ -225,12 +225,12 @@ Of Your
               </motion.div>
             </div>
 
-            {/* Right: Floating card preview */}
+            {/* Center: Floating card preview */}
             <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
-              className="hidden lg:block"
+              className="w-full max-w-2xl"
             >
               <div className="space-y-6">
                 <div className="relative">
