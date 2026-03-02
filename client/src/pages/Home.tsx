@@ -169,9 +169,9 @@ export default function Home() {
                 <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-display font-extrabold leading-[1.05]">
 Take Back Control
                    <br />
-                   <span className="text-neon neon-text-glow">Of Your Credit</span>
+Of Your
                    <br />
-Score
+                   <span className="text-neon neon-text-glow">Credit Score</span>
                 </h1>
                 <p className="text-lg sm:text-xl text-white/50 max-w-lg leading-relaxed mx-auto lg:mx-0">
                   Premium authorized user tradelines matched to your specific goals. See your potential score increase before you buy.
