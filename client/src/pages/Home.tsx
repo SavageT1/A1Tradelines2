@@ -136,8 +136,8 @@ export default function Home() {
     <div className="overflow-hidden">
       {/* ===== HERO SECTION ===== */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Background */}
-        <div className="absolute inset-0">
+        {/* Background - Fixed/Static */}
+        <div className="fixed inset-0 -z-10">
           <img src={HERO_BG} alt="" className="w-full h-full object-cover opacity-20" />
           <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/80 to-background" />
           <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background/50" />

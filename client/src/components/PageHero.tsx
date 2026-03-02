@@ -12,9 +12,9 @@ interface PageHeroProps {
 
 export default function PageHero({ title, subtitle, backgroundImage }: PageHeroProps) {
   return (
-    <section className="relative min-h-[40vh] flex items-center justify-center overflow-hidden pt-20">
-      {/* Background */}
-      <div className="absolute inset-0">
+    <section className="relative min-h-[40vh] flex items-center justify-center overflow-hidden pt-20 bg-background">
+      {/* Background - Fixed/Static */}
+      <div className="fixed inset-0 -z-10">
         <img
           src={backgroundImage}
           alt=""
@@ -24,12 +24,12 @@ export default function PageHero({ title, subtitle, backgroundImage }: PageHeroP
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center px-4 py-20">
+      <div className="relative z-10 text-center px-4 py-20 max-w-4xl mx-auto w-full">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.25, 0.4, 0.25, 1] }}
-          className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-display font-extrabold tracking-tight"
+          className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-display font-extrabold tracking-[0.05em]"
         >
           {title}
         </motion.h1>
