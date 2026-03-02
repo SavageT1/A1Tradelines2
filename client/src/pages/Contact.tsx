@@ -284,6 +284,35 @@ export default function Contact() {
           </div>
         </div>
       </section>
+
+      {/* Guarantee Section */}
+      <section className="py-20 sm:py-28 bg-emerald-500/5 border-t border-emerald-500/20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionReveal>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="glass-panel rounded-3xl p-8 sm:p-12 border-l-4 border-emerald-500 bg-emerald-500/5 text-center"
+            >
+              <CheckCircle2 className="w-16 h-16 text-emerald-400 mx-auto mb-6" />
+              <h2 className="text-3xl sm:text-4xl font-display font-extrabold tracking-tight mb-4">
+                100% <span className="text-emerald-400">Perfect Payment History</span>
+              </h2>
+              <p className="text-white/70 leading-relaxed text-lg max-w-2xl mx-auto mb-6">
+                Every tradeline comes with a <span className="font-bold text-white">$0 balance</span> and <span className="font-bold text-white">100% perfect payment history</span>. We guarantee it. If it doesn't post, we make it right — money-back guarantee or replacement at no cost.
+              </p>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center gap-2 px-8 py-3 bg-emerald-500/20 border border-emerald-500/50 text-emerald-400 font-bold rounded-xl hover:bg-emerald-500/30 transition-all"
+              >
+                Learn About Our Guarantee <ArrowRight className="w-4 h-4" />
+              </motion.button>
+            </motion.div>
+          </SectionReveal>
+        </div>
+      </section>
     </div>
   );
 }

@@ -28,6 +28,10 @@ const FAQ_ITEMS = [
     answer: "Yes, authorized user tradelines are completely legal. Being added as an authorized user to someone's credit card account is a standard banking practice that has been in use for decades. It's the same process parents use to help their children build credit.",
   },
   {
+    question: "What guarantee do you offer on tradelines?",
+    answer: "Every tradeline in our inventory comes with a 100% perfect payment history and $0 balance guarantee. We stand behind the quality and accuracy of every tradeline we provide. If a tradeline fails to post to your credit report, we offer a money-back guarantee or a replacement tradeline at no additional cost. Learn more about what tradelines are and how they work in our Learning Center.",
+  },
+  {
     question: "How long does the tradeline stay on my report?",
     answer: "Tradelines typically remain on your credit report for the duration of the agreement period, which is usually 1-2 billing cycles after posting. The specific duration depends on the package you select. Even after removal, the positive impact on your credit history can have lasting benefits.",
   },

@@ -203,6 +203,17 @@ Of Your
                 </motion.a>
               </motion.div>
 
+              {/* Guarantee Badge */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.35 }}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-widest"
+              >
+                <Shield className="w-4 h-4" />
+                100% Perfect Payment History • $0 Balance Guaranteed
+              </motion.div>
+
               {/* Stats */}
               <motion.div
                 initial={{ opacity: 0 }}

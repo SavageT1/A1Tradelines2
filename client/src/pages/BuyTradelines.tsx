@@ -4,7 +4,7 @@
  */
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CreditCard, Filter, ArrowUpDown, Search, ChevronDown, Phone, ArrowRight } from "lucide-react";
+import { CreditCard, Filter, ArrowUpDown, Search, ChevronDown, Phone, ArrowRight, Shield } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
 import { toast } from "sonner";
@@ -78,6 +78,25 @@ export default function BuyTradelines() {
 
       <section className="py-16 sm:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Guarantee Banner */}
+          <SectionReveal>
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mb-8 glass-panel rounded-2xl p-6 sm:p-8 border-l-4 border-emerald-500 bg-emerald-500/5"
+            >
+              <div className="flex items-start gap-4">
+                <Shield className="w-6 h-6 text-emerald-400 flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="text-lg font-bold text-emerald-400 mb-2">Our Guarantee</h3>
+                  <p className="text-white/70 leading-relaxed">
+                    Every tradeline in our inventory comes with a <span className="font-bold text-white">100% perfect payment history</span> and <span className="font-bold text-white">$0 balance</span>. We guarantee the quality and accuracy of every tradeline we provide. Your credit profile is our priority.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </SectionReveal>
+
           {/* Filters */}
           <SectionReveal>
             <div className="glass-panel rounded-2xl p-4 sm:p-6 mb-8 flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
@@ -166,6 +185,12 @@ export default function BuyTradelines() {
                     <span className="text-xl font-display font-extrabold text-neon font-mono">
                       ${t.price.toLocaleString()}
                     </span>
+                  </div>
+
+                  {/* Guarantee Badge */}
+                  <div className="flex items-center gap-2 px-3 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-lg">
+                    <Shield className="w-3 h-3 text-emerald-400 flex-shrink-0" />
+                    <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest">Perfect Payment • $0 Balance</span>
                   </div>
 
                   {/* Details */}

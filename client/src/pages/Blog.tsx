@@ -19,12 +19,13 @@ const CATEGORY_STYLES: Record<string, { bg: string; text: string; border: string
 const ARTICLES = [
   {
     id: 1,
-    title: "Tradelines 101: Everything You Need to Know About Authorized User Tradelines",
-    excerpt: "A comprehensive guide to understanding how authorized user tradelines work, their impact on your credit score, and how to choose the right ones for your goals.",
+    title: "What is a Tradeline? Complete Guide with Credit Report Examples & Legal Regulations",
+    excerpt: "Learn exactly what a tradeline is, how it appears on your credit report, why it helps your score, and the legal regulations that make it possible. Includes before/after credit report examples.",
     category: "Tradelines 101",
-    readTime: "8 min read",
-    date: "Feb 25, 2026",
+    readTime: "12 min read",
+    date: "Feb 28, 2026",
     featured: true,
+    fullContent: true,
   },
   {
     id: 2,
@@ -102,35 +103,213 @@ export default function Blog() {
             <SectionReveal>
               <motion.div
                 whileHover={{ y: -5 }}
-                onClick={() => toast("Article coming soon — full content will be available at launch.")}
-                className="glass-panel rounded-2xl p-8 sm:p-10 mb-12 cursor-pointer group neon-border-glow card-shine transition-all duration-300"
+                className="glass-panel rounded-2xl p-8 sm:p-10 mb-12 group neon-border-glow card-shine transition-all duration-300"
               >
-                <div className="flex flex-col lg:flex-row gap-8 items-start">
-                  <div className="flex-1 space-y-4">
-                    <div className="flex items-center gap-3 flex-wrap">
+                {featured.fullContent && (
+                  <div className="space-y-8">
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-3 flex-wrap">
                       <span className="px-3 py-1 rounded-full bg-neon/10 border border-neon/20 text-neon text-xs font-bold uppercase tracking-widest">
                         Featured
                       </span>
                       <CategoryBadge category={featured.category} />
                     </div>
-                    <h2 className="text-2xl sm:text-3xl font-display font-extrabold tracking-tight group-hover:text-neon transition-colors">
+                    <h2 className="text-3xl sm:text-4xl font-display font-extrabold tracking-tight">
                       {featured.title}
                     </h2>
-                    <p className="text-white/50 leading-relaxed">{featured.excerpt}</p>
-                    <div className="flex items-center gap-4 text-xs text-white/30">
+                    <p className="text-white/60 leading-relaxed text-lg">{featured.excerpt}</p>
+                    <div className="flex items-center gap-4 text-sm text-white/40">
                       <span className="flex items-center gap-1">
-                        <Clock className="w-3 h-3" /> {featured.readTime}
+                        <Clock className="w-4 h-4" /> {featured.readTime}
                       </span>
                       <span>{featured.date}</span>
                     </div>
-                    <span className="inline-flex items-center gap-1 text-neon text-sm font-bold group-hover:gap-2 transition-all">
-                      Read Article <ArrowRight className="w-4 h-4" />
-                    </span>
+
+                    {/* What is a Tradeline Content */}
+                    <div className="space-y-8 pt-8 border-t border-white/10">
+                      {/* Section 1: Simple Explanation */}
+                      <div className="space-y-4">
+                        <h3 className="text-2xl font-display font-bold text-neon">What Exactly is a Tradeline?</h3>
+                        <p className="text-white/60 leading-relaxed">
+                          A tradeline is a credit account that appears on your credit report. It shows the credit bureaus (Equifax, Experian, TransUnion) information about that account, including the creditor's name, account type, credit limit, balance, payment history, and age of the account.
+                        </p>
+                        <p className="text-white/60 leading-relaxed">
+                          When you become an <span className="font-bold text-white">authorized user</span> on someone else's credit card account, that account's history is added to your credit report as a tradeline. You don't need to make payments or have access to the card — you simply benefit from the account's positive history.
+                        </p>
+                      </div>
+
+                      {/* Section 2: How It Appears on Credit Report */}
+                      <div className="space-y-4">
+                        <h3 className="text-2xl font-display font-bold text-neon">How a Tradeline Appears on Your Credit Report</h3>
+                        <p className="text-white/60 leading-relaxed">
+                          When a tradeline is added to your credit report, it shows up in your account history section. Here's what you'll see:
+                        </p>
+                        <div className="glass-panel rounded-xl p-6 space-y-3 bg-white/[0.02] border border-white/10">
+                          <div className="space-y-1">
+                            <span className="text-xs font-bold text-white/40 uppercase tracking-widest">Account Details</span>
+                            <p className="text-sm text-white/70 font-mono">Creditor: Chase Bank | Account Type: Credit Card</p>
+                          </div>
+                          <div className="space-y-1">
+                            <span className="text-xs font-bold text-white/40 uppercase tracking-widest">Credit Limit</span>
+                            <p className="text-sm text-white/70 font-mono">$50,000</p>
+                          </div>
+                          <div className="space-y-1">
+                            <span className="text-xs font-bold text-white/40 uppercase tracking-widest">Current Balance</span>
+                            <p className="text-sm text-neon font-mono">$0 (Perfect Payment History)</p>
+                          </div>
+                          <div className="space-y-1">
+                            <span className="text-xs font-bold text-white/40 uppercase tracking-widest">Account Age</span>
+                            <p className="text-sm text-white/70 font-mono">15 Years</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Section 3: Why It Helps Your Credit Score */}
+                      <div className="space-y-4">
+                        <h3 className="text-2xl font-display font-bold text-neon">Why Does a Tradeline Help Your Credit Score?</h3>
+                        <p className="text-white/60 leading-relaxed">
+                          Tradelines improve your credit score by positively impacting the key factors that make up your FICO score:
+                        </p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          <div className="glass-panel rounded-lg p-4 bg-emerald-500/5 border border-emerald-500/20">
+                            <p className="text-sm font-bold text-emerald-400 mb-2">📊 Utilization Ratio (30%)</p>
+                            <p className="text-xs text-white/60">A tradeline with a $0 balance and high credit limit dramatically lowers your utilization ratio, boosting your score.</p>
+                          </div>
+                          <div className="glass-panel rounded-lg p-4 bg-blue-500/5 border border-blue-500/20">
+                            <p className="text-sm font-bold text-blue-400 mb-2">📅 Account Age (15%)</p>
+                            <p className="text-xs text-white/60">Older tradelines increase your average account age, which credit bureaus reward with higher scores.</p>
+                          </div>
+                          <div className="glass-panel rounded-lg p-4 bg-amber-500/5 border border-amber-500/20">
+                            <p className="text-sm font-bold text-amber-400 mb-2">✅ Payment History (35%)</p>
+                            <p className="text-xs text-white/60">A tradeline with perfect payment history adds positive weight to your payment record.</p>
+                          </div>
+                          <div className="glass-panel rounded-lg p-4 bg-purple-500/5 border border-purple-500/20">
+                            <p className="text-sm font-bold text-purple-400 mb-2">🏦 Credit Mix (10%)</p>
+                            <p className="text-xs text-white/60">Adding diverse account types (credit cards, installment loans) strengthens your credit profile.</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Section 4: Legal Regulations */}
+                      <div className="space-y-4">
+                        <h3 className="text-2xl font-display font-bold text-neon">Legal Regulations: Why Tradelines Are 100% Legal</h3>
+                        <p className="text-white/60 leading-relaxed">
+                          Authorized user tradelines are completely legal and regulated by federal law. Here's why:
+                        </p>
+                        <div className="space-y-3">
+                          <div className="glass-panel rounded-lg p-4 bg-white/[0.02] border border-white/10">
+                            <p className="text-sm font-bold text-white mb-2">📋 Fair Credit Reporting Act (FCRA)</p>
+                            <p className="text-xs text-white/60">The FCRA explicitly allows credit bureaus to report authorized user accounts on credit reports. This is standard banking practice.</p>
+                          </div>
+                          <div className="glass-panel rounded-lg p-4 bg-white/[0.02] border border-white/10">
+                            <p className="text-sm font-bold text-white mb-2">🏦 Banking Standards</p>
+                            <p className="text-xs text-white/60">Adding authorized users is a standard feature offered by all major banks and credit card issuers. Parents use this to help their children build credit.</p>
+                          </div>
+                          <div className="glass-panel rounded-lg p-4 bg-white/[0.02] border border-white/10">
+                            <p className="text-sm font-bold text-white mb-2">✅ Credit Bureau Compliance</p>
+                            <p className="text-xs text-white/60">All three major credit bureaus (Equifax, Experian, TransUnion) are required to report authorized user accounts accurately and fairly.</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Section 5: Before & After Example */}
+                      <div className="space-y-4">
+                        <h3 className="text-2xl font-display font-bold text-neon">Before & After: Real Credit Report Impact</h3>
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                          {/* Before */}
+                          <div className="space-y-3">
+                            <p className="text-sm font-bold text-white/70">BEFORE (Without Tradeline)</p>
+                            <div className="glass-panel rounded-lg p-4 bg-red-500/5 border border-red-500/20 space-y-2">
+                              <div className="flex justify-between items-center">
+                                <span className="text-xs text-white/60">Credit Score</span>
+                                <span className="text-lg font-bold text-red-400">620</span>
+                              </div>
+                              <div className="flex justify-between items-center">
+                                <span className="text-xs text-white/60">Utilization Ratio</span>
+                                <span className="text-xs text-red-400">45%</span>
+                              </div>
+                              <div className="flex justify-between items-center">
+                                <span className="text-xs text-white/60">Avg Account Age</span>
+                                <span className="text-xs text-red-400">3 years</span>
+                              </div>
+                              <div className="flex justify-between items-center">
+                                <span className="text-xs text-white/60">Accounts</span>
+                                <span className="text-xs text-red-400">2 cards</span>
+                              </div>
+                            </div>
+                          </div>
+                          {/* After */}
+                          <div className="space-y-3">
+                            <p className="text-sm font-bold text-white/70">AFTER (With Tradeline)</p>
+                            <div className="glass-panel rounded-lg p-4 bg-emerald-500/5 border border-emerald-500/20 space-y-2">
+                              <div className="flex justify-between items-center">
+                                <span className="text-xs text-white/60">Credit Score</span>
+                                <span className="text-lg font-bold text-emerald-400">755</span>
+                              </div>
+                              <div className="flex justify-between items-center">
+                                <span className="text-xs text-white/60">Utilization Ratio</span>
+                                <span className="text-xs text-emerald-400">12%</span>
+                              </div>
+                              <div className="flex justify-between items-center">
+                                <span className="text-xs text-white/60">Avg Account Age</span>
+                                <span className="text-xs text-emerald-400">8 years</span>
+                              </div>
+                              <div className="flex justify-between items-center">
+                                <span className="text-xs text-white/60">Accounts</span>
+                                <span className="text-xs text-emerald-400">3 cards</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <p className="text-sm text-white/60 italic text-center pt-4">
+                          +135 points in 30 days by adding one strategically chosen tradeline
+                        </p>
+                      </div>
+
+                      {/* CTA */}
+                      <div className="pt-8 border-t border-white/10 text-center">
+                        <p className="text-white/60 mb-4">Ready to see how tradelines can help your credit score?</p>
+                        <motion.a
+                          href="/#simulator"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          className="inline-flex items-center gap-2 px-6 py-3 bg-neon/20 border border-neon/50 text-neon font-bold rounded-xl hover:bg-neon/30 transition-all"
+                        >
+                          Try the Credit Score Simulator <ArrowRight className="w-4 h-4" />
+                        </motion.a>
+                      </div>
+                    </div>
+                    </div>
                   </div>
-                  <div className="w-full lg:w-64 h-48 lg:h-auto bg-gradient-to-br from-neon/10 to-emerald-600/5 rounded-xl flex items-center justify-center shrink-0 border border-neon/10">
-                    <BookOpen className="w-12 h-12 text-neon/40" />
+                )}
+                {!featured.fullContent && (
+                  <div className="flex flex-col lg:flex-row gap-8 items-start">
+                    <div className="flex-1 space-y-4">
+                      <div className="flex items-center gap-3 flex-wrap">
+                        <span className="px-3 py-1 rounded-full bg-neon/10 border border-neon/20 text-neon text-xs font-bold uppercase tracking-widest">
+                          Featured
+                        </span>
+                        <CategoryBadge category={featured.category} />
+                      </div>
+                      <h2 className="text-2xl sm:text-3xl font-display font-extrabold tracking-tight group-hover:text-neon transition-colors">
+                        {featured.title}
+                      </h2>
+                      <p className="text-white/50 leading-relaxed">{featured.excerpt}</p>
+                      <div className="flex items-center gap-4 text-xs text-white/30">
+                        <span className="flex items-center gap-1">
+                          <Clock className="w-3 h-3" /> {featured.readTime}
+                        </span>
+                        <span>{featured.date}</span>
+                      </div>
+                      <span className="inline-flex items-center gap-1 text-neon text-sm font-bold group-hover:gap-2 transition-all">
+                        Read Article <ArrowRight className="w-4 h-4" />
+                      </span>
+                    </div>
+                    <div className="w-full lg:w-64 h-48 lg:h-auto bg-gradient-to-br from-neon/10 to-emerald-600/5 rounded-xl flex items-center justify-center shrink-0 border border-neon/10">
+                      <BookOpen className="w-12 h-12 text-neon/40" />
+                    </div>
                   </div>
-                </div>
+                )}
               </motion.div>
             </SectionReveal>
           )}

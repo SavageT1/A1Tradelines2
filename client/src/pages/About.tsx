@@ -140,6 +140,35 @@ export default function About() {
         </div>
       </section>
 
+      {/* Guarantee Section */}
+      <section className="py-20 sm:py-28 bg-emerald-500/5 border-y border-emerald-500/20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionReveal>
+            <div className="glass-panel rounded-3xl p-8 sm:p-12 border-l-4 border-emerald-500 bg-emerald-500/5">
+              <div className="flex items-start gap-6">
+                <Shield className="w-12 h-12 text-emerald-400 flex-shrink-0" />
+                <div>
+                  <h2 className="text-3xl sm:text-4xl font-display font-extrabold tracking-tight mb-4">
+                    Our <span className="text-emerald-400">100% Guarantee</span>
+                  </h2>
+                  <p className="text-white/70 leading-relaxed text-lg mb-6">
+                    Every tradeline in our inventory comes with a <span className="font-bold text-white">100% perfect payment history</span> and <span className="font-bold text-white">$0 balance</span>. We stand behind the quality and accuracy of every tradeline we provide. If a tradeline fails to post to your credit report, we offer a money-back guarantee or a replacement tradeline at no additional cost.
+                  </p>
+                  <Link href="/blog">
+                    <motion.a
+                      whileHover={{ x: 5 }}
+                      className="inline-flex items-center gap-2 text-emerald-400 font-bold hover:text-emerald-300 transition-colors"
+                    >
+                      Learn what a tradeline is <ArrowRight className="w-4 h-4" />
+                    </motion.a>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </SectionReveal>
+        </div>
+      </section>
+
       {/* Why Different */}
       <section className="py-20 sm:py-28">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
