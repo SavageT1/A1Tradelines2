@@ -80,7 +80,7 @@ export default function About() {
             <SectionReveal direction="right">
               <div className="relative">
                 <div className="absolute -inset-4 bg-neon/5 rounded-3xl blur-2xl" />
-                <div className="relative glass-panel rounded-2xl p-8 space-y-6 neon-border-glow">
+                <div className="relative glass-panel rounded-2xl p-8 space-y-6 neon-border-glow white-glow">
                   <h3 className="text-xl font-bold font-display">Our Mission</h3>
                   <p className="text-white/60 leading-relaxed text-lg italic border-l-2 border-neon/30 pl-5">
                     "To democratize access to premium credit-building strategies and empower every client to achieve their financial goals through intelligent tradeline matching."
@@ -126,7 +126,7 @@ export default function About() {
               <SectionReveal key={value.title} delay={i * 0.1}>
                 <motion.div
                   whileHover={{ y: -5, borderColor: "rgba(0,255,127,0.3)" }}
-                  className="glass-panel rounded-2xl p-7 space-y-4 h-full transition-all duration-300 card-shine"
+                  className="glass-panel rounded-2xl p-7 space-y-4 h-full transition-all duration-300 card-shine white-glow"
                 >
                   <div className="w-12 h-12 bg-neon/10 rounded-xl flex items-center justify-center">
                     <value.icon className="w-6 h-6 text-neon" />
@@ -144,7 +144,7 @@ export default function About() {
       <section className="py-20 sm:py-28">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionReveal>
-            <div className="glass-panel rounded-3xl p-8 sm:p-12 neon-border-glow">
+            <div className="glass-panel rounded-3xl p-8 sm:p-12 neon-border-glow white-glow">
               <div className="text-center mb-10">
                 <h2 className="text-3xl sm:text-4xl font-display font-extrabold tracking-tight">
                   Why A1 Tradelines <span className="text-neon">Is Different</span>

@@ -141,7 +141,7 @@ const ScoreGauge = ({ score, label }: { score: number; label: string }) => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="relative flex flex-col items-center justify-center p-6 sm:p-8 glass-panel rounded-2xl neon-border-glow card-shine"
+      className="relative flex flex-col items-center justify-center p-6 sm:p-8 glass-panel rounded-2xl neon-border-glow card-shine white-glow"
     >
       <div className="relative w-40 h-40 sm:w-48 sm:h-48">
         <svg className="w-full h-full transform -rotate-90">
@@ -430,7 +430,7 @@ export default function TradelineWizard() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 20 }}
-              className="space-y-5 glass-panel p-5 sm:p-7 rounded-2xl card-shine"
+               className="space-y-5 glass-panel p-5 sm:p-7 rounded-2xl card-shine white-glow"
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
@@ -689,7 +689,7 @@ export default function TradelineWizard() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="glass-panel p-6 sm:p-8 rounded-2xl space-y-5 neon-border-glow"
+               className="glass-panel p-6 sm:p-8 rounded-2xl space-y-5 neon-border-glow white-glow"
             >
               {leadSubmitted ? (
                 <div className="text-center py-6 space-y-3">
@@ -788,7 +788,7 @@ export default function TradelineWizard() {
               </div>
 
               {/* Score Result Card */}
-              <div className="glass-panel rounded-2xl p-5 sm:p-7 space-y-5 neon-border-glow card-shine">
+              <div className="glass-panel rounded-2xl p-5 sm:p-7 space-y-5 neon-border-glow card-shine white-glow">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-5 border-b border-white/5 gap-3">
                   <div>
                     <p className="text-white/40 text-[10px] uppercase tracking-widest mb-1">Projected Score</p>

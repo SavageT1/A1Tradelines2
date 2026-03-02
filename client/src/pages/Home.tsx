@@ -243,7 +243,7 @@ Of Your
                 </div>
                 <div className="relative">
                   <div className="absolute -inset-4 bg-neon/5 rounded-3xl blur-2xl" />
-                  <div className="relative glass-panel rounded-2xl p-8 space-y-6 neon-border-glow">
+                  <div className="relative glass-panel rounded-2xl p-8 space-y-6 neon-border-glow white-glow">
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-12 bg-neon/10 rounded-xl flex items-center justify-center">
                       <TrendingUp className="w-6 h-6 text-neon" />
@@ -324,7 +324,7 @@ Of Your
               <SectionReveal key={item.step} delay={i * 0.1}>
                 <motion.div
                   whileHover={{ y: -8, borderColor: "rgba(0,255,127,0.3)" }}
-                  className="relative glass-panel rounded-2xl p-6 space-y-4 h-full transition-all duration-300 card-shine group"
+                  className="relative glass-panel rounded-2xl p-6 space-y-4 h-full transition-all duration-300 card-shine group white-glow"
                 >
                   <span className="text-5xl font-display font-extrabold text-white/[0.03] absolute top-4 right-4">
                     {item.step}
@@ -363,7 +363,7 @@ Of Your
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -50 }}
                 transition={{ duration: 0.5 }}
-                className="glass-panel rounded-2xl p-8 sm:p-10 neon-border-glow"
+                className="glass-panel rounded-2xl p-8 sm:p-10 neon-border-glow white-glow"
               >
                 <div className="flex gap-1 mb-6">
                   {Array.from({ length: TESTIMONIALS[currentTestimonial].rating }).map((_, i) => (
