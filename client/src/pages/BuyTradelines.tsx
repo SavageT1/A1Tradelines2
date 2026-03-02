@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { CreditCard, Filter, ArrowUpDown, Search, ChevronDown, Phone, ArrowRight, Shield } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
+import TradelineInquiryModal from "@/components/TradelineInquiryModal";
 import { toast } from "sonner";
 
 const TRADELINES_HERO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663300423717/YgBCM3Vvv9dzqmN7qfKYzh/tradelines-hero-MgAogTaYj2uNyddmtjtsbi.webp";
@@ -43,6 +44,8 @@ export default function BuyTradelines() {
   const [categoryFilter, setCategoryFilter] = useState("All");
   const [sortBy, setSortBy] = useState<SortKey>("price");
   const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
+  const [selectedTradeline, setSelectedTradeline] = useState<TradelineItem | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const filtered = useMemo(() => {
     let items = [...SAMPLE_TRADELINES];
@@ -207,7 +210,10 @@ export default function BuyTradelines() {
 
                   {/* CTA */}
                   <button
-                    onClick={() => toast.success(`Inquiry submitted for ${t.bank} tradeline. Our team will contact you shortly.`)}
+                    onClick={() => {
+                      setSelectedTradeline(t);
+                      setIsModalOpen(true);
+                    }}
                     className="btn-ghost w-full bg-neon/10 border border-neon/20 text-neon py-2.5 rounded-xl text-sm font-bold transition-all flex items-center justify-center gap-2"
                   >
                     Inquire Now <ArrowRight className="w-4 h-4" />
@@ -245,6 +251,20 @@ export default function BuyTradelines() {
           </SectionReveal>
         </div>
       </section>
+
+      {/* Inquiry Modal */}
+      {selectedTradeline && (
+        <TradelineInquiryModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          tradeline={{
+            name: selectedTradeline.bank,
+            creditLimit: `$${selectedTradeline.creditLimit.toLocaleString()}`,
+            age: `${selectedTradeline.ageYears} Years`,
+            price: `$${selectedTradeline.price.toLocaleString()}`,
+          }}
+        />
+      )}
     </div>
   );
 }
