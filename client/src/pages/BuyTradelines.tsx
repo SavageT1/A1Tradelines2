@@ -1,10 +1,10 @@
 /*
  * BuyTradelines.tsx — Tradeline marketplace page
- * Neon Pulse Design: dark cards, neon accents, filtering/sorting UI.
+ * Neon Pulse Design: lighter cards, advanced filtering (price, credit limit, age), improved readability.
  */
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CreditCard, Filter, ArrowUpDown, Search, ChevronDown, Phone, ArrowRight, Shield } from "lucide-react";
+import { CreditCard, Filter, ArrowUpDown, Search, ChevronDown, Phone, ArrowRight, Shield, X } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
 import TradelineInquiryModal from "@/components/TradelineInquiryModal";
@@ -39,28 +39,72 @@ const SAMPLE_TRADELINES: TradelineItem[] = [
 
 type SortKey = "price" | "creditLimit" | "ageYears";
 
+// Price range filter options
+const PRICE_RANGES = [
+  { label: "All Prices", min: 0, max: Infinity },
+  { label: "$0 - $500", min: 0, max: 500 },
+  { label: "$500 - $1000", min: 500, max: 1000 },
+  { label: "$1000+", min: 1000, max: Infinity },
+];
+
+// Credit limit filter options
+const CREDIT_LIMIT_RANGES = [
+  { label: "All Limits", min: 0, max: Infinity },
+  { label: "$0 - $10k", min: 0, max: 10000 },
+  { label: "$10k - $25k", min: 10000, max: 25000 },
+  { label: "$25k+", min: 25000, max: Infinity },
+];
+
+// Account age filter options
+const AGE_RANGES = [
+  { label: "All Ages", min: 0, max: Infinity },
+  { label: "0-5 Years", min: 0, max: 5 },
+  { label: "5-10 Years", min: 5, max: 10 },
+  { label: "10+ Years", min: 10, max: Infinity },
+];
+
 export default function BuyTradelines() {
   const [searchTerm, setSearchTerm] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("All");
+  const [priceRange, setPriceRange] = useState(PRICE_RANGES[0]);
+  const [creditLimitRange, setCreditLimitRange] = useState(CREDIT_LIMIT_RANGES[0]);
+  const [ageRange, setAgeRange] = useState(AGE_RANGES[0]);
   const [sortBy, setSortBy] = useState<SortKey>("price");
   const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
   const [selectedTradeline, setSelectedTradeline] = useState<TradelineItem | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showFiltersPanel, setShowFiltersPanel] = useState(false);
 
   const filtered = useMemo(() => {
     let items = [...SAMPLE_TRADELINES];
+    
+    // Apply search filter
     if (searchTerm) {
       items = items.filter((t) => t.bank.toLowerCase().includes(searchTerm.toLowerCase()));
     }
+    
+    // Apply category filter
     if (categoryFilter !== "All") {
       items = items.filter((t) => t.category === categoryFilter);
     }
+    
+    // Apply price range filter
+    items = items.filter((t) => t.price >= priceRange.min && t.price <= priceRange.max);
+    
+    // Apply credit limit range filter
+    items = items.filter((t) => t.creditLimit >= creditLimitRange.min && t.creditLimit <= creditLimitRange.max);
+    
+    // Apply age range filter
+    items = items.filter((t) => t.ageYears >= ageRange.min && t.ageYears <= ageRange.max);
+    
+    // Apply sorting
     items.sort((a, b) => {
       const diff = a[sortBy] - b[sortBy];
       return sortDir === "asc" ? diff : -diff;
     });
+    
     return items;
-  }, [searchTerm, categoryFilter, sortBy, sortDir]);
+  }, [searchTerm, categoryFilter, priceRange, creditLimitRange, ageRange, sortBy, sortDir]);
 
   const toggleSort = (key: SortKey) => {
     if (sortBy === key) {
@@ -69,6 +113,21 @@ export default function BuyTradelines() {
       setSortBy(key);
       setSortDir("asc");
     }
+  };
+
+  const hasActiveFilters = 
+    searchTerm || 
+    categoryFilter !== "All" || 
+    priceRange.label !== "All Prices" || 
+    creditLimitRange.label !== "All Limits" || 
+    ageRange.label !== "All Ages";
+
+  const resetFilters = () => {
+    setSearchTerm("");
+    setCategoryFilter("All");
+    setPriceRange(PRICE_RANGES[0]);
+    setCreditLimitRange(CREDIT_LIMIT_RANGES[0]);
+    setAgeRange(AGE_RANGES[0]);
   };
 
   return (
@@ -100,9 +159,9 @@ export default function BuyTradelines() {
             </motion.div>
           </SectionReveal>
 
-          {/* Filters */}
+          {/* Main Search Bar */}
           <SectionReveal>
-            <div className="glass-panel rounded-2xl p-4 sm:p-6 mb-8 flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
+            <div className="glass-panel rounded-2xl p-4 sm:p-6 mb-6 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
               {/* Search */}
               <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
@@ -115,23 +174,144 @@ export default function BuyTradelines() {
                 />
               </div>
 
-              {/* Category Filter */}
-              <div className="relative">
-                <Filter className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
-                <select
-                  value={categoryFilter}
-                  onChange={(e) => setCategoryFilter(e.target.value)}
-                  className="bg-black/30 border border-white/10 rounded-lg py-2.5 pl-10 pr-8 text-sm outline-none focus:border-neon/50 transition-all appearance-none"
-                >
-                  <option value="All" className="bg-void">All Categories</option>
-                  <option value="Premium" className="bg-void">Premium</option>
-                  <option value="Standard" className="bg-void">Standard</option>
-                  <option value="Economy" className="bg-void">Economy</option>
-                </select>
-                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30 pointer-events-none" />
-              </div>
+              {/* Filter Toggle Button */}
+              <button
+                onClick={() => setShowFiltersPanel(!showFiltersPanel)}
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all border ${
+                  showFiltersPanel
+                    ? "bg-neon/10 border-neon/30 text-neon"
+                    : "bg-white/5 border-white/10 text-white/60 hover:text-white"
+                }`}
+              >
+                <Filter className="w-4 h-4" />
+                Filters
+              </button>
+            </div>
+          </SectionReveal>
 
-              {/* Sort Buttons */}
+          {/* Advanced Filters Panel */}
+          <AnimatePresence>
+            {showFiltersPanel && (
+              <SectionReveal>
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="glass-panel rounded-2xl p-6 mb-6 border border-neon/20"
+                >
+                  <div className="flex items-center justify-between mb-6">
+                    <h3 className="text-lg font-bold text-white">Advanced Filters</h3>
+                    {hasActiveFilters && (
+                      <button
+                        onClick={resetFilters}
+                        className="text-xs font-medium text-neon hover:text-neon/80 transition-colors flex items-center gap-1"
+                      >
+                        <X className="w-3 h-3" />
+                        Clear All
+                      </button>
+                    )}
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {/* Price Range Filter */}
+                    <div>
+                      <label className="block text-xs font-bold text-white/60 uppercase tracking-widest mb-3">
+                        Price Range
+                      </label>
+                      <div className="space-y-2">
+                        {PRICE_RANGES.map((range) => (
+                          <button
+                            key={range.label}
+                            onClick={() => setPriceRange(range)}
+                            className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all border ${
+                              priceRange.label === range.label
+                                ? "bg-neon/10 border-neon/30 text-neon font-medium"
+                                : "bg-white/5 border-white/10 text-white/60 hover:text-white/80"
+                            }`}
+                          >
+                            {range.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Credit Limit Filter */}
+                    <div>
+                      <label className="block text-xs font-bold text-white/60 uppercase tracking-widest mb-3">
+                        Credit Limit
+                      </label>
+                      <div className="space-y-2">
+                        {CREDIT_LIMIT_RANGES.map((range) => (
+                          <button
+                            key={range.label}
+                            onClick={() => setCreditLimitRange(range)}
+                            className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all border ${
+                              creditLimitRange.label === range.label
+                                ? "bg-neon/10 border-neon/30 text-neon font-medium"
+                                : "bg-white/5 border-white/10 text-white/60 hover:text/80"
+                            }`}
+                          >
+                            {range.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Account Age Filter */}
+                    <div>
+                      <label className="block text-xs font-bold text-white/60 uppercase tracking-widest mb-3">
+                        Account Age
+                      </label>
+                      <div className="space-y-2">
+                        {AGE_RANGES.map((range) => (
+                          <button
+                            key={range.label}
+                            onClick={() => setAgeRange(range)}
+                            className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all border ${
+                              ageRange.label === range.label
+                                ? "bg-neon/10 border-neon/30 text-neon font-medium"
+                                : "bg-white/5 border-white/10 text-white/60 hover:text-white/80"
+                            }`}
+                          >
+                            {range.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Category Filter */}
+                    <div>
+                      <label className="block text-xs font-bold text-white/60 uppercase tracking-widest mb-3">
+                        Category
+                      </label>
+                      <div className="space-y-2">
+                        {["All", "Premium", "Standard", "Economy"].map((cat) => (
+                          <button
+                            key={cat}
+                            onClick={() => setCategoryFilter(cat)}
+                            className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all border ${
+                              categoryFilter === cat
+                                ? "bg-neon/10 border-neon/30 text-neon font-medium"
+                                : "bg-white/5 border-white/10 text-white/60 hover:text-white/80"
+                            }`}
+                          >
+                            {cat}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </SectionReveal>
+            )}
+          </AnimatePresence>
+
+          {/* Sort Controls */}
+          <SectionReveal>
+            <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+              <p className="text-sm text-white/30">
+                Showing <span className="text-white/60 font-mono font-bold">{filtered.length}</span> tradelines
+              </p>
               <div className="flex gap-2">
                 {(["price", "creditLimit", "ageYears"] as SortKey[]).map((key) => (
                   <button
@@ -151,12 +331,7 @@ export default function BuyTradelines() {
             </div>
           </SectionReveal>
 
-          {/* Results count */}
-          <p className="text-sm text-white/30 mb-6">
-            Showing <span className="text-white/60 font-mono">{filtered.length}</span> tradelines
-          </p>
-
-          {/* Tradeline Grid */}
+          {/* Tradeline Grid - LIGHTER CARDS */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             <AnimatePresence mode="popLayout">
               {filtered.map((t, i) => (
@@ -168,18 +343,18 @@ export default function BuyTradelines() {
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ delay: i * 0.03 }}
                   whileHover={{ y: -5, borderColor: "rgba(0,255,127,0.3)" }}
-                  className="glass-panel rounded-2xl p-6 space-y-4 transition-all duration-300 card-shine group"
+                  className="tradeline-card rounded-2xl p-6 space-y-4 transition-all duration-300 card-shine group"
                 >
                   {/* Header */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-neon/10 rounded-lg flex items-center justify-center group-hover:bg-neon/20 transition-colors">
+                      <div className="w-10 h-10 bg-neon/15 rounded-lg flex items-center justify-center group-hover:bg-neon/25 transition-colors">
                         <CreditCard className="w-5 h-5 text-neon" />
                       </div>
                       <div>
-                        <h3 className="font-bold text-sm">{t.bank}</h3>
+                        <h3 className="font-bold text-sm text-white">{t.bank}</h3>
                         <span className={`text-[10px] font-bold uppercase tracking-widest ${
-                          t.category === "Premium" ? "text-neon" : t.category === "Standard" ? "text-blue-400" : "text-white/40"
+                          t.category === "Premium" ? "text-neon" : t.category === "Standard" ? "text-blue-400" : "text-white/50"
                         }`}>
                           {t.category}
                         </span>
@@ -191,20 +366,20 @@ export default function BuyTradelines() {
                   </div>
 
                   {/* Guarantee Badge */}
-                  <div className="flex items-center gap-2 px-3 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-lg">
+                  <div className="flex items-center gap-2 px-3 py-2 bg-emerald-500/15 border border-emerald-500/30 rounded-lg">
                     <Shield className="w-3 h-3 text-emerald-400 flex-shrink-0" />
                     <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest">Perfect Payment • $0 Balance</span>
                   </div>
 
-                  {/* Details */}
+                  {/* Details - IMPROVED CONTRAST */}
                   <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-white/[0.02] rounded-lg p-3">
-                      <p className="text-[10px] text-white/30 uppercase tracking-widest">Credit Limit</p>
-                      <p className="text-sm font-bold font-mono">${t.creditLimit.toLocaleString()}</p>
+                    <div className="bg-white/[0.08] rounded-lg p-3 border border-white/10">
+                      <p className="text-[10px] text-white/50 uppercase tracking-widest font-semibold">Credit Limit</p>
+                      <p className="text-sm font-bold font-mono text-white/90 mt-1">${t.creditLimit.toLocaleString()}</p>
                     </div>
-                    <div className="bg-white/[0.02] rounded-lg p-3">
-                      <p className="text-[10px] text-white/30 uppercase tracking-widest">Account Age</p>
-                      <p className="text-sm font-bold font-mono">{t.ageYears} Years</p>
+                    <div className="bg-white/[0.08] rounded-lg p-3 border border-white/10">
+                      <p className="text-[10px] text-white/50 uppercase tracking-widest font-semibold">Account Age</p>
+                      <p className="text-sm font-bold font-mono text-white/90 mt-1">{t.ageYears} Years</p>
                     </div>
                   </div>
 
@@ -214,7 +389,7 @@ export default function BuyTradelines() {
                       setSelectedTradeline(t);
                       setIsModalOpen(true);
                     }}
-                    className="btn-ghost w-full bg-neon/10 border border-neon/20 text-neon py-2.5 rounded-xl text-sm font-bold transition-all flex items-center justify-center gap-2"
+                    className="btn-ghost w-full bg-neon/15 border border-neon/30 text-neon py-2.5 rounded-xl text-sm font-bold transition-all flex items-center justify-center gap-2 hover:bg-neon/25"
                   >
                     Inquire Now <ArrowRight className="w-4 h-4" />
                   </button>
@@ -226,7 +401,10 @@ export default function BuyTradelines() {
           {filtered.length === 0 && (
             <div className="text-center py-20">
               <p className="text-white/30 text-lg">No tradelines match your filters.</p>
-              <button onClick={() => { setSearchTerm(""); setCategoryFilter("All"); }} className="mt-4 text-neon text-sm font-medium hover:underline">
+              <button 
+                onClick={resetFilters} 
+                className="mt-4 text-neon text-sm font-medium hover:underline transition-colors"
+              >
                 Clear filters
               </button>
             </div>
