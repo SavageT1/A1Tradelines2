@@ -176,18 +176,18 @@ export default function Blog() {
 
                       {/* Section 3: Why It Helps Your Credit Score */}
                       <div className="space-y-4">
-                        <h3 className="text-2xl font-display font-bold text-neon">Why Does a Tradeline Help Your Credit Score?</h3>
+                        <h3 className="text-2xl font-display font-bold text-neon">Why Does a Tradeline Help Your Credit Profile?</h3>
                         <p className="text-white/60 leading-relaxed">
-                          Tradelines improve your credit score by positively impacting the key factors that make up your FICO score:
+                          Tradelines improve your credit profile by positively impacting the key factors that make up your FICO score, leading to overall credit profile improvement:
                         </p>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           <div className="glass-panel rounded-lg p-4 bg-emerald-500/5 border border-emerald-500/20">
                             <p className="text-sm font-bold text-emerald-400 mb-2">📊 Utilization Ratio (30%)</p>
-                            <p className="text-xs text-white/60">A tradeline with a $0 balance and high credit limit dramatically lowers your utilization ratio, boosting your score.</p>
+                            <p className="text-xs text-white/60">A tradeline with a $0 balance and high credit limit dramatically lowers your utilization ratio, contributing to a stronger credit profile.</p>
                           </div>
                           <div className="glass-panel rounded-lg p-4 bg-blue-500/5 border border-blue-500/20">
                             <p className="text-sm font-bold text-blue-400 mb-2">📅 Account Age (15%)</p>
-                            <p className="text-xs text-white/60">Older tradelines increase your average account age, which credit bureaus reward with higher scores.</p>
+                            <p className="text-xs text-white/60">Older tradelines increase your average account age, which positively impacts your credit profile.</p>
                           </div>
                           <div className="glass-panel rounded-lg p-4 bg-amber-500/5 border border-amber-500/20">
                             <p className="text-sm font-bold text-amber-400 mb-2">✅ Payment History (35%)</p>
@@ -195,7 +195,7 @@ export default function Blog() {
                           </div>
                           <div className="glass-panel rounded-lg p-4 bg-purple-500/5 border border-purple-500/20">
                             <p className="text-sm font-bold text-purple-400 mb-2">🏦 Credit Mix (10%)</p>
-                            <p className="text-xs text-white/60">Adding diverse account types (credit cards, installment loans) strengthens your credit profile.</p>
+                            <p className="text-xs text-white/60">Adding diverse account types (credit cards, installment loans) strengthens your overall credit profile.</p>
                           </div>
                         </div>
                       </div>
@@ -271,21 +271,21 @@ export default function Blog() {
                             </div>
                           </div>
                         </div>
-                        <p className="text-sm text-white/60 italic text-center pt-4">
-                          +135 points in 30 days by adding one strategically chosen tradeline
-                        </p>
+                            <p className="text-sm text-white/60 italic text-center pt-4">
+                              Significant credit profile improvement in 30 days by adding one strategically chosen tradeline
+                            </p>
                       </div>
 
                       {/* CTA */}
                       <div className="pt-8 border-t border-white/10 text-center">
-                        <p className="text-white/60 mb-4">Ready to see how tradelines can help your credit score?</p>
+                        <p className="text-white/60 mb-4">Ready to see how tradelines can help improve your credit profile?</p>
                         <motion.a
                           href="/#simulator"
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                           className="inline-flex items-center gap-2 px-6 py-3 bg-neon/20 border border-neon/50 text-neon font-bold rounded-xl hover:bg-neon/30 transition-all"
                         >
-                          Try the Credit Score Simulator <ArrowRight className="w-4 h-4" />
+                          Try the Credit Profile Simulator <ArrowRight className="w-4 h-4" />
                         </motion.a>
                       </div>
                     </div>
@@ -300,11 +300,9 @@ export default function Blog() {
                           Featured
                         </span>
                         <CategoryBadge category={featured.category} />
-                      </div>
-                      <h2 className="text-2xl sm:text-3xl font-display font-extrabold tracking-tight group-hover:text-neon transition-colors">
-                        {featured.title}
-                      </h2>
-                      <p className="text-white/50 leading-relaxed">{featured.excerpt}</p>
+                      </di                        <h2 className="text-3xl sm:text-4xl font-display font-extrabold tracking-tight group-hover:text-neon transition-colors">
+                          {featured.title.replace("Credit Score", "Credit Profile")}
+                        </h2>                    <p className="text-white/50 leading-relaxed">{featured.excerpt}</p>
                       <div className="flex items-center gap-4 text-xs text-white/30">
                         <span className="flex items-center gap-1">
                           <Clock className="w-3 h-3" /> {featured.readTime}
@@ -341,7 +339,7 @@ export default function Blog() {
                     <div className="space-y-3">
                       <CategoryBadge category={article.category} />
                       <h3 className="font-bold text-sm leading-snug group-hover:text-neon transition-colors line-clamp-2">
-                        {article.title}
+                        {article.title.replace("Credit Score", "Credit Profile")}
                       </h3>
                       <p className="text-xs text-white/40 leading-relaxed line-clamp-2">{article.excerpt}</p>
                       <div className="flex items-center justify-between text-[11px] text-white/25 pt-2">
