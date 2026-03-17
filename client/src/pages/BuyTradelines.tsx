@@ -9,8 +9,10 @@ import { CreditCard, Filter, ArrowUpDown, Search, ChevronDown, Phone, ArrowRight
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
 import TradelineInquiryModal from "@/components/TradelineInquiryModal";
+import SEOHead from "@/components/SEOHead";
 import { toast } from "sonner";
 import { fetchTradelines, type TradelineItem } from "@/services/tradelineApi";
+import { generateServiceSchema } from "@/lib/seo";
 
 const TRADELINES_HERO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663300423717/YgBCM3Vvv9dzqmN7qfKYzh/tradelines-hero-MgAogTaYj2uNyddmtjtsbi.webp";
 
@@ -130,8 +132,17 @@ export default function BuyTradelines() {
     setAgeRange(AGE_RANGES[0]);
   };
 
+  const schema = generateServiceSchema();
+
   return (
     <div>
+      <SEOHead
+        title="Buy Premium Tradelines — Authorized User Accounts for Credit Profile Improvement"
+        description="Browse 240+ premium authorized user tradelines with perfect payment history. Filter by credit limit, age, and price. See your potential score increase before you buy."
+        canonical="https://a1tradelines.com/buy-tradelines"
+        keywords="buy tradelines, authorized user tradelines, credit profile improvement, premium tradelines, credit score boost"
+        schema={schema}
+      />
       <PageHero
         title="Buy Tradelines"
         subtitle="Browse our inventory of premium authorized user tradelines"

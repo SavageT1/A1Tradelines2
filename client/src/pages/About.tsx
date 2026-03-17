@@ -7,6 +7,8 @@ import { Link } from "wouter";
 import { Shield, Target, Users, Zap, ArrowRight, CheckCircle2, Award, Heart } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
+import SEOHead from "@/components/SEOHead";
+import { generateOrganizationSchema } from "@/lib/seo";
 
 const ABOUT_HERO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663300423717/YgBCM3Vvv9dzqmN7qfKYzh/about-hero-SHHrLgGBeyCspmG2izuVnT.webp";
 
@@ -43,8 +45,17 @@ const DIFFERENTIATORS = [
 ];
 
 export default function About() {
+  const schema = generateOrganizationSchema();
+
   return (
     <div>
+      <SEOHead
+        title="About A1 Tradelines — Strategy-First Credit Building Since 2010"
+        description="Learn about A1 Tradelines' mission to democratize credit profile improvement through intelligent tradeline matching. 16+ years of expertise, 2,500+ satisfied clients."
+        canonical="https://a1tradelines.com/about"
+        keywords="about A1 Tradelines, credit strategy, tradeline company, credit profile improvement"
+        schema={schema}
+      />
       <PageHero
         title="About A1 Tradelines"
         subtitle="Strategy-first tradeline matching for serious funding goals"

@@ -7,6 +7,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, HelpCircle } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
+import SEOHead from "@/components/SEOHead";
+import { generateFAQSchema } from "@/lib/seo";
 
 const ABOUT_HERO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663300423717/YgBCM3Vvv9dzqmN7qfKYzh/about-hero-SHHrLgGBeyCspmG2izuVnT.webp";
 
@@ -67,9 +69,17 @@ const FAQ_ITEMS = [
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const schema = generateFAQSchema(FAQ_ITEMS);
 
   return (
     <div>
+      <SEOHead
+        title="FAQ — Frequently Asked Questions About Tradelines"
+        description="Get answers to common questions about tradelines, credit profile improvement, authorized user accounts, and how A1 Tradelines can help you."
+        canonical="https://a1tradelines.com/faq"
+        keywords="tradelines FAQ, authorized user questions, credit improvement, tradeline cost, how tradelines work"
+        schema={schema}
+      />
       <PageHero
         title="Frequently Asked Questions"
         subtitle="Everything you need to know about tradelines and our services"

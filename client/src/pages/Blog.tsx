@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 import { Clock, ArrowRight, BookOpen, Tag, TrendingUp, Landmark, ShieldCheck, Lightbulb, BarChart3 } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
+import SEOHead from "@/components/SEOHead";
+import { generateArticleSchema } from "@/lib/seo";
 import { toast } from "sonner";
 
 const BLOG_HERO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663300423717/YgBCM3Vvv9dzqmN7qfKYzh/blog-hero-g8VJsEqV6jJAms6TkpDRt9.webp";
@@ -87,9 +89,17 @@ function CategoryBadge({ category }: { category: string }) {
 export default function Blog() {
   const featured = ARTICLES.find((a) => a.featured);
   const rest = ARTICLES.filter((a) => !a.featured);
+  const schema = featured ? generateArticleSchema(featured) : null;
 
   return (
     <div>
+      <SEOHead
+        title="Blog — Tradelines, Credit Building, and Financial Strategy"
+        description="Learn about tradelines, credit profile improvement, authorized user accounts, and financial strategies from A1 Tradelines' expert guides."
+        canonical="https://a1tradelines.com/blog"
+        keywords="tradelines blog, credit building, credit profile improvement, authorized user, financial strategy"
+        schema={schema}
+      />
       <PageHero
         title="Learning Center"
         subtitle="Expert insights on credit building, tradelines, and funding strategies"

@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send, CheckCircle2, Clock, ArrowRight, AlertCircle } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
+import SEOHead from "@/components/SEOHead";
 import { submitToHubSpot } from "@/lib/hubspot";
 
 const CONTACT_HERO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663300423717/YgBCM3Vvv9dzqmN7qfKYzh/contact-hero-GATXTizuF7kKCUe38nynTh.webp";
@@ -89,6 +90,12 @@ export default function Contact() {
 
   return (
     <div>
+      <SEOHead
+        title="Contact A1 Tradelines — Get Your Free Credit Strategy Consultation"
+        description="Get in touch with our credit strategy team. Schedule a free consultation, ask questions, or learn how tradelines can help your credit profile improvement goals."
+        canonical="https://a1tradelines.com/contact"
+        keywords="contact A1 Tradelines, credit consultation, tradeline advice, credit strategy"
+      />
       <PageHero
         title="Contact Us"
         subtitle="Get in touch with our credit strategy team"
