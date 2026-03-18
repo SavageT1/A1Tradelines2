@@ -154,6 +154,7 @@ const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(
 
 export default defineConfig({
   plugins,
+  publicDir: path.resolve(import.meta.dirname, "attached_assets"),
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),

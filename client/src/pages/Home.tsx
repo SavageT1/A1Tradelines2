@@ -262,8 +262,9 @@ Of Your
                 <div className="relative">
                   <div className="absolute -inset-4 bg-neon/5 rounded-3xl blur-2xl" />
                   <div className="relative glass-panel rounded-2xl overflow-hidden neon-border-glow">
-                    <video autoPlay muted playsInline className="w-full h-auto rounded-2xl" style={{ aspectRatio: "16/9" }}>
-                      <source src="https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663300423717/dDgVYfJtZJVkrJar.mp4" type="video/mp4" />
+                    <video autoPlay muted playsInline loop className="w-full h-auto rounded-2xl" style={{ aspectRatio: "16/9" }}>
+                      <source src="/hero-video.mp4" type="video/mp4" />
+                      Your browser does not support the video tag.
                     </video>
                   </div>
                 </div>
