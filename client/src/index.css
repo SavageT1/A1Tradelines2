@@ -153,16 +153,31 @@
 
   /* Neon Pulse Design System */
   .glass-panel {
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     backdrop-filter: blur(20px);
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.05), inset 0 0 20px rgba(255, 255, 255, 0.02);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.08), inset 0 0 20px rgba(255, 255, 255, 0.04);
+  }
+
+  /* Light Container for Better Readability */
+  .light-container {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.06);
+  }
+
+  /* Section Container - Lighter Background */
+  .section-container {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
   }
 
   .glass-panel-hover:hover {
-    background: rgba(255, 255, 255, 0.09);
-    border-color: rgba(93, 241, 54, 0.3);
-    box-shadow: 0 0 40px rgba(255, 255, 255, 0.08), 0 0 20px rgba(93, 241, 54, 0.15);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(93, 241, 54, 0.4);
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.12), 0 0 20px rgba(93, 241, 54, 0.2);
   }
 
   .neon-glow {
@@ -196,17 +211,17 @@
 
   /* Tradeline Card - Lighter background for better readability */
   .tradeline-card {
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.22);
     backdrop-filter: blur(20px);
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.08), inset 0 0 20px rgba(255, 255, 255, 0.04);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.1), inset 0 0 20px rgba(255, 255, 255, 0.05);
     transition: all 0.3s ease;
   }
 
   .tradeline-card:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(93, 241, 54, 0.4);
-    box-shadow: 0 0 40px rgba(255, 255, 255, 0.12), 0 0 20px rgba(93, 241, 54, 0.2);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(93, 241, 54, 0.5);
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.15), 0 0 25px rgba(93, 241, 54, 0.25);
   }
 
   .card-shine {

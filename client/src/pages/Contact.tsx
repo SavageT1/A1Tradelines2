@@ -280,7 +280,7 @@ export default function Contact() {
                           disabled={loading}
                           className="btn-neon w-full bg-neon text-black font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-neon/20 transition-all text-sm disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                          {loading ? "Sending..." : "Send Message"} {!loading && <Send className="w-4 h-4" />}
+                          {loading ? "Submitting..." : "Get My Free Consultation"} {!loading && <Send className="w-4 h-4" />}
                         </motion.button>
                       </form>
                     </>
