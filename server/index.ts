@@ -19,7 +19,7 @@ async function startServer() {
 
   // ✅ NEW: Contact form API endpoint
   app.post("/api/contact", async (req, res) => {
-    const { firstname, lastname, email, phone, message } = req.body;
+    const { firstname, lastname, email, phone, subject, message } = req.body;
 
     // Validate
     if (!email) {
@@ -38,7 +38,8 @@ async function startServer() {
             { name: "lastname", value: lastname || "" },
             { name: "email", value: email },
             { name: "phone", value: phone || "" },
-            { name: "message", value: message || "" },
+            { name: "subject", value: subject || "" },
+            { name: "message", value: subject ? `[${subject}] ${message || ""}` : (message || "") },
           ],
           context: {
             pageUri: req.headers.referer || "https://a1tradelines.com/contact",

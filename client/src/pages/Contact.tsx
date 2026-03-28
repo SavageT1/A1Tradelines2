@@ -74,6 +74,7 @@ export default function Contact() {
           lastname,
           email: form.email,
           phone: form.phone,
+          subject: form.subject,
           message: form.message,
         }),
       });

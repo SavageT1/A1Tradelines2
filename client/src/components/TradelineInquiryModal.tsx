@@ -48,18 +48,22 @@ export default function TradelineInquiryModal({
     setError('');
 
     try {
-      await submitToHubSpot({
+      const result = await submitToHubSpot({
         email,
         phone,
         message: `Tradeline Inquiry - ${tradeline.name}\nCredit Limit: ${tradeline.creditLimit}\nAge: ${tradeline.age}\nPrice: ${tradeline.price}`,
       });
-      setSuccess(true);
-      setTimeout(() => {
-        onClose();
-        setSuccess(false);
-        setEmail('');
-        setPhone('');
-      }, 2000);
+      if (result.success) {
+        setSuccess(true);
+        setTimeout(() => {
+          onClose();
+          setSuccess(false);
+          setEmail('');
+          setPhone('');
+        }, 2000);
+      } else {
+        setError(result.message || 'Failed to submit. Please try again or email us directly.');
+      }
     } catch (err) {
       setError('Failed to submit. Please try again or email us directly.');
     } finally {
