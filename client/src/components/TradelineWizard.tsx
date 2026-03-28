@@ -33,7 +33,6 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { Link } from "wouter";
-import { submitToHubSpot } from "@/lib/hubspot";
 
 // --- Types ---
 interface Tradeline {
@@ -379,12 +378,20 @@ export default function TradelineWizard() {
       const nameParts = leadForm.name.trim().split(" ");
       const firstname = nameParts[0] || "";
       const lastname = nameParts.slice(1).join(" ") || "";
-      await submitToHubSpot({
-        firstname,
-        lastname,
-        email: leadForm.email,
-        phone: leadForm.phone,
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstname,
+          lastname,
+          email: leadForm.email,
+          phone: leadForm.phone,
+          message: "Credit Score Simulator Lead",
+        }),
       });
+      if (!response.ok) {
+        console.error("HubSpot lead submission failed:", response.status);
+      }
     } catch (error) {
       console.error("HubSpot submission error:", error);
     }
