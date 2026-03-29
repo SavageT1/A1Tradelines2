@@ -97,7 +97,7 @@ export default function Contact() {
   return (
     <div>
       <SEOHead
-        title="Contact A1 Tradelines — Get Your Free Credit Strategy Consultation"
+        title="Contact A1 TradeLines — Get Your Free Credit Strategy Consultation"
         description="Get in touch with our credit strategy team. Schedule a free consultation, ask questions, or learn how tradelines can help your credit profile improvement goals."
         canonical="https://a1tradelines.com/contact"
         keywords="contact A1 Tradelines, credit consultation, tradeline advice, credit strategy"

@@ -50,14 +50,14 @@ export default function About() {
   return (
     <div>
       <SEOHead
-        title="About A1 Tradelines — Strategy-First Credit Building Since 2010"
+        title="About A1 TradeLines — Strategy-First Credit Building Since 2010"
         description="Learn about A1 Tradelines' mission to democratize credit profile improvement through intelligent tradeline matching. 16+ years of expertise, 2,500+ satisfied clients."
         canonical="https://a1tradelines.com/about"
         keywords="about A1 Tradelines, credit strategy, tradeline company, credit profile improvement"
         schema={schema}
       />
       <PageHero
-        title="About A1 Tradelines"
+        title="About A1 TradeLines"
         subtitle="Strategy-first tradeline matching for serious funding goals"
         backgroundImage={ABOUT_HERO}
       />
