@@ -3,7 +3,8 @@
  * Neon Pulse Design: article cards with colored category badges and visual variety.
  */
 import { motion } from "framer-motion";
-import { Clock, ArrowRight, BookOpen, Tag, TrendingUp, Landmark, ShieldCheck, Lightbulb, BarChart3 } from "lucide-react";
+import { Link } from "wouter";
+import { Clock, ArrowRight, BookOpen, Tag, TrendingUp, Landmark, ShieldCheck, Lightbulb, BarChart3, Phone } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
 import SEOHead from "@/components/SEOHead";
@@ -300,9 +301,11 @@ export default function Blog() {
                           Featured
                         </span>
                         <CategoryBadge category={featured.category} />
-                      </di                        <h2 className="text-3xl sm:text-4xl font-display font-extrabold tracking-tight group-hover:text-neon transition-colors">
+                      </div>
+                        <h2 className="text-3xl sm:text-4xl font-display font-extrabold tracking-tight group-hover:text-neon transition-colors">
                           {featured.title.replace("Credit Score", "Credit Profile")}
-                        </h2>                    <p className="text-white/50 leading-relaxed">{featured.excerpt}</p>
+                        </h2>
+                        <p className="text-white/50 leading-relaxed">{featured.excerpt}</p>
                       <div className="flex items-center gap-4 text-xs text-white/30">
                         <span className="flex items-center gap-1">
                           <Clock className="w-3 h-3" /> {featured.readTime}
@@ -330,7 +333,7 @@ export default function Blog() {
                 <SectionReveal key={article.id} delay={i * 0.05}>
                   <motion.div
                     whileHover={{ y: -5, borderColor: "rgba(0,255,127,0.3)" }}
-                    onClick={() => toast("Article coming soon — full content will be available at launch.")}
+                    onClick={() => window.location.href = "/contact"}
                     className="glass-panel rounded-2xl p-6 space-y-4 h-full cursor-pointer group transition-all duration-300 card-shine"
                   >
                     <div className={`w-full h-36 rounded-xl flex items-center justify-center ${catStyle.bg} border ${catStyle.border}`}>
@@ -354,6 +357,48 @@ export default function Blog() {
               );
             })}
           </div>
+
+          {/* CTA Banner */}
+          <SectionReveal>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mt-16 glass-panel rounded-3xl p-8 sm:p-12 neon-border-glow text-center space-y-6"
+            >
+              <div className="w-14 h-14 bg-neon/10 rounded-2xl flex items-center justify-center mx-auto">
+                <Phone className="w-7 h-7 text-neon" />
+              </div>
+              <div className="space-y-2">
+                <h2 className="text-2xl sm:text-3xl font-display font-extrabold">
+                  Ready to <span className="text-neon">Boost Your Score?</span>
+                </h2>
+                <p className="text-white/50 max-w-xl mx-auto">
+                  Stop reading — start building. Talk to a credit strategist today and get a personalized tradeline plan for your goals.
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Link href="/contact">
+                  <motion.button
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="btn-neon bg-neon text-black font-bold px-8 py-3.5 rounded-xl shadow-lg shadow-neon/30 text-sm"
+                  >
+                    Get My Free Consultation <ArrowRight className="w-4 h-4 inline ml-1" />
+                  </motion.button>
+                </Link>
+                <Link href="/buy-tradelines">
+                  <motion.button
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="bg-white/5 border border-white/10 text-white font-bold px-8 py-3.5 rounded-xl text-sm hover:border-neon/30 transition-all"
+                  >
+                    Browse Tradelines
+                  </motion.button>
+                </Link>
+              </div>
+            </motion.div>
+          </SectionReveal>
         </div>
       </section>
     </div>

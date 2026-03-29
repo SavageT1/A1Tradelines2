@@ -262,10 +262,12 @@ Of Your
                 <div className="relative">
                   <div className="absolute -inset-4 bg-neon/5 rounded-3xl blur-2xl" />
                   <div className="relative glass-panel rounded-2xl overflow-hidden neon-border-glow">
-                    <video autoPlay muted playsInline loop className="w-full h-auto rounded-2xl" style={{ aspectRatio: "16/9" }}>
-                      <source src="/hero-video.mp4" type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
+                    <img
+                      src="https://d2xsxph8kpxj0f.cloudfront.net/310519663300423717/YgBCM3Vvv9dzqmN7qfKYzh/contact-hero-GATXTizuF7kKCUe38nynTh.webp"
+                      alt="A1 Tradelines — Build Credit Fast"
+                      className="w-full h-auto rounded-2xl object-cover"
+                      style={{ aspectRatio: "16/9" }}
+                    />
                   </div>
                 </div>
                 <div className="relative">
