@@ -24,7 +24,7 @@ export default function SEOHead({
   ogType = "website",
   schema,
   keywords,
-  author = "A1 Tradelines",
+  author = "A1 TradeLines",
 }: SEOHeadProps) {
   useEffect(() => {
     // Set page title
@@ -52,6 +52,7 @@ export default function SEOHead({
       image: ogImage,
       "image:width": "1200",
       "image:height": "630",
+      "site_name": "A1 TradeLines",
     };
 
     setOpenGraphTags(ogTags);
