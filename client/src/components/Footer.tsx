@@ -117,9 +117,9 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} A1 Tradelines. All rights reserved.
           </p>
           <div className="flex gap-6 text-white/25 text-xs">
-            <span className="hover:text-white/50 transition-colors cursor-pointer">Privacy Policy</span>
-            <span className="hover:text-white/50 transition-colors cursor-pointer">Terms of Service</span>
-            <span className="hover:text-white/50 transition-colors cursor-pointer">Disclaimer</span>
+            <Link href="/contact" className="hover:text-white/50 transition-colors">Privacy Policy</Link>
+            <Link href="/contact" className="hover:text-white/50 transition-colors">Terms of Service</Link>
+            <Link href="/contact" className="hover:text-white/50 transition-colors">Disclaimer</Link>
           </div>
         </div>
       </div>

@@ -5,6 +5,7 @@
 import { ReactNode } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import FloatingCTA from "./FloatingCTA";
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
@@ -21,6 +22,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <Header />
       <main className="relative z-10">{children}</main>
       <Footer />
+      <FloatingCTA />
     </div>
   );
 }

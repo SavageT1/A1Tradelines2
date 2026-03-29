@@ -74,6 +74,7 @@ export default function Contact() {
           lastname,
           email: form.email,
           phone: form.phone,
+          subject: form.subject,
           message: form.message,
         }),
       });
@@ -314,13 +315,15 @@ export default function Contact() {
               <p className="text-white/70 leading-relaxed text-lg max-w-2xl mx-auto mb-6">
                 Every tradeline comes with a <span className="font-bold text-white">$0 balance</span> and <span className="font-bold text-white">100% perfect payment history</span>. We guarantee it. If it doesn't post, we make it right — money-back guarantee or replacement at no cost.
               </p>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-2 px-8 py-3 bg-emerald-500/20 border border-emerald-500/50 text-emerald-400 font-bold rounded-xl hover:bg-emerald-500/30 transition-all"
-              >
-                Learn About Our Guarantee <ArrowRight className="w-4 h-4" />
-              </motion.button>
+              <a href="/faq">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="inline-flex items-center gap-2 px-8 py-3 bg-emerald-500/20 border border-emerald-500/50 text-emerald-400 font-bold rounded-xl hover:bg-emerald-500/30 transition-all"
+                >
+                  Learn About Our Guarantee <ArrowRight className="w-4 h-4" />
+                </motion.button>
+              </a>
             </motion.div>
           </SectionReveal>
         </div>
