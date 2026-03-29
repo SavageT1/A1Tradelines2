@@ -143,7 +143,7 @@ export default function Home() {
   return (
     <div className="overflow-hidden">
       <SEOHead
-        title="A1 TradeLines — Strategy-First Tradeline Matching for Credit Profile Improvement"
+        title="Tradelines for Sale | Boost Your Credit Fast (700+ Ready) | A1 Tradelines"
         description="Premium authorized user tradelines matched to your specific credit profile improvement goals. See your potential score increase before you buy. 2,500+ satisfied clients."
         canonical="https://a1tradelines.com/"
         keywords="tradelines, credit profile improvement, authorized user, credit score, credit building, funding"
