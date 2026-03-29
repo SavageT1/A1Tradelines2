@@ -146,6 +146,8 @@ export default function Home() {
       <SEOHead
         title="Tradelines for Sale | Boost Your Credit Fast (700+ Ready) | A1 Tradelines"
         description="Boost your credit score fast with verified tradelines. Increase limits, improve utilization, and get results in as little as 30 days. Trusted by clients nationwide."
+        ogTitle="A1 Tradelines | Boost Your Credit Fast"
+        ogDescription="Increase your credit score with verified tradelines in as little as 30 days."
         canonical="https://a1tradelines.com/"
         keywords="tradelines, credit profile improvement, authorized user, credit score, credit building, funding"
         schema={schemas}

@@ -11,6 +11,8 @@ interface SEOHeadProps {
   canonical?: string;
   ogImage?: string;
   ogType?: string;
+  ogTitle?: string;
+  ogDescription?: string;
   schema?: SchemaMarkup | SchemaMarkup[];
   keywords?: string;
   author?: string;
@@ -22,6 +24,8 @@ export default function SEOHead({
   canonical,
   ogImage = "https://a1tradelines.com/og-image.png",
   ogType = "website",
+  ogTitle,
+  ogDescription,
   schema,
   keywords,
   author = "A1 TradeLines",
@@ -43,16 +47,16 @@ export default function SEOHead({
 
     setMetaTags(metaTags);
 
-    // Set Open Graph tags
+    // Set Open Graph tags — ogTitle/ogDescription override title/description when provided
     const ogTags: Record<string, string> = {
-      title,
-      description,
+      title: ogTitle ?? title,
+      description: ogDescription ?? description,
       type: ogType,
       url: window.location.href,
       image: ogImage,
       "image:width": "1200",
       "image:height": "630",
-      "site_name": "A1 TradeLines",
+      "site_name": "A1 Tradelines",
     };
 
     setOpenGraphTags(ogTags);
@@ -60,8 +64,8 @@ export default function SEOHead({
     // Set Twitter Card tags
     const twitterTags: Record<string, string> = {
       card: "summary_large_image",
-      title,
-      description,
+      title: ogTitle ?? title,
+      description: ogDescription ?? description,
       image: ogImage,
     };
 
@@ -90,7 +94,7 @@ export default function SEOHead({
     if (schema) {
       injectSchemaMarkup(schema);
     }
-  }, [title, description, canonical, ogImage, ogType, schema, keywords, author]);
+  }, [title, description, canonical, ogImage, ogType, ogTitle, ogDescription, schema, keywords, author]);
 
   return null;
 }
