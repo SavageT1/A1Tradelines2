@@ -1,9 +1,2 @@
 name = "a1tradelines2"
-type = "javascript"
-account_id = "dec9a6cbc391c2584adcc6e7cb98fb85"
-workers_dev = false
-route = ""
-zone_id = ""
-
-[env.production]
-vars = { VITE_TRADELINE_API_USER = "cb147860-95b2-4dc1-9607-a6e2e5931543", VITE_TRADELINE_API_PASS = "66d4effc-29e9-419d-9230-b9c6744cd449" }
+pages_build_output_dir = "dist/public"
