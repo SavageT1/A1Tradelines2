@@ -23,7 +23,7 @@ import { useState, useEffect } from "react";
 import SectionReveal from "@/components/SectionReveal";
 import TradelineWizard from "@/components/TradelineWizard";
 import SEOHead from "@/components/SEOHead";
-import { generateOrganizationSchema, generateServiceSchema, generateAggregateRatingSchema } from "@/lib/seo";
+import { generateOrganizationSchema, generateServiceSchema, generateAggregateRatingSchema, generateWebSiteSchema } from "@/lib/seo";
 
 const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663300423717/YgBCM3Vvv9dzqmN7qfKYzh/hero-bg-9Z7yUMMjZU6HqTHEHsnbNW.webp";
 
@@ -135,6 +135,7 @@ export default function Home() {
   }, []);
 
   const schemas = [
+    generateWebSiteSchema(),
     generateOrganizationSchema(),
     generateServiceSchema(),
     generateAggregateRatingSchema(TESTIMONIALS),

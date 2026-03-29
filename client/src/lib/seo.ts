@@ -207,11 +207,42 @@ export const generateBreadcrumbSchema = (items: Array<{ name: string; url: strin
 });
 
 /**
+ * WebSite Schema
+ * Defines the site name Google displays in search results and enables Sitelinks Search Box
+ */
+export const generateWebSiteSchema = (): SchemaMarkup => ({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "A1 Tradelines",
+  alternateName: "A1 TradeLines",
+  url: "https://a1tradelines.com",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: "https://a1tradelines.com/?q={search_term_string}",
+    },
+    "query-input": "required name=search_term_string",
+  },
+});
+
+/**
  * Helper function to inject schema markup into page head
+ * Uses a data attribute to prevent duplicate injection on re-renders
  */
 export const injectSchemaMarkup = (schema: SchemaMarkup | SchemaMarkup[]): void => {
+  const key = Array.isArray(schema)
+    ? schema.map((s) => s["@type"]).join(",")
+    : schema["@type"];
+  const attrKey = `data-schema-types`;
+
+  // Remove existing script with same types to prevent duplicates
+  const existing = document.head.querySelector(`script[type="application/ld+json"][${attrKey}="${key}"]`);
+  if (existing) existing.remove();
+
   const script = document.createElement("script");
   script.type = "application/ld+json";
+  script.setAttribute(attrKey, key);
   script.textContent = JSON.stringify(Array.isArray(schema) ? schema : schema);
   document.head.appendChild(script);
 };
