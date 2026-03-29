@@ -144,7 +144,7 @@ export default function Home() {
     <div className="overflow-hidden">
       <SEOHead
         title="Tradelines for Sale | Boost Your Credit Fast (700+ Ready) | A1 Tradelines"
-        description="Premium authorized user tradelines matched to your specific credit profile improvement goals. See your potential score increase before you buy. 2,500+ satisfied clients."
+        description="Boost your credit score fast with verified tradelines. Increase limits, improve utilization, and get results in as little as 30 days. Trusted by clients nationwide."
         canonical="https://a1tradelines.com/"
         keywords="tradelines, credit profile improvement, authorized user, credit score, credit building, funding"
         schema={schemas}
