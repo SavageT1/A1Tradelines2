@@ -10,6 +10,9 @@ import BuyTradelines from "./pages/BuyTradelines";
 import FAQ from "./pages/FAQ";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
+import BestTradelinesForSale from "./pages/BestTradelinesForSale";
+import AuthorizedUserTradelines from "./pages/AuthorizedUserTradelines";
+import HowToBoostCreditScore from "./pages/HowToBoostCreditScore";
 import Layout from "./components/Layout";
 
 function Router() {
@@ -22,6 +25,9 @@ function Router() {
         <Route path="/faq" component={FAQ} />
         <Route path="/blog" component={Blog} />
         <Route path="/contact" component={Contact} />
+        <Route path="/best-tradelines-for-sale" component={BestTradelinesForSale} />
+        <Route path="/authorized-user-tradelines" component={AuthorizedUserTradelines} />
+        <Route path="/how-to-boost-credit-score-fast" component={HowToBoostCreditScore} />
         <Route path="/resources/faq-hub"><Redirect to="/faq" /></Route>
         <Route path="/resources/:rest*"><Redirect to="/faq" /></Route>
         <Route path="/404" component={NotFound} />
