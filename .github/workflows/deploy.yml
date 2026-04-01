@@ -34,3 +34,5 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: dec9a6cbc391c2584adcc6e7cb98fb85
           command: pages deploy dist/public --project-name=a1tradelines2 --commit-dirty=true
+        env:
+          HUBSPOT_API_TOKEN: ${{ secrets.HUBSPOT_API_TOKEN }}
