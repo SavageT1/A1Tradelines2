@@ -1,8 +1,7 @@
-import express from "express";
+import express, { Request, Response, NextFunction } from "express";
 import { createServer } from "http";
 import path from "path";
 import { fileURLToPath } from "url";
-import rateLimit from "express-rate-limit";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -10,23 +9,33 @@ const __dirname = path.dirname(__filename);
 const HUBSPOT_PORTAL_ID = "244921424";
 const HUBSPOT_FORM_ID = "f738963e-9243-43e3-848c-df584038fa1a";
 
-// Rate limiter for static file serving — 300 requests per minute per IP
-const staticLimiter = rateLimit({
-  windowMs: 60 * 1000,
-  max: 300,
-  standardHeaders: true,
-  legacyHeaders: false,
-  message: { error: "Too many requests, please try again later." },
-});
+// Zero-dependency in-memory rate limiter
+function makeRateLimiter(maxRequests: number, windowMs: number, message: object) {
+  const hits = new Map<string, { count: number; resetAt: number }>();
+  return (req: Request, res: Response, next: NextFunction) => {
+    const ip = (req.headers["x-forwarded-for"] as string)?.split(",")[0].trim()
+      || req.socket.remoteAddress
+      || "unknown";
+    const now = Date.now();
+    const record = hits.get(ip);
+    if (!record || now > record.resetAt) {
+      hits.set(ip, { count: 1, resetAt: now + windowMs });
+      return next();
+    }
+    if (record.count >= maxRequests) {
+      res.setHeader("Retry-After", Math.ceil((record.resetAt - now) / 1000));
+      return res.status(429).json(message);
+    }
+    record.count++;
+    next();
+  };
+}
 
-// Tighter rate limiter for the API endpoint — 20 submissions per 15 minutes per IP
-const apiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 20,
-  standardHeaders: true,
-  legacyHeaders: false,
-  message: { success: false, message: "Too many submissions. Please try again later." },
-});
+// 300 requests / 60 s per IP for static file serving
+const staticLimiter = makeRateLimiter(300, 60 * 1000, { error: "Too many requests, please try again later." });
+
+// 20 submissions / 15 min per IP for the contact API
+const apiLimiter = makeRateLimiter(20, 15 * 60 * 1000, { success: false, message: "Too many submissions. Please try again later." });
 
 async function startServer() {
   const app = express();
