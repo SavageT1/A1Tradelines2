@@ -1,29 +1,17 @@
-/**
- * SEO Utilities - Schema Markup and Meta Tags
- * Generates structured data for Google Search and AI-driven answers
- */
-
 export interface SchemaMarkup {
   "@context": string;
   "@type": string;
   [key: string]: any;
 }
 
-/**
- * Organization Schema
- * Helps Google understand your business entity
- */
 export const generateOrganizationSchema = (): SchemaMarkup => ({
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "A1 Tradelines",
   url: "https://a1tradelines.com",
   logo: "https://a1tradelines.com/logo.png",
-  description: "Strategy-first tradeline matching for credit profile improvement and funding goals",
-  sameAs: [
-    "https://facebook.com/a1tradelines",
-    "https://instagram.com/a1tradelines",
-  ],
+  description: "Authorized user tradeline matching, education, and reporting support. No credit outcome is guaranteed.",
+  sameAs: ["https://www.facebook.com/A1Tradelines/"],
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "Customer Service",
@@ -32,34 +20,20 @@ export const generateOrganizationSchema = (): SchemaMarkup => ({
     areaServed: "US",
     availableLanguage: "en",
   },
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "522 N Central Ave #831",
-    addressLocality: "Phoenix",
-    addressRegion: "AZ",
-    postalCode: "85004",
-    addressCountry: "US",
-  },
-  foundingDate: "2010",
-  numberOfEmployees: "50-100",
   knowsAbout: [
-    "Tradelines",
-    "Credit Profile Improvement",
-    "Authorized User Accounts",
-    "Credit Scoring",
-    "Financial Strategy",
+    "Authorized User Tradelines",
+    "Tradeline Matching",
+    "Credit Profile Education",
+    "Credit Utilization",
+    "Credit Reporting Timelines",
   ],
 });
 
-/**
- * Service Schema
- * Describes your tradeline matching service
- */
 export const generateServiceSchema = (): SchemaMarkup => ({
   "@context": "https://schema.org",
   "@type": "Service",
-  name: "Tradeline Matching Service",
-  description: "Premium authorized user tradelines matched to your specific credit profile improvement goals",
+  name: "Authorized User Tradeline Matching Service",
+  description: "Authorized user tradeline matching, education, and reporting support based on profile fit, account age, credit limit, reported balance, and reporting timeline. No credit outcome is guaranteed.",
   provider: {
     "@type": "Organization",
     name: "A1 Tradelines",
@@ -71,30 +45,18 @@ export const generateServiceSchema = (): SchemaMarkup => ({
   },
   hasOfferCatalog: {
     "@type": "OfferCatalog",
-    name: "Tradeline Inventory",
+    name: "Authorized User Tradeline Options",
     itemListElement: [
       {
         "@type": "Offer",
-        name: "Premium Tradelines",
-        description: "High-limit, aged tradelines with perfect payment history",
-        price: "299-999",
+        name: "Authorized User Tradeline Matching",
+        description: "Profile-based tradeline matching using account age, limit, reported balance, and timeline factors.",
         priceCurrency: "USD",
       },
     ],
   },
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.9",
-    ratingCount: "2500",
-    bestRating: "5",
-    worstRating: "1",
-  },
 });
 
-/**
- * FAQ Schema
- * Marks up FAQ items for rich snippets in search results
- */
 export const generateFAQSchema = (faqs: Array<{ question: string; answer: string }>): SchemaMarkup => ({
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -108,10 +70,6 @@ export const generateFAQSchema = (faqs: Array<{ question: string; answer: string
   })),
 });
 
-/**
- * Article/BlogPosting Schema
- * Marks up blog posts for better indexing and rich results
- */
 export const generateArticleSchema = (article: {
   title: string;
   excerpt: string;
@@ -140,13 +98,9 @@ export const generateArticleSchema = (article: {
       url: "https://a1tradelines.com/logo.png",
     },
   },
-  keywords: [article.category, "tradelines", "credit profile improvement", "credit score"],
+  keywords: [article.category, "authorized user tradelines", "tradeline matching", "credit profile education"],
 });
 
-/**
- * Review/AggregateRating Schema
- * Displays star ratings in search results
- */
 export const generateAggregateRatingSchema = (testimonials: Array<{ rating: number }>): SchemaMarkup => ({
   "@context": "https://schema.org",
   "@type": "AggregateRating",
@@ -156,45 +110,27 @@ export const generateAggregateRatingSchema = (testimonials: Array<{ rating: numb
   worstRating: "1",
 });
 
-/**
- * LocalBusiness Schema
- * Helps with local SEO
- */
 export const generateLocalBusinessSchema = (): SchemaMarkup => ({
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": "ProfessionalService",
   name: "A1 Tradelines",
   image: "https://a1tradelines.com/logo.png",
-  description: "Strategy-first tradeline matching for credit profile improvement",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "522 N Central Ave #831",
-    addressLocality: "Phoenix",
-    addressRegion: "AZ",
-    postalCode: "85004",
-    addressCountry: "US",
-  },
+  description: "Authorized user tradeline matching, education, and reporting support. No credit outcome is guaranteed.",
   telephone: "+1-908-767-5309",
   email: "info@a1tradelines.com",
   url: "https://a1tradelines.com",
+  areaServed: {
+    "@type": "Country",
+    name: "United States",
+  },
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",
     dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
     opens: "09:00",
     closes: "18:00",
-    validFrom: "2024-01-01",
-  },
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.9",
-    ratingCount: "2500",
   },
 });
 
-/**
- * Breadcrumb Schema
- * Helps with navigation in search results
- */
 export const generateBreadcrumbSchema = (items: Array<{ name: string; url: string }>): SchemaMarkup => ({
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -206,10 +142,6 @@ export const generateBreadcrumbSchema = (items: Array<{ name: string; url: strin
   })),
 });
 
-/**
- * WebSite Schema
- * Defines the site name Google displays in search results and enables Sitelinks Search Box
- */
 export const generateWebSiteSchema = (): SchemaMarkup => ({
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -226,53 +158,20 @@ export const generateWebSiteSchema = (): SchemaMarkup => ({
   },
 });
 
-/**
- * Helper function to inject schema markup into page head
- * Uses a data attribute to prevent duplicate injection on re-renders
- */
 export const injectSchemaMarkup = (schema: SchemaMarkup | SchemaMarkup[]): void => {
   const key = Array.isArray(schema)
     ? schema.map((s) => s["@type"]).join(",")
     : schema["@type"];
   const attrKey = `data-schema-types`;
 
-  // Remove existing script with same types to prevent duplicates
   const existing = document.head.querySelector(`script[type="application/ld+json"][${attrKey}="${key}"]`);
-  if (existing) existing.remove();
+  if (existing) {
+    existing.remove();
+  }
 
   const script = document.createElement("script");
   script.type = "application/ld+json";
   script.setAttribute(attrKey, key);
-  script.textContent = JSON.stringify(Array.isArray(schema) ? schema : schema);
+  script.textContent = JSON.stringify(schema);
   document.head.appendChild(script);
-};
-
-/**
- * Helper function to set meta tags
- */
-export const setMetaTags = (tags: Record<string, string>): void => {
-  Object.entries(tags).forEach(([name, content]) => {
-    let element = document.querySelector(`meta[name="${name}"]`);
-    if (!element) {
-      element = document.createElement("meta");
-      element.setAttribute("name", name);
-      document.head.appendChild(element);
-    }
-    element.setAttribute("content", content);
-  });
-};
-
-/**
- * Helper function to set Open Graph tags
- */
-export const setOpenGraphTags = (tags: Record<string, string>): void => {
-  Object.entries(tags).forEach(([property, content]) => {
-    let element = document.querySelector(`meta[property="og:${property}"]`);
-    if (!element) {
-      element = document.createElement("meta");
-      element.setAttribute("property", `og:${property}`);
-      document.head.appendChild(element);
-    }
-    element.setAttribute("content", content);
-  });
 };
