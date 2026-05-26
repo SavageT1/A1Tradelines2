@@ -89,23 +89,37 @@
   * {
     @apply border-border outline-ring/50;
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
-  .font-display {
-    letter-spacing: 0.05em;
-  }
 
-  /* Center headings on mobile */
   h1, h2, h3, h4, h5, h6 {
-    @apply text-center md:text-left;
+    @apply font-display font-extrabold tracking-[0.05em] text-center;
+    line-height: 1.05;
   }
 
-  /* Apply consistent letter-spacing to all display headings */
-  h1, h2, h3 {
-    @apply tracking-[0.05em] text-center;
+  h1 {
+    @apply text-4xl sm:text-5xl lg:text-6xl xl:text-7xl;
   }
+
+  h2 {
+    @apply text-3xl sm:text-4xl lg:text-5xl;
+  }
+
+  h3 {
+    @apply text-xl sm:text-2xl;
+  }
+
+  p {
+    @apply leading-relaxed;
+  }
+
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
   [type="button"]:not(:disabled),
@@ -117,9 +131,6 @@
   input[type="radio"]:not(:disabled) {
     @apply cursor-pointer;
   }
-  html {
-    scroll-behavior: smooth;
-  }
 }
 
 @layer components {
@@ -129,6 +140,50 @@
     margin-right: auto;
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+
+  .site-section {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  .site-section-lg {
+    @apply py-20 sm:py-24 lg:py-28;
+  }
+
+  .site-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .site-container-narrow {
+    @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-kicker {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neon/10 border border-neon/20 text-neon text-xs font-bold uppercase tracking-widest mb-4;
+  }
+
+  .section-title {
+    @apply text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-[0.05em] text-center;
+  }
+
+  .section-subtitle {
+    @apply mt-4 text-white/45 max-w-2xl mx-auto text-center leading-relaxed;
+  }
+
+  .cta-row {
+    @apply flex flex-col sm:flex-row gap-4 justify-center items-center;
+  }
+
+  .cta-primary {
+    @apply btn-neon inline-flex items-center justify-center gap-2 bg-neon text-black px-7 py-3.5 rounded-xl text-sm sm:text-base font-bold shadow-lg shadow-neon/25 transition-all;
+  }
+
+  .cta-secondary {
+    @apply btn-ghost inline-flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white px-7 py-3.5 rounded-xl text-sm sm:text-base font-bold transition-all;
+  }
+
+  .content-card {
+    @apply glass-panel rounded-2xl p-6 sm:p-8;
   }
 
   .flex {
@@ -151,7 +206,6 @@
     }
   }
 
-  /* Neon Pulse Design System */
   .glass-panel {
     background: rgba(255, 255, 255, 0.12);
     border: 1px solid rgba(255, 255, 255, 0.18);
@@ -159,7 +213,6 @@
     box-shadow: 0 0 30px rgba(255, 255, 255, 0.08), inset 0 0 20px rgba(255, 255, 255, 0.04);
   }
 
-  /* Light Container for Better Readability */
   .light-container {
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.15);
@@ -167,7 +220,6 @@
     box-shadow: 0 0 25px rgba(255, 255, 255, 0.06);
   }
 
-  /* Section Container - Lighter Background */
   .section-container {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -196,7 +248,6 @@
     box-shadow: inset 0 0 20px rgba(93, 241, 54, 0.05), 0 0 20px rgba(93, 241, 54, 0.1), 0 0 30px rgba(255, 255, 255, 0.05);
   }
 
-  /* White glow effects for brightness */
   .white-glow {
     box-shadow: 0 0 30px rgba(255, 255, 255, 0.1), 0 0 60px rgba(255, 255, 255, 0.05);
   }
@@ -209,7 +260,6 @@
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.3), 0 0 40px rgba(255, 255, 255, 0.1);
   }
 
-  /* Tradeline Card - Lighter background for better readability */
   .tradeline-card {
     background: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.22);
@@ -243,7 +293,6 @@
     transform: skewX(-25deg) translateX(200%);
   }
 
-  /* Animated Neon Button */
   .btn-neon {
     position: relative;
     overflow: hidden;
@@ -272,7 +321,6 @@
     box-shadow: 0 0 15px rgba(93, 241, 54, 0.4), 0 2px 10px rgba(0, 0, 0, 0.3);
   }
 
-  /* Animated Ghost Button */
   .btn-ghost {
     position: relative;
     overflow: hidden;
@@ -311,7 +359,6 @@
   }
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -326,7 +373,6 @@
   background: rgba(93, 241, 54, 0.3);
 }
 
-/* Animations */
 @keyframes float {
   0%, 100% { transform: translateY(0) rotate(0deg); }
   33% { transform: translateY(-15px) rotate(1deg); }
@@ -361,7 +407,6 @@
   animation: gradient-shift 8s ease infinite;
 }
 
-/* Hide spin buttons on number inputs */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -371,7 +416,6 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-/* Selection */
 ::selection {
   background: rgba(0, 255, 127, 0.3);
   color: white;
