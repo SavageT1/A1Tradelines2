@@ -26,6 +26,8 @@ export interface TradelineItem {
   spotsAvailable: number;
   cycles: number;
   dateOpened: string;
+  statementDate: string;
+  postingDate: string;
 }
 
 const API_BASE_URL = "https://www.tradelinemaster.com/api";
@@ -69,6 +71,8 @@ function transformTradelineFromAPI(item: TradelineFromAPI): TradelineItem {
     spotsAvailable: item.SpotsAvailable,
     cycles: item.Cycles,
     dateOpened: item.DateOpened,
+    statementDate: item.StatementDate,
+    postingDate: item.PostingDate,
   };
 }
 
