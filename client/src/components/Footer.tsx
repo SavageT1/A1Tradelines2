@@ -16,7 +16,7 @@ export default function Footer() {
           <div className="lg:col-span-1 space-y-4">
             <img src={LOGO_URL} alt="A1 Tradelines" className="h-12 w-auto" />
             <p className="text-white/40 text-sm leading-relaxed max-w-xs">
-              Strategy-first tradeline matching for serious funding goals. We help you build the credit profile you need.
+              Authorized user tradeline matching, education, and reporting support. No credit score, approval, or funding outcomes are guaranteed.
             </p>
             <div className="flex gap-3 pt-2">
               <a
@@ -117,9 +117,9 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} A1 Tradelines. All rights reserved.
           </p>
           <div className="flex gap-6 text-white/25 text-xs">
-            <Link href="/contact" className="hover:text-white/50 transition-colors">Privacy Policy</Link>
-            <Link href="/contact" className="hover:text-white/50 transition-colors">Terms of Service</Link>
-            <Link href="/contact" className="hover:text-white/50 transition-colors">Disclaimer</Link>
+            <Link href="/privacy-policy" className="hover:text-white/50 transition-colors">Privacy Policy</Link>
+            <Link href="/terms-of-service" className="hover:text-white/50 transition-colors">Terms of Service</Link>
+            <Link href="/disclaimer" className="hover:text-white/50 transition-colors">Disclaimer</Link>
           </div>
         </div>
       </div>
