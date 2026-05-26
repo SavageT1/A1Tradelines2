@@ -13,6 +13,9 @@ import Contact from "./pages/Contact";
 import BestTradelinesForSale from "./pages/BestTradelinesForSale";
 import AuthorizedUserTradelines from "./pages/AuthorizedUserTradelines";
 import HowToBoostCreditScore from "./pages/HowToBoostCreditScore";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
+import Disclaimer from "./pages/Disclaimer";
 import Layout from "./components/Layout";
 
 function Router() {
@@ -25,6 +28,9 @@ function Router() {
         <Route path="/faq" component={FAQ} />
         <Route path="/blog" component={Blog} />
         <Route path="/contact" component={Contact} />
+        <Route path="/privacy-policy" component={PrivacyPolicy} />
+        <Route path="/terms-of-service" component={TermsOfService} />
+        <Route path="/disclaimer" component={Disclaimer} />
         <Route path="/best-tradelines-for-sale" component={BestTradelinesForSale} />
         <Route path="/authorized-user-tradelines" component={AuthorizedUserTradelines} />
         <Route path="/how-to-boost-credit-score-fast" component={HowToBoostCreditScore} />
