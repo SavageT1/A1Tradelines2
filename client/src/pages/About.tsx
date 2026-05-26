@@ -1,10 +1,10 @@
 /*
- * About.tsx — About A1 Tradelines
- * Neon Pulse Design: company story, mission, values, differentiators.
+ * About.tsx - About A1 Tradelines
+ * Safer positioning around authorized user tradeline education and matching.
  */
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { Shield, Target, Users, Zap, ArrowRight, CheckCircle2, Award, Heart } from "lucide-react";
+import { Shield, Target, Users, ArrowRight, CheckCircle2, Award, Heart, BookOpen } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
 import SEOHead from "@/components/SEOHead";
@@ -15,33 +15,33 @@ const ABOUT_HERO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663300423717/YgB
 const VALUES = [
   {
     icon: Shield,
-    title: "Integrity First",
-    description: "We operate with complete transparency. No hidden fees, no misleading promises — just honest guidance backed by real results.",
+    title: "Transparency First",
+    description: "We explain what authorized user tradelines can and cannot do before a client makes a purchase decision.",
   },
   {
     icon: Target,
-    title: "Strategy Over Sales",
-    description: "We don't just sell tradelines. We build customized credit strategies aligned with your specific funding goals and timeline.",
+    title: "Strategy Over Hype",
+    description: "We evaluate tradelines by profile fit, account age, credit limit, reported balance, bank diversity, and reporting timing.",
   },
   {
     icon: Heart,
-    title: "Client Success",
-    description: "Your success is our success. We measure our performance by the outcomes we deliver, not the products we sell.",
+    title: "Client Education",
+    description: "Our goal is to help clients understand the process, risks, limitations, and third-party reporting factors involved.",
   },
   {
-    icon: Zap,
-    title: "Innovation",
-    description: "From our Credit Score Simulator to our matching algorithms, we leverage technology to deliver better results faster.",
+    icon: BookOpen,
+    title: "Compliance-Minded Guidance",
+    description: "We do not offer CPNs, synthetic identities, fake credit profiles, or guaranteed credit outcomes.",
   },
 ];
 
 const DIFFERENTIATORS = [
-  "Custom strategy consultation before any purchase",
-  "Proprietary credit score simulation technology",
-  "Bank-diverse tradeline inventory for maximum impact",
-  "Ongoing support throughout the reporting cycle",
-  "Money-back guarantee if tradeline doesn't post",
-  "16+ years of industry expertise and relationships",
+  "Authorized user tradeline matching only",
+  "No guaranteed score, approval, or funding claims",
+  "Inventory reviewed for age, limit, balance, and reporting factors",
+  "Profile-based consultation before purchase",
+  "Clear explanations of posting timelines and limitations",
+  "No CPNs, synthetic identities, or fake credit profiles",
 ];
 
 export default function About() {
@@ -50,39 +50,38 @@ export default function About() {
   return (
     <div>
       <SEOHead
-        title="About A1 TradeLines — Strategy-First Credit Building Since 2010"
-        description="Learn about A1 Tradelines' mission to democratize credit profile improvement through intelligent tradeline matching. 16+ years of expertise, 2,500+ satisfied clients."
+        title="About A1 Tradelines | Authorized User Tradeline Matching"
+        description="Learn about A1 Tradelines, an authorized user tradeline matching and education company focused on profile fit, reporting support, and clear no-guarantee disclosures."
         canonical="https://a1tradelines.com/about"
-        keywords="about A1 Tradelines, credit strategy, tradeline company, credit profile improvement"
+        keywords="about A1 Tradelines, authorized user tradelines, tradeline matching, credit profile education"
         schema={schema}
       />
       <PageHero
-        title="About A1 TradeLines"
-        subtitle="Strategy-first tradeline matching for serious funding goals"
+        title="About A1 Tradelines"
+        subtitle="Strategy-first authorized user tradeline matching with clear expectations"
         backgroundImage={ABOUT_HERO}
       />
 
-      {/* Story Section */}
       <section className="py-20 sm:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <SectionReveal direction="left">
               <div className="space-y-6">
                 <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neon/10 border border-neon/20 text-neon text-xs font-bold uppercase tracking-widest">
-                  <Award className="w-3 h-3" /> Our Story
+                  <Award className="w-3 h-3" /> Our Approach
                 </span>
                 <h2 className="text-3xl sm:text-4xl font-display font-extrabold tracking-tight">
-                  Built by Credit Strategists, <span className="text-neon">for Ambitious People</span>
+                  Built for <span className="text-neon">Informed Tradeline Decisions</span>
                 </h2>
                 <div className="space-y-4 text-white/50 leading-relaxed">
                   <p>
-                    A1 Tradelines was founded with a simple but powerful belief: everyone deserves access to the credit tools and strategies that were once reserved for the financially privileged. We saw an industry full of companies selling tradelines as a commodity — with no regard for whether they would actually help the client.
+                    A1 Tradelines helps clients evaluate authorized user tradeline options with a focus on education, profile fit, and realistic expectations.
                   </p>
                   <p>
-                    We took a different approach. Before recommending a single tradeline, we analyze your complete credit profile, understand your funding goals, and build a strategy designed to maximize your results. Whether you're trying to qualify for a mortgage, secure business funding, or simply build a stronger financial foundation, we match you with the right tradelines at the right time.
+                    Instead of treating tradelines as one-size-fits-all products, we look at the details that matter: account age, credit limit, reported balance, bank diversity, available spots, reporting timelines, and the client's current credit profile.
                   </p>
                   <p>
-                    Today, A1 Tradelines has helped over 2,500 clients achieve their credit goals. Our proprietary Credit Score Simulator lets you simulate your score increase before you buy, and our team of credit strategists provides hands-on guidance every step of the way.
+                    Authorized user tradelines may affect credit profiles differently. A1 Tradelines does not guarantee credit score increases, approvals, funding, loan terms, mortgage approval, or any specific credit outcome.
                   </p>
                 </div>
               </div>
@@ -94,24 +93,24 @@ export default function About() {
                 <div className="relative glass-panel rounded-2xl p-8 space-y-6 neon-border-glow white-glow">
                   <h3 className="text-xl font-bold font-display">Our Mission</h3>
                   <p className="text-white/60 leading-relaxed text-lg italic border-l-2 border-neon/30 pl-5">
-                    "To democratize access to premium credit-building strategies and empower every client to achieve their financial goals through intelligent tradeline matching."
+                    "To provide clear authorized user tradeline education, profile-based matching, and transparent reporting support without promising credit outcomes we cannot control."
                   </p>
                   <div className="grid grid-cols-2 gap-4 pt-4">
                     <div className="text-center p-4 bg-white/[0.02] rounded-xl">
-                      <span className="text-2xl font-display font-extrabold text-neon font-mono">2,500+</span>
-                      <p className="text-xs text-white/30 mt-1">Clients Served</p>
+                      <span className="text-2xl font-display font-extrabold text-neon font-mono">AU</span>
+                      <p className="text-xs text-white/30 mt-1">Tradeline Focus</p>
                     </div>
                     <div className="text-center p-4 bg-white/[0.02] rounded-xl">
-                      <span className="text-2xl font-display font-extrabold text-neon font-mono">150+</span>
-                      <p className="text-xs text-white/30 mt-1">Avg. Point Increase</p>
+                      <span className="text-2xl font-display font-extrabold text-neon font-mono">$0</span>
+                      <p className="text-xs text-white/30 mt-1">Reported Balance Target</p>
                     </div>
                     <div className="text-center p-4 bg-white/[0.02] rounded-xl">
-                      <span className="text-2xl font-display font-extrabold text-neon font-mono">98%</span>
-                      <p className="text-xs text-white/30 mt-1">Satisfaction Rate</p>
+                      <span className="text-2xl font-display font-extrabold text-neon font-mono">No</span>
+                      <p className="text-xs text-white/30 mt-1">Outcome Guarantees</p>
                     </div>
                     <div className="text-center p-4 bg-white/[0.02] rounded-xl">
-                      <span className="text-2xl font-display font-extrabold text-neon font-mono">16+</span>
-                      <p className="text-xs text-white/30 mt-1">Years Experience</p>
+                      <span className="text-2xl font-display font-extrabold text-neon font-mono">Fit</span>
+                      <p className="text-xs text-white/30 mt-1">Profile Matching</p>
                     </div>
                   </div>
                 </div>
@@ -121,7 +120,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* Values */}
       <section className="py-20 sm:py-28 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionReveal>
@@ -151,7 +149,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* Guarantee Section */}
       <section className="py-20 sm:py-28 bg-emerald-500/5 border-y border-emerald-500/20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionReveal>
@@ -160,17 +157,17 @@ export default function About() {
                 <Shield className="w-12 h-12 text-emerald-400 flex-shrink-0" />
                 <div>
                   <h2 className="text-3xl sm:text-4xl font-display font-extrabold tracking-tight mb-4">
-                    Our <span className="text-emerald-400">100% Guarantee</span>
+                    Clear <span className="text-emerald-400">No-Guarantee Policy</span>
                   </h2>
                   <p className="text-white/70 leading-relaxed text-lg mb-6">
-                    Every tradeline in our inventory comes with a <span className="font-bold text-white">100% perfect payment history</span> and <span className="font-bold text-white">$0 balance</span>. We stand behind the quality and accuracy of every tradeline we provide. If a tradeline fails to post to your credit report, we offer a money-back guarantee or a replacement tradeline at no additional cost.
+                    We can review tradeline quality factors such as payment history, reported balance, limit, age, and reporting timeline. We cannot guarantee score movement, bureau treatment, lender decisions, approvals, funding, or specific financial outcomes.
                   </p>
-                  <Link href="/blog">
+                  <Link href="/disclaimer">
                     <motion.a
                       whileHover={{ x: 5 }}
                       className="inline-flex items-center gap-2 text-emerald-400 font-bold hover:text-emerald-300 transition-colors"
                     >
-                      Learn what a tradeline is <ArrowRight className="w-4 h-4" />
+                      Read our disclaimer <ArrowRight className="w-4 h-4" />
                     </motion.a>
                   </Link>
                 </div>
@@ -180,7 +177,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* Why Different */}
       <section className="py-20 sm:py-28">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionReveal>
@@ -189,7 +185,7 @@ export default function About() {
                 <h2 className="text-3xl sm:text-4xl font-display font-extrabold tracking-tight">
                   Why A1 Tradelines <span className="text-neon">Is Different</span>
                 </h2>
-                <p className="mt-3 text-white/40">We're not just another tradeline company. Here's what sets us apart.</p>
+                <p className="mt-3 text-white/40">A clearer, safer process for evaluating authorized user tradelines.</p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {DIFFERENTIATORS.map((item, i) => (
@@ -211,7 +207,7 @@ export default function About() {
                   href="/contact"
                   className="btn-neon inline-flex items-center gap-2 bg-neon text-black px-8 py-3.5 rounded-xl text-sm font-bold shadow-lg shadow-neon/20 transition-all"
                 >
-                  Schedule a Free Consultation <ArrowRight className="w-4 h-4" />
+                  Request a Consultation <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
             </div>
