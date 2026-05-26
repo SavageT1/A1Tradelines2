@@ -62,12 +62,12 @@ function categorizeTradelineByPrice(price: number, limit: number): string {
 
 /**
  * Transform API response to internal format
- * Applies 40% markup to vendor prices
+ * Applies 50% markup to vendor prices
  */
 function transformTradelineFromAPI(item: TradelineFromAPI): TradelineItem {
   const ageYears = calculateAgeInYears(item.DateOpened);
   const ageMonths = ageYears * 12;
-  const markupPrice = item.Price * 1.4; // 40% markup
+  const markupPrice = item.Price * 1.5; // 50% markup
 
   return {
     id: item.Id,
