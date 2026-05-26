@@ -1,15 +1,7 @@
-/*
- * Header.tsx — Neon Pulse Design System
- * Sticky header with glassmorphism, logo, nav links, mobile hamburger.
- * Brand: neon green on dark void. Space Grotesk for logo text.
- */
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone } from "lucide-react";
-
-const LOGO_URL =
-  "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663300423717/bPnWfefKrdDXDqCx.png?Expires=1803933625&Signature=vPTh-wshoDRgZOD4MikRHmiMEy8-wRe4zw6W5~s2wWuX0S-nPJ52rAZyp8ThLklcP4ggOZjLsYhHfO3n1dQ9VXU0HKwpM5FFfxi1IsNuGVmnVWHehGqNu5S5LWz4CPsfpRikcbs3T~hsYD1~ZEjwmSzNybEjENMISIqxTm8kX7792tE70f3HUviTFf0O86k1qUrbmA4Oq9h5MUp1VMzj1GLCCU0QZElYTcWcdpP2u0abmTHzaoEIsRRXjBWzwcpajUKHIxAtuEHHWaxb5XQORSlE80nnZ8ZKh-Hdes7DQNfVTcvZkYybkBZSSGFOn45M2lFHLKBQwwBe0mPXa2Ye6w__&Key-Pair-Id=K2HSFNDJXOU9YS";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -38,23 +30,16 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-void/80 backdrop-blur-xl border-b border-white/5 shadow-lg shadow-black/20"
-          : "bg-transparent"
+        scrolled ? "bg-void/85 backdrop-blur-xl border-b border-white/5 shadow-lg shadow-black/20" : "bg-background/30 backdrop-blur-sm"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-24 sm:h-28">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <img
-              src={LOGO_URL}
-              alt="A1 Tradelines"
-              className="h-20 sm:h-24 w-auto object-contain drop-shadow-lg group-hover:drop-shadow-[0_0_12px_rgba(93,241,54,0.4)] transition-all duration-300"
-            />
+        <div className="flex items-center justify-between h-20 sm:h-24">
+          <Link href="/" className="flex items-center gap-2 group" aria-label="A1 Tradelines home">
+            <span className="font-display text-3xl sm:text-4xl font-extrabold tracking-[0.05em] text-white leading-none group-hover:text-neon transition-colors">A1</span>
+            <span className="font-display text-3xl sm:text-4xl font-extrabold tracking-[0.05em] text-neon leading-none neon-text-glow">Tradelines</span>
           </Link>
 
-          {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-1">
             {NAV_LINKS.map((link) => {
               const isActive = location === link.href;
@@ -63,9 +48,7 @@ export default function Header() {
                   key={link.href}
                   href={link.href}
                   className={`relative px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-lg ${
-                    isActive
-                      ? "text-neon"
-                      : "text-white/60 hover:text-white"
+                    isActive ? "text-neon" : "text-white/60 hover:text-white"
                   }`}
                 >
                   {link.label}
@@ -81,35 +64,22 @@ export default function Header() {
             })}
           </nav>
 
-          {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-3">
-            <a
-              href="tel:+19087675309"
-              className="flex items-center gap-2 text-sm text-white/50 hover:text-neon transition-colors"
-            >
+            <a href="tel:+19087675309" className="flex items-center gap-2 text-sm text-white/50 hover:text-neon transition-colors">
               <Phone className="w-4 h-4" />
               <span className="font-mono">(908) 767-5309</span>
             </a>
-            <Link
-              href="/buy-tradelines"
-              className="btn-neon bg-neon text-black px-5 py-2.5 rounded-lg text-sm font-bold transition-all shadow-lg shadow-neon/20"
-            >
-              Get Started
+            <Link href="/buy-tradelines" className="btn-neon bg-neon text-black px-5 py-2.5 rounded-lg text-sm font-bold transition-all shadow-lg shadow-neon/20">
+              Browse Tradelines
             </Link>
           </div>
 
-          {/* Mobile Hamburger */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden p-2 text-white/70 hover:text-neon transition-colors"
-            aria-label="Toggle menu"
-          >
+          <button onClick={() => setMobileOpen(!mobileOpen)} className="lg:hidden p-2 text-white/70 hover:text-neon transition-colors" aria-label="Toggle menu">
             {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -123,18 +93,11 @@ export default function Header() {
               {NAV_LINKS.map((link, i) => {
                 const isActive = location === link.href;
                 return (
-                  <motion.div
-                    key={link.href}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.05 }}
-                  >
+                  <motion.div key={link.href} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}>
                     <Link
                       href={link.href}
                       className={`block px-4 py-3 rounded-xl text-base font-medium transition-all ${
-                        isActive
-                          ? "bg-neon/10 text-neon border border-neon/20"
-                          : "text-white/70 hover:bg-white/5 hover:text-white"
+                        isActive ? "bg-neon/10 text-neon border border-neon/20" : "text-white/70 hover:bg-white/5 hover:text-white"
                       }`}
                     >
                       {link.label}
@@ -142,17 +105,9 @@ export default function Header() {
                   </motion.div>
                 );
               })}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: NAV_LINKS.length * 0.05 }}
-                className="pt-4"
-              >
-                <Link
-                  href="/buy-tradelines"
-                  className="btn-neon block w-full text-center bg-neon text-black px-5 py-3 rounded-xl text-base font-bold shadow-lg shadow-neon/20"
-                >
-                  Get Started
+              <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: NAV_LINKS.length * 0.05 }} className="pt-4">
+                <Link href="/buy-tradelines" className="btn-neon block w-full text-center bg-neon text-black px-5 py-3 rounded-xl text-base font-bold shadow-lg shadow-neon/20">
+                  Browse Tradelines
                 </Link>
               </motion.div>
             </nav>
