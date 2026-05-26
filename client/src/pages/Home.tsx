@@ -1,179 +1,94 @@
 /*
- * Home.tsx — A1 Tradelines Homepage
- * Neon Pulse Design: dark void, neon green accents, glassmorphism, animated reveals.
- * Sections: Hero, Credit Score Simulator, How It Works, Testimonials, Final CTA
+ * Home.tsx - A1 Tradelines Homepage
+ * Safer conversion copy for authorized user tradeline matching.
  */
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import {
   ArrowRight,
   Shield,
-  TrendingUp,
   Users,
-  Zap,
-  Star,
-  ChevronLeft,
-  ChevronRight,
   CreditCard,
   Target,
   Sparkles,
   Phone,
+  CheckCircle2,
+  Clock,
+  AlertTriangle,
 } from "lucide-react";
-import { useState, useEffect } from "react";
 import SectionReveal from "@/components/SectionReveal";
 import TradelineWizard from "@/components/TradelineWizard";
 import SEOHead from "@/components/SEOHead";
-import { generateOrganizationSchema, generateServiceSchema, generateAggregateRatingSchema, generateWebSiteSchema } from "@/lib/seo";
+import { generateOrganizationSchema, generateServiceSchema, generateWebSiteSchema } from "@/lib/seo";
 
 const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663300423717/YgBCM3Vvv9dzqmN7qfKYzh/hero-bg-9Z7yUMMjZU6HqTHEHsnbNW.webp";
 
 const STATS = [
-  { value: "2,500+", label: "Clients Served" },
-  { value: "150+", label: "Point Avg. Increase" },
-  { value: "98%", label: "Satisfaction Rate" },
-  { value: "16+", label: "Years Experience" },
+  { value: "AU", label: "Tradeline Focus" },
+  { value: "$0", label: "Reported Balance Target" },
+  { value: "1-2", label: "Typical Billing Cycles" },
+  { value: "3", label: "Major Bureau Awareness" },
 ];
 
 const HOW_IT_WORKS = [
   {
     icon: Phone,
-    title: "Free Consultation",
-    description: "Schedule a call with our credit strategists. We analyze your credit profile and funding goals to create a custom plan.",
+    title: "Profile Review",
+    description: "Tell us your current credit profile, goals, timeline, and budget so we can understand whether authorized user tradelines may be a fit.",
     step: "01",
   },
   {
     icon: Target,
     title: "Strategy & Matching",
-    description: "We match you with the optimal tradelines based on your specific needs — credit limit, age, and bank diversity.",
+    description: "We compare available tradelines by age, limit, balance, reporting cycle, bank diversity, and profile fit before suggesting options.",
     step: "02",
   },
   {
     icon: CreditCard,
-    title: "Tradeline Placement",
-    description: "Once selected, your tradeline is placed on your credit report. You'll see it appear within 1-2 billing cycles.",
+    title: "Authorized User Placement",
+    description: "When selected, the authorized user tradeline process follows the applicable cardholder, bank, vendor, and reporting requirements.",
     step: "03",
   },
   {
-    icon: TrendingUp,
-    title: "Score Improvement",
-    description: "Watch your credit score climb. Our team monitors the process and provides ongoing support for your funding journey.",
+    icon: Clock,
+    title: "Reporting Support",
+    description: "Posting depends on issuer reporting cycles and credit bureau processing. We help you understand the expected timeline and limitations.",
     step: "04",
   },
 ];
 
-const TESTIMONIALS = [
-  {
-    name: "Marcus J.",
-    role: "Real Estate Investor",
-    text: "A1 Tradelines helped me go from a 620 to a 748 in just two months. I was able to secure the funding I needed for my first investment property. Their strategy-first approach made all the difference.",
-    rating: 5,
-  },
-  {
-    name: "Sarah K.",
-    role: "Small Business Owner",
-    text: "I was skeptical at first, but the team at A1 walked me through every step. My credit score jumped 130 points and I qualified for a business line of credit I'd been denied for years.",
-    rating: 5,
-  },
-  {
-    name: "David R.",
-    role: "Entrepreneur",
-    text: "The Credit Score Simulator alone was worth it — it showed me exactly what I needed. The actual results exceeded the simulation. Highly recommend A1 Tradelines to anyone serious about their credit.",
-    rating: 5,
-  },
-  {
-    name: "Jennifer L.",
-    role: "Homebuyer",
-    text: "After working with A1 Tradelines, I went from being denied a mortgage to getting approved with a competitive rate. They truly understand credit strategy at a deep level.",
-    rating: 5,
-  },
-  {
-    name: "Anthony M.",
-    role: "Auto Dealership Owner",
-    text: "I needed my score above 720 to qualify for dealer financing. A1 Tradelines got me there in 30 days flat. The team was responsive, professional, and delivered exactly what they promised. Game changer for my business.",
-    rating: 5,
-  },
-  {
-    name: "Lisa T.",
-    role: "Freelance Consultant",
-    text: "As a self-employed person, getting approved for anything was a nightmare. A1 Tradelines boosted my score by 160 points and I finally got approved for a premium rewards card and a personal loan at a great rate.",
-    rating: 5,
-  },
-  {
-    name: "Carlos G.",
-    role: "First-Time Homebuyer",
-    text: "My wife and I were told we needed at least a 680 to qualify for an FHA loan. We were sitting at 590. A1 Tradelines built us a custom plan and within 6 weeks we were at 710. We just closed on our first home!",
-    rating: 5,
-  },
-  {
-    name: "Tanya W.",
-    role: "Medical Professional",
-    text: "I had student loan debt dragging my score down. A1 Tradelines showed me how adding the right tradelines could offset that. My score went from 640 to 755 and I refinanced at a much lower rate. Saved me thousands.",
-    rating: 5,
-  },
-  {
-    name: "Robert H.",
-    role: "E-Commerce Business Owner",
-    text: "I've worked with three different tradeline companies before. A1 is the only one that actually took the time to understand my goals before recommending anything. The results speak for themselves — 180 point increase.",
-    rating: 5,
-  },
-  {
-    name: "Michelle P.",
-    role: "Real Estate Agent",
-    text: "I refer all my clients who need credit help to A1 Tradelines. They're professional, transparent, and they deliver results consistently. Several of my buyers have gone from pre-approval denials to closing in under 60 days.",
-    rating: 5,
-  },
+const TRUST_POINTS = [
+  "Authorized user tradeline matching only — no CPNs, synthetic identities, or fake credit profiles.",
+  "No guaranteed score increases, approvals, funding, loan terms, or specific credit outcomes.",
+  "Quality-focused inventory review based on payment history, reported balance, account age, and credit limit.",
+  "Education-first guidance so clients understand both potential benefits and limitations before purchasing.",
 ];
 
 export default function Home() {
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % TESTIMONIALS.length);
-    }, 6000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const schemas = [
-    generateWebSiteSchema(),
-    generateOrganizationSchema(),
-    generateServiceSchema(),
-    generateAggregateRatingSchema(TESTIMONIALS),
-  ];
+  const schemas = [generateWebSiteSchema(), generateOrganizationSchema(), generateServiceSchema()];
 
   return (
     <div className="overflow-hidden">
       <SEOHead
-        title="Tradelines for Sale | Boost Your Credit Fast (700+ Ready) | A1 Tradelines"
-        description="Boost your credit score fast with verified tradelines. Increase limits, improve utilization, and get results in as little as 30 days. Trusted by clients nationwide."
-        ogTitle="A1 Tradelines | Boost Your Credit Fast"
-        ogDescription="Increase your credit score with verified tradelines in as little as 30 days."
+        title="Authorized User Tradeline Matching | A1 Tradelines"
+        description="A1 Tradelines provides authorized user tradeline matching, education, and reporting support based on profile fit, account age, credit limit, balance, and timeline. No credit outcome is guaranteed."
+        ogTitle="A1 Tradelines | Authorized User Tradeline Matching"
+        ogDescription="Profile-based authorized user tradeline matching, education, and reporting support. No credit score, approval, or funding outcomes guaranteed."
         canonical="https://a1tradelines.com/"
-        keywords="tradelines, credit profile improvement, authorized user, credit score, credit building, funding"
+        keywords="authorized user tradelines, tradeline matching, tradeline education, credit profile strategy, A1 Tradelines"
         schema={schemas}
       />
-      {/* ===== HERO SECTION ===== */}
+
       <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Background - Fixed/Static */}
         <div className="fixed inset-0 -z-10">
           <img src={HERO_BG} alt="" className="w-full h-full object-cover opacity-20" />
           <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/80 to-background" />
           <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background/50" />
         </div>
 
-        {/* Scan line effect */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <motion.div
-            className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon/30 to-transparent"
-            animate={{ y: ["-100vh", "100vh"] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-          />
-        </div>
-
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20 w-full">
           <div className="flex flex-col items-center justify-center gap-12 lg:gap-16">
-            {/* Center: Text */}
-            <div className="space-y-8 text-center max-w-3xl">
+            <div className="space-y-8 text-center max-w-4xl">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -182,17 +97,18 @@ export default function Home() {
               >
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neon/10 border border-neon/20 text-neon text-xs font-bold uppercase tracking-widest">
                   <Sparkles className="w-3.5 h-3.5" />
-                  Strategy-First Tradeline Matching
+                  Strategy-First Authorized User Tradeline Matching
                 </div>
                 <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-display font-extrabold leading-[1.05]">
-Take Back Control
-                   <br />
-Of Your
-                   <br />
-                   <span className="text-neon neon-text-glow">Credit Score</span>
+                  Build a Stronger
+                  <br />
+                  <span className="text-neon neon-text-glow">Credit Profile</span>
                 </h1>
-                <p className="text-lg sm:text-xl text-white/50 max-w-2xl leading-relaxed mx-auto">
-                  Premium authorized user tradelines matched to your specific goals. See your potential score increase before you buy.
+                <p className="text-lg sm:text-xl text-white/55 max-w-2xl leading-relaxed mx-auto">
+                  A1 Tradelines helps clients evaluate authorized user tradeline options based on account age, credit limit, reported balance, bank diversity, and reporting timeline.
+                </p>
+                <p className="text-xs sm:text-sm text-white/35 max-w-3xl leading-relaxed mx-auto border border-white/10 bg-white/[0.03] rounded-xl px-4 py-3">
+                  Authorized user tradelines may affect profiles differently. A1 Tradelines does not guarantee credit score increases, approvals, funding, loan terms, mortgage approval, or any specific credit outcome.
                 </p>
               </motion.div>
 
@@ -207,7 +123,7 @@ Of Your
                     href="/buy-tradelines"
                     className="btn-neon inline-flex items-center justify-center gap-2 bg-neon text-black px-8 py-4 rounded-xl text-base font-bold shadow-lg shadow-neon/25 transition-all"
                   >
-                    See Available Tradelines <ArrowRight className="w-5 h-5" />
+                    Browse Tradeline Options <ArrowRight className="w-5 h-5" />
                   </Link>
                 </motion.div>
                 <motion.a
@@ -216,12 +132,10 @@ Of Your
                   whileTap={{ scale: 0.97 }}
                   className="group btn-ghost inline-flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white px-8 py-4 rounded-xl text-base font-medium transition-all hover:bg-neon hover:text-black hover:border-neon"
                 >
-                  <span className="group-hover:hidden">Predict Your Score Increase</span>
-                  <span className="hidden group-hover:inline font-bold">SCORE PREDICTOR</span>
+                  Compare Profile Factors
                 </motion.a>
               </motion.div>
 
-              {/* Guarantee Badge */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -229,10 +143,9 @@ Of Your
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-widest"
               >
                 <Shield className="w-4 h-4" />
-                100% Perfect Payment History • $0 Balance Guaranteed
+                Quality Reviewed Accounts • No Outcome Guarantees
               </motion.div>
 
-              {/* Stats */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -253,80 +166,22 @@ Of Your
                 ))}
               </motion.div>
             </div>
-
-            {/* Center: Floating card preview */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.3 }}
-              className="w-full max-w-2xl"
-            >
-              <div className="space-y-6">
-                <div className="relative">
-                  <div className="absolute -inset-4 bg-neon/5 rounded-3xl blur-2xl" />
-                  <div className="relative glass-panel rounded-2xl overflow-hidden neon-border-glow">
-                    <img
-                      src="https://d2xsxph8kpxj0f.cloudfront.net/310519663300423717/YgBCM3Vvv9dzqmN7qfKYzh/contact-hero-GATXTizuF7kKCUe38nynTh.webp"
-                      alt="A1 Tradelines — Build Credit Fast"
-                      className="w-full h-auto rounded-2xl object-cover"
-                      style={{ aspectRatio: "16/9" }}
-                    />
-                  </div>
-                </div>
-                <div className="relative">
-                  <div className="absolute -inset-4 bg-neon/5 rounded-3xl blur-2xl" />
-                  <div className="relative glass-panel rounded-2xl p-8 space-y-6 neon-border-glow white-glow">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-neon/10 rounded-xl flex items-center justify-center">
-                      <TrendingUp className="w-6 h-6 text-neon" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-bold">Credit Score Simulation</p>
-                      <p className="text-xs text-white/40">Real-time estimate</p>
-                    </div>
-                  </div>
-                  <div className="flex items-end gap-4">
-                    <div>
-                      <p className="text-xs text-white/30 uppercase tracking-widest mb-1">Before</p>
-                      <span className="text-3xl font-display font-extrabold text-white/50 font-mono">620</span>
-                    </div>
-                    <ArrowRight className="w-5 h-5 text-neon mb-2" />
-                    <div>
-                      <p className="text-xs text-neon/60 uppercase tracking-widest mb-1">After</p>
-                      <span className="text-3xl font-display font-extrabold text-neon font-mono">748</span>
-                    </div>
-                    <span className="text-emerald-400 font-bold text-sm mb-1">+128 pts</span>
-                  </div>
-                  <div className="h-2 bg-white/5 rounded-full overflow-hidden">
-                    <motion.div
-                      initial={{ width: "35%" }}
-                      animate={{ width: "78%" }}
-                      transition={{ duration: 2, delay: 1 }}
-                      className="h-full bg-gradient-to-r from-neon-dark to-neon rounded-full"
-                    />
-                  </div>
-                  <p className="text-[11px] text-white/25">* Simulation based on adding a $50K, 15-year tradeline</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* ===== CREDIT SCORE SIMULATOR SECTION ===== */}
       <section id="simulator" className="py-20 sm:py-28 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionReveal>
             <div className="text-center mb-12">
               <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neon/10 border border-neon/20 text-neon text-xs font-bold uppercase tracking-widest mb-4">
-                <Zap className="w-3 h-3" /> Interactive Tool
+                <Target className="w-3 h-3" /> Profile Factors
               </span>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight">
-                Simulate Your <span className="text-neon">Score Increase</span>
+                Compare <span className="text-neon">Tradeline Factors</span>
               </h2>
               <p className="mt-4 text-white/40 max-w-2xl mx-auto">
-                Enter your current credit profile and see how adding a tradeline could impact your score — before you spend a dime.
+                Review how limit, balance, age, and reporting timing may matter before choosing an authorized user tradeline. This tool is educational and does not guarantee results.
               </p>
             </div>
           </SectionReveal>
@@ -334,7 +189,6 @@ Of Your
         </div>
       </section>
 
-      {/* ===== HOW IT WORKS ===== */}
       <section className="py-20 sm:py-28 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionReveal>
@@ -346,7 +200,7 @@ Of Your
                 How It <span className="text-neon">Works</span>
               </h2>
               <p className="mt-4 text-white/40 max-w-2xl mx-auto">
-                From consultation to credit improvement — our proven process delivers results in weeks, not months.
+                A straightforward matching process designed around profile fit, transparency, and realistic expectations.
               </p>
             </div>
           </SectionReveal>
@@ -373,89 +227,46 @@ Of Your
         </div>
       </section>
 
-      {/* ===== TESTIMONIALS ===== */}
       <section className="py-20 sm:py-28 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionReveal>
-            <div className="text-center mb-12">
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neon/10 border border-neon/20 text-neon text-xs font-bold uppercase tracking-widest mb-4">
-                <Users className="w-3 h-3" /> Client Success
-              </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight">
-                Real <span className="text-neon">Results</span>
-              </h2>
-            </div>
-          </SectionReveal>
-
-          <div className="relative max-w-3xl mx-auto">
-            <div className="overflow-hidden">
-              <motion.div
-                key={currentTestimonial}
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                transition={{ duration: 0.5 }}
-                className="glass-panel rounded-2xl p-8 sm:p-10 neon-border-glow white-glow"
-              >
-                <div className="flex gap-1 mb-6">
-                  {Array.from({ length: TESTIMONIALS[currentTestimonial].rating }).map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-neon fill-neon" />
-                  ))}
-                </div>
-                <blockquote className="text-lg sm:text-xl text-white/80 leading-relaxed mb-8 font-light italic">
-                  "{TESTIMONIALS[currentTestimonial].text}"
-                </blockquote>
-                <div>
-                  <p className="font-bold text-white">{TESTIMONIALS[currentTestimonial].name}</p>
-                  <p className="text-sm text-white/40">{TESTIMONIALS[currentTestimonial].role}</p>
-                </div>
-              </motion.div>
-            </div>
-
-            {/* Navigation dots */}
-            <div className="flex items-center justify-center gap-3 mt-8">
-              <button
-                onClick={() => setCurrentTestimonial((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length)}
-                className="p-2 rounded-lg bg-white/5 border border-white/10 text-white/40 hover:text-neon hover:border-neon/30 transition-all"
-              >
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-              <div className="flex gap-2">
-                {TESTIMONIALS.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setCurrentTestimonial(i)}
-                    className={`w-2 h-2 rounded-full transition-all ${
-                      i === currentTestimonial ? "bg-neon w-6" : "bg-white/20"
-                    }`}
-                  />
+            <div className="glass-panel rounded-3xl p-8 sm:p-12 neon-border-glow white-glow">
+              <div className="text-center mb-10">
+                <Users className="w-12 h-12 text-neon mx-auto mb-4" />
+                <h2 className="text-3xl sm:text-4xl font-display font-extrabold tracking-tight">
+                  What We <span className="text-neon">Do and Do Not</span> Offer
+                </h2>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {TRUST_POINTS.map((point) => (
+                  <div key={point} className="flex items-start gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/10">
+                    <CheckCircle2 className="w-5 h-5 text-neon shrink-0 mt-0.5" />
+                    <p className="text-sm text-white/60 leading-relaxed">{point}</p>
+                  </div>
                 ))}
               </div>
-              <button
-                onClick={() => setCurrentTestimonial((prev) => (prev + 1) % TESTIMONIALS.length)}
-                className="p-2 rounded-lg bg-white/5 border border-white/10 text-white/40 hover:text-neon hover:border-neon/30 transition-all"
-              >
-                <ChevronRight className="w-4 h-4" />
-              </button>
+              <div className="mt-8 flex items-start gap-3 p-4 rounded-xl bg-amber-500/10 border border-amber-500/20">
+                <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                <p className="text-sm text-white/60 leading-relaxed">
+                  Do not submit Social Security numbers, credit monitoring logins, bank logins, or sensitive identity information through general website forms. Sensitive information should only be handled through secure approved processes when required.
+                </p>
+              </div>
             </div>
-          </div>
+          </SectionReveal>
         </div>
       </section>
 
-      {/* ===== FINAL CTA ===== */}
       <section className="py-20 sm:py-28 relative">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionReveal>
             <div className="relative glass-panel rounded-3xl p-10 sm:p-16 text-center overflow-hidden neon-glow">
-              {/* Decorative gradient */}
               <div className="absolute inset-0 bg-gradient-to-br from-neon/5 via-transparent to-neon-dark/5" />
-
               <div className="relative z-10 space-y-6">
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight">
-                  Ready to <span className="text-neon neon-text-glow">Transform</span> Your Credit?
+                  Ready to Review <span className="text-neon neon-text-glow">Available Tradelines?</span>
                 </h2>
                 <p className="text-white/40 max-w-xl mx-auto text-lg">
-                  Join thousands of clients who have used A1 Tradelines to unlock better rates, higher limits, and new financial opportunities.
+                  Browse authorized user tradeline options and speak with A1 Tradelines about profile-based matching before making a purchase.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
                   <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
@@ -463,7 +274,7 @@ Of Your
                       href="/buy-tradelines"
                       className="btn-neon inline-flex items-center justify-center gap-2 bg-neon text-black px-8 py-4 rounded-xl text-base font-bold shadow-lg shadow-neon/25 transition-all"
                     >
-                      Get Started Now <ArrowRight className="w-5 h-5" />
+                      Browse Tradelines <ArrowRight className="w-5 h-5" />
                     </Link>
                   </motion.div>
                   <motion.div whileHover={{ scale: 1.04, borderColor: "rgba(0,255,127,0.4)" }} whileTap={{ scale: 0.97 }}>
@@ -471,7 +282,7 @@ Of Your
                       href="/contact"
                       className="btn-ghost inline-flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white px-8 py-4 rounded-xl text-base font-medium transition-all"
                     >
-                      Schedule Consultation
+                      Request Consultation
                     </Link>
                   </motion.div>
                 </div>
