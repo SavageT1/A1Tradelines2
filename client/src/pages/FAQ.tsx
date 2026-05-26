@@ -1,6 +1,6 @@
 /*
- * FAQ.tsx — Frequently Asked Questions
- * Neon Pulse Design: accordion-style FAQ with smooth animations.
+ * FAQ.tsx - Frequently Asked Questions
+ * Safer authorized user tradeline FAQ content.
  */
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -15,55 +15,55 @@ const ABOUT_HERO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663300423717/YgB
 const FAQ_ITEMS = [
   {
     question: "What is an authorized user tradeline?",
-    answer: "An authorized user tradeline is a credit account that you are added to as an authorized user. When added, the account's history — including its credit limit, age, and payment history — is reported on your credit report. This can positively impact your credit score by improving your utilization ratio, average account age, and credit mix.",
+    answer: "An authorized user tradeline is a credit card account that may appear on a person's credit report after they are added as an authorized user. If it reports, the account may show details such as account age, credit limit, balance, and payment history. Reporting and scoring treatment can vary by bank, credit bureau, scoring model, lender, and individual profile.",
   },
   {
-    question: "How much can a tradeline increase my credit score?",
-    answer: "The impact varies depending on your current credit profile. Clients typically see increases of 30 to 150+ points. The biggest factors are your current utilization ratio, average account age, and overall credit history. Our Credit Score Simulator can give you a personalized estimate before you purchase.",
+    question: "Do authorized user tradelines guarantee a credit score increase?",
+    answer: "No. A1 Tradelines does not guarantee credit score increases, approvals, funding, loan terms, mortgage approval, business credit approval, or any specific credit outcome. Tradeline impact depends on the full credit profile, bureau reporting, lender criteria, and scoring model used.",
   },
   {
-    question: "How long does it take for a tradeline to appear on my credit report?",
-    answer: "Most tradelines appear on your credit report within 1-2 billing cycles, which is typically 15-45 days. The exact timing depends on the bank's reporting schedule. We monitor the process and keep you updated throughout.",
+    question: "How long does it take for a tradeline to appear on a credit report?",
+    answer: "Many authorized user tradelines are expected to report within one to two billing cycles, but timing is not guaranteed. Posting depends on the card issuer's reporting schedule, bureau processing, account status, and other third-party factors outside A1 Tradelines' control.",
   },
   {
-    question: "Is buying tradelines legal?",
-    answer: "Yes, authorized user tradelines are completely legal. Being added as an authorized user to someone's credit card account is a standard banking practice that has been in use for decades. It's the same process parents use to help their children build credit.",
+    question: "Is buying authorized user tradelines allowed?",
+    answer: "Authorized user accounts are a standard banking feature. However, every client should understand the risks, limitations, and lender-specific treatment before purchasing. A1 Tradelines provides education and matching support, not legal or financial advice.",
   },
   {
-    question: "What guarantee do you offer on tradelines?",
-    answer: "Every tradeline in our inventory comes with a 100% perfect payment history and $0 balance guarantee. We stand behind the quality and accuracy of every tradeline we provide. If a tradeline fails to post to your credit report, we offer a money-back guarantee or a replacement tradeline at no additional cost. Learn more about what tradelines are and how they work in our Learning Center.",
+    question: "What quality standards do you look for?",
+    answer: "We focus on factors such as clean payment history, low reported balance, account age, credit limit, bank diversity, available spots, and reporting timing. These factors can matter, but they still do not guarantee any particular score or approval outcome.",
   },
   {
-    question: "How long does the tradeline stay on my report?",
-    answer: "Tradelines typically remain on your credit report for the duration of the agreement period, which is usually 1-2 billing cycles after posting. The specific duration depends on the package you select. Even after removal, the positive impact on your credit history can have lasting benefits.",
+    question: "How long does a tradeline stay on my report?",
+    answer: "The visible reporting period depends on the agreement, cardholder account, bank reporting cycle, and credit bureau processing. Some tradelines may report for a limited cycle window. Exact duration and post-removal treatment are not guaranteed.",
   },
   {
-    question: "What information do you need from me?",
-    answer: "We need your full legal name, date of birth, and Social Security number to add you as an authorized user. This information is handled with bank-level security and is only used for the purpose of adding you to the tradeline account.",
+    question: "What information should I avoid sending through a website form?",
+    answer: "Do not send Social Security numbers, government ID numbers, credit monitoring logins, banking logins, or other sensitive identity information through general website forms. Sensitive information should only be handled through secure approved processes if required.",
   },
   {
-    question: "What if the tradeline doesn't post to my credit report?",
-    answer: "We offer a money-back guarantee if a tradeline fails to post to your credit report. While this is rare (our posting rate is over 99%), we stand behind our service and will either replace the tradeline or provide a full refund.",
+    question: "What if the tradeline does not post?",
+    answer: "Posting policies depend on the product terms, vendor rules, bank behavior, and bureau reporting. A1 Tradelines can review the situation and explain available options under the applicable purchase terms, but no credit score or approval outcome is guaranteed.",
   },
   {
     question: "Can I choose which bank the tradeline is from?",
-    answer: "Yes, you can browse our inventory and select tradelines from specific banks. We carry tradelines from major banks including Chase, American Express, Citi, Bank of America, Capital One, and more. Our strategists can also recommend the best bank mix for your specific goals.",
+    answer: "Available inventory may include different banks, credit limits, ages, prices, and reporting dates. You can review available options, and A1 Tradelines can help evaluate which factors may fit your profile and timeline.",
   },
   {
-    question: "How is A1 Tradelines different from other tradeline companies?",
-    answer: "We take a strategy-first approach. Before recommending any tradeline, we analyze your complete credit profile and understand your funding goals. We also offer our proprietary Credit Score Simulator, ongoing support, and a money-back guarantee. We're not just selling tradelines — we're building credit strategies.",
+    question: "How is A1 Tradelines different?",
+    answer: "A1 Tradelines emphasizes strategy-first matching, education, and transparent limitations. We focus on authorized user tradelines and do not offer CPNs, synthetic identities, fake credit profiles, or guaranteed credit outcomes.",
   },
   {
-    question: "Do you offer payment plans?",
-    answer: "Yes, we offer flexible payment options for qualifying clients. Contact our team to discuss payment arrangements that work for your budget. We want to make credit improvement accessible to everyone.",
+    question: "Do you offer payment options?",
+    answer: "Payment options may vary by product, availability, and qualification. Contact A1 Tradelines to review current options before purchasing.",
   },
   {
-    question: "Will the tradeline affect the primary cardholder's credit?",
-    answer: "No. As an authorized user, your activity does not affect the primary cardholder's credit score or account. You will not have access to the physical card or the ability to make charges on the account.",
+    question: "Will I receive a physical card?",
+    answer: "No. Authorized user tradeline services are for reporting purposes only. Clients should not expect card access, account spending access, or the ability to make charges.",
   },
   {
     question: "How do I get started?",
-    answer: "Getting started is easy. You can browse our tradeline inventory, use our Credit Score Simulator to simulate your score increase, or schedule a free consultation with one of our credit strategists. We'll help you find the right tradeline strategy for your goals.",
+    answer: "You can browse available tradelines or request a consultation. A1 Tradelines will help review your goals, timeline, budget, and profile factors before discussing available authorized user tradeline options.",
   },
 ];
 
@@ -74,15 +74,15 @@ export default function FAQ() {
   return (
     <div>
       <SEOHead
-        title="FAQ — Frequently Asked Questions About Tradelines"
-        description="Get answers to common questions about tradelines, credit profile improvement, authorized user accounts, and how A1 Tradelines can help you."
+        title="FAQ | Authorized User Tradeline Questions | A1 Tradelines"
+        description="Answers to common questions about authorized user tradelines, reporting timelines, profile matching, limitations, and no-guarantee disclosures."
         canonical="https://a1tradelines.com/faq"
-        keywords="tradelines FAQ, authorized user questions, credit improvement, tradeline cost, how tradelines work"
+        keywords="authorized user tradelines FAQ, tradeline questions, credit profile, tradeline reporting, A1 Tradelines"
         schema={schema}
       />
       <PageHero
         title="Frequently Asked Questions"
-        subtitle="Everything you need to know about tradelines and our services"
+        subtitle="Clear answers about authorized user tradelines, reporting, limitations, and profile-based matching"
         backgroundImage={ABOUT_HERO}
       />
 
@@ -134,7 +134,6 @@ export default function FAQ() {
             ))}
           </div>
 
-          {/* Bottom CTA */}
           <SectionReveal>
             <div className="mt-16 text-center">
               <p className="text-white/40 mb-4">Still have questions?</p>
