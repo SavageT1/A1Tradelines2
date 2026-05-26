@@ -1,11 +1,6 @@
-/*
- * BuyTradelines.tsx — Tradeline marketplace page
- * Integrated with TradelineMaster API for live inventory
- * Neon Pulse Design: lighter cards, advanced filtering (price, credit limit, age), improved readability.
- */
 import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CreditCard, Filter, ArrowUpDown, Search, ChevronDown, Phone, ArrowRight, Shield, X, Loader } from "lucide-react";
+import { ArrowRight, ArrowUpDown, CreditCard, Filter, Loader, Phone, Search, Shield, X } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
 import TradelineInquiryModal from "@/components/TradelineInquiryModal";
@@ -16,31 +11,45 @@ import { generateServiceSchema } from "@/lib/seo";
 
 const TRADELINES_HERO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663300423717/YgBCM3Vvv9dzqmN7qfKYzh/tradelines-hero-MgAogTaYj2uNyddmtjtsbi.webp";
 
-type SortKey = "price" | "creditLimit" | "ageYears";
+type SortKey = "price" | "creditLimit" | "ageYears" | "cycles";
 
-// Price range filter options
 const PRICE_RANGES = [
-  { label: "All Prices", min: 0, max: Infinity },
-  { label: "$0 - $500", min: 0, max: 500 },
-  { label: "$500 - $1000", min: 500, max: 1000 },
-  { label: "$1000+", min: 1000, max: Infinity },
+  { label: "All Total Prices", min: 0, max: Infinity },
+  { label: "Under $500", min: 0, max: 500 },
+  { label: "$500 - $1,000", min: 500, max: 1000 },
+  { label: "$1,000+", min: 1000, max: Infinity },
 ];
 
-// Credit limit filter options
 const CREDIT_LIMIT_RANGES = [
   { label: "All Limits", min: 0, max: Infinity },
-  { label: "$0 - $10k", min: 0, max: 10000 },
+  { label: "Under $10k", min: 0, max: 10000 },
   { label: "$10k - $25k", min: 10000, max: 25000 },
   { label: "$25k+", min: 25000, max: Infinity },
 ];
 
-// Account age filter options
 const AGE_RANGES = [
   { label: "All Ages", min: 0, max: Infinity },
   { label: "0-5 Years", min: 0, max: 5 },
   { label: "5-10 Years", min: 5, max: 10 },
   { label: "10+ Years", min: 10, max: Infinity },
 ];
+
+const formatCurrency = (value: number) =>
+  value.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0, maximumFractionDigits: 0 });
+
+const formatDate = (value?: string) => {
+  if (!value) return "TBD";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "TBD";
+  return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+};
+
+const getMonthlyPrice = (item: TradelineItem) => {
+  const months = item.cycles && item.cycles > 0 ? item.cycles : 1;
+  return item.price / months;
+};
+
+const getMonthLabel = (cycles: number) => `${cycles || 1} month${(cycles || 1) === 1 ? "" : "s"}`;
 
 export default function BuyTradelines() {
   const [tradelines, setTradelines] = useState<TradelineItem[]>([]);
@@ -57,7 +66,6 @@ export default function BuyTradelines() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showFiltersPanel, setShowFiltersPanel] = useState(false);
 
-  // Fetch tradelines on component mount
   useEffect(() => {
     const loadTradelines = async () => {
       try {
@@ -79,32 +87,24 @@ export default function BuyTradelines() {
 
   const filtered = useMemo(() => {
     let items = [...tradelines];
-    
-    // Apply search filter
+
     if (searchTerm) {
       items = items.filter((t) => t.bank.toLowerCase().includes(searchTerm.toLowerCase()));
     }
-    
-    // Apply category filter
+
     if (categoryFilter !== "All") {
       items = items.filter((t) => t.category === categoryFilter);
     }
-    
-    // Apply price range filter
+
     items = items.filter((t) => t.price >= priceRange.min && t.price <= priceRange.max);
-    
-    // Apply credit limit range filter
     items = items.filter((t) => t.creditLimit >= creditLimitRange.min && t.creditLimit <= creditLimitRange.max);
-    
-    // Apply age range filter
     items = items.filter((t) => t.ageYears >= ageRange.min && t.ageYears <= ageRange.max);
-    
-    // Apply sorting
+
     items.sort((a, b) => {
       const diff = a[sortBy] - b[sortBy];
       return sortDir === "asc" ? diff : -diff;
     });
-    
+
     return items;
   }, [tradelines, searchTerm, categoryFilter, priceRange, creditLimitRange, ageRange, sortBy, sortDir]);
 
@@ -117,11 +117,11 @@ export default function BuyTradelines() {
     }
   };
 
-  const hasActiveFilters = 
-    searchTerm || 
-    categoryFilter !== "All" || 
-    priceRange.label !== "All Prices" || 
-    creditLimitRange.label !== "All Limits" || 
+  const hasActiveFilters =
+    searchTerm ||
+    categoryFilter !== "All" ||
+    priceRange.label !== "All Total Prices" ||
+    creditLimitRange.label !== "All Limits" ||
     ageRange.label !== "All Ages";
 
   const resetFilters = () => {
@@ -132,48 +132,49 @@ export default function BuyTradelines() {
     setAgeRange(AGE_RANGES[0]);
   };
 
+  const openTradeline = (tradeline: TradelineItem) => {
+    setSelectedTradeline(tradeline);
+    setIsModalOpen(true);
+  };
+
   const schema = generateServiceSchema();
 
   return (
     <div>
       <SEOHead
-        title="Buy Premium Tradelines — Authorized User Accounts for Credit Profile Improvement"
-        description="Browse 240+ premium authorized user tradelines with perfect payment history. Filter by credit limit, age, and price. See your potential score increase before you buy."
+        title="Authorized User Tradeline Inventory | A1 Tradelines"
+        description="Browse authorized user tradeline options by bank, credit limit, account age, reporting term, availability, purchase deadline, target reporting date, and price."
         canonical="https://a1tradelines.com/buy-tradelines"
-        keywords="buy tradelines, authorized user tradelines, credit profile improvement, premium tradelines, credit score boost"
+        keywords="authorized user tradelines, tradeline inventory, tradeline matching, credit profile strategy"
         schema={schema}
       />
       <PageHero
-        title="Buy Tradelines"
-        subtitle="Browse our inventory of premium authorized user tradelines"
+        title="Tradeline Inventory"
+        subtitle="Compare authorized user tradelines by age, limit, monthly price, total price, and reporting dates"
         backgroundImage={TRADELINES_HERO}
       />
 
-      <section className="py-16 sm:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Guarantee Banner */}
+      <section className="site-section">
+        <div className="site-container">
           <SectionReveal>
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mb-8 glass-panel rounded-2xl p-6 sm:p-8 border-l-4 border-emerald-500 bg-emerald-500/5"
-            >
+            <div className="mb-8 glass-panel rounded-2xl p-6 sm:p-8 border-l-4 border-emerald-500 bg-emerald-500/5">
               <div className="flex items-start gap-4">
                 <Shield className="w-6 h-6 text-emerald-400 flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="text-lg font-bold text-emerald-400 mb-2">Our Guarantee</h3>
-                  <p className="text-white/70 leading-relaxed">
-                    Every tradeline in our inventory comes with a <span className="font-bold text-white">100% perfect payment history</span> and <span className="font-bold text-white">$0 balance</span>. We guarantee the quality and accuracy of every tradeline we provide. Your credit profile is our priority.
+                <div className="space-y-2">
+                  <h3 className="text-lg font-bold text-emerald-400">How to Read This Inventory</h3>
+                  <p className="text-white/65 leading-relaxed">
+                    The highlighted price shows the estimated monthly price. The total price is shown clearly underneath. The deadline shows when the tradeline should be purchased to target the listed reporting date.
+                  </p>
+                  <p className="text-xs text-white/35 leading-relaxed">
+                    Purchase and reporting dates are based on vendor inventory data and may vary. Authorized user tradelines do not guarantee score increases, approvals, funding, or specific credit outcomes.
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </SectionReveal>
 
-          {/* Main Search Bar */}
           <SectionReveal>
             <div className="glass-panel rounded-2xl p-4 sm:p-6 mb-6 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
-              {/* Search */}
               <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
                 <input
@@ -185,13 +186,10 @@ export default function BuyTradelines() {
                 />
               </div>
 
-              {/* Filter Toggle Button */}
               <button
                 onClick={() => setShowFiltersPanel(!showFiltersPanel)}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all border ${
-                  showFiltersPanel
-                    ? "bg-neon/10 border-neon/30 text-neon"
-                    : "bg-white/5 border-white/10 text-white/60 hover:text-white"
+                className={`flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all border ${
+                  showFiltersPanel ? "bg-neon/10 border-neon/30 text-neon" : "bg-white/5 border-white/10 text-white/60 hover:text-white"
                 }`}
               >
                 <Filter className="w-4 h-4" />
@@ -200,7 +198,6 @@ export default function BuyTradelines() {
             </div>
           </SectionReveal>
 
-          {/* Advanced Filters Panel */}
           <AnimatePresence>
             {showFiltersPanel && (
               <SectionReveal>
@@ -211,101 +208,53 @@ export default function BuyTradelines() {
                   className="glass-panel rounded-2xl p-6 mb-6 border border-neon/20"
                 >
                   <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-lg font-bold text-white">Advanced Filters</h3>
+                    <h3 className="text-lg font-bold text-white">Filters</h3>
                     {hasActiveFilters && (
-                      <button
-                        onClick={resetFilters}
-                        className="text-xs font-medium text-neon hover:text-neon/80 transition-colors flex items-center gap-1"
-                      >
-                        <X className="w-3 h-3" />
-                        Clear All
+                      <button onClick={resetFilters} className="text-xs font-medium text-neon hover:text-neon/80 transition-colors flex items-center gap-1">
+                        <X className="w-3 h-3" /> Clear All
                       </button>
                     )}
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {/* Price Range Filter */}
                     <div>
-                      <label className="block text-xs font-bold text-white/60 uppercase tracking-widest mb-3">
-                        Price Range
-                      </label>
+                      <label className="block text-xs font-bold text-white/60 uppercase tracking-widest mb-3">Total Price</label>
                       <div className="space-y-2">
                         {PRICE_RANGES.map((range) => (
-                          <button
-                            key={range.label}
-                            onClick={() => setPriceRange(range)}
-                            className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all border ${
-                              priceRange.label === range.label
-                                ? "bg-neon/10 border-neon/30 text-neon font-medium"
-                                : "bg-white/5 border-white/10 text-white/60 hover:text-white/80"
-                            }`}
-                          >
+                          <button key={range.label} onClick={() => setPriceRange(range)} className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all border ${priceRange.label === range.label ? "bg-neon/10 border-neon/30 text-neon font-medium" : "bg-white/5 border-white/10 text-white/60 hover:text-white/80"}`}>
                             {range.label}
                           </button>
                         ))}
                       </div>
                     </div>
 
-                    {/* Credit Limit Filter */}
                     <div>
-                      <label className="block text-xs font-bold text-white/60 uppercase tracking-widest mb-3">
-                        Credit Limit
-                      </label>
+                      <label className="block text-xs font-bold text-white/60 uppercase tracking-widest mb-3">Credit Limit</label>
                       <div className="space-y-2">
                         {CREDIT_LIMIT_RANGES.map((range) => (
-                          <button
-                            key={range.label}
-                            onClick={() => setCreditLimitRange(range)}
-                            className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all border ${
-                              creditLimitRange.label === range.label
-                                ? "bg-neon/10 border-neon/30 text-neon font-medium"
-                                : "bg-white/5 border-white/10 text-white/60 hover:text-white/80"
-                            }`}
-                          >
+                          <button key={range.label} onClick={() => setCreditLimitRange(range)} className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all border ${creditLimitRange.label === range.label ? "bg-neon/10 border-neon/30 text-neon font-medium" : "bg-white/5 border-white/10 text-white/60 hover:text-white/80"}`}>
                             {range.label}
                           </button>
                         ))}
                       </div>
                     </div>
 
-                    {/* Account Age Filter */}
                     <div>
-                      <label className="block text-xs font-bold text-white/60 uppercase tracking-widest mb-3">
-                        Account Age
-                      </label>
+                      <label className="block text-xs font-bold text-white/60 uppercase tracking-widest mb-3">Account Age</label>
                       <div className="space-y-2">
                         {AGE_RANGES.map((range) => (
-                          <button
-                            key={range.label}
-                            onClick={() => setAgeRange(range)}
-                            className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all border ${
-                              ageRange.label === range.label
-                                ? "bg-neon/10 border-neon/30 text-neon font-medium"
-                                : "bg-white/5 border-white/10 text-white/60 hover:text-white/80"
-                            }`}
-                          >
+                          <button key={range.label} onClick={() => setAgeRange(range)} className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all border ${ageRange.label === range.label ? "bg-neon/10 border-neon/30 text-neon font-medium" : "bg-white/5 border-white/10 text-white/60 hover:text-white/80"}`}>
                             {range.label}
                           </button>
                         ))}
                       </div>
                     </div>
 
-                    {/* Category Filter */}
                     <div>
-                      <label className="block text-xs font-bold text-white/60 uppercase tracking-widest mb-3">
-                        Category
-                      </label>
+                      <label className="block text-xs font-bold text-white/60 uppercase tracking-widest mb-3">Category</label>
                       <div className="space-y-2">
                         {["All", "Premium", "Standard", "Economy"].map((cat) => (
-                          <button
-                            key={cat}
-                            onClick={() => setCategoryFilter(cat)}
-                            className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all border ${
-                              categoryFilter === cat
-                                ? "bg-neon/10 border-neon/30 text-neon font-medium"
-                                : "bg-white/5 border-white/10 text-white/60 hover:text-white/80"
-                            }`}
-                          >
+                          <button key={cat} onClick={() => setCategoryFilter(cat)} className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all border ${categoryFilter === cat ? "bg-neon/10 border-neon/30 text-neon font-medium" : "bg-white/5 border-white/10 text-white/60 hover:text-white/80"}`}>
                             {cat}
                           </button>
                         ))}
@@ -317,176 +266,168 @@ export default function BuyTradelines() {
             )}
           </AnimatePresence>
 
-          {/* Sort Controls & Results Count */}
           <SectionReveal>
             <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-              <p className="text-sm text-white/30">
-                Showing <span className="text-white/60 font-mono font-bold">{filtered.length}</span> tradelines
+              <p className="text-sm text-white/35">
+                Showing <span className="text-white/70 font-mono font-bold">{filtered.length}</span> available tradelines
               </p>
-              <div className="flex gap-2">
-                {(["price", "creditLimit", "ageYears"] as SortKey[]).map((key) => (
-                  <button
-                    key={key}
-                    onClick={() => toggleSort(key)}
-                    className={`flex items-center gap-1.5 px-3 py-2.5 rounded-lg text-xs font-medium transition-all border ${
-                      sortBy === key
-                        ? "bg-neon/10 border-neon/30 text-neon"
-                        : "bg-white/5 border-white/10 text-white/40 hover:text-white"
-                    }`}
-                  >
+              <div className="flex flex-wrap gap-2">
+                {(["price", "creditLimit", "ageYears", "cycles"] as SortKey[]).map((key) => (
+                  <button key={key} onClick={() => toggleSort(key)} className={`flex items-center gap-1.5 px-3 py-2.5 rounded-lg text-xs font-medium transition-all border ${sortBy === key ? "bg-neon/10 border-neon/30 text-neon" : "bg-white/5 border-white/10 text-white/40 hover:text-white"}`}>
                     <ArrowUpDown className="w-3 h-3" />
-                    {key === "price" ? "Price" : key === "creditLimit" ? "Limit" : "Age"}
+                    {key === "price" ? "Total Price" : key === "creditLimit" ? "Limit" : key === "ageYears" ? "Age" : "Months"}
                   </button>
                 ))}
               </div>
             </div>
           </SectionReveal>
 
-          {/* Loading State */}
           {isLoading && (
             <div className="flex items-center justify-center py-20">
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-              >
+              <motion.div animate={{ rotate: 360 }} transition={{ duration: 2, repeat: Infinity, ease: "linear" }}>
                 <Loader className="w-8 h-8 text-neon" />
               </motion.div>
-              <p className="ml-4 text-white/60">Loading tradelines...</p>
+              <p className="ml-4 text-white/60">Loading current vendor inventory...</p>
             </div>
           )}
 
-          {/* Error State */}
           {error && !isLoading && (
             <div className="text-center py-20">
               <p className="text-red-400 text-lg mb-4">{error}</p>
-              <button
-                onClick={() => window.location.reload()}
-                className="text-neon text-sm font-medium hover:underline transition-colors"
-              >
-                Try again
-              </button>
+              <button onClick={() => window.location.reload()} className="text-neon text-sm font-medium hover:underline transition-colors">Try again</button>
             </div>
           )}
 
-          {/* Tradeline Grid - LIGHTER CARDS */}
           {!isLoading && !error && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              <AnimatePresence mode="popLayout">
-                {filtered.map((t, i) => (
-                  <motion.div
-                    key={t.id}
-                    layout
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ delay: i * 0.03 }}
-                    whileHover={{ y: -5, borderColor: "rgba(0,255,127,0.3)" }}
-                    className="tradeline-card rounded-2xl p-6 space-y-4 transition-all duration-300 card-shine group"
-                  >
-                    {/* Header */}
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-neon/15 rounded-lg flex items-center justify-center group-hover:bg-neon/25 transition-colors">
-                          <CreditCard className="w-5 h-5 text-neon" />
-                        </div>
+            <>
+              <div className="hidden lg:block overflow-hidden rounded-2xl border border-white/10 glass-panel">
+                <table className="w-full text-sm">
+                  <thead className="bg-white/[0.04] text-white/45 uppercase tracking-widest text-[11px]">
+                    <tr>
+                      <th className="text-left px-5 py-4">Bank</th>
+                      <th className="text-right px-5 py-4">Limit</th>
+                      <th className="text-right px-5 py-4">Age</th>
+                      <th className="text-right px-5 py-4">Reports For</th>
+                      <th className="text-right px-5 py-4">Deadline</th>
+                      <th className="text-right px-5 py-4">Target Report</th>
+                      <th className="text-right px-5 py-4">Spots</th>
+                      <th className="text-right px-5 py-4">Price</th>
+                      <th className="text-right px-5 py-4">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-white/10">
+                    {filtered.map((t) => (
+                      <tr key={t.id} className="hover:bg-white/[0.04] transition-colors">
+                        <td className="px-5 py-4">
+                          <div className="flex items-center gap-3">
+                            <div className="w-9 h-9 bg-neon/15 rounded-lg flex items-center justify-center">
+                              <CreditCard className="w-4 h-4 text-neon" />
+                            </div>
+                            <div>
+                              <p className="font-bold text-white">{t.bank}</p>
+                              <p className="text-[11px] text-white/35 uppercase tracking-widest">{t.category} • $0 balance</p>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-5 py-4 text-right font-mono text-white/85">{formatCurrency(t.creditLimit)}</td>
+                        <td className="px-5 py-4 text-right font-mono text-white/85">{t.ageYears} yrs</td>
+                        <td className="px-5 py-4 text-right text-white/75">{getMonthLabel(t.cycles)}</td>
+                        <td className="px-5 py-4 text-right text-amber-300">Buy by {formatDate(t.statementDate)}</td>
+                        <td className="px-5 py-4 text-right text-white/75">Target {formatDate(t.postingDate)}</td>
+                        <td className="px-5 py-4 text-right text-white/75">{t.spotsAvailable}</td>
+                        <td className="px-5 py-4 text-right">
+                          <p className="text-lg font-display font-extrabold text-neon font-mono">{formatCurrency(getMonthlyPrice(t))}</p>
+                          <p className="text-[11px] text-white/35">per month</p>
+                          <p className="text-xs text-white/55">{formatCurrency(t.price)} total</p>
+                        </td>
+                        <td className="px-5 py-4 text-right">
+                          <button onClick={() => openTradeline(t)} className="btn-neon bg-neon text-black px-4 py-2.5 rounded-lg text-xs font-bold shadow-lg shadow-neon/20">
+                            Check Availability
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="lg:hidden grid grid-cols-1 gap-4">
+                <AnimatePresence mode="popLayout">
+                  {filtered.map((t, i) => (
+                    <motion.div key={t.id} layout initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95 }} transition={{ delay: i * 0.02 }} className="tradeline-card rounded-2xl p-5 space-y-4 transition-all duration-300 card-shine">
+                      <div className="flex items-start justify-between gap-4">
                         <div>
-                          <h3 className="font-bold text-sm text-white">{t.bank}</h3>
-                          <span className={`text-[10px] font-bold uppercase tracking-widest ${
-                            t.category === "Premium" ? "text-neon" : t.category === "Standard" ? "text-blue-400" : "text-white/50"
-                          }`}>
-                            {t.category}
-                          </span>
+                          <p className="text-lg font-bold text-white">{t.bank}</p>
+                          <p className="text-[11px] text-white/40 uppercase tracking-widest">{t.category} • $0 balance</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-2xl font-display font-extrabold text-neon font-mono">{formatCurrency(getMonthlyPrice(t))}</p>
+                          <p className="text-[11px] text-white/35">per month</p>
+                          <p className="text-xs text-white/55">{formatCurrency(t.price)} total</p>
                         </div>
                       </div>
-                      <span className="text-xl font-display font-extrabold text-neon font-mono">
-                        ${t.price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                      </span>
-                    </div>
 
-                    {/* Guarantee Badge */}
-                    <div className="flex items-center gap-2 px-3 py-2 bg-emerald-500/15 border border-emerald-500/30 rounded-lg">
-                      <Shield className="w-3 h-3 text-emerald-400 flex-shrink-0" />
-                      <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest">Perfect Payment • $0 Balance</span>
-                    </div>
-
-                    {/* Details - IMPROVED CONTRAST */}
-                    <div className="grid grid-cols-2 gap-3">
-                      <div className="bg-white/[0.08] rounded-lg p-3 border border-white/10">
-                        <p className="text-[10px] text-white/50 uppercase tracking-widest font-semibold">Credit Limit</p>
-                        <p className="text-sm font-bold font-mono text-white/90 mt-1">${t.creditLimit.toLocaleString()}</p>
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="bg-white/[0.08] rounded-lg p-3 border border-white/10">
+                          <p className="text-[10px] text-white/50 uppercase tracking-widest font-semibold">Limit</p>
+                          <p className="text-sm font-bold font-mono text-white/90 mt-1">{formatCurrency(t.creditLimit)}</p>
+                        </div>
+                        <div className="bg-white/[0.08] rounded-lg p-3 border border-white/10">
+                          <p className="text-[10px] text-white/50 uppercase tracking-widest font-semibold">Age</p>
+                          <p className="text-sm font-bold font-mono text-white/90 mt-1">{t.ageYears} Years</p>
+                        </div>
+                        <div className="bg-white/[0.08] rounded-lg p-3 border border-white/10">
+                          <p className="text-[10px] text-white/50 uppercase tracking-widest font-semibold">Reports For</p>
+                          <p className="text-sm font-bold text-white/90 mt-1">{getMonthLabel(t.cycles)}</p>
+                        </div>
+                        <div className="bg-white/[0.08] rounded-lg p-3 border border-white/10">
+                          <p className="text-[10px] text-white/50 uppercase tracking-widest font-semibold">Spots</p>
+                          <p className="text-sm font-bold text-white/90 mt-1">{t.spotsAvailable} available</p>
+                        </div>
                       </div>
-                      <div className="bg-white/[0.08] rounded-lg p-3 border border-white/10">
-                        <p className="text-[10px] text-white/50 uppercase tracking-widest font-semibold">Account Age</p>
-                        <p className="text-sm font-bold font-mono text-white/90 mt-1">{t.ageYears} Years</p>
+
+                      <div className="rounded-xl border border-amber-500/25 bg-amber-500/10 p-3 text-sm">
+                        <p className="text-amber-300 font-bold">Purchase by {formatDate(t.statementDate)}</p>
+                        <p className="text-white/55 text-xs mt-1">Target reporting date: {formatDate(t.postingDate)}</p>
                       </div>
-                    </div>
 
-                    {/* Spots Available */}
-                    <div className="text-xs text-white/40">
-                      {t.spotsAvailable} spot{t.spotsAvailable !== 1 ? "s" : ""} available
-                    </div>
+                      <div className="flex items-center gap-2 px-3 py-2 bg-emerald-500/15 border border-emerald-500/30 rounded-lg">
+                        <Shield className="w-3 h-3 text-emerald-400 flex-shrink-0" />
+                        <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest">Clean Payment History • $0 Reported Balance</span>
+                      </div>
 
-                    {/* CTA */}
-                    <button
-                      onClick={() => {
-                        setSelectedTradeline(t);
-                        setIsModalOpen(true);
-                      }}
-                      className="btn-ghost w-full bg-neon/15 border border-neon/30 text-neon py-2.5 rounded-xl text-sm font-bold transition-all flex items-center justify-center gap-2 hover:bg-neon/25"
-                    >
-                      Inquire Now <ArrowRight className="w-4 h-4" />
-                    </button>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-            </div>
+                      <button onClick={() => openTradeline(t)} className="cta-primary w-full">
+                        Check Availability <ArrowRight className="w-4 h-4" />
+                      </button>
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </div>
+            </>
           )}
 
           {!isLoading && !error && filtered.length === 0 && (
             <div className="text-center py-20">
               <p className="text-white/30 text-lg">No tradelines match your filters.</p>
-              <button 
-                onClick={resetFilters} 
-                className="mt-4 text-neon text-sm font-medium hover:underline transition-colors"
-              >
-                Clear filters
-              </button>
+              <button onClick={resetFilters} className="mt-4 text-neon text-sm font-medium hover:underline transition-colors">Clear filters</button>
             </div>
           )}
 
-          {/* Bottom CTA */}
           <SectionReveal>
             <div className="mt-16 glass-panel rounded-2xl p-8 sm:p-10 text-center neon-border-glow">
-              <h3 className="text-2xl font-display font-extrabold mb-3">
-                Need Help Choosing?
-              </h3>
-              <p className="text-white/40 mb-6 max-w-lg mx-auto">
-                Our credit strategists can analyze your profile and recommend the perfect tradeline combination for your goals.
+              <h3 className="text-2xl font-display font-extrabold mb-3">Need Help Choosing?</h3>
+              <p className="text-white/45 mb-6 max-w-xl mx-auto">
+                A1 Tradelines can help you compare age, limit, reporting term, purchase deadline, target reporting date, and total price before selecting an authorized user tradeline.
               </p>
-              <a
-                href="/contact"
-                className="btn-neon inline-flex items-center gap-2 bg-neon text-black px-8 py-3.5 rounded-xl text-sm font-bold shadow-lg shadow-neon/20 transition-all"
-              >
-                <Phone className="w-4 h-4" /> Schedule Free Consultation
+              <a href="/contact" className="cta-primary">
+                <Phone className="w-4 h-4" /> Request Consultation
               </a>
             </div>
           </SectionReveal>
         </div>
       </section>
 
-      {/* Inquiry Modal */}
-      {selectedTradeline && (
-        <TradelineInquiryModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          tradeline={{
-            name: selectedTradeline.bank,
-            creditLimit: `$${selectedTradeline.creditLimit.toLocaleString()}`,
-            age: `${selectedTradeline.ageYears} Years`,
-            price: `$${selectedTradeline.price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
-          }}
-        />
-      )}
+      <TradelineInquiryModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} tradeline={selectedTradeline} />
     </div>
   );
 }
