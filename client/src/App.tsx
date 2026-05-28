@@ -10,6 +10,7 @@ import BuyTradelines from "./pages/BuyTradelines";
 import FAQ from "./pages/FAQ";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
+import ThankYou from "./pages/ThankYou";
 import BestTradelinesForSale from "./pages/BestTradelinesForSale";
 import AuthorizedUserTradelines from "./pages/AuthorizedUserTradelines";
 import HowToBoostCreditScore from "./pages/HowToBoostCreditScore";
@@ -28,6 +29,7 @@ function Router() {
         <Route path="/faq" component={FAQ} />
         <Route path="/blog" component={Blog} />
         <Route path="/contact" component={Contact} />
+        <Route path="/thank-you" component={ThankYou} />
         <Route path="/privacy-policy" component={PrivacyPolicy} />
         <Route path="/terms-of-service" component={TermsOfService} />
         <Route path="/disclaimer" component={Disclaimer} />
