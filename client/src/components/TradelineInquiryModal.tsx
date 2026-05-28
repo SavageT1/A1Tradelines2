@@ -2,17 +2,43 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Mail, Phone as PhoneIcon } from 'lucide-react';
 import { submitToHubSpot } from '@/lib/hubspot';
+import type { TradelineItem } from '@/services/tradelineApi';
 
 interface TradelineInquiryModalProps {
   isOpen: boolean;
   onClose: () => void;
-  tradeline: {
-    name: string;
-    creditLimit: string;
-    age: string;
-    price: string;
-  };
+  tradeline: TradelineItem | null;
 }
+
+const formatCurrency = (value: number) =>
+  value.toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  });
+
+const getTradelineSummary = (tradeline: TradelineItem | null) => {
+  if (!tradeline) {
+    return {
+      bank: 'Selected Tradeline',
+      creditLimit: 'TBD',
+      age: 'TBD',
+      price: 'TBD',
+      reportsFor: 'TBD',
+    };
+  }
+
+  const cycles = tradeline.cycles || 1;
+
+  return {
+    bank: tradeline.bank,
+    creditLimit: formatCurrency(tradeline.creditLimit),
+    age: `${tradeline.ageYears} year${tradeline.ageYears === 1 ? '' : 's'}`,
+    price: `${formatCurrency(tradeline.price)} total`,
+    reportsFor: `${cycles} month${cycles === 1 ? '' : 's'}`,
+  };
+};
 
 export default function TradelineInquiryModal({
   isOpen,
@@ -24,6 +50,7 @@ export default function TradelineInquiryModal({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
+  const summary = getTradelineSummary(tradeline);
 
   const handleSendEmail = () => {
     if (!email || !phone) {
@@ -31,8 +58,8 @@ export default function TradelineInquiryModal({
       return;
     }
 
-    const subject = `Inquiry: ${tradeline.name} Tradeline`;
-    const body = `I'm interested in the ${tradeline.name} tradeline.\n\nEmail: ${email}\nPhone: ${phone}\n\nTradeline Details:\n- Credit Limit: ${tradeline.creditLimit}\n- Age: ${tradeline.age}\n- Price: ${tradeline.price}`;
+    const subject = `Inquiry: ${summary.bank} Tradeline`;
+    const body = `I'm interested in the ${summary.bank} tradeline.\n\nEmail: ${email}\nPhone: ${phone}\n\nTradeline Details:\n- Credit Limit: ${summary.creditLimit}\n- Age: ${summary.age}\n- Reports For: ${summary.reportsFor}\n- Price: ${summary.price}`;
     const mailtoLink = `mailto:info@a1tradelines.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailtoLink;
     onClose();
@@ -51,7 +78,7 @@ export default function TradelineInquiryModal({
       const result = await submitToHubSpot({
         email,
         phone,
-        message: `Tradeline Inquiry - ${tradeline.name}\nCredit Limit: ${tradeline.creditLimit}\nAge: ${tradeline.age}\nPrice: ${tradeline.price}`,
+        message: `Tradeline Inquiry - ${summary.bank}\nCredit Limit: ${summary.creditLimit}\nAge: ${summary.age}\nReports For: ${summary.reportsFor}\nPrice: ${summary.price}`,
       });
       if (result.success) {
         setSuccess(true);
@@ -96,10 +123,13 @@ export default function TradelineInquiryModal({
               <div className="flex items-start justify-between">
                 <div>
                   <h3 className="text-xl font-bold text-white mb-1">
-                    {tradeline.name}
+                    {summary.bank}
                   </h3>
                   <p className="text-sm text-gray-400">
-                    Limit: {tradeline.creditLimit} • Age: {tradeline.age}
+                    Limit: {summary.creditLimit} • Age: {summary.age}
+                  </p>
+                  <p className="text-xs text-gray-500 mt-1">
+                    Reports for {summary.reportsFor} • {summary.price}
                   </p>
                 </div>
                 <button
