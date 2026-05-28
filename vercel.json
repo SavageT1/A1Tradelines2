@@ -1,0 +1,27 @@
+{
+  "installCommand": "npm install --legacy-peer-deps",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/public",
+  "rewrites": [
+    {
+      "source": "/home",
+      "destination": "/"
+    },
+    {
+      "source": "/resources/authorized-user-tradelines-explained",
+      "destination": "/faq"
+    },
+    {
+      "source": "/resources/tradelines-for-auto-loans",
+      "destination": "/"
+    },
+    {
+      "source": "/resources/:path*",
+      "destination": "/blog"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
