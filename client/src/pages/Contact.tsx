@@ -3,8 +3,9 @@
  * Neon Pulse Design: contact form with glassmorphism and direct contact links.
  */
 import { useState } from "react";
+import { useLocation } from "wouter";
 import { motion } from "framer-motion";
-import { Mail, Phone, Send, CheckCircle2, Clock, AlertCircle } from "lucide-react";
+import { Mail, Phone, Send, Clock, AlertCircle } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
 import SEOHead from "@/components/SEOHead";
@@ -36,7 +37,7 @@ const CONTACT_INFO = [
 ];
 
 export default function Contact() {
-  const [submitted, setSubmitted] = useState(false);
+  const [, setLocation] = useLocation();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState({
@@ -73,7 +74,7 @@ export default function Contact() {
       const result = await response.json();
 
       if (result.success) {
-        setSubmitted(true);
+        setLocation("/thank-you");
       } else {
         setError(result.message || "Failed to submit form");
       }
@@ -144,80 +145,52 @@ export default function Contact() {
             <div className="lg:col-span-3">
               <SectionReveal direction="right">
                 <div className="glass-panel rounded-2xl p-7 sm:p-10 neon-border-glow">
-                  {submitted ? (
+                  <div className="mb-8">
+                    <h3 className="text-xl font-display font-extrabold mb-2">Send Us a Message</h3>
+                    <p className="text-sm text-white/40">Fill out the form below and we'll get back to you promptly.</p>
+                  </div>
+                  {error && (
                     <motion.div
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      className="text-center py-12 space-y-4"
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="mb-5 p-4 bg-red-500/10 border border-red-500/30 rounded-lg flex items-start gap-3"
                     >
-                      <div className="w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto">
-                        <CheckCircle2 className="w-8 h-8 text-emerald-400" />
-                      </div>
-                      <h3 className="text-2xl font-display font-extrabold">Message Sent!</h3>
-                      <p className="text-white/50 max-w-sm mx-auto">
-                        Thank you for reaching out. A member of our team will get back to you within 24 hours.
-                      </p>
-                      <button
-                        onClick={() => {
-                          setSubmitted(false);
-                          setForm({ name: "", email: "", phone: "", subject: "", message: "" });
-                          setError(null);
-                        }}
-                        className="mt-4 text-neon text-sm font-bold hover:underline"
-                      >
-                        Send another message
-                      </button>
+                      <AlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
+                      <p className="text-sm text-red-300">{error}</p>
                     </motion.div>
-                  ) : (
-                    <>
-                      <div className="mb-8">
-                        <h3 className="text-xl font-display font-extrabold mb-2">Send Us a Message</h3>
-                        <p className="text-sm text-white/40">Fill out the form below and we'll get back to you promptly.</p>
-                      </div>
-                      {error && (
-                        <motion.div
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          className="mb-5 p-4 bg-red-500/10 border border-red-500/30 rounded-lg flex items-start gap-3"
-                        >
-                          <AlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
-                          <p className="text-sm text-red-300">{error}</p>
-                        </motion.div>
-                      )}
-                      <form onSubmit={handleSubmit} className="space-y-5">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                          <div className="space-y-1.5">
-                            <label className="text-xs font-medium text-white/40 uppercase tracking-widest">Full Name</label>
-                            <input required type="text" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full bg-black/30 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-neon/50 transition-all" placeholder="John Doe" />
-                          </div>
-                          <div className="space-y-1.5">
-                            <label className="text-xs font-medium text-white/40 uppercase tracking-widest">Email</label>
-                            <input required type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full bg-black/30 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-neon/50 transition-all" placeholder="john@example.com" />
-                          </div>
-                        </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                          <div className="space-y-1.5">
-                            <label className="text-xs font-medium text-white/40 uppercase tracking-widest">Phone</label>
-                            <input type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="w-full bg-black/30 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-neon/50 transition-all" placeholder="(555) 123-4567" />
-                          </div>
-                          <div className="space-y-1.5">
-                            <label className="text-xs font-medium text-white/40 uppercase tracking-widest">Subject</label>
-                            <input required type="text" value={form.subject} onChange={(e) => setForm({ ...form, subject: e.target.value })} className="w-full bg-black/30 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-neon/50 transition-all" placeholder="Tradeline inquiry" />
-                          </div>
-                        </div>
-                        <div className="space-y-1.5">
-                          <label className="text-xs font-medium text-white/40 uppercase tracking-widest">Message</label>
-                          <textarea required rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="w-full bg-black/30 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-neon/50 transition-all resize-none" placeholder="Tell us about your tradeline questions or credit profile goals..." />
-                        </div>
-                        <p className="text-[11px] text-white/30 leading-relaxed">
-                          By submitting this form, you agree to be contacted by A1 Tradelines by phone, text, or email about your inquiry. Message and data rates may apply. Consent is not a condition of purchase. Results are not guaranteed.
-                        </p>
-                        <motion.button whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }} type="submit" disabled={loading} className="btn-neon w-full bg-neon text-black font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-neon/20 transition-all text-sm disabled:opacity-50 disabled:cursor-not-allowed">
-                          {loading ? "Submitting..." : "Request Consultation"} {!loading && <Send className="w-4 h-4" />}
-                        </motion.button>
-                      </form>
-                    </>
                   )}
+                  <form onSubmit={handleSubmit} className="space-y-5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-medium text-white/40 uppercase tracking-widest">Full Name</label>
+                        <input required type="text" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full bg-black/30 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-neon/50 transition-all" placeholder="John Doe" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-medium text-white/40 uppercase tracking-widest">Email</label>
+                        <input required type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full bg-black/30 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-neon/50 transition-all" placeholder="john@example.com" />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-medium text-white/40 uppercase tracking-widest">Phone</label>
+                        <input type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="w-full bg-black/30 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-neon/50 transition-all" placeholder="(555) 123-4567" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-medium text-white/40 uppercase tracking-widest">Subject</label>
+                        <input required type="text" value={form.subject} onChange={(e) => setForm({ ...form, subject: e.target.value })} className="w-full bg-black/30 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-neon/50 transition-all" placeholder="Tradeline inquiry" />
+                      </div>
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-medium text-white/40 uppercase tracking-widest">Message</label>
+                      <textarea required rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="w-full bg-black/30 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-neon/50 transition-all resize-none" placeholder="Tell us about your tradeline questions or credit profile goals..." />
+                    </div>
+                    <p className="text-[11px] text-white/30 leading-relaxed">
+                      By submitting this form, you agree to be contacted by A1 Tradelines by phone, text, or email about your inquiry. Message and data rates may apply. Consent is not a condition of purchase. Results are not guaranteed.
+                    </p>
+                    <motion.button whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }} type="submit" disabled={loading} className="btn-neon w-full bg-neon text-black font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-neon/20 transition-all text-sm disabled:opacity-50 disabled:cursor-not-allowed">
+                      {loading ? "Submitting..." : "Request Consultation"} {!loading && <Send className="w-4 h-4" />}
+                    </motion.button>
+                  </form>
                 </div>
               </SectionReveal>
             </div>
