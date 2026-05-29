@@ -4,6 +4,39 @@ export interface SchemaMarkup {
   [key: string]: any;
 }
 
+export const setMetaTags = (tags: Record<string, string>): void => {
+  Object.entries(tags).forEach(([name, content]) => {
+    if (!content) return;
+
+    let element = document.head.querySelector<HTMLMetaElement>(`meta[name="${name}"]`);
+
+    if (!element) {
+      element = document.createElement("meta");
+      element.setAttribute("name", name);
+      document.head.appendChild(element);
+    }
+
+    element.setAttribute("content", content);
+  });
+};
+
+export const setOpenGraphTags = (tags: Record<string, string>): void => {
+  Object.entries(tags).forEach(([property, content]) => {
+    if (!content) return;
+
+    const ogProperty = property.startsWith("og:") ? property : `og:${property}`;
+    let element = document.head.querySelector<HTMLMetaElement>(`meta[property="${ogProperty}"]`);
+
+    if (!element) {
+      element = document.createElement("meta");
+      element.setAttribute("property", ogProperty);
+      document.head.appendChild(element);
+    }
+
+    element.setAttribute("content", content);
+  });
+};
+
 export const generateOrganizationSchema = (): SchemaMarkup => ({
   "@context": "https://schema.org",
   "@type": "Organization",
