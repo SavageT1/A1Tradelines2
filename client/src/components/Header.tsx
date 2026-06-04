@@ -6,9 +6,10 @@ import { Menu, X, Phone } from "lucide-react";
 const NAV_LINKS = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
+  { href: "/how-it-works", label: "How It Works" },
   { href: "/buy-tradelines", label: "Buy Tradelines" },
+  { href: "/tradeline-buyers-guide", label: "Buyer Guide" },
   { href: "/faq", label: "FAQ" },
-  { href: "/blog", label: "Learning Center" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -40,15 +41,15 @@ export default function Header() {
             <span className="font-display text-3xl sm:text-4xl font-extrabold tracking-[0.05em] text-neon leading-none neon-text-glow">Tradelines</span>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden xl:flex items-center gap-1">
             {NAV_LINKS.map((link) => {
               const isActive = location === link.href;
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`relative px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-lg ${
-                    isActive ? "text-neon" : "text-white/60 hover:text-white"
+                  className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 rounded-lg ${
+                    isActive ? "text-neon" : "text-white/70 hover:text-white"
                   }`}
                 >
                   {link.label}
@@ -64,8 +65,8 @@ export default function Header() {
             })}
           </nav>
 
-          <div className="hidden lg:flex items-center gap-3">
-            <a href="tel:+19087675309" className="flex items-center gap-2 text-sm text-white/50 hover:text-neon transition-colors">
+          <div className="hidden xl:flex items-center gap-3">
+            <a href="tel:+19087675309" className="flex items-center gap-2 text-sm text-white/70 hover:text-neon transition-colors">
               <Phone className="w-4 h-4" />
               <span className="font-mono">(908) 767-5309</span>
             </a>
@@ -74,7 +75,7 @@ export default function Header() {
             </Link>
           </div>
 
-          <button onClick={() => setMobileOpen(!mobileOpen)} className="lg:hidden p-2 text-white/70 hover:text-neon transition-colors" aria-label="Toggle menu">
+          <button onClick={() => setMobileOpen(!mobileOpen)} className="xl:hidden p-2 text-white/80 hover:text-neon transition-colors" aria-label="Toggle menu">
             {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
@@ -87,7 +88,7 @@ export default function Header() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="lg:hidden bg-void/95 backdrop-blur-xl border-t border-white/5 overflow-hidden"
+            className="xl:hidden bg-void/95 backdrop-blur-xl border-t border-white/5 overflow-hidden"
           >
             <nav className="px-4 py-6 space-y-1">
               {NAV_LINKS.map((link, i) => {
@@ -97,7 +98,7 @@ export default function Header() {
                     <Link
                       href={link.href}
                       className={`block px-4 py-3 rounded-xl text-base font-medium transition-all ${
-                        isActive ? "bg-neon/10 text-neon border border-neon/20" : "text-white/70 hover:bg-white/5 hover:text-white"
+                        isActive ? "bg-neon/10 text-neon border border-neon/20" : "text-white/80 hover:bg-white/5 hover:text-white"
                       }`}
                     >
                       {link.label}
