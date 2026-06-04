@@ -17,6 +17,13 @@ import HowToBoostCreditScore from "./pages/HowToBoostCreditScore";
 import HowItWorks from "./pages/HowItWorks";
 import TradelineBuyersGuide from "./pages/TradelineBuyersGuide";
 import TradelineGlossary from "./pages/TradelineGlossary";
+import BuyAuthorizedUserTradelines from "./pages/BuyAuthorizedUserTradelines";
+import TradelinesForSale from "./pages/TradelinesForSale";
+import SeasonedTradelines from "./pages/SeasonedTradelines";
+import BestTradelinesForCreditUtilization from "./pages/BestTradelinesForCreditUtilization";
+import TradelinePostingTimeline from "./pages/TradelinePostingTimeline";
+import AreTradelinesLegal from "./pages/AreTradelinesLegal";
+import TradelinesBusinessFunding from "./pages/TradelinesBusinessFunding";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import Disclaimer from "./pages/Disclaimer";
@@ -44,6 +51,13 @@ function Router() {
         <Route path="/how-it-works" component={HowItWorks} />
         <Route path="/tradeline-buyers-guide" component={TradelineBuyersGuide} />
         <Route path="/tradeline-glossary" component={TradelineGlossary} />
+        <Route path="/buy-authorized-user-tradelines" component={BuyAuthorizedUserTradelines} />
+        <Route path="/tradelines-for-sale" component={TradelinesForSale} />
+        <Route path="/seasoned-tradelines" component={SeasonedTradelines} />
+        <Route path="/best-tradelines-for-credit-utilization" component={BestTradelinesForCreditUtilization} />
+        <Route path="/how-long-do-tradelines-take-to-post" component={TradelinePostingTimeline} />
+        <Route path="/are-tradelines-legal" component={AreTradelinesLegal} />
+        <Route path="/can-tradelines-help-business-funding" component={TradelinesBusinessFunding} />
         <Route path="/resources/faq-hub"><Redirect to="/faq" /></Route>
         <Route path="/resources/:rest*"><Redirect to="/faq" /></Route>
         <Route path="/404" component={NotFound} />
