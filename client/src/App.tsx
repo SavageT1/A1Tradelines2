@@ -14,6 +14,9 @@ import ThankYou from "./pages/ThankYou";
 import BestTradelinesForSale from "./pages/BestTradelinesForSale";
 import AuthorizedUserTradelines from "./pages/AuthorizedUserTradelines";
 import HowToBoostCreditScore from "./pages/HowToBoostCreditScore";
+import HowItWorks from "./pages/HowItWorks";
+import TradelineBuyersGuide from "./pages/TradelineBuyersGuide";
+import TradelineGlossary from "./pages/TradelineGlossary";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import Disclaimer from "./pages/Disclaimer";
@@ -38,6 +41,9 @@ function Router() {
         <Route path="/best-tradelines-for-sale" component={BestTradelinesForSale} />
         <Route path="/authorized-user-tradelines" component={AuthorizedUserTradelines} />
         <Route path="/how-to-boost-credit-score-fast" component={HowToBoostCreditScore} />
+        <Route path="/how-it-works" component={HowItWorks} />
+        <Route path="/tradeline-buyers-guide" component={TradelineBuyersGuide} />
+        <Route path="/tradeline-glossary" component={TradelineGlossary} />
         <Route path="/resources/faq-hub"><Redirect to="/faq" /></Route>
         <Route path="/resources/:rest*"><Redirect to="/faq" /></Route>
         <Route path="/404" component={NotFound} />
