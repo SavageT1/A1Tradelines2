@@ -14,13 +14,29 @@ declare global {
   }
 }
 
+function getOrCreateLeadEventId() {
+  const storageKey = "a1_lead_event_id";
+  const existing = window.sessionStorage.getItem(storageKey);
+
+  if (existing) return existing;
+
+  const eventId = `lead_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
+  window.sessionStorage.setItem(storageKey, eventId);
+  return eventId;
+}
+
 export default function ThankYou() {
   useEffect(() => {
-    window.oaiq?.("measure", "registration_completed", {
-      type: "customer_action",
-      amount: 0,
-      currency: "USD",
-    });
+    window.oaiq?.(
+      "measure",
+      "lead_created",
+      {
+        type: "customer_action",
+      },
+      {
+        event_id: getOrCreateLeadEventId(),
+      }
+    );
   }, []);
 
   return (
