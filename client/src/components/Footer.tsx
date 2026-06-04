@@ -35,6 +35,8 @@ export default function Footer() {
                 { href: "/", label: "Home" },
                 { href: "/about", label: "About Us" },
                 { href: "/buy-tradelines", label: "Buy Tradelines" },
+                { href: "/buy-authorized-user-tradelines", label: "Buy Authorized User Tradelines" },
+                { href: "/tradelines-for-sale", label: "Tradelines for Sale" },
                 { href: "/contact", label: "Contact Us" },
               ].map((link) => (
                 <li key={link.href}>
@@ -54,7 +56,11 @@ export default function Footer() {
                 { href: "/tradeline-buyers-guide", label: "Buyer Guide" },
                 { href: "/tradeline-glossary", label: "Tradeline Glossary" },
                 { href: "/authorized-user-tradelines", label: "Authorized User Tradelines" },
-                { href: "/best-tradelines-for-sale", label: "Best Tradelines for Sale" },
+                { href: "/seasoned-tradelines", label: "Seasoned Tradelines" },
+                { href: "/best-tradelines-for-credit-utilization", label: "Credit Utilization Tradelines" },
+                { href: "/how-long-do-tradelines-take-to-post", label: "Posting Timeline" },
+                { href: "/are-tradelines-legal", label: "Are Tradelines Legal?" },
+                { href: "/can-tradelines-help-business-funding", label: "Business Funding" },
                 { href: "/faq", label: "FAQ" },
               ].map((link) => (
                 <li key={link.label}>
