@@ -24,6 +24,7 @@ import BestTradelinesForCreditUtilization from "./pages/BestTradelinesForCreditU
 import TradelinePostingTimeline from "./pages/TradelinePostingTimeline";
 import AreTradelinesLegal from "./pages/AreTradelinesLegal";
 import TradelinesBusinessFunding from "./pages/TradelinesBusinessFunding";
+import TradelineAssessment from "./pages/TradelineAssessment";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import Disclaimer from "./pages/Disclaimer";
@@ -51,6 +52,7 @@ function Router() {
         <Route path="/how-it-works" component={HowItWorks} />
         <Route path="/tradeline-buyers-guide" component={TradelineBuyersGuide} />
         <Route path="/tradeline-glossary" component={TradelineGlossary} />
+        <Route path="/tradeline-assessment" component={TradelineAssessment} />
         <Route path="/buy-authorized-user-tradelines" component={BuyAuthorizedUserTradelines} />
         <Route path="/tradelines-for-sale" component={TradelinesForSale} />
         <Route path="/seasoned-tradelines" component={SeasonedTradelines} />
