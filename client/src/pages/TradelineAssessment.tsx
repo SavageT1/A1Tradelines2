@@ -16,7 +16,7 @@ const faqs = [
   },
   {
     question: "Should I submit my Social Security number?",
-    answer: "No. Do not submit Social Security numbers, government ID numbers, credit monitoring passwords, banking logins, card numbers, or sensitive identity information through this form.",
+    answer: "No. Please do not submit Social Security numbers, government ID numbers, credit monitoring passwords, banking logins, card numbers, or sensitive identity information through this general website form.",
   },
   {
     question: "Will the assessment guarantee the best tradeline?",
@@ -83,7 +83,7 @@ export default function TradelineAssessment() {
         `Negative items: ${form.negativeItems}`,
         `Preferred contact method: ${form.preferredContact}`,
         `Notes: ${form.notes || "None provided"}`,
-        "Sensitive-info reminder: Client was instructed not to submit SSNs, government IDs, credit monitoring passwords, banking logins, card numbers, or sensitive identity information through the form.",
+        "Privacy reminder shown: Client was asked not to include SSNs, government IDs, credit monitoring passwords, banking logins, card numbers, or sensitive identity information through the general website form.",
       ].join("\n");
 
       const response = await fetch("/api/contact", {
@@ -133,18 +133,6 @@ export default function TradelineAssessment() {
       <section className="site-section">
         <div className="site-container-narrow">
           <SectionReveal>
-            <div className="content-card mb-8 flex gap-4 items-start border-neon/20 bg-neon/10">
-              <ShieldCheck className="w-7 h-7 text-neon shrink-0 mt-1" />
-              <div>
-                <h2 className="text-left text-white mb-2">Secure Information Notice</h2>
-                <p className="text-white/75 text-sm leading-relaxed">
-                  Do not submit Social Security numbers, government ID numbers, credit monitoring passwords, banking logins, card numbers, or sensitive identity information through this form.
-                </p>
-              </div>
-            </div>
-          </SectionReveal>
-
-          <SectionReveal>
             <form onSubmit={handleSubmit} className="glass-panel rounded-2xl p-6 sm:p-10 neon-border-glow space-y-6">
               {error && (
                 <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-lg flex items-start gap-3">
@@ -173,7 +161,7 @@ export default function TradelineAssessment() {
 
               <div className="space-y-1.5">
                 <label className="text-xs font-medium text-white/60 uppercase tracking-widest">Additional Notes</label>
-                <textarea rows={5} value={form.notes} onChange={(e) => updateField("notes", e.target.value)} className="w-full bg-black/30 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-neon/50 transition-all resize-none" placeholder="Tell us anything useful about your goal or timeline. Do not include sensitive identity information." />
+                <textarea rows={5} value={form.notes} onChange={(e) => updateField("notes", e.target.value)} className="w-full bg-black/30 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-neon/50 transition-all resize-none" placeholder="Tell us anything useful about your goal or timeline." />
               </div>
 
               <p className="text-[11px] text-white/45 leading-relaxed rounded-xl border border-white/10 bg-white/[0.03] p-4">
@@ -184,6 +172,15 @@ export default function TradelineAssessment() {
                 {loading ? "Submitting..." : "Submit Assessment"} {!loading && <Send className="w-4 h-4" />}
               </button>
             </form>
+          </SectionReveal>
+
+          <SectionReveal>
+            <div className="mt-6 flex gap-3 items-start rounded-xl border border-white/10 bg-white/[0.025] p-4">
+              <ShieldCheck className="w-4 h-4 text-neon/80 shrink-0 mt-0.5" />
+              <p className="text-[11px] sm:text-xs text-white/45 leading-relaxed">
+                Privacy note: please do not include Social Security numbers, government ID numbers, credit monitoring passwords, banking logins, card numbers, or other sensitive identity information in this general assessment form.
+              </p>
+            </div>
           </SectionReveal>
         </div>
       </section>
