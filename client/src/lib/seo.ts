@@ -42,7 +42,7 @@ export const generateOrganizationSchema = (): SchemaMarkup => ({
   "@type": "Organization",
   name: "A1 Tradelines",
   url: "https://a1tradelines.com",
-  logo: "https://a1tradelines.com/logo.png",
+  logo: "https://a1tradelines.com/logo.svg",
   description: "Authorized user tradeline matching, education, and reporting support. No credit outcome is guaranteed.",
   sameAs: ["https://www.facebook.com/A1Tradelines/"],
   contactPoint: {
@@ -83,8 +83,10 @@ export const generateServiceSchema = (): SchemaMarkup => ({
       {
         "@type": "Offer",
         name: "Authorized User Tradeline Matching",
-        description: "Profile-based tradeline matching using account age, limit, reported balance, and timeline factors.",
+        description: "Profile-based tradeline matching using account age, limit, reported balance, and timeline factors. Pricing varies by selected account and availability.",
         priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+        url: "https://a1tradelines.com/buy-tradelines",
       },
     ],
   },
@@ -128,7 +130,7 @@ export const generateArticleSchema = (article: {
     name: "A1 Tradelines",
     logo: {
       "@type": "ImageObject",
-      url: "https://a1tradelines.com/logo.png",
+      url: "https://a1tradelines.com/logo.svg",
     },
   },
   keywords: [article.category, "authorized user tradelines", "tradeline matching", "credit profile education"],
@@ -137,6 +139,11 @@ export const generateArticleSchema = (article: {
 export const generateAggregateRatingSchema = (testimonials: Array<{ rating: number }>): SchemaMarkup => ({
   "@context": "https://schema.org",
   "@type": "AggregateRating",
+  itemReviewed: {
+    "@type": "Organization",
+    name: "A1 Tradelines",
+    url: "https://a1tradelines.com",
+  },
   ratingValue: (testimonials.reduce((sum, t) => sum + t.rating, 0) / testimonials.length).toFixed(1),
   ratingCount: testimonials.length.toString(),
   bestRating: "5",
@@ -147,7 +154,7 @@ export const generateLocalBusinessSchema = (): SchemaMarkup => ({
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   name: "A1 Tradelines",
-  image: "https://a1tradelines.com/logo.png",
+  image: "https://a1tradelines.com/logo.svg",
   description: "Authorized user tradeline matching, education, and reporting support. No credit outcome is guaranteed.",
   telephone: "+1-908-767-5309",
   email: "info@a1tradelines.com",
