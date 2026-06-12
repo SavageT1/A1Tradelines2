@@ -27,7 +27,7 @@ const STATS = [
   { value: "AU", label: "Tradeline Focus" },
   { value: "$0", label: "Reported Balance Target" },
   { value: "1-2", label: "Typical Billing Cycles" },
-  { value: "3", label: "Major Bureau Awareness" },
+  { value: "US", label: "Nationwide Support" },
 ];
 
 const HOW_IT_WORKS = [
@@ -52,16 +52,16 @@ const HOW_IT_WORKS = [
   {
     icon: Clock,
     title: "Reporting Support",
-    description: "Posting depends on issuer reporting cycles and credit bureau processing. We help you understand the expected timeline and limitations.",
+    description: "Posting depends on issuer reporting cycles and credit bureau processing. We help you understand the expected timeline and next steps.",
     step: "04",
   },
 ];
 
 const TRUST_POINTS = [
   "Authorized user tradeline matching only — no CPNs, synthetic identities, or fake credit profiles.",
-  "No guaranteed score increases, approvals, funding, loan terms, or specific credit outcomes.",
+  "Education-first guidance so clients understand profile fit, timing, and limitations before purchasing.",
   "Quality-focused inventory review based on payment history, reported balance, account age, and credit limit.",
-  "Education-first guidance so clients understand both potential benefits and limitations before purchasing.",
+  "Satisfied clients across the U.S. use A1 Tradelines to compare options with clearer expectations.",
 ];
 
 export default function Home() {
@@ -71,9 +71,9 @@ export default function Home() {
     <div className="overflow-hidden">
       <SEOHead
         title="Authorized User Tradeline Matching | A1 Tradelines"
-        description="A1 Tradelines provides authorized user tradeline matching, education, and reporting support based on profile fit, account age, credit limit, balance, and timeline. No credit outcome is guaranteed."
+        description="A1 Tradelines provides authorized user tradeline matching, education, and reporting support based on profile fit, account age, credit limit, balance, and timeline."
         ogTitle="A1 Tradelines | Authorized User Tradeline Matching"
-        ogDescription="Profile-based authorized user tradeline matching, education, and reporting support. No credit score, approval, or funding outcomes guaranteed."
+        ogDescription="Profile-based authorized user tradeline matching, education, and reporting support."
         canonical="https://a1tradelines.com/"
         keywords="authorized user tradelines, tradeline matching, tradeline education, credit profile strategy, A1 Tradelines"
         schema={schemas}
@@ -106,9 +106,6 @@ export default function Home() {
                 </h1>
                 <p className="text-lg sm:text-xl text-white/55 max-w-2xl leading-relaxed mx-auto">
                   A1 Tradelines helps clients evaluate authorized user tradeline options based on account age, credit limit, reported balance, bank diversity, and reporting timeline.
-                </p>
-                <p className="text-xs sm:text-sm text-white/35 max-w-3xl leading-relaxed mx-auto border border-white/10 bg-white/[0.03] rounded-xl px-4 py-3">
-                  Authorized user tradelines may affect profiles differently. A1 Tradelines does not guarantee credit score increases, approvals, funding, loan terms, mortgage approval, or any specific credit outcome.
                 </p>
               </motion.div>
 
@@ -143,7 +140,7 @@ export default function Home() {
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-widest"
               >
                 <Shield className="w-4 h-4" />
-                Quality Reviewed Accounts • No Outcome Guarantees
+                Quality Reviewed Accounts • Education-First Guidance
               </motion.div>
 
               <motion.div
@@ -181,7 +178,7 @@ export default function Home() {
                 Compare <span className="text-neon">Tradeline Factors</span>
               </h2>
               <p className="mt-4 text-white/40 max-w-2xl mx-auto">
-                Review how limit, balance, age, and reporting timing may matter before choosing an authorized user tradeline. This tool is educational and does not guarantee results.
+                Review how limit, balance, age, and reporting timing may matter before choosing an authorized user tradeline.
               </p>
             </div>
           </SectionReveal>
@@ -245,10 +242,10 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-              <div className="mt-8 flex items-start gap-3 p-4 rounded-xl bg-amber-500/10 border border-amber-500/20">
-                <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-                <p className="text-sm text-white/60 leading-relaxed">
-                  Do not submit Social Security numbers, credit monitoring logins, bank logins, or sensitive identity information through general website forms. Sensitive information should only be handled through secure approved processes when required.
+              <div className="mt-8 flex items-start gap-3 p-4 rounded-xl bg-white/[0.025] border border-white/10">
+                <AlertTriangle className="w-5 h-5 text-white/30 shrink-0 mt-0.5" />
+                <p className="text-xs text-white/40 leading-relaxed">
+                  For privacy, general website forms should not include Social Security numbers, banking logins, credit monitoring passwords, or sensitive identity information.
                 </p>
               </div>
             </div>
