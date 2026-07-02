@@ -9,8 +9,12 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div className="lg:col-span-1 space-y-4">
-            <Link href="/" className="inline-flex items-center text-2xl font-display font-extrabold text-white hover:text-neon transition-colors">
-              A1 <span className="text-neon ml-1">Tradelines</span>
+            <Link href="/" className="inline-flex items-center gap-3 text-white hover:text-neon transition-colors" aria-label="A1 Tradelines home">
+              <img
+                src="/logo.svg"
+                alt="A1 Tradelines"
+                className="h-14 w-auto max-w-[170px] object-contain"
+              />
             </Link>
             <p className="text-white/70 text-sm leading-relaxed max-w-xs">
               Authorized user tradeline matching, education, and reporting support. No credit score, approval, or funding outcomes are guaranteed.
@@ -25,7 +29,7 @@ export default function Footer() {
           <div className="space-y-4">
             <h3 className="text-sm font-bold text-white/90 uppercase tracking-widest">Quick Links</h3>
             <ul className="space-y-2">
-              {[
+              [
                 { href: "/", label: "Home" },
                 { href: "/about", label: "About Us" },
                 { href: "/buy-tradelines", label: "Buy Tradelines" },
@@ -46,7 +50,7 @@ export default function Footer() {
           <div className="space-y-4">
             <h3 className="text-sm font-bold text-white/90 uppercase tracking-widest">Education</h3>
             <ul className="space-y-2">
-              {[
+              [
                 { href: "/how-it-works", label: "How It Works" },
                 { href: "/tradeline-buyers-guide", label: "Buyer Guide" },
                 { href: "/tradeline-glossary", label: "Tradeline Glossary" },
