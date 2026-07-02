@@ -29,15 +29,7 @@ export default function Footer() {
           <div className="space-y-4">
             <h3 className="text-sm font-bold text-white/90 uppercase tracking-widest">Quick Links</h3>
             <ul className="space-y-2">
-              [
-                { href: "/", label: "Home" },
-                { href: "/about", label: "About Us" },
-                { href: "/buy-tradelines", label: "Buy Tradelines" },
-                { href: "/tradeline-assessment", label: "Tradeline Assessment" },
-                { href: "/buy-authorized-user-tradelines", label: "Buy Authorized User Tradelines" },
-                { href: "/tradelines-for-sale", label: "Tradelines for Sale" },
-                { href: "/contact", label: "Contact Us" },
-              ].map((link) => (
+              [{"href":"/","label":"Home"},{"href":"/about","label":"About Us"},{"href":"/buy-tradelines","label":"Buy Tradelines"},{"href":"/tradeline-assessment","label":"Tradeline Assessment"},{"href":"/buy-authorized-user-tradelines","label":"Buy Authorized User Tradelines"},{"href":"/tradelines-for-sale","label":"Tradelines for Sale"},{"href":"/contact","label":"Contact Us"}].map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="text-white/70 hover:text-neon text-sm transition-colors">
                     {link.label}
@@ -50,19 +42,7 @@ export default function Footer() {
           <div className="space-y-4">
             <h3 className="text-sm font-bold text-white/90 uppercase tracking-widest">Education</h3>
             <ul className="space-y-2">
-              [
-                { href: "/how-it-works", label: "How It Works" },
-                { href: "/tradeline-buyers-guide", label: "Buyer Guide" },
-                { href: "/tradeline-glossary", label: "Tradeline Glossary" },
-                { href: "/authorized-user-tradelines", label: "Authorized User Tradelines" },
-                { href: "/seasoned-tradelines", label: "Seasoned Tradelines" },
-                { href: "/best-tradelines-for-credit-utilization", label: "Credit Utilization Tradelines" },
-                { href: "/how-long-do-tradelines-take-to-post", label: "Posting Timeline" },
-                { href: "/are-tradelines-legal", label: "Are Tradelines Legal?" },
-                { href: "/can-tradelines-help-business-funding", label: "Business Funding" },
-                { href: "/non-posting-policy", label: "Non-Posting Policy" },
-                { href: "/faq", label: "FAQ" },
-              ].map((link) => (
+              [{"href":"/how-it-works","label":"How It Works"},{"href":"/tradeline-buyers-guide","label":"Buyer Guide"},{"href":"/tradeline-glossary","label":"Tradeline Glossary"},{"href":"/authorized-user-tradelines","label":"Authorized User Tradelines"},{"href":"/seasoned-tradelines","label":"Seasoned Tradelines"},{"href":"/best-tradelines-for-credit-utilization","label":"Credit Utilization Tradelines"},{"href":"/how-long-do-tradelines-take-to-post","label":"Posting Timeline"},{"href":"/are-tradelines-legal","label":"Are Tradelines Legal?"},{"href":"/can-tradelines-help-business-funding","label":"Business Funding"},{"href":"/non-posting-policy","label":"Non-Posting Policy"},{"href":"/faq","label":"FAQ"}].map((link) => (
                 <li key={link.label}>
                   <Link href={link.href} className="text-white/70 hover:text-neon text-sm transition-colors">
                     {link.label}
