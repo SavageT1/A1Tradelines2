@@ -32,12 +32,16 @@ export default function Header() {
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-void/85 backdrop-blur-xl border-b border-white/5 shadow-lg shadow-black/20" : "bg-background/30 backdrop-blur-sm"}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 sm:h-24">
-          <Link href="/" className="flex items-center group" aria-label="A1 Tradelines home">
+          <Link href="/" className="flex items-center gap-3 group" aria-label="A1 Tradelines home">
             <img
               src="/logo.svg"
               alt="A1 Tradelines"
-              className="h-14 sm:h-16 w-auto object-contain drop-shadow-[0_0_14px_rgba(57,255,20,0.22)] transition-transform duration-200 group-hover:scale-[1.02]"
+              className="h-14 sm:h-16 w-auto max-w-[140px] object-contain drop-shadow-[0_0_14px_rgba(57,255,20,0.22)] transition-transform duration-200 group-hover:scale-[1.02]"
             />
+            <div className="hidden lg:block leading-none">
+              <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-white/55">A1 Tradelines</p>
+              <p className="mt-1 text-[10px] font-medium uppercase tracking-[0.26em] text-neon/70">Authorized User Matching</p>
+            </div>
           </Link>
 
           <nav className="hidden xl:flex items-center gap-1">
