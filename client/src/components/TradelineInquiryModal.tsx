@@ -78,6 +78,7 @@ export default function TradelineInquiryModal({
       const result = await submitToHubSpot({
         email,
         phone,
+        subject: `Inquiry: ${summary.bank} Tradeline`,
         message: `Tradeline Inquiry - ${summary.bank}\nCredit Limit: ${summary.creditLimit}\nAge: ${summary.age}\nReports For: ${summary.reportsFor}\nPrice: ${summary.price}`,
       });
       if (result.success) {

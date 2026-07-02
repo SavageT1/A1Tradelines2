@@ -83,7 +83,7 @@ function CategoryBadge({ category }: { category: string }) {
 export default function Blog() {
   const featured = ARTICLES.find((a) => a.featured);
   const rest = ARTICLES.filter((a) => !a.featured);
-  const schema = featured ? generateArticleSchema(featured) : null;
+  const schema = featured ? generateArticleSchema(featured) : undefined;
 
   return (
     <div>
