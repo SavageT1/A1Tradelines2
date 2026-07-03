@@ -201,7 +201,7 @@ function applyMetadata(baseHtml, route) {
       "@type": "Organization",
       name: "A1 Tradelines",
       url: SITE_URL,
-      logo: `${SITE_URL}/logo.svg`,
+      logo: `${SITE_URL}/logo.png`,
     },
   };
 

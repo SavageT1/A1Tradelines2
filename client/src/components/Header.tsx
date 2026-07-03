@@ -34,9 +34,9 @@ export default function Header() {
         <div className="flex items-center justify-between h-20 sm:h-24">
           <Link href="/" className="flex items-center gap-3 group" aria-label="A1 Tradelines home">
             <img
-              src="/logo.svg"
+              src="/logo.png"
               alt="A1 Tradelines"
-              className="h-14 sm:h-16 w-auto max-w-[140px] object-contain drop-shadow-[0_0_14px_rgba(57,255,20,0.22)] transition-transform duration-200 group-hover:scale-[1.02]"
+              className="h-14 sm:h-16 w-auto max-w-[140px] object-contain drop-shadow-[0_0_14px_rgba(77,163,255,0.28)] transition-transform duration-200 group-hover:scale-[1.02]"
             />
             <div className="hidden lg:block leading-none">
               <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-white/55">A1 Tradelines</p>

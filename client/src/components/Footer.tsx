@@ -11,9 +11,9 @@ export default function Footer() {
           <div className="lg:col-span-1 space-y-4">
             <Link href="/" className="inline-flex items-center gap-3 text-white hover:text-neon transition-colors" aria-label="A1 Tradelines home">
               <img
-                src="/logo.svg"
+                src="/logo.png"
                 alt="A1 Tradelines"
-                className="h-14 w-auto max-w-[170px] object-contain"
+                className="h-14 w-auto max-w-[170px] object-contain drop-shadow-[0_0_12px_rgba(77,163,255,0.18)]"
               />
             </Link>
             <p className="text-white/70 text-sm leading-relaxed max-w-xs">

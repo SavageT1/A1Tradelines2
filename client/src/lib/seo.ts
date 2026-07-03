@@ -42,7 +42,7 @@ export const generateOrganizationSchema = (): SchemaMarkup => ({
   "@type": "Organization",
   name: "A1 Tradelines",
   url: "https://a1tradelines.com",
-  logo: "https://a1tradelines.com/logo.svg",
+  logo: "https://a1tradelines.com/logo.png",
   description: "Authorized user tradeline matching, education, and reporting support. No credit outcome is guaranteed.",
   sameAs: ["https://www.facebook.com/A1Tradelines/"],
   contactPoint: {
@@ -130,7 +130,7 @@ export const generateArticleSchema = (article: {
     name: "A1 Tradelines",
     logo: {
       "@type": "ImageObject",
-      url: "https://a1tradelines.com/logo.svg",
+      url: "https://a1tradelines.com/logo.png",
     },
   },
   keywords: [article.category, "authorized user tradelines", "tradeline matching", "credit profile education"],
@@ -154,7 +154,7 @@ export const generateLocalBusinessSchema = (): SchemaMarkup => ({
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   name: "A1 Tradelines",
-  image: "https://a1tradelines.com/logo.svg",
+  image: "https://a1tradelines.com/logo.png",
   description: "Authorized user tradeline matching, education, and reporting support. No credit outcome is guaranteed.",
   telephone: "+1-908-767-5309",
   email: "info@a1tradelines.com",

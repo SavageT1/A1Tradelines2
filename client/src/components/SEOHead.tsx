@@ -22,7 +22,7 @@ export default function SEOHead({
   title,
   description,
   canonical,
-  ogImage = "https://a1tradelines.com/og-image.png",
+  ogImage = "https://a1tradelines.com/logo.png",
   ogType = "website",
   ogTitle,
   ogDescription,
