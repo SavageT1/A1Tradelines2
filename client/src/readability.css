@@ -5,9 +5,9 @@
  */
 
 :root {
-  --readable-text: rgba(255, 255, 255, 0.88);
-  --readable-muted: rgba(255, 255, 255, 0.74);
-  --readable-soft: rgba(255, 255, 255, 0.64);
+  --readable-text: rgba(255, 255, 255, 0.94);
+  --readable-muted: rgba(255, 255, 255, 0.8);
+  --readable-soft: rgba(255, 255, 255, 0.7);
 }
 
 body {
@@ -88,8 +88,8 @@ p {
 .tradeline-card,
 .light-container,
 .section-container {
-  background-color: rgba(10, 10, 10, 0.72) !important;
-  border-color: rgba(255, 255, 255, 0.22) !important;
+  background-color: rgba(17, 24, 39, 0.82) !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
 }
 
 /* Keep legal disclaimers readable without making them visually loud. */
@@ -107,7 +107,7 @@ button {
 
 nav a,
 header a {
-  color: rgba(255, 255, 255, 0.84) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
 }
 
 @media (max-width: 640px) {
