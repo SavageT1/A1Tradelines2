@@ -1,5 +1,5 @@
 {
-  "installCommand": "pnpm install --frozen-lockfile",
+  "installCommand": "pnpm install --frozen-lockfile --force",
   "buildCommand": "pnpm run build",
   "outputDirectory": "dist/public",
   "headers": [
