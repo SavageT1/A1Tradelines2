@@ -13,7 +13,7 @@ export default function Footer() {
               <img
                 src="/logo.png"
                 alt="A1 Tradelines"
-                className="h-14 w-auto max-w-[170px] object-contain drop-shadow-[0_0_12px_rgba(77,163,255,0.18)]"
+                className="h-20 sm:h-24 w-auto max-w-[280px] object-contain drop-shadow-[0_0_16px_rgba(77,163,255,0.22)]"
               />
             </Link>
             <p className="text-white/70 text-sm leading-relaxed max-w-xs">
@@ -27,7 +27,7 @@ export default function Footer() {
           </div>
 
           <div className="space-y-4">
-            <h3 className="text-sm font-bold text-white/90 uppercase tracking-widest">Quick Links</h3>
+            <h3 className="text-sm font-bold text-[#A5D6FF] uppercase tracking-widest">Quick Links</h3>
             <ul className="space-y-2">
               {[
                 { href: "/", label: "Home" },
@@ -48,7 +48,7 @@ export default function Footer() {
           </div>
 
           <div className="space-y-4">
-            <h3 className="text-sm font-bold text-white/90 uppercase tracking-widest">Education</h3>
+            <h3 className="text-sm font-bold text-[#5DF136] uppercase tracking-widest">Education</h3>
             <ul className="space-y-2">
               {[
                 { href: "/how-it-works", label: "How It Works" },
@@ -73,7 +73,7 @@ export default function Footer() {
           </div>
 
           <div className="space-y-4">
-            <h3 className="text-sm font-bold text-white/90 uppercase tracking-widest">Contact</h3>
+            <h3 className="text-sm font-bold text-[#A5D6FF] uppercase tracking-widest">Contact</h3>
             <ul className="space-y-3">
               <li><a href="tel:+19087675309" className="text-white/70 hover:text-neon text-sm transition-colors flex items-center gap-2"><span className="font-mono">(908) 767-5309</span></a></li>
               <li><a href="mailto:info@a1tradelines.com" className="text-white/70 hover:text-neon text-sm transition-colors">info@a1tradelines.com</a></li>

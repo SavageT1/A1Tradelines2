@@ -40,8 +40,8 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --color-neon: #4DA3FF;
-  --color-neon-dark: #1D4ED8;
+  --color-neon: #5DF136;
+  --color-neon-dark: #2F8F1B;
   --color-void: oklch(0.1 0 0);
   --color-void-light: oklch(0.14 0 0);
   --font-display: "Bebas Neue", "Impact", ui-sans-serif, system-ui, sans-serif;
@@ -57,32 +57,32 @@
   --card-foreground: oklch(0.96 0.01 250);
   --popover: oklch(0.18 0.01 250);
   --popover-foreground: oklch(0.96 0.01 250);
-  --primary: #4DA3FF;
+  --primary: #5DF136;
   --primary-foreground: oklch(0.1 0 0);
   --secondary: oklch(0.22 0.01 250);
   --secondary-foreground: oklch(0.88 0.01 250);
   --muted: oklch(0.24 0.01 250);
   --muted-foreground: oklch(0.72 0.01 250);
   --accent: oklch(0.2 0.03 250);
-  --accent-foreground: #4DA3FF;
+  --accent-foreground: #5DF136;
   --destructive: oklch(0.6 0.25 25);
   --destructive-foreground: oklch(0.98 0 0);
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 14%);
-  --ring: #4DA3FF;
-  --chart-1: #4DA3FF;
-  --chart-2: #3B82F6;
-  --chart-3: #2563EB;
-  --chart-4: #0EA5E9;
-  --chart-5: #38BDF8;
+  --ring: #5DF136;
+  --chart-1: #5DF136;
+  --chart-2: #4DA3FF;
+  --chart-3: #3B82F6;
+  --chart-4: #2563EB;
+  --chart-5: #0EA5E9;
   --sidebar: oklch(0.1 0 0);
   --sidebar-foreground: oklch(0.85 0 0);
-  --sidebar-primary: #4DA3FF;
+  --sidebar-primary: #5DF136;
   --sidebar-primary-foreground: oklch(0.1 0 0);
   --sidebar-accent: oklch(0.2 0.03 250);
-  --sidebar-accent-foreground: #4DA3FF;
+  --sidebar-accent-foreground: #5DF136;
   --sidebar-border: oklch(1 0 0 / 8%);
-  --sidebar-ring: #4DA3FF;
+  --sidebar-ring: #5DF136;
 }
 
 @layer base {
@@ -107,6 +107,9 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-display font-extrabold tracking-[0.05em] text-center;
     line-height: 1.05;
+    text-shadow:
+      0 0 14px rgba(93, 241, 54, 0.24),
+      0 0 34px rgba(93, 241, 54, 0.12);
   }
 
   h1 {
@@ -198,6 +201,9 @@
     text-align: center;
     font-size: clamp(1.875rem, 5vw, 3rem);
     line-height: 1.05;
+    text-shadow:
+      0 0 16px rgba(93, 241, 54, 0.28),
+      0 0 40px rgba(93, 241, 54, 0.14);
   }
 
   .section-subtitle {
@@ -232,15 +238,30 @@
   }
 
   .cta-primary {
-    background: #4DA3FF;
+    background: #5DF136;
     color: #000;
-    box-shadow: 0 10px 15px -3px rgba(77, 163, 255, 0.25);
+    box-shadow: 0 10px 15px -3px rgba(93, 241, 54, 0.25);
+  }
+
+  .cta-primary:hover {
+    background: #4DA3FF;
+    color: #fff;
+    box-shadow: 0 14px 28px rgba(77, 163, 255, 0.36);
+    transform: translateY(-1px);
   }
 
   .cta-secondary {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: #fff;
+  }
+
+  .cta-secondary:hover {
+    background: rgba(77, 163, 255, 0.12);
+    border-color: rgba(77, 163, 255, 0.34);
+    color: #A5D6FF;
+    box-shadow: 0 0 18px rgba(77, 163, 255, 0.12);
+    transform: translateY(-1px);
   }
 
   .content-card {
@@ -433,7 +454,9 @@
   }
 
   .btn-neon:hover {
+    background: #4DA3FF;
     box-shadow: 0 0 25px rgba(77, 163, 255, 0.5), 0 0 60px rgba(77, 163, 255, 0.2), 0 8px 25px rgba(0, 0, 0, 0.3);
+    color: #fff;
     transform: translateY(-2px);
   }
 

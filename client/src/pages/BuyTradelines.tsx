@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ArrowUpDown, CreditCard, Filter, Loader, Phone, Search, Shield, X } from "lucide-react";
+import { ArrowRight, ArrowUpDown, Filter, Loader, Phone, Search, Shield, X } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
 import TradelineInquiryModal from "@/components/TradelineInquiryModal";
@@ -11,7 +11,16 @@ import { generateServiceSchema } from "@/lib/seo";
 
 const TRADELINES_HERO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663300423717/YgBCM3Vvv9dzqmN7qfKYzh/tradelines-hero-MgAogTaYj2uNyddmtjtsbi.webp";
 
-type SortKey = "price" | "creditLimit" | "ageYears" | "cycles";
+type SortKey = "rank" | "postingDate" | "price" | "creditLimit" | "ageYears" | "cycles";
+
+const SORT_DEFAULT_DIR: Record<SortKey, "asc" | "desc"> = {
+  rank: "desc",
+  postingDate: "asc",
+  price: "asc",
+  creditLimit: "desc",
+  ageYears: "desc",
+  cycles: "desc",
+};
 
 const PRICE_RANGES = [
   { label: "All Total Prices", min: 0, max: Infinity },
@@ -43,6 +52,51 @@ const formatDate = (value?: string) => {
   if (Number.isNaN(date.getTime())) return "TBD";
   return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
 };
+
+const getDateValue = (value?: string) => {
+  if (!value) return Number.MAX_SAFE_INTEGER;
+  const date = new Date(value);
+  const time = date.getTime();
+  return Number.isNaN(time) ? Number.MAX_SAFE_INTEGER : time;
+};
+
+const getRankScore = (item: TradelineItem) => {
+  return (item.ageYears * 1000) + (item.creditLimit / 100) + (item.cycles * 75) - (item.price * 5);
+};
+
+const getSortValue = (item: TradelineItem, key: SortKey) => {
+  switch (key) {
+    case "rank":
+      return getRankScore(item);
+    case "postingDate":
+      return getDateValue(item.postingDate);
+    case "price":
+      return item.price;
+    case "creditLimit":
+      return item.creditLimit;
+    case "ageYears":
+      return item.ageYears;
+    case "cycles":
+      return item.cycles;
+    default:
+      return item.price;
+  }
+};
+
+function BankBadge({ bank }: { bank: string }) {
+  const initials = bank
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase())
+    .join("");
+
+  return (
+    <div className="w-11 h-11 bg-white/10 border border-white/10 rounded-lg flex items-center justify-center shrink-0 overflow-hidden">
+      <span className="text-[11px] font-black tracking-wider text-neon">{initials || "BK"}</span>
+    </div>
+  );
+}
 
 const getMonthlyPrice = (item: TradelineItem) => {
   const months = item.cycles && item.cycles > 0 ? item.cycles : 1;
@@ -101,8 +155,11 @@ export default function BuyTradelines() {
     items = items.filter((t) => t.ageYears >= ageRange.min && t.ageYears <= ageRange.max);
 
     items.sort((a, b) => {
-      const diff = a[sortBy] - b[sortBy];
-      return sortDir === "asc" ? diff : -diff;
+      const diff = getSortValue(a, sortBy) - getSortValue(b, sortBy);
+      if (diff !== 0) {
+        return sortDir === "asc" ? diff : -diff;
+      }
+      return a.bank.localeCompare(b.bank) || a.id - b.id;
     });
 
     return items;
@@ -113,7 +170,7 @@ export default function BuyTradelines() {
       setSortDir((d) => (d === "asc" ? "desc" : "asc"));
     } else {
       setSortBy(key);
-      setSortDir("asc");
+      setSortDir(SORT_DEFAULT_DIR[key]);
     }
   };
 
@@ -163,7 +220,7 @@ export default function BuyTradelines() {
                 <div className="space-y-2">
                   <h3 className="text-lg font-bold text-emerald-400">How to Read This Inventory</h3>
                   <p className="text-white/65 leading-relaxed">
-                    The highlighted price shows the estimated monthly price. The total price is shown clearly underneath. The deadline shows when the tradeline should be purchased to target the listed reporting date.
+                    The highlighted price shows the estimated monthly price. The total price is shown clearly underneath. The deadline is the latest day we need to purchase the tradeline so it can post by the target reporting date.
                   </p>
                   <p className="text-xs text-white/35 leading-relaxed">
                     Purchase and reporting dates are based on vendor inventory data and may vary. Authorized user tradelines do not guarantee score increases, approvals, funding, or specific credit outcomes.
@@ -173,30 +230,73 @@ export default function BuyTradelines() {
             </div>
           </SectionReveal>
 
-          <SectionReveal>
-            <div className="glass-panel rounded-2xl p-4 sm:p-6 mb-6 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
-              <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
-                <input
-                  type="text"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder="Search by bank name..."
-                  className="w-full bg-black/30 border border-white/10 rounded-lg py-2.5 pl-10 pr-4 text-sm outline-none focus:border-neon/50 transition-all"
-                />
-              </div>
+          <div className="sticky top-24 sm:top-28 z-30 mb-6">
+            <div className="glass-panel rounded-2xl p-4 sm:p-6 border border-white/10 bg-void/80 backdrop-blur-xl shadow-2xl shadow-black/20">
+              <div className="flex flex-col gap-4">
+                <div className="flex flex-col xl:flex-row gap-3 xl:items-center">
+                  <div className="relative flex-1">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
+                    <input
+                      type="text"
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      placeholder="Search by bank name..."
+                      className="w-full bg-black/30 border border-white/10 rounded-lg py-2.5 pl-10 pr-4 text-sm outline-none focus:border-neon/50 transition-all"
+                    />
+                  </div>
 
-              <button
-                onClick={() => setShowFiltersPanel(!showFiltersPanel)}
-                className={`flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all border ${
-                  showFiltersPanel ? "bg-neon/10 border-neon/30 text-neon" : "bg-white/5 border-white/10 text-white/60 hover:text-white"
-                }`}
-              >
-                <Filter className="w-4 h-4" />
-                Filters
-              </button>
+                  <button
+                    onClick={() => setShowFiltersPanel(!showFiltersPanel)}
+                    className={`flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all border ${showFiltersPanel ? "bg-neon/10 border-neon/30 text-neon" : "bg-white/5 border-white/10 text-white/60 hover:text-white"}`}
+                  >
+                    <Filter className="w-4 h-4" />
+                    Filters
+                  </button>
+                </div>
+
+                <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+                  <p className="text-sm text-white/35">
+                    Showing <span className="text-white/70 font-mono font-bold">{filtered.length}</span> available tradelines
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {(["rank", "postingDate", "price", "creditLimit", "ageYears", "cycles"] as SortKey[]).map((key) => (
+                      <button
+                        key={key}
+                        onClick={() => toggleSort(key)}
+                        title={
+                          key === "rank"
+                            ? "Rank first by overall fit"
+                            : key === "postingDate"
+                              ? "Soonest reporting date first"
+                              : key === "price"
+                                ? "Lowest monthly price first"
+                                : key === "creditLimit"
+                                  ? "Highest limit first"
+                                  : key === "ageYears"
+                                    ? "Oldest accounts first"
+                                    : "Longest reporting term first"
+                        }
+                        className={`flex items-center gap-1.5 px-3 py-2.5 rounded-lg text-xs font-medium transition-all border ${sortBy === key ? "bg-neon/10 border-neon/30 text-neon" : "bg-white/5 border-white/10 text-white/40 hover:text-white"}`}
+                      >
+                        <ArrowUpDown className="w-3 h-3" />
+                        {key === "rank"
+                          ? "Rank"
+                          : key === "postingDate"
+                            ? "Soonest Report"
+                            : key === "price"
+                              ? "Total Price"
+                              : key === "creditLimit"
+                                ? "Limit"
+                                : key === "ageYears"
+                                  ? "Age"
+                                  : "Months"}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
-          </SectionReveal>
+          </div>
 
           <AnimatePresence>
             {showFiltersPanel && (
@@ -266,22 +366,6 @@ export default function BuyTradelines() {
             )}
           </AnimatePresence>
 
-          <SectionReveal>
-            <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-              <p className="text-sm text-white/35">
-                Showing <span className="text-white/70 font-mono font-bold">{filtered.length}</span> available tradelines
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {(["price", "creditLimit", "ageYears", "cycles"] as SortKey[]).map((key) => (
-                  <button key={key} onClick={() => toggleSort(key)} className={`flex items-center gap-1.5 px-3 py-2.5 rounded-lg text-xs font-medium transition-all border ${sortBy === key ? "bg-neon/10 border-neon/30 text-neon" : "bg-white/5 border-white/10 text-white/40 hover:text-white"}`}>
-                    <ArrowUpDown className="w-3 h-3" />
-                    {key === "price" ? "Total Price" : key === "creditLimit" ? "Limit" : key === "ageYears" ? "Age" : "Months"}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </SectionReveal>
-
           {isLoading && (
             <div className="flex items-center justify-center py-20">
               <motion.div animate={{ rotate: 360 }} transition={{ duration: 2, repeat: Infinity, ease: "linear" }}>
@@ -302,17 +386,16 @@ export default function BuyTradelines() {
             <>
               <div className="hidden lg:block overflow-hidden rounded-2xl border border-white/10 glass-panel">
                 <table className="w-full text-sm">
-                  <thead className="bg-white/[0.04] text-white/45 uppercase tracking-widest text-[11px]">
+                  <thead className="bg-white/[0.04] text-[#A5D6FF] uppercase tracking-widest text-[12px]">
                     <tr>
-                      <th className="text-left px-5 py-4">Bank</th>
-                      <th className="text-right px-5 py-4">Limit</th>
-                      <th className="text-right px-5 py-4">Age</th>
-                      <th className="text-right px-5 py-4">Reports For</th>
-                      <th className="text-right px-5 py-4">Deadline</th>
-                      <th className="text-right px-5 py-4">Target Report</th>
-                      <th className="text-right px-5 py-4">Spots</th>
-                      <th className="text-right px-5 py-4">Price</th>
-                      <th className="text-right px-5 py-4">Action</th>
+                      <th className="text-left px-5 py-4 text-[#5DF136] text-sm">Bank</th>
+                      <th className="text-right px-5 py-4 text-[#A5D6FF] text-sm">Limit</th>
+                      <th className="text-right px-5 py-4 text-[#A5D6FF] text-sm">Age</th>
+                      <th className="text-right px-5 py-4 text-[#A5D6FF] text-sm">Deadline</th>
+                      <th className="text-right px-5 py-4 text-[#5DF136] text-sm">Posting Date</th>
+                      <th className="text-right px-5 py-4 text-[#A5D6FF] text-sm">Reports For</th>
+                      <th className="text-right px-5 py-4 text-[#A5D6FF] text-sm">Price</th>
+                      <th className="text-right px-5 py-4 text-[#5DF136] text-sm">Action</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-white/10">
@@ -320,9 +403,7 @@ export default function BuyTradelines() {
                       <tr key={t.id} className="hover:bg-white/[0.04] transition-colors">
                         <td className="px-5 py-4">
                           <div className="flex items-center gap-3">
-                            <div className="w-9 h-9 bg-neon/15 rounded-lg flex items-center justify-center">
-                              <CreditCard className="w-4 h-4 text-neon" />
-                            </div>
+                            <BankBadge bank={t.bank} />
                             <div>
                               <p className="font-bold text-white">{t.bank}</p>
                               <p className="text-[11px] text-white/35 uppercase tracking-widest">{t.category} • $0 balance</p>
@@ -331,10 +412,15 @@ export default function BuyTradelines() {
                         </td>
                         <td className="px-5 py-4 text-right font-mono text-white/85">{formatCurrency(t.creditLimit)}</td>
                         <td className="px-5 py-4 text-right font-mono text-white/85">{t.ageYears} yrs</td>
+                        <td className="px-5 py-4 text-right">
+                          <span className="text-white/60">Buy by </span>
+                          <span className="text-neon font-semibold">{formatDate(t.statementDate)}</span>
+                        </td>
+                        <td className="px-5 py-4 text-right">
+                          <span className="text-white/60">Posts by </span>
+                          <span className="text-neon font-semibold">{formatDate(t.postingDate)}</span>
+                        </td>
                         <td className="px-5 py-4 text-right text-white/75">{getMonthLabel(t.cycles)}</td>
-                        <td className="px-5 py-4 text-right text-amber-300">Buy by {formatDate(t.statementDate)}</td>
-                        <td className="px-5 py-4 text-right text-white/75">Target {formatDate(t.postingDate)}</td>
-                        <td className="px-5 py-4 text-right text-white/75">{t.spotsAvailable}</td>
                         <td className="px-5 py-4 text-right">
                           <p className="text-lg font-display font-extrabold text-neon font-mono">{formatCurrency(getMonthlyPrice(t))}</p>
                           <p className="text-[11px] text-white/35">per month</p>
@@ -381,14 +467,20 @@ export default function BuyTradelines() {
                           <p className="text-sm font-bold text-white/90 mt-1">{getMonthLabel(t.cycles)}</p>
                         </div>
                         <div className="bg-white/[0.08] rounded-lg p-3 border border-white/10">
-                          <p className="text-[10px] text-white/50 uppercase tracking-widest font-semibold">Spots</p>
-                          <p className="text-sm font-bold text-white/90 mt-1">{t.spotsAvailable} available</p>
+                          <p className="text-[10px] text-white/50 uppercase tracking-widest font-semibold">Posting Date</p>
+                          <p className="text-sm font-bold text-neon mt-1">{formatDate(t.postingDate)}</p>
                         </div>
                       </div>
 
                       <div className="rounded-xl border border-amber-500/25 bg-amber-500/10 p-3 text-sm">
-                        <p className="text-amber-300 font-bold">Purchase by {formatDate(t.statementDate)}</p>
-                        <p className="text-white/55 text-xs mt-1">Target reporting date: {formatDate(t.postingDate)}</p>
+                        <p className="font-bold">
+                          <span className="text-white/60">Purchase by </span>
+                          <span className="text-neon">{formatDate(t.statementDate)}</span>
+                        </p>
+                        <p className="text-white/55 text-xs mt-1">
+                          <span className="text-white/60">Posts by </span>
+                          <span className="text-neon">{formatDate(t.postingDate)}</span>
+                        </p>
                       </div>
 
                       <div className="flex items-center gap-2 px-3 py-2 bg-emerald-500/15 border border-emerald-500/30 rounded-lg">
