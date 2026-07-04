@@ -1,5 +1,8 @@
 packages:
   - .
 
+allowBuilds:
+  esbuild: true
+
 overrides:
   tailwindcss>nanoid: 3.3.7
