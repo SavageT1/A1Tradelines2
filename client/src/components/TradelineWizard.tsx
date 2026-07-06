@@ -5,7 +5,7 @@
  *   Path B: Manual entry → select tradeline → lead capture gate → show results + tradeline recs
  * Neon Pulse Design: neon green accent, glassmorphism panels, dark void bg.
  */
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   TrendingUp,
@@ -33,6 +33,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { Link } from "wouter";
+import { trackEvent, trackFormEvent } from "@/lib/analytics";
 
 // --- Types ---
 interface Tradeline {
@@ -224,7 +225,14 @@ export default function TradelineWizard() {
   const [leadCaptured, setLeadCaptured] = useState(false);
   const [leadForm, setLeadForm] = useState({ name: "", email: "", phone: "" });
   const [leadSubmitted, setLeadSubmitted] = useState(false);
+  const [leadError, setLeadError] = useState<string | null>(null);
   const [extractedContact, setExtractedContact] = useState<ExtractedContact | null>(null);
+
+  useEffect(() => {
+    if ((step as number) === 2.5 && !leadCaptured) {
+      trackFormEvent("simulation_lead", "started", { input_method: inputMethod });
+    }
+  }, [step, leadCaptured, inputMethod]);
 
   const validateField = (name: string, value: number) => {
     let error = "";
@@ -366,13 +374,18 @@ export default function TradelineWizard() {
     if (leadCaptured) {
       setStep(3);
     } else {
+      trackEvent("simulation_tradeline_selected", {
+        tradeline_name: newTradeline.name,
+        tradeline_limit: newTradeline.limit,
+        tradeline_age_months: newTradeline.ageInMonths,
+      });
       setStep(2.5 as any);
     }
   };
 
   const handleLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLeadSubmitted(true);
+    setLeadError(null);
 
     try {
       const nameParts = leadForm.name.trim().split(" ");
@@ -391,9 +404,18 @@ export default function TradelineWizard() {
       });
       if (!response.ok) {
         console.error("HubSpot lead submission failed:", response.status);
+        setLeadError("We could not submit your info right now. Please try again.");
+        trackFormEvent("simulation_lead", "failed", { reason: "api_error", status: response.status });
+        return;
       }
+
+      trackFormEvent("simulation_lead", "submitted");
+      setLeadSubmitted(true);
     } catch (error) {
       console.error("HubSpot submission error:", error);
+      setLeadError("We could not submit your info right now. Please try again.");
+      trackFormEvent("simulation_lead", "failed", { reason: "network_error" });
+      return;
     }
 
     setLeadCaptured(true);
@@ -716,10 +738,15 @@ export default function TradelineWizard() {
                     <p className="text-white/40 text-sm max-w-sm mx-auto">
                       Enter your contact info to see your personalized credit score simulation and tradeline recommendations.
                     </p>
-                    <p className="text-neon/40 text-[11px]">
-                      Tip: Upload your credit report instead to skip this step!
-                    </p>
+                  <p className="text-neon/40 text-[11px]">
+                    Tip: Upload your credit report instead to skip this step!
+                  </p>
+                </div>
+                {leadError && (
+                  <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-xl text-sm text-red-300">
+                    {leadError}
                   </div>
+                )}
                   <form onSubmit={handleLeadSubmit} className="space-y-3">
                     <div className="relative">
                       <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20" />

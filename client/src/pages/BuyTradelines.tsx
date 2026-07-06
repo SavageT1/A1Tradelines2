@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ArrowUpDown, Filter, Loader, Phone, Search, Shield, X } from "lucide-react";
+import { Link } from "wouter";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
 import TradelineInquiryModal from "@/components/TradelineInquiryModal";
@@ -8,6 +9,7 @@ import SEOHead from "@/components/SEOHead";
 import { toast } from "sonner";
 import { fetchTradelines, type TradelineItem } from "@/services/tradelineApi";
 import { generateServiceSchema } from "@/lib/seo";
+import { trackEvent, trackInventoryCardClick, trackInventoryFilterChange } from "@/lib/analytics";
 
 const TRADELINES_HERO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663300423717/YgBCM3Vvv9dzqmN7qfKYzh/tradelines-hero-MgAogTaYj2uNyddmtjtsbi.webp";
 
@@ -114,7 +116,7 @@ export default function BuyTradelines() {
   const [priceRange, setPriceRange] = useState(PRICE_RANGES[0]);
   const [creditLimitRange, setCreditLimitRange] = useState(CREDIT_LIMIT_RANGES[0]);
   const [ageRange, setAgeRange] = useState(AGE_RANGES[0]);
-  const [sortBy, setSortBy] = useState<SortKey>("price");
+  const [sortBy, setSortBy] = useState<SortKey>("rank");
   const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
   const [selectedTradeline, setSelectedTradeline] = useState<TradelineItem | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -172,6 +174,7 @@ export default function BuyTradelines() {
       setSortBy(key);
       setSortDir(SORT_DEFAULT_DIR[key]);
     }
+    trackEvent("inventory_sort_change", { sort_key: key });
   };
 
   const hasActiveFilters =
@@ -187,11 +190,33 @@ export default function BuyTradelines() {
     setPriceRange(PRICE_RANGES[0]);
     setCreditLimitRange(CREDIT_LIMIT_RANGES[0]);
     setAgeRange(AGE_RANGES[0]);
+    trackEvent("inventory_filters_reset");
   };
 
   const openTradeline = (tradeline: TradelineItem) => {
+    trackInventoryCardClick({ id: tradeline.id, bank: tradeline.bank, price: tradeline.price });
     setSelectedTradeline(tradeline);
     setIsModalOpen(true);
+  };
+
+  const handlePriceRangeChange = (range: (typeof PRICE_RANGES)[number]) => {
+    setPriceRange(range);
+    trackInventoryFilterChange("price_range", range.label);
+  };
+
+  const handleCreditLimitRangeChange = (range: (typeof CREDIT_LIMIT_RANGES)[number]) => {
+    setCreditLimitRange(range);
+    trackInventoryFilterChange("credit_limit_range", range.label);
+  };
+
+  const handleAgeRangeChange = (range: (typeof AGE_RANGES)[number]) => {
+    setAgeRange(range);
+    trackInventoryFilterChange("age_range", range.label);
+  };
+
+  const handleCategoryFilterChange = (cat: string) => {
+    setCategoryFilter(cat);
+    trackInventoryFilterChange("category", cat);
   };
 
   const schema = generateServiceSchema();
@@ -258,6 +283,10 @@ export default function BuyTradelines() {
                   <p className="text-sm text-white/35">
                     Showing <span className="text-white/70 font-mono font-bold">{filtered.length}</span> available tradelines
                   </p>
+                  <Link href="/contact" className="inline-flex items-center justify-center gap-2 rounded-lg border border-neon/30 bg-neon/10 px-4 py-2.5 text-sm font-semibold text-neon hover:bg-neon hover:text-black transition-all">
+                    Request Help Choosing
+                    <Phone className="w-4 h-4" />
+                  </Link>
                   <div className="flex flex-wrap gap-2">
                     {(["rank", "postingDate", "price", "creditLimit", "ageYears", "cycles"] as SortKey[]).map((key) => (
                       <button
@@ -321,7 +350,7 @@ export default function BuyTradelines() {
                       <label className="block text-xs font-bold text-white/60 uppercase tracking-widest mb-3">Total Price</label>
                       <div className="space-y-2">
                         {PRICE_RANGES.map((range) => (
-                          <button key={range.label} onClick={() => setPriceRange(range)} className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all border ${priceRange.label === range.label ? "bg-neon/10 border-neon/30 text-neon font-medium" : "bg-white/5 border-white/10 text-white/60 hover:text-white/80"}`}>
+                          <button key={range.label} onClick={() => handlePriceRangeChange(range)} className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all border ${priceRange.label === range.label ? "bg-neon/10 border-neon/30 text-neon font-medium" : "bg-white/5 border-white/10 text-white/60 hover:text-white/80"}`}>
                             {range.label}
                           </button>
                         ))}
@@ -332,7 +361,7 @@ export default function BuyTradelines() {
                       <label className="block text-xs font-bold text-white/60 uppercase tracking-widest mb-3">Credit Limit</label>
                       <div className="space-y-2">
                         {CREDIT_LIMIT_RANGES.map((range) => (
-                          <button key={range.label} onClick={() => setCreditLimitRange(range)} className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all border ${creditLimitRange.label === range.label ? "bg-neon/10 border-neon/30 text-neon font-medium" : "bg-white/5 border-white/10 text-white/60 hover:text-white/80"}`}>
+                          <button key={range.label} onClick={() => handleCreditLimitRangeChange(range)} className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all border ${creditLimitRange.label === range.label ? "bg-neon/10 border-neon/30 text-neon font-medium" : "bg-white/5 border-white/10 text-white/60 hover:text-white/80"}`}>
                             {range.label}
                           </button>
                         ))}
@@ -343,7 +372,7 @@ export default function BuyTradelines() {
                       <label className="block text-xs font-bold text-white/60 uppercase tracking-widest mb-3">Account Age</label>
                       <div className="space-y-2">
                         {AGE_RANGES.map((range) => (
-                          <button key={range.label} onClick={() => setAgeRange(range)} className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all border ${ageRange.label === range.label ? "bg-neon/10 border-neon/30 text-neon font-medium" : "bg-white/5 border-white/10 text-white/60 hover:text-white/80"}`}>
+                          <button key={range.label} onClick={() => handleAgeRangeChange(range)} className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all border ${ageRange.label === range.label ? "bg-neon/10 border-neon/30 text-neon font-medium" : "bg-white/5 border-white/10 text-white/60 hover:text-white/80"}`}>
                             {range.label}
                           </button>
                         ))}
@@ -354,7 +383,7 @@ export default function BuyTradelines() {
                       <label className="block text-xs font-bold text-white/60 uppercase tracking-widest mb-3">Category</label>
                       <div className="space-y-2">
                         {["All", "Premium", "Standard", "Economy"].map((cat) => (
-                          <button key={cat} onClick={() => setCategoryFilter(cat)} className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all border ${categoryFilter === cat ? "bg-neon/10 border-neon/30 text-neon font-medium" : "bg-white/5 border-white/10 text-white/60 hover:text-white/80"}`}>
+                          <button key={cat} onClick={() => handleCategoryFilterChange(cat)} className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all border ${categoryFilter === cat ? "bg-neon/10 border-neon/30 text-neon font-medium" : "bg-white/5 border-white/10 text-white/60 hover:text-white/80"}`}>
                             {cat}
                           </button>
                         ))}

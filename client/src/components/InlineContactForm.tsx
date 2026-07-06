@@ -6,6 +6,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Send, CheckCircle2, AlertCircle } from "lucide-react";
 import SectionReveal from "@/components/SectionReveal";
+import { trackFormEvent } from "@/lib/analytics";
 
 interface InlineContactFormProps {
   heading?: string;
@@ -23,6 +24,7 @@ export default function InlineContactForm({
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [started, setStarted] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -56,14 +58,24 @@ export default function InlineContactForm({
 
       const result = await response.json();
       if (result.success) {
+        trackFormEvent("inline_contact", "submitted", { subject: form.subject });
         setSubmitted(true);
       } else {
+        trackFormEvent("inline_contact", "failed", { reason: "api_rejected" });
         setError(result.message || "Failed to submit. Please try again.");
       }
     } catch {
+      trackFormEvent("inline_contact", "failed", { reason: "network_error" });
       setError("Failed to submit. Please try again.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const markStarted = () => {
+    if (!started) {
+      setStarted(true);
+      trackFormEvent("inline_contact", "started");
     }
   };
 
@@ -114,7 +126,7 @@ export default function InlineContactForm({
                   </motion.div>
                 )}
 
-                <form onSubmit={handleSubmit} className="space-y-5">
+                <form onSubmit={handleSubmit} onFocusCapture={markStarted} className="space-y-5">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
                       <label className="text-xs font-medium text-white/40 uppercase tracking-widest">Full Name</label>

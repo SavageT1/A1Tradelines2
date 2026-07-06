@@ -11,6 +11,31 @@ export function trackEvent(eventName: string, params: EventParams = {}) {
   window.gtag?.("event", eventName, params);
 }
 
+export function trackPageView(path: string, title?: string) {
+  trackEvent("page_view", {
+    page_path: path,
+    page_location: window.location.href,
+    page_title: title ?? document.title,
+  });
+}
+
+export function trackFormEvent(
+  formName: string,
+  action: "started" | "submitted" | "failed",
+  params: EventParams = {}
+) {
+  trackEvent(`form_${action}`, {
+    form_name: formName,
+    action,
+    ...params,
+  });
+  trackEvent(`${formName}_${action}`, {
+    form_name: formName,
+    action,
+    ...params,
+  });
+}
+
 export function trackPhoneClick(location: string) {
   trackEvent("phone_click", { location, method: "phone" });
 }
@@ -20,7 +45,7 @@ export function trackEmailClick(location: string) {
 }
 
 export function trackAssessmentStart() {
-  trackEvent("assessment_started", { form_name: "tradeline_assessment" });
+  trackFormEvent("assessment", "started");
   window.oaiq?.(
     "measure",
     "custom",
@@ -30,7 +55,7 @@ export function trackAssessmentStart() {
 }
 
 export function trackAssessmentSubmitted() {
-  trackEvent("assessment_submitted", { form_name: "tradeline_assessment" });
+  trackFormEvent("assessment", "submitted");
   window.oaiq?.(
     "measure",
     "lead_created",
@@ -55,6 +80,13 @@ export function trackInventoryCardClick(item: { id: number; bank: string; price:
         content_type: "tradeline",
       },
     ],
+  });
+}
+
+export function trackInventoryFilterChange(filterName: string, value: string) {
+  trackEvent("inventory_filter_change", {
+    filter_name: filterName,
+    filter_value: value,
   });
 }
 

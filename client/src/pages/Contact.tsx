@@ -9,6 +9,7 @@ import { Mail, Phone, Send, Clock, AlertCircle, ShieldCheck } from "lucide-react
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
 import SEOHead from "@/components/SEOHead";
+import { trackFormEvent } from "@/lib/analytics";
 
 const CONTACT_HERO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663300423717/YgBCM3Vvv9dzqmN7qfKYzh/contact-hero-GATXTizuF7kKCUe38nynTh.webp";
 
@@ -22,7 +23,15 @@ export default function Contact() {
   const [, setLocation] = useLocation();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [started, setStarted] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", phone: "", subject: "", message: "" });
+
+  const markStarted = () => {
+    if (!started) {
+      setStarted(true);
+      trackFormEvent("contact", "started");
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,9 +48,15 @@ export default function Contact() {
         body: JSON.stringify({ firstname, lastname, email: form.email, phone: form.phone, subject: form.subject, message: form.message }),
       });
       const result = await response.json();
-      if (result.success) setLocation("/thank-you");
-      else setError(result.message || "Failed to submit form");
+      if (result.success) {
+        trackFormEvent("contact", "submitted");
+        setLocation("/thank-you");
+      } else {
+        trackFormEvent("contact", "failed", { reason: "api_rejected" });
+        setError(result.message || "Failed to submit form");
+      }
     } catch (err) {
+      trackFormEvent("contact", "failed", { reason: "network_error" });
       setError("Failed to submit form. Please try again.");
       console.error(err);
     } finally {
@@ -96,7 +111,7 @@ export default function Contact() {
                       <AlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" /><p className="text-sm text-red-300">{error}</p>
                     </motion.div>
                   )}
-                  <form onSubmit={handleSubmit} className="space-y-5">
+                  <form onSubmit={handleSubmit} onFocusCapture={markStarted} className="space-y-5">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="space-y-1.5"><label className="text-xs font-medium text-white/60 uppercase tracking-widest">Full Name</label><input required type="text" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full bg-black/30 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-neon/50 transition-all" placeholder="John Doe" /></div>
                       <div className="space-y-1.5"><label className="text-xs font-medium text-white/60 uppercase tracking-widest">Email</label><input required type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full bg-black/30 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-neon/50 transition-all" placeholder="john@example.com" /></div>
