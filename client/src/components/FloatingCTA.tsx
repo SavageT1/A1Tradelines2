@@ -13,7 +13,7 @@ export default function FloatingCTA() {
 
   useEffect(() => {
     if (isContactPage || dismissed) return;
-    const timer = setTimeout(() => setVisible(true), 4000);
+    const timer = setTimeout(() => setVisible(true), 2500);
     return () => clearTimeout(timer);
   }, [isContactPage, dismissed]);
 
@@ -45,7 +45,7 @@ export default function FloatingCTA() {
                 <Phone className="w-5 h-5 text-neon" />
               </div>
               <div className="space-y-1">
-                <p className="text-sm font-bold text-white">Free Credit Consultation</p>
+                <p className="text-sm font-bold text-white">Free Tradeline Review</p>
                 <p className="text-xs text-white/50">Talk to a strategist — no obligation.</p>
               </div>
             </div>
@@ -55,7 +55,7 @@ export default function FloatingCTA() {
                 whileTap={{ scale: 0.98 }}
                 className="mt-3 w-full bg-neon text-black font-bold py-2.5 rounded-xl text-sm btn-neon shadow-lg shadow-neon/30"
               >
-                Get My Free Consultation
+                Request Consultation
               </motion.button>
             </Link>
           </div>

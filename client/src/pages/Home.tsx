@@ -17,6 +17,7 @@ import {
   AlertTriangle,
 } from "lucide-react";
 import SectionReveal from "@/components/SectionReveal";
+import InlineContactForm from "@/components/InlineContactForm";
 import TradelineWizard from "@/components/TradelineWizard";
 import SEOHead from "@/components/SEOHead";
 import { generateOrganizationSchema, generateServiceSchema, generateWebSiteSchema } from "@/lib/seo";
@@ -100,15 +101,12 @@ export default function Home() {
                   Strategy-First Authorized User Tradeline Matching
                 </div>
                 <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-display font-extrabold leading-[1.05]">
-                  Build a Stronger
+                  Shop Tradelines
                   <br />
-                  <span className="text-neon neon-text-glow">Credit Profile</span>
+                  <span className="text-neon neon-text-glow">That Fit You</span>
                 </h1>
                 <p className="text-lg sm:text-xl text-white/55 max-w-2xl leading-relaxed mx-auto">
-                  A1 Tradelines helps clients evaluate authorized user tradeline options based on account age, credit limit, reported balance, bank diversity, and reporting timeline.
-                </p>
-                <p className="text-xs sm:text-sm text-white/35 max-w-3xl leading-relaxed mx-auto border border-white/10 bg-white/[0.03] rounded-xl px-4 py-3">
-                  Authorized user tradelines may affect profiles differently. A1 Tradelines does not guarantee credit score increases, approvals, funding, loan terms, mortgage approval, or any specific credit outcome.
+                  Compare tradelines by age, limit, reporting timeline, and profile fit so you can move from browsing to a faster decision with more confidence.
                 </p>
               </motion.div>
 
@@ -120,21 +118,25 @@ export default function Home() {
               >
                 <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
                   <Link
-                    href="/buy-tradelines"
+                    href="#lead-form"
                     className="btn-neon inline-flex items-center justify-center gap-2 bg-neon text-black px-8 py-4 rounded-xl text-base font-bold shadow-lg shadow-neon/25 transition-all"
                   >
-                    Browse Tradeline Options <ArrowRight className="w-5 h-5" />
+                    Request Free Consultation <ArrowRight className="w-5 h-5" />
                   </Link>
                 </motion.div>
                 <motion.a
-                  href="#simulator"
+                  href="/buy-tradelines"
                   whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.97 }}
                   className="group btn-ghost inline-flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white px-8 py-4 rounded-xl text-base font-medium transition-all hover:bg-neon hover:text-black hover:border-neon"
                 >
-                  Compare Profile Factors
+                  Search Tradelines
                 </motion.a>
               </motion.div>
+
+              <p className="text-xs sm:text-sm text-white/35 max-w-3xl leading-relaxed mx-auto border border-white/10 bg-white/[0.03] rounded-xl px-4 py-3">
+                Authorized user tradelines may affect profiles differently. A1 Tradelines does not guarantee credit score increases, approvals, funding, loan terms, mortgage approval, or any specific credit outcome.
+              </p>
 
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -165,10 +167,34 @@ export default function Home() {
                   </motion.div>
                 ))}
               </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.45 }}
+                className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-6 max-w-3xl mx-auto"
+              >
+                {[
+                  "Fast response from a real strategist",
+                  "Profile-based guidance before you buy",
+                  "Privacy-safe form with no pressure",
+                ].map((item) => (
+                  <div key={item} className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white/65">
+                    {item}
+                  </div>
+                ))}
+              </motion.div>
             </div>
           </div>
         </div>
       </section>
+
+      <InlineContactForm
+        sectionId="lead-form"
+        heading="Request Your Free Match Review"
+        subheading="Tell us your goal, timeline, and budget. We’ll point you to the best next step within 24 hours."
+        defaultSubject="Free Tradeline Match Review"
+      />
 
       <section id="simulator" className="py-20 sm:py-28 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -271,18 +297,18 @@ export default function Home() {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
                   <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
                     <Link
-                      href="/buy-tradelines"
+                      href="#lead-form"
                       className="btn-neon inline-flex items-center justify-center gap-2 bg-neon text-black px-8 py-4 rounded-xl text-base font-bold shadow-lg shadow-neon/25 transition-all"
                     >
-                      Browse Tradelines <ArrowRight className="w-5 h-5" />
+                      Request Consultation <ArrowRight className="w-5 h-5" />
                     </Link>
                   </motion.div>
                   <motion.div whileHover={{ scale: 1.04, borderColor: "rgba(0,255,127,0.4)" }} whileTap={{ scale: 0.97 }}>
                     <Link
-                      href="/contact"
+                      href="/buy-tradelines"
                       className="btn-ghost inline-flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white px-8 py-4 rounded-xl text-base font-medium transition-all"
                     >
-                      Request Consultation
+                      Search Tradelines
                     </Link>
                   </motion.div>
                 </div>

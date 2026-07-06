@@ -11,12 +11,14 @@ interface InlineContactFormProps {
   heading?: string;
   subheading?: string;
   defaultSubject?: string;
+  sectionId?: string;
 }
 
 export default function InlineContactForm({
   heading = "Get Your Free Credit Strategy Consultation",
   subheading = "Fill out the form and a strategist will reach out within 24 hours.",
   defaultSubject = "Tradeline Inquiry",
+  sectionId,
 }: InlineContactFormProps) {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -66,7 +68,7 @@ export default function InlineContactForm({
   };
 
   return (
-    <section className="py-20 sm:py-28 bg-white/[0.02] border-t border-white/5">
+    <section id={sectionId} className="py-20 sm:py-28 bg-white/[0.02] border-t border-white/5">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionReveal>
           <div className="glass-panel rounded-3xl p-8 sm:p-12 neon-border-glow">

@@ -57,8 +57,8 @@ export default function Header() {
               <Phone className="w-4 h-4" />
               <span className="font-mono">(908) 767-5309</span>
             </a>
-            <Link href="/tradeline-assessment" className="btn-neon bg-neon text-black px-5 py-2.5 rounded-lg text-sm font-bold transition-all shadow-lg shadow-neon/20">
-              Get Matched
+            <Link href="/buy-tradelines" className="btn-neon bg-neon text-black px-5 py-2.5 rounded-lg text-sm font-bold transition-all shadow-lg shadow-neon/20">
+              BUY TRADELINES
             </Link>
           </div>
 
@@ -83,8 +83,8 @@ export default function Header() {
                 );
               })}
               <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: NAV_LINKS.length * 0.05 }} className="pt-4">
-                <Link href="/tradeline-assessment" className="btn-neon block w-full text-center bg-neon text-black px-5 py-3 rounded-xl text-base font-bold shadow-lg shadow-neon/20">
-                  Get My Tradeline Match
+                <Link href="/buy-tradelines" className="btn-neon block w-full text-center bg-neon text-black px-5 py-3 rounded-xl text-base font-bold shadow-lg shadow-neon/20">
+                  BUY TRADELINES
                 </Link>
               </motion.div>
             </nav>
