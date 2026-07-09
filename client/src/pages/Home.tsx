@@ -80,32 +80,32 @@ export default function Home() {
         schema={schemas}
       />
 
-      <section className="relative min-h-screen flex items-center overflow-hidden">
+      <section className="relative min-h-[92svh] flex items-center overflow-hidden">
         <div className="fixed inset-0 -z-10">
           <img src={HERO_BG} alt="" className="w-full h-full object-cover opacity-20" />
           <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/80 to-background" />
           <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background/50" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20 w-full">
-          <div className="flex flex-col items-center justify-center gap-12 lg:gap-16">
-            <div className="space-y-8 text-center max-w-4xl">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-16 sm:pb-20 w-full">
+          <div className="flex flex-col items-center justify-center gap-10 lg:gap-16">
+            <div className="space-y-6 sm:space-y-8 text-center max-w-4xl">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                className="space-y-6 flex flex-col items-center"
+                className="space-y-5 sm:space-y-6 flex flex-col items-center"
               >
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neon/10 border border-neon/20 text-neon text-xs font-bold uppercase tracking-widest">
                   <Sparkles className="w-3.5 h-3.5" />
                   Strategy-First Authorized User Tradeline Matching
                 </div>
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-display font-extrabold leading-[1.05]">
+                <h1 className="text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-display font-extrabold leading-[1.04]">
                   Shop Tradelines
                   <br />
                   <span className="text-neon neon-text-glow">That Fit You</span>
                 </h1>
-                <p className="text-lg sm:text-xl text-white/55 max-w-2xl leading-relaxed mx-auto">
+                <p className="text-base sm:text-lg lg:text-xl text-white/55 max-w-2xl leading-relaxed mx-auto">
                   Compare tradelines by age, limit, reporting timeline, and profile fit so you can move from browsing to a faster decision with more confidence.
                 </p>
               </motion.div>
@@ -114,12 +114,12 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="flex flex-col sm:flex-row gap-4 items-center justify-center"
+                className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center justify-center w-full max-w-2xl mx-auto"
               >
-                <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
+                <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="w-full sm:w-auto">
                   <Link
                     href="#lead-form"
-                    className="btn-neon inline-flex items-center justify-center gap-2 bg-neon text-black px-8 py-4 rounded-xl text-base font-bold shadow-lg shadow-neon/25 transition-all"
+                    className="btn-neon inline-flex items-center justify-center gap-2 bg-neon text-black px-6 sm:px-8 py-4 rounded-xl text-base font-bold shadow-lg shadow-neon/25 transition-all w-full sm:w-auto"
                   >
                     Request Free Consultation <ArrowRight className="w-5 h-5" />
                   </Link>
@@ -128,7 +128,7 @@ export default function Home() {
                   href="/buy-tradelines"
                   whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.97 }}
-                  className="group btn-ghost inline-flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white px-8 py-4 rounded-xl text-base font-medium transition-all hover:bg-neon hover:text-black hover:border-neon"
+                  className="group btn-ghost inline-flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white px-6 sm:px-8 py-4 rounded-xl text-base font-medium transition-all hover:bg-neon hover:text-black hover:border-neon w-full sm:w-auto"
                 >
                   Search Tradelines
                 </motion.a>
@@ -152,7 +152,7 @@ export default function Home() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-4"
+                className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 pt-4"
               >
                 {STATS.map((stat, i) => (
                   <motion.div
@@ -172,7 +172,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.45 }}
-                className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-6 max-w-3xl mx-auto"
+                className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-5 sm:pt-6 max-w-3xl mx-auto"
               >
                 {[
                   "Fast response from a real strategist",
@@ -196,7 +196,7 @@ export default function Home() {
         defaultSubject="Free Tradeline Match Review"
       />
 
-      <section id="simulator" className="py-20 sm:py-28 relative">
+      <section id="simulator" className="py-16 sm:py-20 lg:py-28 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionReveal>
             <div className="text-center mb-12">
@@ -215,7 +215,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-20 sm:py-28 relative">
+      <section className="py-16 sm:py-20 lg:py-28 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionReveal>
             <div className="text-center mb-16">
@@ -253,7 +253,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-20 sm:py-28 relative">
+      <section className="py-16 sm:py-20 lg:py-28 relative">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionReveal>
             <div className="glass-panel rounded-3xl p-8 sm:p-12 neon-border-glow white-glow">
@@ -282,7 +282,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-20 sm:py-28 relative">
+      <section className="py-16 sm:py-20 lg:py-28 relative">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionReveal>
             <div className="relative glass-panel rounded-3xl p-10 sm:p-16 text-center overflow-hidden neon-glow">
