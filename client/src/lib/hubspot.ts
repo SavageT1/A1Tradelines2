@@ -7,6 +7,7 @@
 export interface HubSpotFormData {
   firstname?: string;
   lastname?: string;
+  name?: string;
   email: string;
   phone?: string;
   subject?: string;

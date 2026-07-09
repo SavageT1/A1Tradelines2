@@ -569,3 +569,56 @@ input[type=number] {
   background: rgba(77, 163, 255, 0.3);
   color: white;
 }
+
+@keyframes section-reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes section-reveal-left {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes section-reveal-right {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.section-reveal-up,
+.section-reveal-left,
+.section-reveal-right {
+  animation-duration: 600ms;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+}
+
+.section-reveal-up {
+  animation-name: section-reveal-up;
+}
+
+.section-reveal-left {
+  animation-name: section-reveal-left;
+}
+
+.section-reveal-right {
+  animation-name: section-reveal-right;
+}

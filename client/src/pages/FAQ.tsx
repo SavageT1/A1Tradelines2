@@ -3,7 +3,6 @@
  * Expanded for SEO/AEO, buyer education, and safer authorized user tradeline disclosures.
  */
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, HelpCircle } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import SectionReveal from "@/components/SectionReveal";
@@ -151,11 +150,7 @@ export default function FAQ() {
           <div className="space-y-3">
             {FAQ_ITEMS.map((item, i) => (
               <SectionReveal key={i} delay={i * 0.02}>
-                <motion.div
-                  className={`glass-panel rounded-xl overflow-hidden transition-all duration-300 ${
-                    openIndex === i ? "border-neon/20" : ""
-                  }`}
-                >
+                <div className={`glass-panel rounded-xl overflow-hidden transition-all duration-300 ${openIndex === i ? "border-neon/20" : ""}`}>
                   <button
                     onClick={() => setOpenIndex(openIndex === i ? null : i)}
                     className="w-full flex items-center justify-between p-5 sm:p-6 text-left group"
@@ -166,30 +161,19 @@ export default function FAQ() {
                         {item.question}
                       </span>
                     </div>
-                    <motion.div
-                      animate={{ rotate: openIndex === i ? 180 : 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
+                    <div className={`transition-transform duration-200 ${openIndex === i ? "rotate-180" : ""}`}>
                       <ChevronDown className={`w-5 h-5 shrink-0 transition-colors ${openIndex === i ? "text-neon" : "text-white/40"}`} />
-                    </motion.div>
+                    </div>
                   </button>
 
-                  <AnimatePresence>
-                    {openIndex === i && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                        className="overflow-hidden"
-                      >
-                        <div className="px-5 sm:px-6 pb-5 sm:pb-6 pl-13 sm:pl-14">
-                          <p className="text-sm text-white/70 leading-relaxed">{item.answer}</p>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
+                  {openIndex === i && (
+                    <div className="overflow-hidden">
+                      <div className="px-5 sm:px-6 pb-5 sm:pb-6 pl-13 sm:pl-14">
+                        <p className="text-sm text-white/70 leading-relaxed">{item.answer}</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </SectionReveal>
             ))}
           </div>

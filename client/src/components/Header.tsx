@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link, useLocation } from "wouter";
 import { Menu, X, Phone } from "lucide-react";
 
 const NAV_LINKS = [
@@ -44,9 +44,13 @@ export default function Header() {
             {NAV_LINKS.map((link) => {
               const isActive = location === link.href;
               return (
-                <Link key={link.href} href={link.href} className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 rounded-lg ${isActive ? "text-neon" : "text-white/70 hover:text-white"}`}>
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 rounded-lg ${isActive ? "text-neon" : "text-white/70 hover:text-white"}`}
+                >
                   {link.label}
-                  {isActive && <motion.div layoutId="nav-indicator" className="absolute bottom-0 left-2 right-2 h-0.5 bg-neon rounded-full" transition={{ type: "spring", stiffness: 500, damping: 30 }} />}
+                  {isActive && <span className="absolute bottom-0 left-2 right-2 h-0.5 bg-neon rounded-full" />}
                 </Link>
               );
             })}
@@ -70,19 +74,38 @@ export default function Header() {
 
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3, ease: "easeInOut" }} className="xl:hidden bg-void/95 backdrop-blur-xl border-t border-white/5 overflow-hidden max-h-[calc(100vh-5rem)] overflow-y-auto">
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="xl:hidden bg-void/95 backdrop-blur-xl border-t border-white/5 overflow-hidden max-h-[calc(100vh-5rem)] overflow-y-auto"
+          >
             <nav className="px-4 py-5 space-y-1">
               {NAV_LINKS.map((link, i) => {
                 const isActive = location === link.href;
                 return (
-                  <motion.div key={link.href} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}>
-                    <Link href={link.href} className={`block px-4 py-4 rounded-xl text-base font-medium transition-all touch-manipulation ${isActive ? "bg-neon/10 text-neon border border-neon/20" : "text-white/80 hover:bg-white/5 hover:text-white"}`}>
+                  <motion.div
+                    key={link.href}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                  >
+                    <Link
+                      href={link.href}
+                      className={`block px-4 py-4 rounded-xl text-base font-medium transition-all touch-manipulation ${isActive ? "bg-neon/10 text-neon border border-neon/20" : "text-white/80 hover:bg-white/5 hover:text-white"}`}
+                    >
                       {link.label}
                     </Link>
                   </motion.div>
                 );
               })}
-              <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: NAV_LINKS.length * 0.05 }} className="pt-4">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: NAV_LINKS.length * 0.05 }}
+                className="pt-4"
+              >
                 <Link href="/buy-tradelines" className="btn-neon block w-full text-center bg-neon text-black px-5 py-3 rounded-xl text-base font-bold shadow-lg shadow-neon/20">
                   BUY TRADELINES
                 </Link>

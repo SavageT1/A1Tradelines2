@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Mail, Phone as PhoneIcon } from 'lucide-react';
+import { X, Phone as PhoneIcon, User, Mail } from 'lucide-react';
 import { submitToHubSpot } from '@/lib/hubspot';
 import type { TradelineItem } from '@/services/tradelineApi';
 
@@ -45,6 +45,7 @@ export default function TradelineInquiryModal({
   onClose,
   tradeline,
 }: TradelineInquiryModalProps) {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [loading, setLoading] = useState(false);
@@ -52,22 +53,9 @@ export default function TradelineInquiryModal({
   const [success, setSuccess] = useState(false);
   const summary = getTradelineSummary(tradeline);
 
-  const handleSendEmail = () => {
-    if (!email || !phone) {
-      setError('Please fill in all fields');
-      return;
-    }
-
-    const subject = `Inquiry: ${summary.bank} Tradeline`;
-    const body = `I'm interested in the ${summary.bank} tradeline.\n\nEmail: ${email}\nPhone: ${phone}\n\nTradeline Details:\n- Credit Limit: ${summary.creditLimit}\n- Age: ${summary.age}\n- Reports For: ${summary.reportsFor}\n- Price: ${summary.price}`;
-    const mailtoLink = `mailto:info@a1tradelines.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailtoLink;
-    onClose();
-  };
-
-  const handleMoreInfo = async () => {
-    if (!email || !phone) {
-      setError('Please fill in all fields');
+  const handleSubmit = async () => {
+    if (!name || !email || !phone) {
+      setError('Please fill in your name, email, and phone number');
       return;
     }
 
@@ -75,25 +63,31 @@ export default function TradelineInquiryModal({
     setError('');
 
     try {
+      const [firstname, ...rest] = name.trim().split(/\s+/);
+      const lastname = rest.join(' ');
       const result = await submitToHubSpot({
+        firstname,
+        lastname,
         email,
         phone,
         subject: `Inquiry: ${summary.bank} Tradeline`,
         message: `Tradeline Inquiry - ${summary.bank}\nCredit Limit: ${summary.creditLimit}\nAge: ${summary.age}\nReports For: ${summary.reportsFor}\nPrice: ${summary.price}`,
       });
+
       if (result.success) {
         setSuccess(true);
         setTimeout(() => {
           onClose();
           setSuccess(false);
+          setName('');
           setEmail('');
           setPhone('');
         }, 2000);
       } else {
-        setError(result.message || 'Failed to submit. Please try again or email us directly.');
+        setError(result.message || 'Failed to submit. Please try again.');
       }
-    } catch (err) {
-      setError('Failed to submit. Please try again or email us directly.');
+    } catch {
+      setError('Failed to submit. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -103,7 +97,6 @@ export default function TradelineInquiryModal({
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -112,20 +105,16 @@ export default function TradelineInquiryModal({
             className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
           />
 
-          {/* Modal */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md z-50"
+            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md z-50 px-4"
           >
             <div className="glass-panel rounded-xl p-6 space-y-6 white-glow">
-              {/* Header */}
-              <div className="flex items-start justify-between">
+              <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h3 className="text-xl font-bold text-white mb-1">
-                    {summary.bank}
-                  </h3>
+                  <h3 className="text-xl font-bold text-white mb-1">{summary.bank}</h3>
                   <p className="text-sm text-gray-400">
                     Limit: {summary.creditLimit} • Age: {summary.age}
                   </p>
@@ -141,7 +130,6 @@ export default function TradelineInquiryModal({
                 </button>
               </div>
 
-              {/* Success Message */}
               {success && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
@@ -154,11 +142,31 @@ export default function TradelineInquiryModal({
                 </motion.div>
               )}
 
-              {/* Form */}
               {!success && (
                 <>
                   <div className="space-y-4">
-                    {/* Email Field */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                        Full Name
+                      </label>
+                      <div className="relative">
+                        <User
+                          size={16}
+                          className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
+                        />
+                        <input
+                          type="text"
+                          value={name}
+                          onChange={(e) => {
+                            setName(e.target.value);
+                            setError('');
+                          }}
+                          placeholder="Your name"
+                          className="w-full bg-white/5 border border-white/10 rounded-lg pl-10 pr-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-green-500/50 focus:ring-1 focus:ring-green-500/20 transition-all"
+                        />
+                      </div>
+                    </div>
+
                     <div>
                       <label className="block text-sm font-medium text-gray-300 mb-2">
                         Email Address
@@ -181,7 +189,6 @@ export default function TradelineInquiryModal({
                       </div>
                     </div>
 
-                    {/* Phone Field */}
                     <div>
                       <label className="block text-sm font-medium text-gray-300 mb-2">
                         Phone Number
@@ -204,7 +211,6 @@ export default function TradelineInquiryModal({
                       </div>
                     </div>
 
-                    {/* Error Message */}
                     {error && (
                       <motion.div
                         initial={{ opacity: 0, y: -10 }}
@@ -216,30 +222,21 @@ export default function TradelineInquiryModal({
                     )}
                   </div>
 
-                  {/* Action Buttons */}
                   <div className="flex gap-3">
                     <button
-                      onClick={handleSendEmail}
+                      onClick={handleSubmit}
                       disabled={loading}
-                      className="flex-1 px-4 py-2.5 bg-white/10 hover:bg-white/15 border border-white/20 rounded-lg text-white font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                    >
-                      <Mail size={16} />
-                      Send via Email
-                    </button>
-                    <button
-                      onClick={handleMoreInfo}
-                      disabled={loading}
-                      className="flex-1 px-4 py-2.5 bg-green-500/20 hover:bg-green-500/30 border border-green-500/50 rounded-lg text-green-400 font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 btn-neon"
+                      className="w-full px-4 py-2.5 bg-green-500/20 hover:bg-green-500/30 border border-green-500/50 rounded-lg text-green-400 font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 btn-neon"
                     >
                       {loading ? (
                         <>
                           <div className="w-4 h-4 border-2 border-green-400/30 border-t-green-400 rounded-full animate-spin" />
-                          Loading...
+                          Submitting...
                         </>
                       ) : (
                         <>
                           <PhoneIcon size={16} />
-                          More Info
+                          Check Availability
                         </>
                       )}
                     </button>

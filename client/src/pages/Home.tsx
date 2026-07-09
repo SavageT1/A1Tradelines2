@@ -2,8 +2,8 @@
  * Home.tsx - A1 Tradelines Homepage
  * Safer conversion copy for authorized user tradeline matching.
  */
-import { motion } from "framer-motion";
 import { Link } from "wouter";
+import { motion } from "framer-motion";
 import {
   ArrowRight,
   Shield,
@@ -295,22 +295,18 @@ export default function Home() {
                   Browse authorized user tradeline options and speak with A1 Tradelines about profile-based matching before making a purchase.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-                  <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
-                    <Link
-                      href="#lead-form"
-                      className="btn-neon inline-flex items-center justify-center gap-2 bg-neon text-black px-8 py-4 rounded-xl text-base font-bold shadow-lg shadow-neon/25 transition-all"
-                    >
-                      Request Consultation <ArrowRight className="w-5 h-5" />
-                    </Link>
-                  </motion.div>
-                  <motion.div whileHover={{ scale: 1.04, borderColor: "rgba(0,255,127,0.4)" }} whileTap={{ scale: 0.97 }}>
-                    <Link
-                      href="/buy-tradelines"
-                      className="btn-ghost inline-flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white px-8 py-4 rounded-xl text-base font-medium transition-all"
-                    >
-                      Search Tradelines
-                    </Link>
-                  </motion.div>
+                  <Link
+                    href="#lead-form"
+                    className="btn-neon inline-flex items-center justify-center gap-2 bg-neon text-black px-8 py-4 rounded-xl text-base font-bold shadow-lg shadow-neon/25 transition-all"
+                  >
+                    Request Consultation <ArrowRight className="w-5 h-5" />
+                  </Link>
+                  <Link
+                    href="/buy-tradelines"
+                    className="btn-ghost inline-flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white px-8 py-4 rounded-xl text-base font-medium transition-all"
+                  >
+                    Search Tradelines
+                  </Link>
                 </div>
               </div>
             </div>

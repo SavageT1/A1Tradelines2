@@ -1,8 +1,7 @@
 /*
  * PageHero.tsx — Reusable page hero banner with background image and overlay.
- * Neon Pulse Design: dark overlay with neon accents.
+ * Static markup keeps the hero lightweight and crawlable.
  */
-import { motion } from "framer-motion";
 
 interface PageHeroProps {
   title: string;
@@ -25,23 +24,13 @@ export default function PageHero({ title, subtitle, backgroundImage }: PageHeroP
 
       {/* Content */}
       <div className="relative z-10 text-center px-4 py-20 max-w-4xl mx-auto w-full">
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.25, 0.4, 0.25, 1] }}
-          className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-display font-extrabold tracking-[0.05em]"
-        >
+        <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-display font-extrabold tracking-[0.05em]">
           {title}
-        </motion.h1>
+        </h1>
         {subtitle && (
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.15, ease: [0.25, 0.4, 0.25, 1] }}
-            className="mt-4 text-lg sm:text-xl text-white/50 max-w-2xl mx-auto"
-          >
+          <p className="mt-4 text-lg sm:text-xl text-white/50 max-w-2xl mx-auto">
             {subtitle}
-          </motion.p>
+          </p>
         )}
       </div>
     </section>
