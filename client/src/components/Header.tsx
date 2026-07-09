@@ -31,12 +31,12 @@ export default function Header() {
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-void/85 backdrop-blur-xl border-b border-white/5 shadow-lg shadow-black/20" : "bg-background/30 backdrop-blur-sm"}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-28 sm:h-32">
+        <div className="flex items-center justify-between h-20 sm:h-24 lg:h-28">
           <Link href="/" className="flex items-center gap-3 group" aria-label="A1 Tradelines home">
             <img
               src="/logo.png"
               alt="A1 Tradelines"
-              className="h-24 sm:h-28 w-auto max-w-[260px] object-contain drop-shadow-[0_0_18px_rgba(77,163,255,0.3)] transition-transform duration-200 group-hover:scale-[1.02]"
+              className="h-14 sm:h-20 lg:h-28 w-auto max-w-[180px] sm:max-w-[220px] lg:max-w-[260px] object-contain drop-shadow-[0_0_18px_rgba(77,163,255,0.3)] transition-transform duration-200 group-hover:scale-[1.02]"
             />
           </Link>
 
@@ -62,7 +62,7 @@ export default function Header() {
             </Link>
           </div>
 
-          <button onClick={() => setMobileOpen(!mobileOpen)} className="xl:hidden p-2 text-white/80 hover:text-neon transition-colors" aria-label="Toggle menu">
+          <button onClick={() => setMobileOpen(!mobileOpen)} className="xl:hidden p-3 -mr-2 text-white/80 hover:text-neon transition-colors" aria-label="Toggle menu">
             {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
@@ -70,13 +70,13 @@ export default function Header() {
 
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3, ease: "easeInOut" }} className="xl:hidden bg-void/95 backdrop-blur-xl border-t border-white/5 overflow-hidden">
-            <nav className="px-4 py-6 space-y-1">
+          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3, ease: "easeInOut" }} className="xl:hidden bg-void/95 backdrop-blur-xl border-t border-white/5 overflow-hidden max-h-[calc(100vh-5rem)] overflow-y-auto">
+            <nav className="px-4 py-5 space-y-1">
               {NAV_LINKS.map((link, i) => {
                 const isActive = location === link.href;
                 return (
                   <motion.div key={link.href} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}>
-                    <Link href={link.href} className={`block px-4 py-3 rounded-xl text-base font-medium transition-all ${isActive ? "bg-neon/10 text-neon border border-neon/20" : "text-white/80 hover:bg-white/5 hover:text-white"}`}>
+                    <Link href={link.href} className={`block px-4 py-4 rounded-xl text-base font-medium transition-all touch-manipulation ${isActive ? "bg-neon/10 text-neon border border-neon/20" : "text-white/80 hover:bg-white/5 hover:text-white"}`}>
                       {link.label}
                     </Link>
                   </motion.div>
