@@ -69,13 +69,13 @@ export default function Contact() {
       <SEOHead title="Contact A1 Tradelines | Authorized User Tradeline Consultation" description="Contact A1 Tradelines to ask questions about authorized user tradeline options, reporting timelines, and profile-based matching. No credit outcome is guaranteed." canonical="https://a1tradelines.com/contact" keywords="contact A1 Tradelines, authorized user tradelines, tradeline consultation, credit profile strategy" />
       <PageHero title="Contact Us" subtitle="Ask about authorized user tradeline options and profile-based matching" backgroundImage={CONTACT_HERO} />
 
-      <section className="py-16 sm:py-24">
+      <section className="py-14 sm:py-20 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-16">
             <div className="lg:col-span-2 space-y-8">
               <SectionReveal direction="left">
                 <div className="space-y-4">
-                  <h2 className="text-2xl font-display font-extrabold">Let's <span className="text-neon">Talk</span></h2>
+                  <h2 className="text-2xl sm:text-3xl font-display font-extrabold">Let's <span className="text-neon">Talk</span></h2>
                   <p className="text-white/70 leading-relaxed">Have questions about authorized user tradelines, reporting timelines, or profile-based matching? Send a message and our team will respond.</p>
                 </div>
               </SectionReveal>
@@ -97,9 +97,9 @@ export default function Contact() {
 
             <div className="lg:col-span-3">
               <SectionReveal direction="right">
-                <div className="glass-panel rounded-2xl p-7 sm:p-10 neon-border-glow">
+                <div className="glass-panel rounded-2xl p-5 sm:p-7 lg:p-10 neon-border-glow">
                   <div className="mb-8">
-                    <h3 className="text-xl font-display font-extrabold mb-2">Send Us a Message</h3>
+                    <h3 className="text-xl sm:text-2xl font-display font-extrabold mb-2">Send Us a Message</h3>
                     <p className="text-sm text-white/70">Fill out the form below and we'll get back to you promptly.</p>
                   </div>
                   <div className="mb-5 p-4 rounded-xl border border-neon/20 bg-neon/10 flex items-start gap-3">
@@ -113,16 +113,16 @@ export default function Contact() {
                   )}
                   <form onSubmit={handleSubmit} onFocusCapture={markStarted} className="space-y-5">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div className="space-y-1.5"><label className="text-xs font-medium text-white/60 uppercase tracking-widest">Full Name</label><input required type="text" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full bg-black/30 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-neon/50 transition-all" placeholder="John Doe" /></div>
-                      <div className="space-y-1.5"><label className="text-xs font-medium text-white/60 uppercase tracking-widest">Email</label><input required type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full bg-black/30 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-neon/50 transition-all" placeholder="john@example.com" /></div>
+                      <div className="space-y-1.5"><label className="text-xs font-medium text-white/60 uppercase tracking-widest">Full Name</label><input required type="text" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full min-h-12 bg-black/30 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-neon/50 transition-all" placeholder="John Doe" /></div>
+                      <div className="space-y-1.5"><label className="text-xs font-medium text-white/60 uppercase tracking-widest">Email</label><input required type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full min-h-12 bg-black/30 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-neon/50 transition-all" placeholder="john@example.com" /></div>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div className="space-y-1.5"><label className="text-xs font-medium text-white/60 uppercase tracking-widest">Phone</label><input type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="w-full bg-black/30 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-neon/50 transition-all" placeholder="(555) 123-4567" /></div>
-                      <div className="space-y-1.5"><label className="text-xs font-medium text-white/60 uppercase tracking-widest">Subject</label><input required type="text" value={form.subject} onChange={(e) => setForm({ ...form, subject: e.target.value })} className="w-full bg-black/30 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-neon/50 transition-all" placeholder="Tradeline inquiry" /></div>
+                      <div className="space-y-1.5"><label className="text-xs font-medium text-white/60 uppercase tracking-widest">Phone</label><input type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="w-full min-h-12 bg-black/30 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-neon/50 transition-all" placeholder="(555) 123-4567" /></div>
+                      <div className="space-y-1.5"><label className="text-xs font-medium text-white/60 uppercase tracking-widest">Subject</label><input required type="text" value={form.subject} onChange={(e) => setForm({ ...form, subject: e.target.value })} className="w-full min-h-12 bg-black/30 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-neon/50 transition-all" placeholder="Tradeline inquiry" /></div>
                     </div>
-                    <div className="space-y-1.5"><label className="text-xs font-medium text-white/60 uppercase tracking-widest">Message</label><textarea required rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="w-full bg-black/30 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-neon/50 transition-all resize-none" placeholder="Tell us about your tradeline questions or credit profile goals. Do not include sensitive identity information." /></div>
+                    <div className="space-y-1.5"><label className="text-xs font-medium text-white/60 uppercase tracking-widest">Message</label><textarea required rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="w-full min-h-32 bg-black/30 border border-white/10 rounded-lg py-3 px-4 text-sm outline-none focus:border-neon/50 transition-all resize-none" placeholder="Tell us about your tradeline questions or credit profile goals. Do not include sensitive identity information." /></div>
                     <p className="text-[11px] text-white/45 leading-relaxed">By submitting this form, you agree to be contacted by A1 Tradelines by phone, text, or email about your inquiry. Message and data rates may apply. Consent is not a condition of purchase. Results are not guaranteed.</p>
-                    <motion.button whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }} type="submit" disabled={loading} className="btn-neon w-full bg-neon text-black font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-neon/20 transition-all text-sm disabled:opacity-50 disabled:cursor-not-allowed">
+                    <motion.button whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }} type="submit" disabled={loading} className="btn-neon w-full min-h-12 bg-neon text-black font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-neon/20 transition-all text-sm disabled:opacity-50 disabled:cursor-not-allowed">
                       {loading ? "Submitting..." : "Request Consultation"} {!loading && <Send className="w-4 h-4" />}
                     </motion.button>
                   </form>
