@@ -255,7 +255,7 @@ export default function BuyTradelines() {
             </div>
           </SectionReveal>
 
-          <div className="sticky top-24 sm:top-28 z-30 mb-6">
+          <div className="sticky top-20 sm:top-24 lg:top-28 z-30 mb-6">
             <div className="glass-panel rounded-2xl p-4 sm:p-6 border border-white/10 bg-void/80 backdrop-blur-xl shadow-2xl shadow-black/20">
               <div className="flex flex-col gap-4">
                 <div className="flex flex-col xl:flex-row gap-3 xl:items-center">
@@ -266,13 +266,13 @@ export default function BuyTradelines() {
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                       placeholder="Search by bank name..."
-                      className="w-full bg-black/30 border border-white/10 rounded-lg py-2.5 pl-10 pr-4 text-sm outline-none focus:border-neon/50 transition-all"
+                      className="w-full bg-black/30 border border-white/10 rounded-lg py-3 pl-10 pr-4 text-sm outline-none focus:border-neon/50 transition-all"
                     />
                   </div>
 
                   <button
                     onClick={() => setShowFiltersPanel(!showFiltersPanel)}
-                    className={`flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all border ${showFiltersPanel ? "bg-neon/10 border-neon/30 text-neon" : "bg-white/5 border-white/10 text-white/60 hover:text-white"}`}
+                    className={`flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-sm font-medium transition-all border touch-manipulation ${showFiltersPanel ? "bg-neon/10 border-neon/30 text-neon" : "bg-white/5 border-white/10 text-white/60 hover:text-white"}`}
                   >
                     <Filter className="w-4 h-4" />
                     Filters
@@ -345,12 +345,12 @@ export default function BuyTradelines() {
                     )}
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
                     <div>
                       <label className="block text-xs font-bold text-white/60 uppercase tracking-widest mb-3">Total Price</label>
                       <div className="space-y-2">
                         {PRICE_RANGES.map((range) => (
-                          <button key={range.label} onClick={() => handlePriceRangeChange(range)} className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all border ${priceRange.label === range.label ? "bg-neon/10 border-neon/30 text-neon font-medium" : "bg-white/5 border-white/10 text-white/60 hover:text-white/80"}`}>
+                          <button key={range.label} onClick={() => handlePriceRangeChange(range)} className={`w-full text-left px-3 py-3 rounded-lg text-sm transition-all border touch-manipulation ${priceRange.label === range.label ? "bg-neon/10 border-neon/30 text-neon font-medium" : "bg-white/5 border-white/10 text-white/60 hover:text-white/80"}`}>
                             {range.label}
                           </button>
                         ))}
@@ -361,7 +361,7 @@ export default function BuyTradelines() {
                       <label className="block text-xs font-bold text-white/60 uppercase tracking-widest mb-3">Credit Limit</label>
                       <div className="space-y-2">
                         {CREDIT_LIMIT_RANGES.map((range) => (
-                          <button key={range.label} onClick={() => handleCreditLimitRangeChange(range)} className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all border ${creditLimitRange.label === range.label ? "bg-neon/10 border-neon/30 text-neon font-medium" : "bg-white/5 border-white/10 text-white/60 hover:text-white/80"}`}>
+                          <button key={range.label} onClick={() => handleCreditLimitRangeChange(range)} className={`w-full text-left px-3 py-3 rounded-lg text-sm transition-all border touch-manipulation ${creditLimitRange.label === range.label ? "bg-neon/10 border-neon/30 text-neon font-medium" : "bg-white/5 border-white/10 text-white/60 hover:text-white/80"}`}>
                             {range.label}
                           </button>
                         ))}
@@ -372,7 +372,7 @@ export default function BuyTradelines() {
                       <label className="block text-xs font-bold text-white/60 uppercase tracking-widest mb-3">Account Age</label>
                       <div className="space-y-2">
                         {AGE_RANGES.map((range) => (
-                          <button key={range.label} onClick={() => handleAgeRangeChange(range)} className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all border ${ageRange.label === range.label ? "bg-neon/10 border-neon/30 text-neon font-medium" : "bg-white/5 border-white/10 text-white/60 hover:text-white/80"}`}>
+                          <button key={range.label} onClick={() => handleAgeRangeChange(range)} className={`w-full text-left px-3 py-3 rounded-lg text-sm transition-all border touch-manipulation ${ageRange.label === range.label ? "bg-neon/10 border-neon/30 text-neon font-medium" : "bg-white/5 border-white/10 text-white/60 hover:text-white/80"}`}>
                             {range.label}
                           </button>
                         ))}
@@ -383,7 +383,7 @@ export default function BuyTradelines() {
                       <label className="block text-xs font-bold text-white/60 uppercase tracking-widest mb-3">Category</label>
                       <div className="space-y-2">
                         {["All", "Premium", "Standard", "Economy"].map((cat) => (
-                          <button key={cat} onClick={() => handleCategoryFilterChange(cat)} className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all border ${categoryFilter === cat ? "bg-neon/10 border-neon/30 text-neon font-medium" : "bg-white/5 border-white/10 text-white/60 hover:text-white/80"}`}>
+                          <button key={cat} onClick={() => handleCategoryFilterChange(cat)} className={`w-full text-left px-3 py-3 rounded-lg text-sm transition-all border touch-manipulation ${categoryFilter === cat ? "bg-neon/10 border-neon/30 text-neon font-medium" : "bg-white/5 border-white/10 text-white/60 hover:text-white/80"}`}>
                             {cat}
                           </button>
                         ))}
@@ -469,7 +469,7 @@ export default function BuyTradelines() {
               <div className="lg:hidden grid grid-cols-1 gap-4">
                 <AnimatePresence mode="popLayout">
                   {filtered.map((t, i) => (
-                    <motion.div key={t.id} layout initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95 }} transition={{ delay: i * 0.02 }} className="tradeline-card rounded-2xl p-5 space-y-4 transition-all duration-300 card-shine">
+                    <motion.div key={t.id} layout initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95 }} transition={{ delay: i * 0.02 }} className="tradeline-card rounded-2xl p-4 sm:p-5 space-y-4 transition-all duration-300 card-shine">
                       <div className="flex items-start justify-between gap-4">
                         <div>
                           <p className="text-lg font-bold text-white">{t.bank}</p>
@@ -517,7 +517,7 @@ export default function BuyTradelines() {
                         <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest">Clean Payment History • $0 Reported Balance</span>
                       </div>
 
-                      <button onClick={() => openTradeline(t)} className="cta-primary w-full">
+                      <button onClick={() => openTradeline(t)} className="cta-primary w-full min-h-12">
                         Check Availability <ArrowRight className="w-4 h-4" />
                       </button>
                     </motion.div>
@@ -535,12 +535,12 @@ export default function BuyTradelines() {
           )}
 
           <SectionReveal>
-            <div className="mt-16 glass-panel rounded-2xl p-8 sm:p-10 text-center neon-border-glow">
+            <div className="mt-16 glass-panel rounded-2xl p-6 sm:p-10 text-center neon-border-glow">
               <h3 className="text-2xl font-display font-extrabold mb-3">Need Help Choosing?</h3>
               <p className="text-white/45 mb-6 max-w-xl mx-auto">
                 A1 Tradelines can help you compare age, limit, reporting term, purchase deadline, target reporting date, and total price before selecting an authorized user tradeline.
               </p>
-              <a href="/contact" className="cta-primary">
+              <a href="/contact" className="cta-primary w-full sm:w-auto">
                 <Phone className="w-4 h-4" /> Request Consultation
               </a>
             </div>
