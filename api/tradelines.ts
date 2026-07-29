@@ -1,7 +1,7 @@
 const API_BASE_URL = "https://www.tradelinemaster.com/api";
 const API_VERSION = "3";
 const REFERER_URL = "https://a1tradelines.com";
-const VENDOR_MARKUP_MULTIPLIER = 1.7;
+const VENDOR_MARKUP_MULTIPLIER = 1.8;
 
 type VendorTradeline = {
   Id: number;
@@ -77,7 +77,7 @@ function transformTradeline(item: VendorTradeline) {
 }
 
 export default async function handler(req: ApiRequest, res: ApiResponse) {
-  res.setHeader("Cache-Control", "s-maxage=300, stale-while-revalidate=600");
+  res.setHeader("Cache-Control", "no-store, max-age=0");
 
   if (req.method && req.method !== "GET") {
     return res.status(405).json({ success: false, message: "Method not allowed" });
@@ -96,6 +96,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
   try {
     const vendorResponse = await fetch(`${API_BASE_URL}/Tradeline`, {
       method: "GET",
+      cache: "no-store",
       headers: {
         Accept: "application/json",
         Authorization: buildAuthHeader(user, pass),
