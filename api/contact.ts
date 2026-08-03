@@ -3,6 +3,7 @@ const HUBSPOT_FORM_ID = "f738963e-9243-43e3-848c-df584038fa1a";
 const LEAD_NOTIFICATION_EMAIL = process.env.LEAD_NOTIFICATION_EMAIL || "info@a1tradelines.com";
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const RESEND_FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "A1 Tradelines <leads@a1tradelines.com>";
+const GHL_WEBHOOK_URL = process.env.GHL_WEBHOOK_URL;
 
 const ALLOWED_ORIGINS = new Set([
   "https://a1tradelines.com",
@@ -128,6 +129,36 @@ async function sendLeadNotification(input: {
   }
 }
 
+async function sendLeadToHighLevel(input: {
+  firstname: string;
+  lastname: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+  pageName: string;
+}) {
+  if (!GHL_WEBHOOK_URL) return { sent: false, configured: false };
+
+  try {
+    const response = await fetch(GHL_WEBHOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...input, source: "a1tradelines.com", formType: "website_contact" }),
+    });
+
+    if (!response.ok) {
+      console.error("HighLevel lead delivery failed:", response.status, await response.text().catch(() => ""));
+      return { sent: false, configured: true };
+    }
+
+    return { sent: true, configured: true };
+  } catch (error) {
+    console.error("HighLevel lead delivery error:", error);
+    return { sent: false, configured: true };
+  }
+}
+
 function isSpamTrapFilled(body: Record<string, unknown>) {
   return Boolean(
     cleanField(body.website, 200) ||
@@ -225,7 +256,21 @@ export default async function handler(req: any, res: any) {
       pageName,
     });
 
-    return sendJson(res, 200, { success: true, message: "Form submitted successfully!" }, origin);
+    const highLevel = await sendLeadToHighLevel({
+      firstname,
+      lastname,
+      email,
+      phone,
+      subject,
+      message,
+      pageName,
+    });
+
+    return sendJson(res, 200, {
+      success: true,
+      message: "Form submitted successfully!",
+      highLevel: highLevel.configured ? highLevel.sent : undefined,
+    }, origin);
   } catch (error) {
     console.error("Contact API error:", error);
     return sendJson(res, 500, { success: false, message: "Server error" }, origin);
