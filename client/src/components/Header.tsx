@@ -1,119 +1,29 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Link, useLocation } from "wouter";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
-const NAV_LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/how-it-works", label: "How It Works" },
-  { href: "/buy-tradelines", label: "Buy Tradelines" },
-  { href: "/tradeline-assessment", label: "Assessment" },
-  { href: "/faq", label: "FAQ" },
-  { href: "/contact", label: "Contact" },
+const links = [
+  { href: "/buy-tradelines", label: "Browse Tradelines" },
+  { href: "/tradeline-assessment", label: "Get Matched" },
+  { href: "/tradeline-glossary", label: "Credit Terms" },
+  { href: "/broker-program", label: "Broker Program" },
+  { href: "/blog", label: "Learning Center" },
 ];
 
 export default function Header() {
   const [location] = useLocation();
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [location]);
-
-  return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-void/85 backdrop-blur-xl border-b border-white/5 shadow-lg shadow-black/20" : "bg-background/30 backdrop-blur-sm"}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20 sm:h-24 lg:h-28">
-          <Link href="/" className="flex items-center gap-3 group" aria-label="A1 Tradelines home">
-            <img
-              src="/logo.png"
-              alt="A1 Tradelines"
-              className="h-14 sm:h-20 lg:h-28 w-auto max-w-[180px] sm:max-w-[220px] lg:max-w-[260px] object-contain drop-shadow-[0_0_18px_rgba(77,163,255,0.3)] transition-transform duration-200 group-hover:scale-[1.02]"
-            />
-          </Link>
-
-          <nav className="hidden xl:flex items-center gap-1">
-            {NAV_LINKS.map((link) => {
-              const isActive = location === link.href;
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 rounded-lg ${isActive ? "text-neon" : "text-white/70 hover:text-white"}`}
-                >
-                  {link.label}
-                  {isActive && <span className="absolute bottom-0 left-2 right-2 h-0.5 bg-neon rounded-full" />}
-                </Link>
-              );
-            })}
-          </nav>
-
-          <div className="hidden xl:flex items-center gap-3">
-            <a href="tel:+19087675309" className="flex items-center gap-2 text-sm text-white/70 hover:text-neon transition-colors">
-              <Phone className="w-4 h-4" />
-              <span className="font-mono">(908) 767-5309</span>
-            </a>
-            <Link href="/buy-tradelines" className="btn-neon bg-neon text-black px-5 py-2.5 rounded-lg text-sm font-bold transition-all shadow-lg shadow-neon/20">
-              BUY TRADELINES
-            </Link>
-          </div>
-
-          <button onClick={() => setMobileOpen(!mobileOpen)} className="xl:hidden p-3 -mr-2 text-white/80 hover:text-neon transition-colors" aria-label="Toggle menu">
-            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-      </div>
-
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="xl:hidden bg-void/95 backdrop-blur-xl border-t border-white/5 overflow-hidden max-h-[calc(100vh-5rem)] overflow-y-auto"
-          >
-            <nav className="px-4 py-5 space-y-1">
-              {NAV_LINKS.map((link, i) => {
-                const isActive = location === link.href;
-                return (
-                  <motion.div
-                    key={link.href}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.05 }}
-                  >
-                    <Link
-                      href={link.href}
-                      className={`block px-4 py-4 rounded-xl text-base font-medium transition-all touch-manipulation ${isActive ? "bg-neon/10 text-neon border border-neon/20" : "text-white/80 hover:bg-white/5 hover:text-white"}`}
-                    >
-                      {link.label}
-                    </Link>
-                  </motion.div>
-                );
-              })}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: NAV_LINKS.length * 0.05 }}
-                className="pt-4"
-              >
-                <Link href="/buy-tradelines" className="btn-neon block w-full text-center bg-neon text-black px-5 py-3 rounded-xl text-base font-bold shadow-lg shadow-neon/20">
-                  BUY TRADELINES
-                </Link>
-              </motion.div>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
-  );
+  useEffect(() => { const listener = () => setScrolled(window.scrollY > 12); window.addEventListener("scroll", listener, { passive: true }); return () => window.removeEventListener("scroll", listener); }, []);
+  useEffect(() => setOpen(false), [location]);
+  return <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled ? "border-b border-slate-200/80 bg-[#f8f8f6]/90 shadow-sm backdrop-blur-xl" : "bg-[#f8f8f6]/70 backdrop-blur-md"}`}>
+    <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <Link href="/" className="flex items-center gap-2" aria-label="A1 Tradelines home"><img src="/logo.png" alt="A1 Tradelines" className="h-12 w-auto object-contain" /><span className="hidden text-sm font-black tracking-[0.16em] text-[#101b33] sm:inline">TRADELINES</span></Link>
+      <nav className="hidden items-center gap-1 xl:flex">{links.map(link => <Link key={link.href} href={link.href} className={`rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${location === link.href ? "bg-blue-50 text-blue-700" : "text-slate-700 hover:bg-white hover:text-[#101b33]"}`}>{link.label}</Link>)}</nav>
+      <Link href="/contact" className="hidden rounded-lg bg-[#111d37] px-4 py-2.5 text-sm font-bold text-white transition-transform duration-150 hover:-translate-y-0.5 hover:bg-blue-700 xl:inline-flex">Private Consultation</Link>
+      <button type="button" className="rounded-lg p-3 text-[#101b33] xl:hidden" onClick={() => setOpen(!open)} aria-expanded={open} aria-label="Toggle menu">{open ? <X /> : <Menu />}</button>
+    </div>
+    <AnimatePresence>{open && <motion.nav initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: .2 }} className="border-t border-slate-200 bg-[#f8f8f6] px-4 py-4 xl:hidden">{links.map(link => <Link key={link.href} href={link.href} className="block rounded-lg px-4 py-3 font-semibold text-slate-700 hover:bg-white">{link.label}</Link>)}<Link href="/contact" className="mt-2 block rounded-lg bg-[#111d37] px-4 py-3 text-center font-bold text-white">Private Consultation</Link></motion.nav>}</AnimatePresence>
+  </header>;
 }

@@ -29,6 +29,7 @@ import NonPostingPolicy from "./pages/NonPostingPolicy";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import Disclaimer from "./pages/Disclaimer";
+import BrokerProgram from "./pages/BrokerProgram";
 import Layout from "./components/Layout";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -47,6 +48,7 @@ function Router() {
         <Route path="/privacy-policy" component={PrivacyPolicy} />
         <Route path="/terms-of-service" component={TermsOfService} />
         <Route path="/disclaimer" component={Disclaimer} />
+        <Route path="/broker-program" component={BrokerProgram} />
         <Route path="/non-posting-policy" component={NonPostingPolicy} />
         <Route path="/best-tradelines-for-sale" component={BestTradelinesForSale} />
         <Route path="/authorized-user-tradelines" component={AuthorizedUserTradelines} />
