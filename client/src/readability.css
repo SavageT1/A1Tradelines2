@@ -217,6 +217,16 @@ footer a:focus-visible {
   color: #12213f !important;
 }
 
+/* Preserve deliberate navy feature bands inside the light editorial system. */
+.site-main section[class*="bg-[#12213f]"] h1,
+.site-main section[class*="bg-[#12213f]"] h2,
+.site-main section[class*="bg-[#12213f]"] h3,
+.site-main section[class*="bg-[#12213f]"] h4,
+.site-main section[class*="bg-[#12213f]"] p,
+.site-main section[class*="bg-[#12213f]"] li {
+  color: #ffffff !important;
+}
+
 @media (max-width: 640px) {
   h1 {
     font-size: clamp(2.4rem, 12vw, 3.65rem) !important;
