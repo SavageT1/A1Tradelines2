@@ -52,7 +52,12 @@ li,
   line-height: 1.65 !important;
 }
 
-p {
+/*
+ * Only provide the dark-theme fallback when a paragraph has no explicit
+ * text-color utility. Explicit colors such as text-black must remain in
+ * control on white and light editorial sections.
+ */
+p:not([class*="text-"]) {
   color: var(--readable-muted);
 }
 
