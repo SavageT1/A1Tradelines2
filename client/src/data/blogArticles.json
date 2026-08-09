@@ -1,0 +1,319 @@
+[
+  {
+    "slug": "what-is-an-authorized-user-tradeline",
+    "title": "What Is an Authorized User Tradeline?",
+    "description": "An authorized user tradeline is a credit-card account that may appear on another person's credit report after the cardholder adds them as an authorized user. Learn how reporting works, what to compare, and the limits.",
+    "category": "Tradelines 101",
+    "published": "2026-08-09",
+    "updated": "2026-08-09",
+    "readTime": "8 min read",
+    "answer": "An authorized user tradeline is a credit-card account that may be reported on the credit file of someone the primary cardholder adds as an authorized user. If the issuer reports it, the account may show details such as its age, limit, balance, and payment history. Reporting and scoring treatment vary, so no score change or approval is guaranteed.",
+    "sections": [
+      {
+        "heading": "How does an authorized user tradeline work?",
+        "paragraphs": [
+          "The primary cardholder asks the credit-card issuer to add another person as an authorized user. An authorized user can generally make purchases if given a card, but is usually not contractually responsible for paying the account. In a tradeline service arrangement, card access is not needed or intended.",
+          "Many issuers report authorized user accounts to one or more consumer reporting companies. When reporting occurs, the account can appear with information such as the opening date, credit limit, reported balance, payment status, and payment history. The issuer controls reporting, the bureaus control processing, and scoring models and lenders decide how they treat the account."
+        ]
+      },
+      {
+        "heading": "What information should a buyer compare?",
+        "paragraphs": [
+          "Start with the account's age, credit limit, reported balance, payment history, issuer, statement date, estimated reporting window, number of reporting cycles, price, and available spots. A larger limit or older age is not automatically a better fit for every credit file.",
+          "Look at the complete credit profile before selecting anything. Existing balances, recent late payments, collections, inquiries, account mix, and the scoring model used by a future lender can all affect the result. A tradeline does not remove accurate negative information or create a guaranteed lending outcome."
+        ]
+      },
+      {
+        "heading": "What can an authorized user tradeline not guarantee?",
+        "paragraphs": [
+          "It cannot guarantee a credit-score increase, approval, funding amount, interest rate, mortgage result, apartment approval, or a particular reporting date. It also does not turn an authorized user account into a primary account owned by the authorized user.",
+          "Avoid any provider promising a precise score increase or guaranteed approval. Also avoid CPNs, synthetic identities, false applications, or instructions to misrepresent account ownership. A1 Tradelines does not support those practices."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Does an authorized user tradeline always report?",
+        "answer": "No. Reporting depends on the issuer, the information supplied, bureau processing, and other third-party factors."
+      },
+      {
+        "question": "Is an authorized user responsible for the debt?",
+        "answer": "Authorized users are generally not contractually responsible for the balance, although account terms and applicable law should be reviewed."
+      },
+      {
+        "question": "Will a tradeline remove negative items?",
+        "answer": "No. Adding an account does not delete accurate late payments, collections, charge-offs, or other negative information."
+      }
+    ],
+    "sources": [
+      {
+        "name": "CFPB: Authorized users and account responsibility",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/i-was-an-authorized-user-on-my-deceased-relatives-credit-card-account-am-i-liable-to-repay-the-debt-en-1485/"
+      },
+      {
+        "name": "CFPB: Credit reports and scores",
+        "url": "https://www.consumerfinance.gov/consumer-tools/credit-reports-and-scores/"
+      }
+    ],
+    "related": [
+      "how-credit-utilization-works",
+      "how-long-do-tradelines-take-to-post",
+      "how-to-compare-tradelines-before-buying"
+    ]
+  },
+  {
+    "slug": "how-credit-utilization-works",
+    "title": "How Does Credit Utilization Work?",
+    "description": "Credit utilization compares reported revolving balances with available revolving credit limits. Learn the formula, why statement timing matters, and why a lower ratio does not guarantee a score change.",
+    "category": "Credit Profile Mechanics",
+    "published": "2026-08-09",
+    "updated": "2026-08-09",
+    "readTime": "7 min read",
+    "answer": "Credit utilization is the percentage of available revolving credit currently reported as used. Divide a reported card balance by its credit limit and multiply by 100. Scoring models may evaluate both each card's utilization and total utilization across revolving accounts, but there is no single ratio that guarantees a particular score.",
+    "sections": [
+      {
+        "heading": "How do you calculate credit utilization?",
+        "paragraphs": [
+          "If a card reports a $1,000 balance and a $5,000 limit, its utilization is 20%. If several cards are open, total utilization is calculated by dividing the combined reported balances by the combined limits. Individual-card utilization can still matter even when the overall ratio is low.",
+          "The balance on a credit report is often the balance the issuer reported around the statement closing date, not necessarily today's live balance. Paying before the reporting date may change what is reported, but issuer practices vary."
+        ]
+      },
+      {
+        "heading": "Is 30% utilization a rule?",
+        "paragraphs": [
+          "Thirty percent is a commonly repeated benchmark, not a promise or a universal cutoff. In general, lower reported revolving utilization may be viewed more favorably than high utilization, but the effect depends on the scoring model and the rest of the file.",
+          "Do not carry interest-bearing debt just to create a balance. A reported zero balance on every card may be treated differently by some models than a small reported balance, but consumers should prioritize on-time payments and avoiding unnecessary interest."
+        ]
+      },
+      {
+        "heading": "How can a tradeline affect utilization?",
+        "paragraphs": [
+          "If an authorized user account reports with a limit and low balance, it may change the combined revolving utilization shown on a credit report. Whether that information affects a score—and by how much—depends on the model and whether it includes the authorized user account.",
+          "A high-limit tradeline is not a substitute for reducing balances on accounts you owe. Lenders may also review debt obligations, income, payment history, recent inquiries, and other underwriting information beyond a credit score."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What utilization percentage is best?",
+        "answer": "There is no percentage that guarantees a score. Lower reported revolving utilization is generally less risky than high utilization, but the entire credit file matters."
+      },
+      {
+        "question": "When does utilization update?",
+        "answer": "It typically updates after an issuer sends new account data to a consumer reporting company, often around a statement cycle, but schedules vary."
+      },
+      {
+        "question": "Does paying a card immediately update a credit report?",
+        "answer": "Usually not. The issuer must send updated data and the consumer reporting company must process it."
+      }
+    ],
+    "sources": [
+      {
+        "name": "myFICO: How owing money can affect FICO Scores",
+        "url": "https://www.myfico.com/credit-education/credit-scores/amount-of-debt"
+      },
+      {
+        "name": "CFPB: Understand your credit score",
+        "url": "https://www.consumerfinance.gov/consumer-tools/credit-reports-and-scores/understand-your-credit-score/"
+      }
+    ],
+    "related": [
+      "what-is-an-authorized-user-tradeline",
+      "how-long-do-tradelines-take-to-post",
+      "how-to-compare-tradelines-before-buying"
+    ]
+  },
+  {
+    "slug": "how-long-do-tradelines-take-to-post",
+    "title": "How Long Do Tradelines Take to Post?",
+    "description": "Tradeline posting depends on the card issuer's reporting cycle and bureau processing. Learn what statement dates, target windows, reporting cycles, and non-posting mean.",
+    "category": "Reporting Timelines",
+    "published": "2026-08-09",
+    "updated": "2026-08-09",
+    "readTime": "7 min read",
+    "answer": "There is no universal tradeline posting time. An authorized user account may appear after the issuer's next reporting cycle, followed by bureau processing. The estimated window depends on when the authorized user is added, the statement date, issuer reporting practices, and the bureau. A target date is an estimate, not a guarantee.",
+    "sections": [
+      {
+        "heading": "What determines the posting timeline?",
+        "paragraphs": [
+          "The purchase or addition deadline matters because the authorized user must be added before the issuer prepares its next report. The statement date is often used as a practical reference point, but issuers can report on another schedule or update different bureaus at different times.",
+          "After the issuer transmits data, each consumer reporting company processes and displays it on its own timeline. Credit monitoring services can also refresh later than the underlying bureau file."
+        ]
+      },
+      {
+        "heading": "What is a reporting cycle?",
+        "paragraphs": [
+          "A reporting cycle is one period in which the account is expected to remain associated with the authorized user's information and potentially report. A listing offering two cycles generally intends to keep the authorized user attached for two reporting periods, subject to issuer and account conditions.",
+          "More cycles can allow more time for reporting, but they do not guarantee that the account will appear or stay on every bureau for a particular length of time."
+        ]
+      },
+      {
+        "heading": "What should you do if a tradeline does not post?",
+        "paragraphs": [
+          "First, wait through the stated reporting window and verify the relevant bureau data rather than relying only on a score alert. Then follow the provider's non-posting procedure and supply only the documentation requested through a secure channel.",
+          "Do not send Social Security numbers, full account numbers, government identification, or credit-monitoring passwords through ordinary email or a general contact form. Review the non-posting and refund policy before purchase so you understand deadlines and available remedies."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Can a tradeline post before the estimated date?",
+        "answer": "It can, but timing varies by issuer and bureau. Treat any date as an estimate unless the issuer itself confirms otherwise."
+      },
+      {
+        "question": "Do all three bureaus update together?",
+        "answer": "Not necessarily. An issuer may report to different bureaus, and each bureau may process the data on a different schedule."
+      },
+      {
+        "question": "Does a credit-monitoring alert prove the tradeline posted?",
+        "answer": "An alert can help, but the underlying credit report is the better source for verifying account details."
+      }
+    ],
+    "sources": [
+      {
+        "name": "CFPB: Understand your credit report",
+        "url": "https://www.consumerfinance.gov/consumer-tools/credit-reports-and-scores/"
+      },
+      {
+        "name": "myFICO: Why a paid card can still show a reported balance",
+        "url": "https://support.myfico.com/hc/en-us/articles/360039242213-Why-does-my-credit-report-show-balances-when-they-re-paid-off-each-month"
+      }
+    ],
+    "related": [
+      "what-is-an-authorized-user-tradeline",
+      "how-credit-utilization-works",
+      "how-to-compare-tradelines-before-buying"
+    ]
+  },
+  {
+    "slug": "how-to-compare-tradelines-before-buying",
+    "title": "How to Compare Tradelines Before Buying",
+    "description": "Compare authorized user tradelines by account age, credit limit, balance, bank, statement date, reporting window, cycles, price, and profile fit before buying.",
+    "category": "Buyer Education",
+    "published": "2026-08-09",
+    "updated": "2026-08-09",
+    "readTime": "9 min read",
+    "answer": "Compare more than age and credit limit. Review the reported balance, payment history, issuer, purchase deadline, statement date, estimated reporting window, number of cycles, price, available spots, and how the account relates to the rest of the credit file. The most expensive option is not automatically the best fit.",
+    "sections": [
+      {
+        "heading": "Which tradeline details matter most?",
+        "paragraphs": [
+          "Account age can affect age-related profile measurements, while the limit and balance can affect revolving-utilization calculations if the account is included. Clean payment history is essential because negative history would not be a desirable addition.",
+          "Timing matters when a consumer has a legitimate upcoming application, but applying immediately after a tradeline appears can still be unwise. Lenders use different bureau data, scoring models, and underwriting rules, and some may discount authorized user accounts."
+        ]
+      },
+      {
+        "heading": "Why does profile fit matter?",
+        "paragraphs": [
+          "A thin file, a mature file with high balances, and a file with recent serious delinquencies present different considerations. An added account cannot erase accurate negative history, cure identity problems, or guarantee that a lender's requirements are met.",
+          "Before buying, review current reports for accuracy, identify which factors are actually limiting the profile, and decide whether paying down existing balances or waiting for recent inquiries to age may be more direct."
+        ]
+      },
+      {
+        "heading": "What are warning signs when shopping?",
+        "paragraphs": [
+          "Avoid guaranteed score increases, guaranteed approvals, claims that a CPN is a lawful replacement for a Social Security number, or instructions to submit false information. Be cautious when a seller will not provide clear dates, refund terms, disclosures, or a secure process.",
+          "Read the agreement and non-posting policy before payment. Confirm exactly what is being purchased, how long the authorized user is expected to remain on the account, what happens if it does not report, and which information must never be sent through an unsecured form."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Is an older tradeline always better?",
+        "answer": "No. Age is one characteristic; reported balance, limit, timing, account history, scoring treatment, and the rest of the credit file also matter."
+      },
+      {
+        "question": "Is a higher credit limit always better?",
+        "answer": "No. A high limit may affect utilization calculations if included, but it does not guarantee a score change or lender approval."
+      },
+      {
+        "question": "Should price be the main deciding factor?",
+        "answer": "No. Compare fit, terms, reporting window, cycles, provider policies, and risk—not price alone."
+      }
+    ],
+    "sources": [
+      {
+        "name": "CFPB: Understand your credit score",
+        "url": "https://www.consumerfinance.gov/consumer-tools/credit-reports-and-scores/understand-your-credit-score/"
+      },
+      {
+        "name": "myFICO: What's in a FICO Score",
+        "url": "https://www.myfico.com/credit-education/whats-in-your-credit-score"
+      }
+    ],
+    "related": [
+      "what-is-an-authorized-user-tradeline",
+      "how-credit-utilization-works",
+      "how-long-do-tradelines-take-to-post"
+    ]
+  },
+  {
+    "slug": "authorized-user-tradelines-myths-and-facts",
+    "title": "Authorized User Tradelines: Myths and Facts",
+    "description": "Separate common tradeline myths from facts about score guarantees, primary accounts, CPNs, reporting, lender treatment, and removing accurate negative information.",
+    "category": "Tradelines 101",
+    "published": "2026-08-09",
+    "updated": "2026-08-09",
+    "readTime": "8 min read",
+    "answer": "Authorized user tradelines are real credit-card accounts, but they are frequently oversold. They do not create a guaranteed score, become primary accounts, erase accurate negative information, or guarantee lender approval. Reporting and scoring treatment vary, and CPN or synthetic-identity schemes should be avoided.",
+    "sections": [
+      {
+        "heading": "Myth: A tradeline guarantees a specific score increase",
+        "paragraphs": [
+          "Fact: No provider controls a credit-scoring model. Different models can treat the same file differently, authorized user accounts may be discounted, and the rest of the file can outweigh any one account.",
+          "A provider can describe account characteristics and an estimated reporting window, but it cannot truthfully promise a precise number of points."
+        ]
+      },
+      {
+        "heading": "Myth: An authorized user account becomes your primary account",
+        "paragraphs": [
+          "Fact: The primary cardholder remains the account owner. An authorized user relationship does not establish the same contractual responsibility or payment history as opening and managing a primary account.",
+          "Lenders can distinguish authorized user accounts in credit-report data and may apply their own underwriting treatment."
+        ]
+      },
+      {
+        "heading": "Myth: A CPN is a legal credit shortcut",
+        "paragraphs": [
+          "Fact: A so-called credit privacy number is not a lawful substitute for a Social Security number on a credit application. Using false identifying information can create serious legal and financial risk.",
+          "Build credit using accurate identity information, review reports for errors through legitimate channels, pay obligations on time, and avoid anyone selling a new credit identity."
+        ]
+      },
+      {
+        "heading": "Myth: A tradeline removes negative information",
+        "paragraphs": [
+          "Fact: Adding an authorized user account does not delete accurate collections, late payments, charge-offs, public records, or inquiries. Inaccurate report information should be addressed through the consumer reporting company's dispute process.",
+          "A realistic strategy starts with the full report and focuses first on accuracy, on-time payments, balance reduction, and sustainable primary credit habits."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Can lenders see authorized user accounts?",
+        "answer": "Yes. Credit-report data can identify an account relationship as authorized user, and lenders may treat it according to their own rules."
+      },
+      {
+        "question": "Can a tradeline guarantee funding?",
+        "answer": "No. Funding decisions can include credit data, income, debt, cash flow, collateral, business history, and lender-specific rules."
+      },
+      {
+        "question": "Is a CPN the same as a Social Security number?",
+        "answer": "No. A CPN is not a lawful replacement for a Social Security number on a credit application."
+      }
+    ],
+    "sources": [
+      {
+        "name": "FTC: Consumer scam guidance",
+        "url": "https://consumer.ftc.gov/scams"
+      },
+      {
+        "name": "CFPB: Credit reports and scores",
+        "url": "https://www.consumerfinance.gov/consumer-tools/credit-reports-and-scores/"
+      }
+    ],
+    "related": [
+      "what-is-an-authorized-user-tradeline",
+      "how-to-compare-tradelines-before-buying",
+      "how-credit-utilization-works"
+    ]
+  }
+]

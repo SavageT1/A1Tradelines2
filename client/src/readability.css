@@ -227,6 +227,16 @@ footer a:focus-visible {
   color: #ffffff !important;
 }
 
+/* Dark editorial cards can be divs/asides, not only full-width sections. */
+.site-main .dark-feature h1,
+.site-main .dark-feature h2,
+.site-main .dark-feature h3,
+.site-main .dark-feature h4,
+.site-main .dark-feature p,
+.site-main .dark-feature li {
+  color: #ffffff !important;
+}
+
 @media (max-width: 640px) {
   h1 {
     font-size: clamp(2.4rem, 12vw, 3.65rem) !important;

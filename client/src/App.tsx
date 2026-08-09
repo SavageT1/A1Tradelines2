@@ -9,6 +9,7 @@ import About from "./pages/About";
 import BuyTradelines from "./pages/BuyTradelines";
 import FAQ from "./pages/FAQ";
 import Blog from "./pages/Blog";
+import BlogArticle from "./pages/BlogArticle";
 import Contact from "./pages/Contact";
 import ThankYou from "./pages/ThankYou";
 import BestTradelinesForSale from "./pages/BestTradelinesForSale";
@@ -42,6 +43,7 @@ function Router() {
         <Route path="/about" component={About} />
         <Route path="/buy-tradelines" component={BuyTradelines} />
         <Route path="/faq" component={FAQ} />
+        <Route path="/blog/:slug" component={BlogArticle} />
         <Route path="/blog" component={Blog} />
         <Route path="/contact" component={Contact} />
         <Route path="/thank-you" component={ThankYou} />
@@ -50,22 +52,50 @@ function Router() {
         <Route path="/disclaimer" component={Disclaimer} />
         <Route path="/broker-program" component={BrokerProgram} />
         <Route path="/non-posting-policy" component={NonPostingPolicy} />
-        <Route path="/best-tradelines-for-sale" component={BestTradelinesForSale} />
-        <Route path="/authorized-user-tradelines" component={AuthorizedUserTradelines} />
-        <Route path="/how-to-boost-credit-score-fast" component={HowToBoostCreditScore} />
+        <Route
+          path="/best-tradelines-for-sale"
+          component={BestTradelinesForSale}
+        />
+        <Route
+          path="/authorized-user-tradelines"
+          component={AuthorizedUserTradelines}
+        />
+        <Route
+          path="/how-to-boost-credit-score-fast"
+          component={HowToBoostCreditScore}
+        />
         <Route path="/how-it-works" component={HowItWorks} />
-        <Route path="/tradeline-buyers-guide" component={TradelineBuyersGuide} />
+        <Route
+          path="/tradeline-buyers-guide"
+          component={TradelineBuyersGuide}
+        />
         <Route path="/tradeline-glossary" component={TradelineGlossary} />
         <Route path="/tradeline-assessment" component={TradelineAssessment} />
-        <Route path="/buy-authorized-user-tradelines" component={BuyAuthorizedUserTradelines} />
+        <Route
+          path="/buy-authorized-user-tradelines"
+          component={BuyAuthorizedUserTradelines}
+        />
         <Route path="/tradelines-for-sale" component={TradelinesForSale} />
         <Route path="/seasoned-tradelines" component={SeasonedTradelines} />
-        <Route path="/best-tradelines-for-credit-utilization" component={BestTradelinesForCreditUtilization} />
-        <Route path="/how-long-do-tradelines-take-to-post" component={TradelinePostingTimeline} />
+        <Route
+          path="/best-tradelines-for-credit-utilization"
+          component={BestTradelinesForCreditUtilization}
+        />
+        <Route
+          path="/how-long-do-tradelines-take-to-post"
+          component={TradelinePostingTimeline}
+        />
         <Route path="/are-tradelines-legal" component={AreTradelinesLegal} />
-        <Route path="/can-tradelines-help-business-funding" component={TradelinesBusinessFunding} />
-        <Route path="/resources/faq-hub"><Redirect to="/faq" /></Route>
-        <Route path="/resources/:rest*"><Redirect to="/faq" /></Route>
+        <Route
+          path="/can-tradelines-help-business-funding"
+          component={TradelinesBusinessFunding}
+        />
+        <Route path="/resources/faq-hub">
+          <Redirect to="/faq" />
+        </Route>
+        <Route path="/resources/:rest*">
+          <Redirect to="/faq" />
+        </Route>
         <Route path="/404" component={NotFound} />
         <Route component={NotFound} />
       </Switch>

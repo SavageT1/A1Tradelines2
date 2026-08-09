@@ -8,7 +8,9 @@ export const setMetaTags = (tags: Record<string, string>): void => {
   Object.entries(tags).forEach(([name, content]) => {
     if (!content) return;
 
-    let element = document.head.querySelector<HTMLMetaElement>(`meta[name="${name}"]`);
+    let element = document.head.querySelector<HTMLMetaElement>(
+      `meta[name="${name}"]`
+    );
 
     if (!element) {
       element = document.createElement("meta");
@@ -25,7 +27,9 @@ export const setOpenGraphTags = (tags: Record<string, string>): void => {
     if (!content) return;
 
     const ogProperty = property.startsWith("og:") ? property : `og:${property}`;
-    let element = document.head.querySelector<HTMLMetaElement>(`meta[property="${ogProperty}"]`);
+    let element = document.head.querySelector<HTMLMetaElement>(
+      `meta[property="${ogProperty}"]`
+    );
 
     if (!element) {
       element = document.createElement("meta");
@@ -43,7 +47,8 @@ export const generateOrganizationSchema = (): SchemaMarkup => ({
   name: "A1 Tradelines",
   url: "https://a1tradelines.com",
   logo: "https://a1tradelines.com/logo.png",
-  description: "Authorized user tradeline matching, education, and reporting support. No credit outcome is guaranteed.",
+  description:
+    "Authorized user tradeline matching, education, and reporting support. No credit outcome is guaranteed.",
   sameAs: ["https://www.facebook.com/A1Tradelines/"],
   contactPoint: {
     "@type": "ContactPoint",
@@ -66,7 +71,8 @@ export const generateServiceSchema = (): SchemaMarkup => ({
   "@context": "https://schema.org",
   "@type": "Service",
   name: "Authorized User Tradeline Matching Service",
-  description: "Authorized user tradeline matching, education, and reporting support based on profile fit, account age, credit limit, reported balance, and reporting timeline. No credit outcome is guaranteed.",
+  description:
+    "Authorized user tradeline matching, education, and reporting support based on profile fit, account age, credit limit, reported balance, and reporting timeline. No credit outcome is guaranteed.",
   provider: {
     "@type": "Organization",
     name: "A1 Tradelines",
@@ -83,7 +89,8 @@ export const generateServiceSchema = (): SchemaMarkup => ({
       {
         "@type": "Offer",
         name: "Authorized User Tradeline Matching",
-        description: "Profile-based tradeline matching using account age, limit, reported balance, and timeline factors. Pricing varies by selected account and availability.",
+        description:
+          "Profile-based tradeline matching using account age, limit, reported balance, and timeline factors. Pricing varies by selected account and availability.",
         priceCurrency: "USD",
         availability: "https://schema.org/InStock",
         url: "https://a1tradelines.com/buy-tradelines",
@@ -92,10 +99,12 @@ export const generateServiceSchema = (): SchemaMarkup => ({
   },
 });
 
-export const generateFAQSchema = (faqs: Array<{ question: string; answer: string }>): SchemaMarkup => ({
+export const generateFAQSchema = (
+  faqs: Array<{ question: string; answer: string }>
+): SchemaMarkup => ({
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: faqs.map((faq) => ({
+  mainEntity: faqs.map(faq => ({
     "@type": "Question",
     name: faq.question,
     acceptedAnswer: {
@@ -110,21 +119,28 @@ export const generateArticleSchema = (article: {
   excerpt: string;
   content?: string;
   date: string;
+  modified?: string;
   category: string;
   readTime: string;
+  url?: string;
 }): SchemaMarkup => ({
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   headline: article.title,
   description: article.excerpt,
   articleBody: article.content || article.excerpt,
+  mainEntityOfPage: article.url
+    ? { "@type": "WebPage", "@id": article.url }
+    : undefined,
+  url: article.url,
+  image: "https://a1tradelines.com/og-image.svg",
   author: {
     "@type": "Organization",
     name: "A1 Tradelines",
     url: "https://a1tradelines.com",
   },
   datePublished: article.date,
-  dateModified: article.date,
+  dateModified: article.modified || article.date,
   publisher: {
     "@type": "Organization",
     name: "A1 Tradelines",
@@ -133,10 +149,17 @@ export const generateArticleSchema = (article: {
       url: "https://a1tradelines.com/logo.png",
     },
   },
-  keywords: [article.category, "authorized user tradelines", "tradeline matching", "credit profile education"],
+  keywords: [
+    article.category,
+    "authorized user tradelines",
+    "tradeline matching",
+    "credit profile education",
+  ],
 });
 
-export const generateAggregateRatingSchema = (testimonials: Array<{ rating: number }>): SchemaMarkup => ({
+export const generateAggregateRatingSchema = (
+  testimonials: Array<{ rating: number }>
+): SchemaMarkup => ({
   "@context": "https://schema.org",
   "@type": "AggregateRating",
   itemReviewed: {
@@ -144,7 +167,9 @@ export const generateAggregateRatingSchema = (testimonials: Array<{ rating: numb
     name: "A1 Tradelines",
     url: "https://a1tradelines.com",
   },
-  ratingValue: (testimonials.reduce((sum, t) => sum + t.rating, 0) / testimonials.length).toFixed(1),
+  ratingValue: (
+    testimonials.reduce((sum, t) => sum + t.rating, 0) / testimonials.length
+  ).toFixed(1),
   ratingCount: testimonials.length.toString(),
   bestRating: "5",
   worstRating: "1",
@@ -155,7 +180,8 @@ export const generateLocalBusinessSchema = (): SchemaMarkup => ({
   "@type": "ProfessionalService",
   name: "A1 Tradelines",
   image: "https://a1tradelines.com/logo.png",
-  description: "Authorized user tradeline matching, education, and reporting support. No credit outcome is guaranteed.",
+  description:
+    "Authorized user tradeline matching, education, and reporting support. No credit outcome is guaranteed.",
   telephone: "+1-908-767-5309",
   email: "info@a1tradelines.com",
   url: "https://a1tradelines.com",
@@ -171,7 +197,9 @@ export const generateLocalBusinessSchema = (): SchemaMarkup => ({
   },
 });
 
-export const generateBreadcrumbSchema = (items: Array<{ name: string; url: string }>): SchemaMarkup => ({
+export const generateBreadcrumbSchema = (
+  items: Array<{ name: string; url: string }>
+): SchemaMarkup => ({
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: items.map((item, index) => ({
@@ -188,23 +216,19 @@ export const generateWebSiteSchema = (): SchemaMarkup => ({
   name: "A1 Tradelines",
   alternateName: "A1 TradeLines",
   url: "https://a1tradelines.com",
-  potentialAction: {
-    "@type": "SearchAction",
-    target: {
-      "@type": "EntryPoint",
-      urlTemplate: "https://a1tradelines.com/?q={search_term_string}",
-    },
-    "query-input": "required name=search_term_string",
-  },
 });
 
-export const injectSchemaMarkup = (schema: SchemaMarkup | SchemaMarkup[]): void => {
+export const injectSchemaMarkup = (
+  schema: SchemaMarkup | SchemaMarkup[]
+): void => {
   const key = Array.isArray(schema)
-    ? schema.map((s) => s["@type"]).join(",")
+    ? schema.map(s => s["@type"]).join(",")
     : schema["@type"];
   const attrKey = `data-schema-types`;
 
-  const existing = document.head.querySelector(`script[type="application/ld+json"][${attrKey}="${key}"]`);
+  const existing = document.head.querySelector(
+    `script[type="application/ld+json"][${attrKey}="${key}"]`
+  );
   if (existing) {
     existing.remove();
   }
