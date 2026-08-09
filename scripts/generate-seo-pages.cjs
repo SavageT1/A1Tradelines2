@@ -277,6 +277,38 @@ function renderStaticArticle(article) {
   </article>`;
 }
 
+function renderStaticBlogIndex() {
+  const articleLinks = blogArticles
+    .map(
+      article => `<article>
+      <p>${escapeHtml(article.category)} · ${escapeHtml(article.readTime)}</p>
+      <h2><a href="/blog/${escapeHtml(article.slug)}">${escapeHtml(article.title)}</a></h2>
+      <p>${escapeHtml(article.description)}</p>
+    </article>`
+    )
+    .join("\n");
+
+  return `<main data-static-content="blog-index">
+    <header><h1>Tradeline Learning Center</h1><p>Direct, plain-language answers about authorized user tradelines, credit utilization, reporting timelines, buyer considerations, and common myths.</p></header>
+    <section aria-label="Tradeline education articles">${articleLinks}</section>
+    <p><a href="/buy-tradelines">Browse current tradeline options</a></p>
+  </main>`;
+}
+
+function renderStaticBrokerPage() {
+  return `<main data-static-content="broker-program">
+    <header>
+      <p>A1 Partner Program</p>
+      <h1>Serve more clients with a clearer tradeline workflow.</h1>
+      <p>Qualified credit professionals, agencies, and financial-service businesses can apply for broker access, partner resources, and eligible pricing.</p>
+      <p><a href="#broker-application">Apply to become a broker</a></p>
+    </header>
+    <section><h2>Tradeline broker resources</h2><p>Approved partners may request current inventory access, agency-ready resources, and eligible partner pricing, subject to review and program terms.</p></section>
+    <section id="broker-application"><h2>Broker application</h2><p>The interactive application asks for business contact information, business website, approximate monthly client volume, and a description of services. Do not submit sensitive identity or financial credentials.</p></section>
+    <p>Partner approval, inventory access, discounts, reporting, score changes, approvals, funding, and other outcomes are not guaranteed.</p>
+  </main>`;
+}
+
 function applyMetadata(baseHtml, route) {
   const canonical = `${SITE_URL}${route.path === "/" ? "/" : route.path}`;
   const schema = route.article
@@ -384,6 +416,16 @@ function writeRouteHtml(baseHtml, route) {
     html = html.replace(
       '<div id="root"></div>',
       `<div id="root">${renderStaticArticle(route.article)}</div>`
+    );
+  } else if (route.path === "/blog") {
+    html = html.replace(
+      '<div id="root"></div>',
+      `<div id="root">${renderStaticBlogIndex()}</div>`
+    );
+  } else if (route.path === "/broker-program") {
+    html = html.replace(
+      '<div id="root"></div>',
+      `<div id="root">${renderStaticBrokerPage()}</div>`
     );
   }
   if (route.path === "/") {
