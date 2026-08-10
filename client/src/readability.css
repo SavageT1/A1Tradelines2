@@ -237,6 +237,68 @@ footer a:focus-visible {
   color: #ffffff !important;
 }
 
+/*
+ * Trust-forward card palette: calm white/blue surfaces, strong navy edges,
+ * and green directional cues. The stronger boundary keeps light cards from
+ * disappearing into the editorial gray page background.
+ */
+.trust-card,
+.site-main .content-card,
+.site-main .glass-panel,
+.site-main .tradeline-card,
+.site-main .light-container,
+.site-main .section-container {
+  background: linear-gradient(145deg, #ffffff 0%, #f5f8fc 100%) !important;
+  border: 2px solid #17365d !important;
+  box-shadow: 0 14px 34px rgba(18, 33, 63, 0.1) !important;
+  color: #12213f !important;
+}
+
+.trust-card,
+.site-main .content-card,
+.site-main .tradeline-card {
+  border-radius: 1rem;
+}
+
+.trust-card:hover,
+.site-main .content-card:hover,
+.site-main .tradeline-card:hover {
+  border-color: #0f2d52 !important;
+  box-shadow: 0 18px 42px rgba(18, 33, 63, 0.16) !important;
+}
+
+.trust-card p,
+.site-main .content-card p,
+.site-main .tradeline-card p {
+  color: #334155;
+}
+
+.trust-card .lucide-arrow-right,
+.site-main .content-card .lucide-arrow-right,
+.site-main .tradeline-card .lucide-arrow-right {
+  color: #4cab2b !important;
+  stroke-width: 2.6;
+}
+
+/* Product detail tiles use the same navy edge as their parent card. */
+.site-main .tradeline-card > .grid > div {
+  background: #edf2f7 !important;
+  border: 1.5px solid #17365d !important;
+}
+
+/* Keep deliberately dark panels dark while retaining the stronger edge. */
+.site-main .dark-feature .content-card,
+.site-main section[class*="bg-[#12213f]"] .content-card {
+  background: #172a49 !important;
+  border-color: rgba(255, 255, 255, 0.28) !important;
+  color: #ffffff !important;
+}
+
+.site-main .dark-feature .content-card p,
+.site-main section[class*="bg-[#12213f]"] .content-card p {
+  color: #d9e2ef !important;
+}
+
 @media (max-width: 640px) {
   h1 {
     font-size: clamp(2.4rem, 12vw, 3.65rem) !important;
