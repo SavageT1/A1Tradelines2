@@ -7,6 +7,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import BuyTradelines from "./pages/BuyTradelines";
+import InventoryPreview from "./pages/InventoryPreview";
 import FAQ from "./pages/FAQ";
 import Blog from "./pages/Blog";
 import BlogArticle from "./pages/BlogArticle";
@@ -42,6 +43,7 @@ function Router() {
         <Route path="/" component={Home} />
         <Route path="/about" component={About} />
         <Route path="/buy-tradelines" component={BuyTradelines} />
+        <Route path="/inventory-preview" component={InventoryPreview} />
         <Route path="/faq" component={FAQ} />
         <Route path="/blog/:slug" component={BlogArticle} />
         <Route path="/blog" component={Blog} />
