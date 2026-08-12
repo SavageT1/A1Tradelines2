@@ -236,6 +236,21 @@ export default function BuyTradelines() {
         backgroundImage={TRADELINES_HERO}
       />
 
+      <section className="site-container py-8 sm:py-12">
+        <div className="overflow-hidden rounded-2xl border border-white/10 bg-black/20 shadow-2xl">
+          <div className="border-b border-white/10 px-5 py-4 sm:px-6">
+            <h2 className="text-left text-xl font-bold text-white">Live Tradeline Options</h2>
+            <p className="mt-1 text-sm text-white/60">View current options and pricing below.</p>
+          </div>
+          <iframe
+            title="Live A1 Tradeline Booking Page"
+            src="https://app.tradelinescore.com/authorized-user-tradeline/eXgzNXRrM1gyVXN3ZTBkMWo0U2xidz09"
+            className="block h-[900px] w-full border-0 bg-white sm:h-[1100px]"
+            allow="payment *"
+          />
+        </div>
+      </section>
+
       <section className="site-section">
         <div className="site-container">
           <SectionReveal>
