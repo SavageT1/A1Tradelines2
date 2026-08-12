@@ -251,7 +251,7 @@ export default function BuyTradelines() {
         </div>
       </section>
 
-      <section className="site-section">
+      <section className="hidden site-section" aria-hidden="true">
         <div className="site-container">
           <SectionReveal>
             <div className="mb-8 glass-panel rounded-2xl p-6 sm:p-8 border-l-4 border-emerald-500 bg-emerald-500/5">
