@@ -32,6 +32,10 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import Disclaimer from "./pages/Disclaimer";
 import BrokerProgram from "./pages/BrokerProgram";
+import TradelineCalculator from "./pages/TradelineCalculator";
+import HowToOrder from "./pages/HowToOrder";
+import PartnerReferrals from "./pages/PartnerReferrals";
+import ResourcesHub from "./pages/ResourcesHub";
 import Layout from "./components/Layout";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -53,6 +57,10 @@ function Router() {
         <Route path="/terms-of-service" component={TermsOfService} />
         <Route path="/disclaimer" component={Disclaimer} />
         <Route path="/broker-program" component={BrokerProgram} />
+        <Route path="/tradeline-calculator" component={TradelineCalculator} />
+        <Route path="/how-to-order-tradelines" component={HowToOrder} />
+        <Route path="/partner-referrals" component={PartnerReferrals} />
+        <Route path="/resources" component={ResourcesHub} />
         <Route path="/non-posting-policy" component={NonPostingPolicy} />
         <Route
           path="/best-tradelines-for-sale"
