@@ -249,9 +249,9 @@ export default function BuyTradelines() {
               ["Posting date", "When the account may show on a report."],
               ["Price", "What the option costs."],
             ].map(([term, meaning]) => (
-              <div key={term} className="rounded-lg border border-white/10 bg-white/[0.04] p-3">
-                <p className="text-xs font-bold uppercase tracking-wider text-lime-300">{term}</p>
-                <p className="mt-1 text-sm leading-5 text-white/70">{meaning}</p>
+              <div key={term} className="rounded-lg border border-slate-200 bg-white p-3 shadow-sm">
+                <p className="text-xs font-bold uppercase tracking-wider text-[#12213f]">{term}</p>
+                <p className="mt-1 text-sm leading-5 text-slate-700">{meaning}</p>
               </div>
             ))}
           </div>
