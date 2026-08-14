@@ -46,6 +46,11 @@ export default function BrokerProgram() {
       title: "Agency-ready support",
       text: "Use practical resources designed for qualified agencies serving their own clients.",
     },
+    {
+      icon: Building2,
+      title: "White-label support",
+      text: "Qualified partners may offer eligible A1 resources under their own brand, subject to approval and program terms.",
+    },
   ];
 
   const schema = [
@@ -124,7 +129,7 @@ export default function BrokerProgram() {
     <div className="bg-[#f4f5f7] pb-20 pt-32">
       <SEOHead
         title="Tradeline Broker Program & Application | A1 Tradelines"
-        description="Apply for the A1 Tradelines broker program. Qualified agencies can request inventory access, partner resources, and eligible pricing."
+        description="Apply for the A1 Tradelines broker program. Qualified agencies can request inventory access, white-label support, partner resources, and eligible pricing."
         canonical="https://a1tradelines.com/broker-program"
         keywords="tradeline broker program, tradeline broker application, wholesale tradelines, authorized user tradeline partner"
         schema={schema}
@@ -141,8 +146,8 @@ export default function BrokerProgram() {
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-700">
               Qualified credit professionals, agencies, and financial-service
-              businesses can apply for broker access, partner resources, and
-              eligible pricing.
+              businesses can apply for broker access, white-label support,
+              partner resources, and eligible pricing.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <a
@@ -182,7 +187,7 @@ export default function BrokerProgram() {
 
       <section className="px-5 py-16 sm:px-8 lg:px-12">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-5 md:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {cards.map(({ icon: Icon, title, text }) => (
               <div
                 key={title}
