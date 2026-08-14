@@ -104,7 +104,6 @@ export default function Contact() {
                   </div>
                   <div className="mb-5 p-4 rounded-xl border border-neon/20 bg-neon/10 flex items-start gap-3">
                     <ShieldCheck className="w-5 h-5 text-neon shrink-0 mt-0.5" />
-                    <p className="text-xs sm:text-sm text-white/75 leading-relaxed">Do not submit Social Security numbers, government ID numbers, credit monitoring passwords, banking logins, card numbers, or sensitive identity information through this form.</p>
                   </div>
                   {error && (
                     <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-5 p-4 bg-red-500/10 border border-red-500/30 rounded-lg flex items-start gap-3">
