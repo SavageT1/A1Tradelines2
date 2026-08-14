@@ -242,6 +242,19 @@ export default function BuyTradelines() {
             <h2 className="text-left text-xl font-bold text-white">Live Tradeline Options</h2>
             <p className="mt-1 text-sm text-white/60">View current options and pricing below.</p>
           </div>
+          <div className="grid gap-3 border-b border-white/10 bg-[#0d1b33] p-5 sm:grid-cols-2 sm:p-6 lg:grid-cols-4">
+            {[
+              ["Credit limit", "The card's total limit."],
+              ["Account age", "How long the account has been open."],
+              ["Posting date", "When the account may show on a report."],
+              ["Price", "What the option costs."],
+            ].map(([term, meaning]) => (
+              <div key={term} className="rounded-lg border border-white/10 bg-white/[0.04] p-3">
+                <p className="text-xs font-bold uppercase tracking-wider text-lime-300">{term}</p>
+                <p className="mt-1 text-sm leading-5 text-white/70">{meaning}</p>
+              </div>
+            ))}
+          </div>
           <iframe
             title="Live A1 Tradeline Booking Page"
             src="https://app.tradelinescore.com/authorized-user-tradeline/eXgzNXRrM1gyVXN3ZTBkMWo0U2xidz09"
