@@ -122,7 +122,7 @@ export default function TradelineBuyersGuide() {
                 <div>
                   <h2 className="text-left text-white mb-3">Avoid Red Flags</h2>
                   <p className="text-white/70 mb-4">
-                    Be cautious of any provider promising exact score increases, guaranteed funding, guaranteed mortgage approval, CPN use, fake profiles, or primary tradelines. Those claims can create serious risk.
+                    Be cautious of any provider promising exact score increases, guaranteed funding, guaranteed mortgage approval, CPN use, fake profiles, or shortcuts that bypass normal lender review. Those claims can create serious risk.
                   </p>
                   <p className="text-white/70">
                     A1 Tradelines focuses on authorized user tradeline matching, education, and transparent limitations.

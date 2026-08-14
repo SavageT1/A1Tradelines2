@@ -36,10 +36,6 @@ const terms = [
     definition: "A tradeline with established account age and payment history. Older accounts may be desirable, but age alone does not guarantee results.",
   },
   {
-    term: "Primary Tradeline",
-    definition: "An account where the person is the primary account holder or borrower. A1 Tradelines does not sell primary tradelines.",
-  },
-  {
     term: "CPN",
     definition: "A term often used online to refer to a credit profile number. A1 Tradelines does not support CPNs, synthetic identities, fake profiles, or identity manipulation.",
   },
@@ -59,9 +55,9 @@ export default function TradelineGlossary() {
     <div>
       <SEOHead
         title="Tradeline Glossary | Authorized User Tradeline Terms"
-        description="Understand common tradeline terms including authorized user, credit utilization, posting date, statement date, seasoned tradeline, primary tradeline, CPN, and non-posting."
+        description="Understand common tradeline terms including authorized user, credit utilization, posting date, statement date, seasoned tradeline, CPN, and non-posting."
         canonical="https://a1tradelines.com/tradeline-glossary"
-        keywords="tradeline glossary, authorized user meaning, credit utilization, posting date, statement date, seasoned tradeline, primary tradeline, CPN"
+        keywords="tradeline glossary, authorized user meaning, credit utilization, posting date, statement date, seasoned tradeline, CPN"
         schema={schema}
       />
       <PageHero

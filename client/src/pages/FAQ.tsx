@@ -85,10 +85,6 @@ const FAQ_ITEMS = [
     answer: "Posting policies depend on the product terms, vendor rules, bank behavior, and bureau reporting. A1 Tradelines can review the situation and explain available options under the applicable purchase terms, but no credit score, approval, or posting outcome is guaranteed.",
   },
   {
-    question: "Do you sell primary tradelines?",
-    answer: "No. A1 Tradelines focuses on authorized user tradelines and profile education. We do not sell primary tradelines, fake accounts, synthetic identities, or guaranteed credit outcomes.",
-  },
-  {
     question: "Do you accept CPNs or synthetic identities?",
     answer: "No. A1 Tradelines does not support CPNs, synthetic identities, fake credit profiles, identity manipulation, or fraudulent applications. Clients should use accurate, lawful identity information only.",
   },
