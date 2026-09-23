@@ -17,12 +17,15 @@ export function BookingModal({
   onClose,
   answers,
   source,
+  variant = 'reserve',
 }: {
   open: boolean
   onClose: () => void
   answers?: Record<string, string>
   /** Where the booking flow was started from: 'quiz' | 'pricing' | 'inventory' | 'simulator' */
   source?: string
+  /** 'reserve' = standard free-consultation framing; 'callback' = "call me back" framing */
+  variant?: 'reserve' | 'callback'
 }) {
   useEffect(() => {
     if (!open) return
@@ -43,11 +46,13 @@ export function BookingModal({
 
   const summaryEntries = answers ? Object.entries(answers).filter(([key]) => summaryLabels[key]) : []
 
+  const isCallback = variant === 'callback'
+
   return (
-    <div className="fixed inset-0 z-50 flex flex-col bg-background" role="dialog" aria-modal="true" aria-label="Book your free consultation">
+    <div className="fixed inset-0 z-50 flex flex-col bg-background" role="dialog" aria-modal="true" aria-label={isCallback ? 'Request a callback' : 'Book your free consultation'}>
       <header className="flex items-center justify-between border-b border-border px-5 py-4">
         <span className="font-sans text-lg font-semibold tracking-[-0.04em]">
-          {site.name} <span className="font-normal text-primary">Free consultation</span>
+          {site.name} <span className="font-normal text-primary">{isCallback ? 'Callback request' : 'Free consultation'}</span>
         </span>
         <button
           onClick={onClose}
@@ -60,10 +65,11 @@ export function BookingModal({
 
       <div className="flex-1 overflow-y-auto">
         <div className="mx-auto w-full max-w-2xl px-5 py-8 lg:py-12">
-          <h1 className="text-balance text-3xl font-semibold tracking-[-0.04em]">Reserve your free consultation</h1>
+          <h1 className="text-balance text-3xl font-semibold tracking-[-0.04em]">{isCallback ? 'Have us call you back' : 'Reserve your free consultation'}</h1>
           <p className="mt-3 text-sm leading-6 text-muted-foreground">
-            Share your details below and one of our specialists will reach out to confirm the tradelines that fit your
-            goals. No payment is collected until you confirm your pick is the right fit.
+            {isCallback
+              ? 'Drop your details below and a specialist will call you back — usually the same business day. No pressure, and no payment talk until you decide a tradeline is the right fit.'
+              : 'Share your details below and one of our specialists will reach out to confirm the tradelines that fit your goals. No payment is collected until you confirm your pick is the right fit.'}
           </p>
 
           {summaryEntries.length > 0 && (

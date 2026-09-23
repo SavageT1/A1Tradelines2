@@ -3,6 +3,7 @@ import { ArrowUpRight, Check, ShieldCheck } from 'lucide-react'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import { JsonLd, faqSchema } from '@/components/json-ld'
+import { ContactCtas } from '@/components/contact-ctas'
 import { HighlightTradelines } from '@/components/highlight-tradelines'
 import { FeaturedTradelines } from '@/components/featured-tradelines'
 import { site } from '@/lib/site'
@@ -32,13 +33,15 @@ export function ServicePage({ content }: { content: ServiceContent }) {
               <HighlightTradelines text={content.title} /> <span className="text-primary">{content.highlight}</span>
             </h1>
             <p className="mt-8 max-w-2xl text-pretty text-lg leading-7 text-muted-foreground">{content.intro}</p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/inventory" className="inline-flex items-center rounded-full bg-primary px-6 py-3.5 text-sm font-medium text-primary-foreground hover:bg-primary/90">
-                View available tradelines <ArrowUpRight className="ml-2 size-4" />
-              </Link>
-              <a href={site.phoneHref} className="inline-flex items-center rounded-full border border-border px-6 py-3.5 text-sm font-medium hover:bg-secondary">
-                Call {site.phone}
-              </a>
+            <div className="mt-8">
+              <ContactCtas
+                source={content.slug}
+                primary={
+                  <Link href="/inventory" className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90">
+                    View available tradelines <ArrowUpRight className="ml-2 size-4" />
+                  </Link>
+                }
+              />
             </div>
           </div>
         </section>

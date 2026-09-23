@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowUpRight, Phone } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
-import { site } from '@/lib/site'
+import { ContactCtas } from '@/components/contact-ctas'
 
 export const metadata: Metadata = {
   title: 'About A1 Tradelines — Transparent Tradeline Marketplace',
@@ -53,15 +53,19 @@ export default function AboutPage() {
           <div>
             <h2 className="text-3xl font-semibold tracking-[-0.04em] lg:text-4xl">Talk to a real person.</h2>
             <p className="mt-3 max-w-md text-sm leading-6 text-muted-foreground">
-              Have a question before you buy? Call us and we will help you compare options with zero pressure.
+              Have a question before you buy? Call, text, or have us call you back — we will help you compare options with zero pressure.
             </p>
-            <a href={site.phoneHref} className="mt-5 inline-flex items-center gap-2 text-lg font-medium text-primary">
-              <Phone className="size-5" /> {site.phone}
-            </a>
+            <div className="mt-6">
+              <ContactCtas
+                source="about"
+                primary={
+                  <Link href="/inventory" className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90">
+                    Browse inventory <ArrowUpRight className="ml-2 size-4" />
+                  </Link>
+                }
+              />
+            </div>
           </div>
-          <Link href="/inventory" className="inline-flex shrink-0 items-center self-start rounded-full bg-primary px-6 py-4 text-sm font-medium text-primary-foreground hover:bg-primary/90 md:self-auto">
-            Browse inventory <ArrowUpRight className="ml-2 size-4" />
-          </Link>
         </div>
       </section>
 

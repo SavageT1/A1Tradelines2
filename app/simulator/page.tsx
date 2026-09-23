@@ -4,7 +4,7 @@ import { ArrowUpRight, Info, Sparkles } from 'lucide-react'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import { TradelineSimulator } from '@/components/tradeline-simulator'
-import { site } from '@/lib/site'
+import { ContactCtas } from '@/components/contact-ctas'
 
 export const metadata: Metadata = {
   title: 'Tradeline Wizard Score Simulator — Estimate the Effect on Your Credit',
@@ -110,19 +110,19 @@ export default function SimulatorPage() {
             Reserving costs nothing. A specialist confirms availability and fit first — payment only
             happens after you confirm your pick, through secure escrow.
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
-            <Link
-              href="/inventory"
-              className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-transform hover:-translate-y-0.5"
-            >
-              Compare &amp; reserve <ArrowUpRight className="ml-1 size-4" />
-            </Link>
-            <a
-              href={site.phoneHref}
-              className="inline-flex items-center justify-center rounded-full border border-border px-6 py-3 text-sm font-medium transition-colors hover:bg-secondary"
-            >
-              Call {site.phone}
-            </a>
+          <div className="mt-8">
+            <ContactCtas
+              source="simulator-page"
+              className="justify-center"
+              primary={
+                <Link
+                  href="/inventory"
+                  className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-transform hover:-translate-y-0.5"
+                >
+                  Compare &amp; reserve <ArrowUpRight className="ml-1 size-4" />
+                </Link>
+              }
+            />
           </div>
         </div>
       </section>

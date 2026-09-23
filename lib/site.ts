@@ -7,6 +7,7 @@ export const site = {
     'A1 Tradelines is a transparent marketplace to buy seasoned authorized-user tradelines. Compare account age, credit limit, utilization, and bureau reporting, then buy with our posting guarantee: reassignment or refund per the purchase agreement.',
   phone: '908-767-5309',
   phoneHref: 'tel:9087675309',
+  smsHref: 'sms:+19087675309',
   email: 'info@a1tradelines.com',
   emailHref: 'mailto:info@a1tradelines.com',
   city: 'Newark',
