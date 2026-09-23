@@ -17,6 +17,7 @@ const serviceLinks = [
 
 const mainLinks = [
   { href: '/inventory', label: 'Inventory' },
+  { href: '/simulator', label: 'Impact simulator' },
   { href: '/pricing', label: 'Pricing' },
   { href: '/blog', label: 'Blog' },
   { href: '/about', label: 'About' },
