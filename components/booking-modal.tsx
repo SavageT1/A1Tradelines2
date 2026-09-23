@@ -68,7 +68,7 @@ export function BookingModal({
           <h1 className="text-balance text-3xl font-semibold tracking-[-0.04em]">{isCallback ? 'Have us call you back' : 'Reserve your free consultation'}</h1>
           <p className="mt-3 text-sm leading-6 text-muted-foreground">
             {isCallback
-              ? 'Drop your details below and a specialist will call you back — usually the same business day. No pressure, and no payment talk until you decide a tradeline is the right fit.'
+              ? 'Drop your details below and a specialist will call you back. No pressure, and no payment talk until you decide a tradeline is the right fit.'
               : 'Share your details below and one of our specialists will reach out to confirm the tradelines that fit your goals. No payment is collected until you confirm your pick is the right fit.'}
           </p>
 
