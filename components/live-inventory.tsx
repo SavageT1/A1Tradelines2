@@ -14,6 +14,7 @@ type Dir = 'asc' | 'desc'
 
 const sortOptions: { value: string; label: string }[] = [
   { value: 'best:desc', label: 'Best tradelines' },
+  { value: 'posts:asc', label: 'Posting date: soonest first' },
   { value: 'price:asc', label: 'Price: low to high' },
   { value: 'price:desc', label: 'Price: high to low' },
   { value: 'limit:desc', label: 'Highest limit' },
