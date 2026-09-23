@@ -63,7 +63,10 @@ export default function OgImage() {
           A1 Tradelines
         </div>
         <div style={{ marginTop: 18, fontSize: 34, color: '#93a89b' }}>
-          Buy tradelines with confidence.
+          Compare age, limit &amp; bureau reporting.
+        </div>
+        <div style={{ marginTop: 10, fontSize: 34, fontWeight: 700, color: '#ffffff' }}>
+          Backed by our posting guarantee.
         </div>
         <div
           style={{
@@ -74,7 +77,7 @@ export default function OgImage() {
             letterSpacing: 1,
           }}
         >
-          a1tradelines.com
+          Free expert consultation · a1tradelines.com
         </div>
       </div>
     ),
