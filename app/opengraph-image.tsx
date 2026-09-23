@@ -5,6 +5,11 @@ export const alt = 'A1 Tradelines — buy seasoned authorized-user tradelines'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
+// Official A1 monogram (near-black "A" + forest-green "1"), knocked out to white
+// for use on the dark brand background.
+const MONOGRAM_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 314 240"><path fill="#ffffff" d="M144 0 L0 240 L122 240 L151 189 L90 189 L143 100 L215 240 L276 240 Z"/><path fill="#ffffff" d="M269 0 L314 0 L314 240 L292 240 L261 189 L261 63 L220 90 L195 55 Z"/></svg>`
+const MONOGRAM_SRC = `data:image/svg+xml,${encodeURIComponent(MONOGRAM_SVG)}`
+
 export default function OgImage() {
   return new ImageResponse(
     (
@@ -14,27 +19,63 @@ export default function OgImage() {
           height: '100%',
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'space-between',
-          background: '#f7f5ee',
-          padding: '80px',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: '#111417',
+          position: 'relative',
           fontFamily: 'Arial, sans-serif',
         }}
       >
-        <div style={{ display: 'flex', fontSize: 34, fontWeight: 600, color: '#16351f' }}>
-          A1 <span style={{ color: '#1f5133', marginLeft: 10 }}>Tradelines</span>
+        {/* soft forest-green glow, top right */}
+        <div
+          style={{
+            position: 'absolute',
+            top: -260,
+            right: -160,
+            width: 720,
+            height: 720,
+            borderRadius: 9999,
+            background: 'rgba(10, 79, 41, 0.5)',
+          }}
+        />
+        {/* soft forest-green glow, bottom left */}
+        <div
+          style={{
+            position: 'absolute',
+            bottom: -300,
+            left: -180,
+            width: 640,
+            height: 640,
+            borderRadius: 9999,
+            background: 'rgba(10, 79, 41, 0.35)',
+          }}
+        />
+        <img src={MONOGRAM_SRC} width={250} height={191} alt="" />
+        <div
+          style={{
+            marginTop: 28,
+            fontSize: 76,
+            fontWeight: 800,
+            color: '#ffffff',
+            letterSpacing: -2,
+          }}
+        >
+          A1 Tradelines
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <div style={{ fontSize: 84, fontWeight: 700, color: '#16351f', lineHeight: 1.02, letterSpacing: -3 }}>
-            Buy tradelines
-          </div>
-          <div style={{ fontSize: 84, fontWeight: 700, color: '#1f5133', lineHeight: 1.02, letterSpacing: -3 }}>
-            with confidence.
-          </div>
-          <div style={{ fontSize: 30, color: '#4b5a4f', marginTop: 28 }}>
-            Compare age, limit, and bureau reporting. Backed by our posting guarantee.
-          </div>
+        <div style={{ marginTop: 18, fontSize: 34, color: '#93a89b' }}>
+          Buy tradelines with confidence.
         </div>
-        <div style={{ display: 'flex', fontSize: 26, color: '#4b5a4f' }}>www.a1tradelines.com</div>
+        <div
+          style={{
+            position: 'absolute',
+            bottom: 44,
+            fontSize: 26,
+            color: '#3d8b5f',
+            letterSpacing: 1,
+          }}
+        >
+          a1tradelines.com
+        </div>
       </div>
     ),
     { ...size },
