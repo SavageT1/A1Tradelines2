@@ -114,7 +114,7 @@ export default function OgImage() {
               borderRadius: 999,
             }}
           >
-            Get my free analysis →
+            View available tradelines →
           </div>
         </div>
       </div>
