@@ -36,7 +36,7 @@ export default function PricingPage() {
             Clear <span className="text-primary">prices.</span> No surprises.
           </h1>
           <p className="mt-8 max-w-2xl text-lg leading-7 text-muted-foreground">
-            Every tradeline is priced by its age, credit limit, and reporting. What you see is what you pay, and it is backed by our money-back guarantee. Prices below are live — they update as inventory changes.
+            Every tradeline is priced by its age, credit limit, and reporting. What you see is what you pay, and it is backed by our posting guarantee: reassignment or refund per the purchase agreement. Prices below are live — they update as inventory changes.
           </p>
         </div>
       </section>

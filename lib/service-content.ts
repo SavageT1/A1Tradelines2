@@ -5,7 +5,7 @@ export const serviceContent: Record<string, ServiceContent & { metaTitle: string
     slug: 'tradelines',
     metaTitle: 'Buy Tradelines Online — Seasoned Authorized-User Tradelines',
     metaDescription:
-      'Buy seasoned tradelines from A1 Tradelines. Compare account age, credit limit, utilization, and reporting dates shown on every listing, with a 100% money-back guarantee if it does not post.',
+      'Buy seasoned tradelines from A1 Tradelines. Compare account age, credit limit, utilization, and reporting dates shown on every listing, with our posting guarantee: reassignment or refund per the purchase agreement.',
     eyebrow: 'Buy tradelines',
     title: 'Buy tradelines',
     highlight: 'the transparent way.',
@@ -21,19 +21,19 @@ export const serviceContent: Record<string, ServiceContent & { metaTitle: string
       'Age, credit limit, and utilization on every listing',
       'reporting dates shown on every listing',
       'Clear posting-window expectations',
-      '100% money-back guarantee if it does not post',
+      'Posting guarantee: reassignment or refund',
     ],
     faqs: [
       { question: 'Is buying a tradeline legal?', answer: 'Being added as an authorized user is a common, legal banking practice. A1 Tradelines does not offer credit repair, and we never encourage misrepresenting your identity on any application.' },
       { question: 'Will a tradeline guarantee a higher score?', answer: 'No. Scores depend on your full credit profile. We do not promise a specific increase, and we are transparent about that up front.' },
-      { question: 'What if the tradeline does not post?', answer: 'If your purchased tradeline does not post to your credit report, you get 100% of your money back under the terms of your purchase agreement.' },
+      { question: 'What if the tradeline does not post?', answer: 'If your purchased tradeline does not post to your credit report, you are covered by reassignment or refund under the terms of your purchase agreement.' },
     ],
   },
   'authorized-user-tradelines': {
     slug: 'authorized-user-tradelines',
     metaTitle: 'Authorized User Tradelines — How They Work & What to Buy',
     metaDescription:
-      'Learn how authorized user tradelines work and buy seasoned tradelines from A1 Tradelines. Transparent details, reporting dates shown on every listing, and a money-back guarantee if it does not post.',
+      'Learn how authorized user tradelines work and buy seasoned tradelines from A1 Tradelines. Transparent details, reporting dates shown on every listing, and our posting guarantee: reassignment or refund per the purchase agreement.',
     eyebrow: 'Authorized user tradelines',
     title: 'Authorized user tradelines,',
     highlight: 'explained.',
@@ -49,7 +49,7 @@ export const serviceContent: Record<string, ServiceContent & { metaTitle: string
       'You never receive or use the physical card',
       'Age and limit clearly listed on each tradeline',
       'reporting dates shown on every listing available',
-      'Money-back guarantee if it does not post',
+      'Posting guarantee: reassignment or refund',
     ],
     faqs: [
       { question: 'Do I get to use the credit card?', answer: 'No. You are added as an authorized user for reporting purposes only. You never receive or spend on the account.' },
@@ -61,7 +61,7 @@ export const serviceContent: Record<string, ServiceContent & { metaTitle: string
     slug: 'aged-tradelines',
     metaTitle: 'Aged Tradelines for Sale — Seasoned High-Limit Tradelines',
     metaDescription:
-      'Shop aged and seasoned tradelines from A1 Tradelines. Older tradelines with high limits and low utilization, reporting dates shown on every listing, and a money-back guarantee if it does not post.',
+      'Shop aged and seasoned tradelines from A1 Tradelines. Older tradelines with high limits and low utilization, reporting dates shown on every listing, and our posting guarantee: reassignment or refund per the purchase agreement.',
     eyebrow: 'Aged tradelines',
     title: 'Aged, seasoned tradelines',
     highlight: 'you can compare.',
@@ -77,7 +77,7 @@ export const serviceContent: Record<string, ServiceContent & { metaTitle: string
       'High-limit, low-utilization options',
       'Clear age and limit on every listing',
       'reporting dates shown on every listing',
-      'Money-back guarantee if it does not post',
+      'Posting guarantee: reassignment or refund',
     ],
     faqs: [
       { question: 'What counts as an aged tradeline?', answer: 'Generally a tradeline with several or more years of history. We list the exact age of each tradeline so there is no guesswork.' },
@@ -89,7 +89,7 @@ export const serviceContent: Record<string, ServiceContent & { metaTitle: string
     slug: 'tradelines-for-mortgage',
     metaTitle: 'Tradelines for a Mortgage — Prepare Your Credit Profile',
     metaDescription:
-      'Considering tradelines before a mortgage application? A1 Tradelines explains realistic expectations and offers seasoned tradelines with a money-back guarantee if they do not post.',
+      'Considering tradelines before a mortgage application? A1 Tradelines explains realistic expectations and offers seasoned tradelines backed by our posting guarantee: reassignment or refund per the purchase agreement.',
     eyebrow: 'Tradelines for a mortgage',
     title: 'Preparing for a mortgage',
     highlight: 'with clear expectations.',
@@ -105,7 +105,7 @@ export const serviceContent: Record<string, ServiceContent & { metaTitle: string
       'Clear posting windows so you can plan timing',
       'reporting dates shown on every listing',
       'Honest guidance, no overpromises',
-      'Money-back guarantee if it does not post',
+      'Posting guarantee: reassignment or refund',
     ],
     faqs: [
       { question: 'Will a tradeline get me approved for a mortgage?', answer: 'No one can promise that. Approval depends on your full financial picture. A tradeline is one part of a profile, not a guarantee.' },
@@ -117,7 +117,7 @@ export const serviceContent: Record<string, ServiceContent & { metaTitle: string
     slug: 'tradelines-for-auto-loans',
     metaTitle: 'Tradelines for Auto Loans — What to Know Before You Buy',
     metaDescription:
-      'A transparent guide to tradelines before an auto loan, plus seasoned tradelines from A1 Tradelines with reporting dates shown on every listing and a money-back guarantee if they do not post.',
+      'A transparent guide to tradelines before an auto loan, plus seasoned tradelines from A1 Tradelines with reporting dates shown on every listing backed by our posting guarantee: reassignment or refund per the purchase agreement.',
     eyebrow: 'Tradelines for auto loans',
     title: 'Getting ready for an auto loan',
     highlight: 'the honest way.',
@@ -133,7 +133,7 @@ export const serviceContent: Record<string, ServiceContent & { metaTitle: string
       'Posting windows to help you plan around shopping',
       'reporting dates shown on every listing',
       'No pressure and no inflated promises',
-      'Money-back guarantee if it does not post',
+      'Posting guarantee: reassignment or refund',
     ],
     faqs: [
       { question: 'Can a tradeline lower my auto loan rate?', answer: 'We cannot promise that. Rates depend on the lender, your income, and your overall profile. A tradeline is only one factor.' },
@@ -161,7 +161,7 @@ export const serviceContent: Record<string, ServiceContent & { metaTitle: string
       'Expected posting windows on every listing',
       'Honest limits, no score promises',
       'reporting dates shown on every listing',
-      'Money-back guarantee if it does not post',
+      'Posting guarantee: reassignment or refund',
     ],
     faqs: [
       { question: 'How fast does a tradeline show up?', answer: 'Usually within one to two weeks, tied to the tradeline\u2019s statement date. Each listing shows the expected window.' },

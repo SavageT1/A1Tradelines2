@@ -31,7 +31,7 @@ export default function OgImage() {
             with confidence.
           </div>
           <div style={{ fontSize: 30, color: '#4b5a4f', marginTop: 28 }}>
-            Compare age, limit, and bureau reporting. 100% money-back guarantee if it does not post.
+            Compare age, limit, and bureau reporting. Backed by our posting guarantee.
           </div>
         </div>
         <div style={{ display: 'flex', fontSize: 26, color: '#4b5a4f' }}>www.a1tradelines.com</div>
