@@ -50,11 +50,11 @@ export default function OgImage() {
             background: 'rgba(10, 79, 41, 0.35)',
           }}
         />
-        <img src={MONOGRAM_SRC} width={250} height={191} alt="" />
+        <img src={MONOGRAM_SRC} width={330} height={252} alt="" style={{ marginTop: -30 }} />
         <div
           style={{
-            marginTop: 28,
-            fontSize: 76,
+            marginTop: 18,
+            fontSize: 88,
             fontWeight: 800,
             color: '#ffffff',
             letterSpacing: -2,
@@ -62,18 +62,18 @@ export default function OgImage() {
         >
           A1 Tradelines
         </div>
-        <div style={{ marginTop: 18, fontSize: 34, color: '#93a89b' }}>
+        <div style={{ marginTop: 22, fontSize: 42, color: '#d5ded8' }}>
           Compare age, limit &amp; bureau reporting.
         </div>
-        <div style={{ marginTop: 10, fontSize: 34, fontWeight: 700, color: '#ffffff' }}>
+        <div style={{ marginTop: 12, fontSize: 42, fontWeight: 700, color: '#ffffff' }}>
           Backed by our posting guarantee.
         </div>
         <div
           style={{
             position: 'absolute',
-            bottom: 44,
-            fontSize: 26,
-            color: '#3d8b5f',
+            bottom: 40,
+            fontSize: 32,
+            color: '#8fe3ae',
             letterSpacing: 1,
           }}
         >
