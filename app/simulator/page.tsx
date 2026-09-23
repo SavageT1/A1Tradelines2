@@ -26,6 +26,11 @@ export default function SimulatorPage() {
 
       <section className="mx-auto max-w-7xl px-6 pb-10 pt-16 lg:px-10 lg:pb-14 lg:pt-24">
         <div className="max-w-3xl">
+          <img
+            src="/brand/a1-wizard-monogram.svg"
+            alt="Tradeline Wizard monogram"
+            className="mb-6 h-20 w-auto sm:h-24"
+          />
           <p className="mb-6 flex items-center gap-2 font-mono text-xs uppercase tracking-[0.22em] text-primary">
             <Sparkles className="size-4" /> Tradeline Wizard
           </p>
