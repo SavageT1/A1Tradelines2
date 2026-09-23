@@ -30,9 +30,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
         <Link href="/" className="flex items-center gap-2.5" aria-label={`${site.name} home`}>
-          <span className="font-sans text-xl font-bold tracking-[-0.04em] text-foreground">
-            A1 <span className="text-primary">Tradelines</span>
-          </span>
+          <img src="/logo.svg" alt="A1 Tradelines" className="h-12 w-auto" />
         </Link>
 
         <nav className="hidden items-center gap-7 text-sm text-muted-foreground lg:flex" aria-label="Main navigation">

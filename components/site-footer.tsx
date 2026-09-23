@@ -54,8 +54,8 @@ export function SiteFooter() {
       <div className="mx-auto flex max-w-7xl flex-col gap-12 px-6 py-14 lg:px-10">
         <div className="flex flex-col justify-between gap-10 lg:flex-row">
           <div className="max-w-xs">
-            <Link href="/" className="font-sans text-xl font-semibold tracking-[-0.04em]">
-              A1 <span className="font-normal text-primary">Tradelines</span>
+            <Link href="/" aria-label={`${site.name} home`}>
+              <img src="/logo.svg" alt="A1 Tradelines" className="h-14 w-auto" />
             </Link>
             <p className="mt-4 text-sm leading-6 text-muted-foreground">
               A transparent marketplace to compare and buy seasoned authorized-user tradelines.
