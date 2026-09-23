@@ -159,7 +159,7 @@ export function LiveInventory() {
   return (
     <div>
       <div className="flex flex-col gap-4 border-b border-border pb-5 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-sm text-muted-foreground">Filter and sort the live Tradeline Score feed below.</p>
+        <p className="text-sm text-muted-foreground">Filter and sort the live A1 inventory feed below.</p>
         <label className="flex items-center gap-2 text-sm text-muted-foreground">
           <span className="sr-only sm:not-sr-only">Sort</span>
           <select

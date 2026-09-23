@@ -12,7 +12,7 @@ function formatPrice(n: number) {
 }
 
 // Live "popular tradelines" strip for service pages — pulls real inventory
-// from the Tradeline Score feed instead of mock data.
+// from the A1 inventory feed instead of mock data.
 export function FeaturedTradelines() {
   const { data, error } = useSWR<{ tradelines: Tradeline[] }>('/api/inventory', fetcher)
 

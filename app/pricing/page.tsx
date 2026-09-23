@@ -16,7 +16,7 @@ function formatPrice(n: number) {
   return n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
 }
 
-// Live pricing — every row is a real tradeline from the Tradeline Score feed.
+// Live pricing — every row is a real tradeline from the A1 inventory feed.
 // "Reserve" opens the free-consultation booking flow: no payment is collected
 // until a specialist confirms the pick.
 export default function PricingPage() {
