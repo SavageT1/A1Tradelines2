@@ -2,6 +2,7 @@
 
 import { ArrowLeft, ArrowRight, Check, ShieldCheck } from 'lucide-react'
 import { useState } from 'react'
+import { trackEvent } from '@/lib/analytics'
 
 type Question = {
   key: string
@@ -70,6 +71,12 @@ export function AssessmentQuiz({
   }
 
   const finish = () => {
+    // Quiz completion — this is a GA4 key event.
+    trackEvent('assessment_submitted', {
+      goal: answers.goal ?? '',
+      timeline: answers.timeline ?? '',
+      budget: answers.budget ?? '',
+    })
     onComplete(answers)
     reset()
   }

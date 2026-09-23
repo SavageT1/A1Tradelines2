@@ -87,7 +87,7 @@ export default function PricingPage() {
       </section>
 
       <SiteFooter />
-      <BookingModal open={bookingOpen} onClose={() => setBookingOpen(false)} />
+      <BookingModal open={bookingOpen} onClose={() => setBookingOpen(false)} source="pricing" />
     </main>
   )
 }

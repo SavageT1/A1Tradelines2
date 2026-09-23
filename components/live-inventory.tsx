@@ -320,7 +320,7 @@ export function LiveInventory() {
         </>
       )}
 
-      <BookingModal open={bookingOpen} onClose={() => setBookingOpen(false)} />
+      <BookingModal open={bookingOpen} onClose={() => setBookingOpen(false)} source="inventory" />
     </div>
   )
 }

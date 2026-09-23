@@ -1,7 +1,7 @@
 'use client'
 
 import useSWR from 'swr'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import {
   ArrowUpRight,
   CalendarClock,
@@ -16,6 +16,7 @@ import {
 } from 'lucide-react'
 import type { Tradeline } from '@/app/api/inventory/route'
 import { BookingModal } from '@/components/booking-modal'
+import { trackEvent } from '@/lib/analytics'
 import { site } from '@/lib/site'
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
@@ -142,6 +143,39 @@ export function TradelineSimulator() {
       }
     : undefined
 
+  // GA4: simulator funnel tracking
+  const estimateFiredFor = useRef<string | null>(null)
+
+  useEffect(() => {
+    trackEvent('simulator_started')
+  }, [])
+
+  useEffect(() => {
+    if (result && selected && estimateFiredFor.current !== selected.id) {
+      estimateFiredFor.current = selected.id
+      trackEvent('estimate_generated', {
+        lender: selected.lender,
+        limit: selected.limit,
+        impact_low: result.low,
+        impact_high: result.high,
+        impact_level: result.level,
+      })
+    }
+  }, [result, selected])
+
+  const selectTradeline = (t: Tradeline) => {
+    const activating = t.id !== selectedId
+    setSelectedId(activating ? t.id : null)
+    if (activating) {
+      trackEvent('tradeline_selected', {
+        lender: t.lender,
+        limit: t.limit,
+        price: t.price,
+        age_years: t.ageYears,
+      })
+    }
+  }
+
   return (
     <div>
       {/* STEP 1 — pick a tradeline */}
@@ -196,7 +230,7 @@ export function TradelineSimulator() {
                     <li key={t.id}>
                       <button
                         type="button"
-                        onClick={() => setSelectedId(active ? null : t.id)}
+                        onClick={() => selectTradeline(t)}
                         aria-pressed={active}
                         className={`flex w-full items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-secondary/50 ${
                           active ? 'bg-primary/10' : ''
@@ -423,7 +457,15 @@ export function TradelineSimulator() {
 
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <button
-                  onClick={() => setBookingOpen(true)}
+                  onClick={() => {
+                    if (selected) {
+                      trackEvent('reservation_cta_clicked', {
+                        lender: selected.lender,
+                        limit: selected.limit,
+                      })
+                    }
+                    setBookingOpen(true)
+                  }}
                   className="inline-flex flex-1 items-center justify-center rounded-full bg-primary px-6 py-3.5 text-sm font-medium text-primary-foreground transition-transform hover:-translate-y-0.5"
                 >
                   Reserve this tradeline <ArrowUpRight className="ml-1 size-4" />
@@ -446,7 +488,7 @@ export function TradelineSimulator() {
         )}
       </section>
 
-      <BookingModal open={bookingOpen} onClose={() => setBookingOpen(false)} answers={answers} />
+      <BookingModal open={bookingOpen} onClose={() => setBookingOpen(false)} answers={answers} source="simulator" />
     </div>
   )
 }

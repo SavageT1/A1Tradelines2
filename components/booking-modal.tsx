@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import { X } from 'lucide-react'
 import { site } from '@/lib/site'
+import { trackEvent } from '@/lib/analytics'
 import { GhlForm } from '@/components/ghl-form'
 
 const summaryLabels: Record<string, string> = {
@@ -15,13 +16,17 @@ export function BookingModal({
   open,
   onClose,
   answers,
+  source,
 }: {
   open: boolean
   onClose: () => void
   answers?: Record<string, string>
+  /** Where the booking flow was started from: 'quiz' | 'pricing' | 'inventory' | 'simulator' */
+  source?: string
 }) {
   useEffect(() => {
     if (!open) return
+    trackEvent('booking_started', { source: source ?? 'unknown' })
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
     }
@@ -32,7 +37,7 @@ export function BookingModal({
       document.removeEventListener('keydown', onKey)
       document.body.style.overflow = prevOverflow
     }
-  }, [open, onClose])
+  }, [open, onClose, source])
 
   if (!open) return null
 

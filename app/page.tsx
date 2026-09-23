@@ -105,7 +105,7 @@ export default function Page() {
           setBookingOpen(true)
         }}
       />
-      <BookingModal open={bookingOpen} onClose={() => setBookingOpen(false)} answers={quizAnswers} />
+      <BookingModal open={bookingOpen} onClose={() => setBookingOpen(false)} answers={quizAnswers} source="quiz" />
     </main>
   )
 }
