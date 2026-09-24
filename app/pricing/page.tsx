@@ -44,20 +44,20 @@ export default function PricingPage() {
       <section className="border-y border-border bg-secondary/30">
         <div className="mx-auto max-w-7xl px-6 py-14 lg:px-10 lg:py-20">
           <div className="overflow-hidden border border-border bg-background">
-            <div className="hidden grid-cols-[1.4fr_0.7fr_0.7fr_0.8fr_0.8fr_auto] gap-4 border-b border-border px-5 py-4 font-mono text-[10px] uppercase tracking-widest text-muted-foreground sm:grid">
+            <div className="hidden grid-cols-[1.4fr_0.7fr_0.7fr_0.8fr_0.8fr_auto] gap-4 border-b border-border px-5 py-4 font-mono text-xs uppercase tracking-widest text-muted-foreground sm:grid">
               <span className="text-primary">Tradeline</span><span>Age</span><span>Limit</span><span>Reporting</span><span>Price</span><span className="text-right">Reserve</span>
             </div>
             {sorted.map((t) => (
               <div key={t.id} className="grid gap-4 border-b border-border px-5 py-5 last:border-b-0 sm:grid-cols-[1.4fr_0.7fr_0.7fr_0.8fr_0.8fr_auto] sm:items-center">
                 <div>
-                  <span className="font-medium tracking-tight">{t.lender}</span>
-                  <p className="mt-1 text-xs text-muted-foreground">{t.spots} {t.spots === 1 ? 'spot' : 'spots'} left</p>
+                  <span className="text-base font-medium tracking-tight">{t.lender}</span>
+                  <p className="mt-1 text-sm text-muted-foreground">{t.spots} {t.spots === 1 ? 'spot' : 'spots'} left</p>
                 </div>
-                <div><span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground sm:hidden">Age </span><span className="text-sm">{t.accountAge}</span></div>
-                <div><span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground sm:hidden">Limit </span><span className="text-sm">${t.limit.toLocaleString()}</span></div>
-                <div><span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground sm:hidden">Reporting </span><span className="text-sm text-primary">{t.reportingDate}</span></div>
-                <div className="text-lg font-semibold">{formatPrice(t.price)}</div>
-                <button onClick={() => setBookingOpen(true)} className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 sm:justify-self-end">Reserve</button>
+                <div><span className="font-mono text-xs uppercase tracking-widest text-muted-foreground sm:hidden">Age </span><span className="text-base">{t.accountAge}</span></div>
+                <div><span className="font-mono text-xs uppercase tracking-widest text-muted-foreground sm:hidden">Limit </span><span className="text-base">${t.limit.toLocaleString()}</span></div>
+                <div><span className="font-mono text-xs uppercase tracking-widest text-muted-foreground sm:hidden">Reporting </span><span className="text-base font-medium text-primary">{t.reportingDate}</span></div>
+                <div className="text-xl font-semibold">{formatPrice(t.price)}</div>
+                <button onClick={() => setBookingOpen(true)} className="inline-flex items-center justify-center rounded-full bg-primary px-5 py-2.5 text-base font-medium text-primary-foreground hover:bg-primary/90 sm:justify-self-end">Reserve</button>
               </div>
             ))}
             {!sorted.length && (
