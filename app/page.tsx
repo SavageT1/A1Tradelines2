@@ -23,6 +23,7 @@ const faqs = [
   ['Is my personal information safe?', 'Yes, absolutely. Your information is protected with encryption across all of our systems. We only ever collect what is necessary to serve you, and it is never sold or shared.'],
   ['How quickly can I get started?', 'Immediately. You can reserve your tradeline in seconds — when it posts depends on the statement closing date shown on each tradeline listing.'],
   ['What if the tradeline does not post?', 'You are covered. If your tradeline does not post as promised, we will reassign you a new tradeline or give you a full refund.'],
+  ['Do you offer business services?', 'Yes. We are partnered with UmbrellaFormation.com — they offer a full suite of business services, from start to finish.'],
 ]
 
 function CreditScoreMeter() {
