@@ -19,10 +19,10 @@ const steps = [
 
 
 const faqs = [
-  ['Will this hurt my credit?', 'No. Getting started with A1 Tradelines does not require a hard credit inquiry.'],
-  ['Is my personal information safe?', 'We treat your information with care and only ask for what is necessary to help you understand your options.'],
-  ['How quickly can I get started?', 'Most people can complete the initial consultation in just a few minutes. We will explain next steps clearly.'],
-  ['What if the tradeline does not post?', 'You are covered by reassignment or refund under the terms of your purchase agreement. See the agreement for the simple terms.'],
+  ['Will this hurt my credit?', 'No. Becoming an authorized user requires no hard credit inquiry — your credit is never pulled just to get started with us.'],
+  ['Is my personal information safe?', 'Yes, absolutely. Your information is protected with encryption across all of our systems. We only ever collect what is necessary to serve you, and it is never sold or shared.'],
+  ['How quickly can I get started?', 'Immediately. You can reserve your tradeline in seconds — when it posts depends on the statement closing date shown on each tradeline listing.'],
+  ['What if the tradeline does not post?', 'You are covered. If your tradeline does not post as promised, we will reassign you a new tradeline or give you a full refund.'],
 ]
 
 function CreditScoreMeter() {
