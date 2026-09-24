@@ -20,7 +20,7 @@ export default function ReviewsPage() {
 
       <section className="mx-auto max-w-7xl px-6 pb-16 pt-16 lg:px-10 lg:pb-20 lg:pt-24">
         <div className="max-w-3xl">
-          <p className="mb-6 font-mono text-xs uppercase tracking-[0.22em] text-primary">Customer reviews</p>
+          <p className="mb-6 font-mono text-sm uppercase tracking-[0.22em] text-primary">Customer reviews</p>
           <h1 className="text-balance font-sans text-5xl font-semibold leading-[0.98] tracking-[-0.06em] sm:text-6xl lg:text-7xl">
             What customers <span className="text-primary">say.</span>
           </h1>

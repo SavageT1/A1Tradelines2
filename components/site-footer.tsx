@@ -79,7 +79,7 @@ export function SiteFooter() {
           <div className="grid grid-cols-2 gap-10 sm:grid-cols-4">
             {columns.map((col) => (
               <div key={col.heading} className="flex flex-col gap-3 text-sm">
-                <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">{col.heading}</span>
+                <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">{col.heading}</span>
                 {col.links.map((link) => (
                   <Link key={link.label} href={link.href} className="text-muted-foreground hover:text-primary">
                     {link.label}

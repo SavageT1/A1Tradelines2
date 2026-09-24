@@ -74,11 +74,11 @@ export function BookingModal({
 
           {summaryEntries.length > 0 && (
             <>
-              <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.18em] text-primary">Your assessment</p>
+              <p className="mt-8 font-mono text-xs uppercase tracking-[0.18em] text-primary">Your assessment</p>
               <dl className="mt-3 grid gap-2 sm:grid-cols-3">
                 {summaryEntries.map(([key, value]) => (
                   <div key={key} className="rounded-xl border border-border bg-secondary/50 px-4 py-3">
-                    <dt className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                    <dt className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
                       {summaryLabels[key]}
                     </dt>
                     <dd className="mt-1 text-sm font-medium leading-snug">{value}</dd>

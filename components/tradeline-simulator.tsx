@@ -42,7 +42,7 @@ const parseMoney = (s: string) => {
 function StepHeading({ n, title, sub }: { n: string; title: string; sub: string }) {
   return (
     <div className="mb-5">
-      <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-primary">Step {n}</p>
+      <p className="font-mono text-xs uppercase tracking-[0.22em] text-primary">Step {n}</p>
       <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em]">{title}</h2>
       <p className="mt-2 text-sm leading-6 text-muted-foreground">{sub}</p>
     </div>
@@ -342,7 +342,7 @@ export function TradelineSimulator() {
 
       {/* STEP 3 — results */}
       <section className="mt-6">
-        <p className="mb-5 font-mono text-[11px] uppercase tracking-[0.22em] text-primary">Step 3</p>
+        <p className="mb-5 font-mono text-xs uppercase tracking-[0.22em] text-primary">Step 3</p>
         {!result || !selected ? (
           <div className="rounded-2xl border border-dashed border-border p-10 text-center">
             <TrendingUp className="mx-auto size-8 text-muted-foreground/50" />
@@ -356,7 +356,7 @@ export function TradelineSimulator() {
         ) : (
           <div id="simulator-results" className="overflow-hidden rounded-2xl border border-border bg-card">
             <div className="border-b border-border bg-secondary/40 px-6 py-4 sm:px-8">
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+              <p className="font-mono text-xs uppercase tracking-[0.22em] text-muted-foreground">
                 Tradeline Wizard · Impact estimate
               </p>
               <p className="mt-1 text-lg font-semibold tracking-tight">
@@ -371,12 +371,12 @@ export function TradelineSimulator() {
                 </p>
                 <div className="mt-4 flex items-end justify-between gap-4">
                   <div>
-                    <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Now</p>
+                    <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">Now</p>
                     <p className="mt-1 text-3xl font-semibold tracking-tight">{pct(result.currentUtil * 100)}</p>
                   </div>
                   <TrendingUp className="mb-2 size-5 text-primary" aria-hidden />
                   <div className="text-right">
-                    <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">With tradeline</p>
+                    <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">With tradeline</p>
                     <p className="mt-1 text-3xl font-semibold tracking-tight text-primary">{pct(result.newUtil * 100)}</p>
                   </div>
                 </div>
@@ -397,14 +397,14 @@ export function TradelineSimulator() {
                 </p>
                 <div className="mt-4 flex items-end justify-between gap-4">
                   <div>
-                    <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Now (est.)</p>
+                    <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">Now (est.)</p>
                     <p className="mt-1 text-3xl font-semibold tracking-tight">
                       {result.currentAAoA.toFixed(1)} <span className="text-base font-normal text-muted-foreground">yrs</span>
                     </p>
                   </div>
                   <TrendingUp className="mb-2 size-5 text-primary" aria-hidden />
                   <div className="text-right">
-                    <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">With tradeline</p>
+                    <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">With tradeline</p>
                     <p className="mt-1 text-3xl font-semibold tracking-tight text-primary">
                       {result.newAAoA.toFixed(1)} <span className="text-base font-normal text-muted-foreground">yrs</span>
                     </p>

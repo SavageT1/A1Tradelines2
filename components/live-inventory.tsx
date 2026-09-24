@@ -296,7 +296,7 @@ export function LiveInventory() {
 
                         <div className="mt-6 flex items-center justify-between gap-3 border-t border-border pt-5">
                           <div>
-                            <p className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+                            <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
                               Price
                             </p>
                             <p className="text-2xl font-semibold tracking-tight text-primary">{usd(t.price)}</p>

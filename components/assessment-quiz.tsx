@@ -103,7 +103,7 @@ export function AssessmentQuiz({
         <div className="flex-1 overflow-y-auto px-6 py-8">
           {!isSummary ? (
             <div>
-              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
+              <p className="font-mono text-xs uppercase tracking-[0.18em] text-primary">
                 Question {step + 1} of {total}
               </p>
               <h2 className="mt-3 text-balance text-2xl font-semibold tracking-[-0.03em]">{questions[step].label}</h2>
@@ -166,7 +166,7 @@ export function AssessmentQuiz({
           ) : (
             <span />
           )}
-          <p className="text-right text-sm font-medium text-muted-foreground">Free analysis — no SSN needed · No credit pull · Takes 60 seconds</p>
+          <p className="text-right font-mono text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">Free analysis — no SSN needed · No credit pull · Takes 60 seconds</p>
         </div>
       </div>
     </div>

@@ -19,7 +19,7 @@ export default function BookingConfirmedPage() {
       <BookingConfirmedTracker />
       <section className="mx-auto max-w-3xl px-6 py-24 text-center lg:py-32">
         <CheckCircle2 className="mx-auto size-14 text-primary" aria-hidden />
-        <p className="mt-6 font-mono text-xs uppercase tracking-[0.22em] text-primary">
+        <p className="mt-6 font-mono text-sm uppercase tracking-[0.22em] text-primary">
           Request received
         </p>
         <h1 className="mt-4 text-balance text-4xl font-semibold tracking-[-0.04em] sm:text-5xl">

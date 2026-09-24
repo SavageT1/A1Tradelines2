@@ -28,7 +28,7 @@ export function ServicePage({ content }: { content: ServiceContent }) {
 
         <section className="mx-auto max-w-7xl px-6 pb-16 pt-16 lg:px-10 lg:pb-24 lg:pt-24">
           <div className="max-w-4xl">
-            <p className="mb-6 font-mono text-xs uppercase tracking-[0.22em] text-primary">{content.eyebrow}</p>
+            <p className="mb-6 font-mono text-sm uppercase tracking-[0.22em] text-primary">{content.eyebrow}</p>
             <h1 className="text-balance font-sans text-5xl font-semibold leading-[0.98] tracking-[-0.06em] sm:text-6xl lg:text-7xl">
               <HighlightTradelines text={content.title} /> <span className="text-primary">{content.highlight}</span>
             </h1>

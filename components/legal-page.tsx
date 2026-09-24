@@ -13,7 +13,7 @@ export function LegalPage({ content }: { content: LegalContent }) {
     <main className="min-h-screen bg-background text-foreground">
       <SiteHeader />
       <section className="mx-auto max-w-3xl px-6 pb-20 pt-16 lg:px-10 lg:pb-28 lg:pt-24">
-        <p className="font-mono text-xs uppercase tracking-[0.22em] text-primary">Legal</p>
+        <p className="font-mono text-sm uppercase tracking-[0.22em] text-primary">Legal</p>
         <h1 className="mt-5 text-balance text-4xl font-semibold tracking-[-0.05em] lg:text-6xl">{content.title}</h1>
         <p className="mt-4 text-sm text-muted-foreground">Last updated: {content.updated}</p>
         <p className="mt-8 text-base leading-7 text-muted-foreground">{content.intro}</p>

@@ -31,7 +31,7 @@ export default function SimulatorPage() {
             alt="Tradeline Wizard monogram"
             className="mb-6 h-20 w-auto sm:h-24"
           />
-          <p className="mb-6 flex items-center gap-2 font-mono text-xs uppercase tracking-[0.22em] text-primary">
+          <p className="mb-6 flex items-center gap-2 font-mono text-sm uppercase tracking-[0.22em] text-primary">
             <Sparkles className="size-4" /> Tradeline Wizard
           </p>
           <h1 className="text-balance font-sans text-5xl font-semibold leading-[0.98] tracking-[-0.06em] sm:text-6xl lg:text-7xl">
@@ -65,7 +65,7 @@ export default function SimulatorPage() {
 
       <section className="border-t border-border bg-secondary/30">
         <div className="mx-auto max-w-5xl px-6 py-16 lg:px-10 lg:py-20">
-          <p className="mb-6 flex items-center gap-2 font-mono text-xs uppercase tracking-[0.22em] text-primary">
+          <p className="mb-6 flex items-center gap-2 font-mono text-sm uppercase tracking-[0.22em] text-primary">
             <Info className="size-4" /> How the estimate works
           </p>
           <div className="grid gap-6 sm:grid-cols-3">
