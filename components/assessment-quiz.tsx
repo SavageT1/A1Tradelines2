@@ -166,7 +166,7 @@ export function AssessmentQuiz({
           ) : (
             <span />
           )}
-          <p className="text-right text-[11px] font-medium text-muted-foreground">Free analysis — no SSN needed · No credit pull · Takes 60 seconds</p>
+          <p className="text-right text-sm font-medium text-muted-foreground">Free analysis — no SSN needed · No credit pull · Takes 60 seconds</p>
         </div>
       </div>
     </div>
