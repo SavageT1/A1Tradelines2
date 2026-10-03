@@ -4,8 +4,11 @@
 // trackEvent is a safe no-op when gtag is unavailable (SSR, dev builds,
 // ad-blockers), so call sites never need their own guards.
 //
-// Event names use snake_case to match the existing GA4 property conventions
-// (inventory_sort_change, form_started, ...). Parameter values should be
+// Event names use snake_case, matching the conventions already in use in the
+// GA4 property (appointment_booked, assessment_submitted, booking_started,
+// estimate_generated, inventory_row_expanded, inventory_sort_change,
+// phone_call_clicked, reservation_cta_clicked, simulator_started,
+// text_us_clicked, tradeline_selected, ...). Parameter values should be
 // strings or numbers only.
 declare global {
   interface Window {

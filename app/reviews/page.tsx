@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
+import { CallLink } from '@/components/call-link'
 import { site } from '@/lib/site'
 
 export const metadata: Metadata = {
@@ -50,7 +51,7 @@ export default function ReviewsPage() {
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <a href={site.phoneHref} className="inline-flex items-center rounded-full border border-border px-6 py-4 text-sm font-medium hover:bg-secondary">Call {site.phone}</a>
+            <CallLink source="reviews" className="inline-flex items-center rounded-full border border-border px-6 py-4 text-sm font-medium hover:bg-secondary">Call {site.phone}</CallLink>
             <Link href="/inventory" className="inline-flex items-center rounded-full bg-primary px-6 py-4 text-sm font-medium text-primary-foreground hover:bg-primary/90">Browse inventory <ArrowUpRight className="ml-2 size-4" /></Link>
           </div>
         </div>

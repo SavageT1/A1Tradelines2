@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import { trackEvent } from '@/lib/analytics'
 
 const SRC =
   'https://app.tradelinescore.com/authorized-user-tradeline/eXgzNXRrM1gyVXN3ZTBkMWo0U2xidz09'
@@ -71,6 +72,7 @@ export function InventoryEmbed() {
           </Link>
           <a
             href="tel:+19087675309"
+            onClick={() => trackEvent('phone_call_clicked', { source: 'inventory_widget_fallback' })}
             className="inline-flex items-center rounded-full border border-border px-6 py-3 text-sm font-semibold transition hover:bg-muted"
           >
             Call 908-767-5309

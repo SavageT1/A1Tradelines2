@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Phone } from 'lucide-react'
 import { site } from '@/lib/site'
+import { CallLink } from '@/components/call-link'
 
 function FacebookIcon({ className }: { className?: string }) {
   return (
@@ -60,9 +61,9 @@ export function SiteFooter() {
             <p className="mt-4 text-sm leading-6 text-muted-foreground">
               A transparent marketplace to compare and buy seasoned authorized-user tradelines.
             </p>
-            <a href={site.phoneHref} className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-primary">
+            <CallLink source="footer" className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-primary">
               <Phone className="size-4" /> {site.phone}
-            </a>
+            </CallLink>
             <a href={site.emailHref} className="mt-2 block text-sm text-muted-foreground hover:text-primary">
               {site.email}
             </a>

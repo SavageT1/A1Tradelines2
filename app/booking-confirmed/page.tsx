@@ -3,6 +3,7 @@ import { CheckCircle2, Phone } from 'lucide-react'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import { BookingConfirmedTracker } from '@/components/booking-confirmed-tracker'
+import { CallLink } from '@/components/call-link'
 import { site } from '@/lib/site'
 
 export const metadata: Metadata = {
@@ -30,12 +31,12 @@ export default function BookingConfirmedPage() {
           you shortly to confirm your free consultation.
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a
-            href={site.phoneHref}
+          <CallLink
+            source="booking_confirmed"
             className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-4 text-sm font-medium text-primary-foreground hover:bg-primary/90"
           >
             <Phone className="mr-2 size-4" /> Call {site.phone}
-          </a>
+          </CallLink>
         </div>
         <p className="mt-8 text-xs text-muted-foreground">
           Questions in the meantime? Call or text {site.phone}.

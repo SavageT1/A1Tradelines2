@@ -40,7 +40,7 @@ export function ContactCtas({
         <button onClick={() => setCallbackOpen(true)} className={secondaryBtn}>
           <PhoneCall className="mr-2 size-4 text-primary" /> Have us call you
         </button>
-        <a href={site.phoneHref} className={secondaryBtn}>
+        <a href={site.phoneHref} onClick={() => trackEvent('phone_call_clicked', { source })} className={secondaryBtn}>
           <Phone className="mr-2 size-4 text-primary" /> Call {site.phone}
         </a>
       </div>

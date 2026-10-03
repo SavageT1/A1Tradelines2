@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { ArrowDown, ArrowUp, ArrowUpDown, ArrowUpRight, CalendarClock, ChevronDown, CreditCard, HelpCircle, RefreshCw, TrendingUp } from 'lucide-react'
 import type { Tradeline } from '@/app/api/inventory/route'
 import { BookingModal } from '@/components/booking-modal'
+import { trackEvent } from '@/lib/analytics'
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
@@ -141,8 +142,33 @@ export function LiveInventory() {
     return sorted
   }, [data, sort])
 
-  const toggleSort = (key: SortKey, defaultDir: Dir) =>
-    setSort((s) => (s.key === key ? { key, dir: s.dir === 'asc' ? 'desc' : 'asc' } : { key, dir: defaultDir }))
+  const changeSort = (key: SortKey, dir: Dir) => {
+    setSort({ key, dir })
+    trackEvent('inventory_sort_change', { sort_key: key, sort_dir: dir })
+  }
+
+  const toggleSort = (key: SortKey, defaultDir: Dir) => {
+    const next =
+      sort.key === key
+        ? { key, dir: (sort.dir === 'asc' ? 'desc' : 'asc') as Dir }
+        : { key, dir: defaultDir }
+    setSort(next)
+    trackEvent('inventory_sort_change', { sort_key: next.key, sort_dir: next.dir })
+  }
+
+  const toggleRow = (t: Tradeline, isOpen: boolean) => {
+    if (!isOpen) {
+      // Opening a row = the visitor is inspecting this tradeline's details.
+      trackEvent('inventory_row_expanded', {
+        item_id: String(t.id),
+        lender: t.lender,
+        price: t.price,
+        limit: t.limit,
+        age_years: t.ageYears,
+      })
+    }
+    setExpandedId(isOpen ? null : t.id)
+  }
 
   const activeSortValue = `${sort.key}:${sort.dir}`
 
@@ -167,7 +193,7 @@ export function LiveInventory() {
             value={activeSortValue}
             onChange={(e) => {
               const [key, d] = e.target.value.split(':') as [SortKey, Dir]
-              setSort({ key, dir: d })
+              changeSort(key, d)
             }}
             className="rounded-full border border-border bg-background px-4 py-2 text-sm text-foreground"
           >
@@ -214,7 +240,7 @@ export function LiveInventory() {
                 return (
                   <li key={t.id} className="bg-card">
                     <button
-                      onClick={() => setExpandedId(isOpen ? null : t.id)}
+                      onClick={() => toggleRow(t, isOpen)}
                       aria-expanded={isOpen}
                       className="grid w-full grid-cols-[1fr_2rem] items-center gap-4 px-5 py-4 text-left transition-colors hover:bg-secondary/40 lg:grid-cols-[1.5fr_0.9fr_1fr_1fr_1fr_2rem]"
                     >
