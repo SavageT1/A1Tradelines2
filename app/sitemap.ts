@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/pricing',
     '/tradelines',
     '/authorized-user-tradelines',
+    '/best-tradelines-for-credit-utilization',
     '/aged-tradelines',
     '/tradelines-for-mortgage',
     '/tradelines-for-auto-loans',
