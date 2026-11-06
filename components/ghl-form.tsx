@@ -6,10 +6,12 @@ import Script from 'next/script'
 // The iframe points at the public form URL; form_embed.js auto-resizes the
 // iframe height by posting messages keyed to the iframe id (inline-<formId>).
 //
-// `prefill` appends GoHighLevel form pre-fill params (?custom.<field_key>=…)
-// so data captured earlier in the visit (e.g. quiz answers saved to the
-// matching custom fields) lands on the contact record at submit time. The
-// custom fields must exist on the form in GHL for the values to be saved.
+// `prefill` appends GoHighLevel form pre-fill params using each field's
+// bare query key (?<field_key>=…) so data captured earlier in the visit
+// (e.g. quiz answers saved to the matching custom fields) lands on the
+// contact record at submit time. The custom fields must exist on the form
+// in GHL for the values to be saved. Format verified live 2026-11-05:
+// bare query keys save; "custom." and "contact." prefixed variants do not.
 const FORM_ID = 'KhzTR8K1KHiASdCuQiD9'
 const FORM_URL = `https://api.leadconnectorhq.com/widget/form/${FORM_ID}`
 
@@ -23,7 +25,7 @@ export function GhlForm({
   const params = new URLSearchParams()
   if (prefill) {
     for (const [key, value] of Object.entries(prefill)) {
-      if (value) params.set(`custom.${key}`, value)
+      if (value) params.set(key, value)
     }
   }
   const query = params.toString()
