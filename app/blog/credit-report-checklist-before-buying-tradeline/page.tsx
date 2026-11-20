@@ -5,10 +5,25 @@ import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 
 export const metadata: Metadata = {
-  title: 'Credit Report Checklist Before Buying a Tradeline | A1 Tradelines',
+  title: 'Credit Report Checklist Before Buying a Tradeline',
   description:
     'Review your credit reports before comparing authorized-user tradelines. Learn what to check, how to spot errors, and where to get free reports.',
   alternates: { canonical: '/blog/credit-report-checklist-before-buying-tradeline' },
+  openGraph: {
+    title: 'Credit Report Checklist Before Buying a Tradeline',
+    description:
+      'Review your credit reports before comparing authorized-user tradelines. Learn what to check, how to spot errors, and where to get free reports.',
+    url: '/blog/credit-report-checklist-before-buying-tradeline',
+    siteName: 'A1 Tradelines',
+    type: 'article',
+    publishedTime: '2026-11-19',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Credit Report Checklist Before Buying a Tradeline',
+    description:
+      'Review your credit reports before comparing authorized-user tradelines. Learn what to check, how to spot errors, and where to get free reports.',
+  },
 }
 
 export default function CreditReportChecklistPage() {
