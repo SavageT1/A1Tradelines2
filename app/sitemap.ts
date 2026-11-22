@@ -20,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/how-tradelines-work',
     '/blog',
     '/about',
+    '/contact',
     '/reviews',
     '/refund-policy',
     '/privacy-policy',
