@@ -73,7 +73,7 @@ export default function Page() {
         <div className="max-w-4xl hero-content">
           <p className="mb-6 font-mono text-sm uppercase tracking-[0.22em] text-primary"><span className="text-primary">Tradelines</span> available to buy</p>
           <h1 className="text-balance font-sans text-[2.75rem] font-semibold leading-[0.95] tracking-[-0.06em] sm:text-7xl lg:text-[7.25rem]">Buy <span className="text-primary">tradelines</span> with confidence.</h1>
-          <p className="mt-8 max-w-xl text-pretty text-lg leading-7 text-muted-foreground">Review available <span className="text-primary">tradelines</span>, compare the details, and choose the tradeline that fits your goals.</p>
+          <p className="mt-8 max-w-xl text-pretty text-lg leading-7 text-muted-foreground">Compare <span className="text-primary">seasoned authorized-user tradelines</span> by account age, credit limit, and bureau reporting, then choose the one that fits your goals.</p>
           <div className="mt-8 flex flex-wrap gap-3"><button onClick={() => setAssessmentOpen(true)} className="inline-flex items-center rounded-full bg-primary px-6 py-4 text-sm font-medium text-primary-foreground hover:bg-primary/90">Get my free analysis <ArrowUpRight className="ml-2 size-4" /></button><a href="/inventory" className="inline-flex items-center rounded-full border-2 border-foreground/25 px-6 py-4 text-sm font-medium text-foreground hover:bg-secondary">View available tradelines</a></div>
           <p className="mt-4 font-mono text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">Free analysis — no SSN needed · No credit pull · Takes 60 seconds</p>
         </div>
