@@ -19,6 +19,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/tradelines-for-auto-loans',
     '/how-tradelines-work',
     '/blog',
+    '/blog/credit-report-checklist-before-buying-tradeline',
+    '/links',
     '/about',
     '/contact',
     '/reviews',

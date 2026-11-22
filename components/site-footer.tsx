@@ -19,6 +19,8 @@ const columns = [
       { href: '/pricing', label: 'Pricing' },
       { href: '/tradelines', label: 'Buy tradelines' },
       { href: '/aged-tradelines', label: 'Aged tradelines' },
+      { href: '/buy-tradelines', label: 'Buy tradelines guide' },
+      { href: '/seasoned-tradelines', label: 'Seasoned tradelines' },
     ],
   },
   {
@@ -28,6 +30,7 @@ const columns = [
       { href: '/authorized-user-tradelines', label: 'Authorized user tradelines' },
       { href: '/tradelines-for-mortgage', label: 'Tradelines for a mortgage' },
       { href: '/tradelines-for-auto-loans', label: 'Tradelines for auto loans' },
+      { href: '/best-tradelines-for-credit-utilization', label: 'Credit utilization guide' },
       { href: '/blog', label: 'Blog' },
     ],
   },
