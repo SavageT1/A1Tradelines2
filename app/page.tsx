@@ -69,7 +69,6 @@ export default function Page() {
       <SiteHeader />
 
       <section id="top" className="relative overflow-hidden">
-        <CardMarquee />
         <div className="relative z-[1] mx-auto max-w-7xl px-6 pb-16 pt-16 lg:px-10 lg:pb-24 lg:pt-24">
         <div className="max-w-4xl hero-content">
           <p className="mb-6 font-mono text-sm uppercase tracking-[0.22em] text-primary"><span className="text-primary">Tradelines</span> available to buy</p>
@@ -81,6 +80,8 @@ export default function Page() {
         <div className="mt-14 flex flex-wrap gap-x-8 gap-y-3 border-y border-border py-5 text-sm text-muted-foreground"><span className="flex items-center gap-2"><ShieldCheck className="size-4 text-primary" /> Privacy guarantee</span><span className="flex items-center gap-2"><Check className="size-4 text-primary" /> Clear tradeline details</span><span className="flex items-center gap-2"><Check className="size-4 text-primary" /> Posting guarantee: reassignment or refund</span></div>
         </div>
       </section>
+
+      <CardMarquee />
 
       <section id="inventory" className="border-y border-border bg-secondary/30 reveal-section"><div className="mx-auto max-w-7xl px-6 py-12 md:py-20 lg:px-10 lg:py-28"><div className="flex flex-col justify-between gap-6 border-b border-border pb-6 md:pb-10 md:flex-row md:items-end"><div><p className="font-mono text-sm uppercase tracking-[0.22em] text-primary">Tradelines available to buy</p><h2 className="mt-4 max-w-2xl text-4xl font-semibold tracking-[-0.05em] lg:text-6xl">Compare <span className="text-primary">tradelines</span> before you buy.</h2></div><p className="max-w-sm text-sm leading-6 text-muted-foreground">Every tradeline is reviewed before it is listed. Compare the details that matter, then contact us to confirm availability, pricing, and reporting.</p></div><div className="mt-8 hidden rounded-xl border border-border bg-background p-4 sm:p-6 md:block"><iframe width="100%" height="900" src="https://app.tradelinescore.com/authorized-user-tradeline/eXgzNXRrM1gyVXN3ZTBkMWo0U2xidz09" title="Tradeline Booking Page" style={{ border: 0, borderRadius: 12 }} className="w-full" /></div><div className="mt-6"><HomeInventoryPreview /></div><div className="flex flex-col gap-4 pt-6 sm:flex-row sm:items-center sm:justify-between"><p className="text-xs leading-5 text-muted-foreground">Inventory updates in real time as tradelines are booked. Availability does not guarantee approval or a specific credit outcome.</p><Link href="/inventory" className="inline-flex items-center self-start rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90">View live inventory <ArrowUpRight className="ml-2 size-4" /></Link></div><div className="mt-10 flex flex-col gap-4 border border-primary/30 bg-primary/5 p-5 sm:flex-row sm:items-center sm:justify-between"><div className="flex items-start gap-3"><ShieldCheck className="mt-0.5 size-5 shrink-0 text-primary" /><div><h3 className="font-medium tracking-tight">Our posting guarantee</h3><p className="mt-1 max-w-2xl text-sm leading-6 text-muted-foreground">If your tradeline does not post, you are covered by reassignment or refund under your purchase agreement.</p></div></div><a href="#faq" className="shrink-0 text-sm font-medium text-primary underline underline-offset-4">See guarantee terms</a></div></div></section>
 
