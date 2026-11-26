@@ -1,8 +1,8 @@
 export const site = {
   name: 'A1 Tradelines',
   legalName: 'A1 Tradelines',
-  domain: 'https://www.a1tradelines.com',
-  url: 'https://www.a1tradelines.com',
+  domain: 'https://a1tradelines.com',
+  url: 'https://a1tradelines.com',
   description:
     'A1 Tradelines is a transparent marketplace to buy seasoned authorized-user tradelines. Compare account age, credit limit, utilization, and bureau reporting, then buy with our posting guarantee: reassignment or refund per the purchase agreement.',
   phone: '908-767-5309',
@@ -29,4 +29,3 @@ export const site = {
     'how tradelines work',
   ],
 }
-
