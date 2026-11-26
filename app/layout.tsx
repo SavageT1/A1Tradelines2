@@ -65,6 +65,8 @@ export default function RootLayout({
               name: site.name,
               description: site.description,
               url: site.url,
+              logo: `${site.url}/logo.svg`,
+              sameAs: ['https://www.facebook.com/A1Tradelines/'],
               telephone: site.phone,
               email: site.email,
               areaServed: 'US',

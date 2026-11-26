@@ -71,16 +71,17 @@ body { margin: 0; background: var(--background); color: var(--foreground); font-
 }
 
 .card-marquee {
-  position: absolute;
-  inset: 0;
+  position: relative;
   z-index: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 2rem;
+  padding: 2.5rem 0;
   overflow: hidden;
   pointer-events: none;
-  opacity: 0.15;
+  border-bottom: 1px solid var(--border);
+  background: var(--background);
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
 }
@@ -125,7 +126,6 @@ body { margin: 0; background: var(--background); color: var(--foreground); font-
 
 @media (max-width: 640px) {
   .score-meter { right: 1rem; bottom: 1rem; width: calc(100vw - 2rem); }
-  .card-marquee { opacity: 0.16; }
   .marquee-card { width: 12rem; height: 7.5rem; }
 }
 

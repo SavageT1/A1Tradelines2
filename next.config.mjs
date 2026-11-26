@@ -12,7 +12,6 @@ const nextConfig = {
       { source: '/tradelines-for-sale', destination: '/inventory', permanent: true },
       { source: '/how-long-do-tradelines-take-to-post', destination: '/tradelines', permanent: true },
       { source: '/how-it-works', destination: '/#how-it-works', permanent: true },
-      { source: '/contact', destination: '/#contact', permanent: true },
     ]
   },
 }
